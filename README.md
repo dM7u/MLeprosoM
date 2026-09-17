@@ -85,17 +85,19 @@ El usuario creó el proyecto independiente y cargó la configuración en `.env.l
 Las credenciales se ingresan allí o en un gestor de secretos, nunca en el chat.
 El remoto `origin` apunta a `https://github.com/dM7u/MLeprosoM.git`, indicado por
 el usuario. La consulta de referencias remotas funcionó y no devolvió ramas.
-La primera publicación y la comprobación de permisos de escritura siguen pendientes.
+El primer commit local es `b62eaea`. La publicación sigue pendiente: el intento
+de push requirió autenticación de GitHub. Iniciar sesión mediante un flujo seguro;
+no compartir contraseñas ni tokens por chat.
 
 ## Documentación de trabajo
 
 Los documentos de la raíz son las copias operativas para versionar; `BACKLOG.md`
 es la fuente de verdad del avance. `sources/` conserva las referencias
 sincronizadas de solo lectura y queda fuera de Git. No editar esas referencias.
-Git está inicializado, pero los archivos todavía no están registrados en un
-commit. La escritura de Git requiere ejecución con permisos ampliados en este
+Git contiene el primer commit de la fundación técnica. La escritura de Git
+requiere ejecución con permisos ampliados en este
 entorno. Para HTTPS se usa el Git instalado en `C:/Program Files/Git/cmd/git.exe`.
-Queda pendiente definir la identidad del autor del primer commit.
+La identidad del autor está configurada únicamente para este repositorio.
 
 ## Versiones y fuentes consultadas (2026-09-17)
 

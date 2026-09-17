@@ -30,7 +30,8 @@
 -   [x] Proveedor inicial elegido.
 -   [x] Estrategia conceptual de datos en vivo documentada.
 -   [x] Confirmado que el proyecto comienza sin código previo.
--   [~] Bloque 1 --- Fundación técnica: base local y acceso Supabase verificados; registro Git pendiente.
+-   [x] Bloque 1 --- Fundación técnica: base local, acceso Supabase y primer commit verificados.
+-   [!] Publicación en GitHub pendiente de autenticación de la cuenta.
 
 ## Decisiones ya tomadas
 
@@ -71,7 +72,7 @@ crecer sin implementar funcionalidades de producto prematuramente.
 -   [x] Crear proyecto Next.js + TypeScript + Tailwind.
 -   [x] Verificar ejecución local (servidor de producción, HTTP y CSS).
 -   [x] Inicializar/configurar Git (rama main, exclusiones y finales de línea).
--   [ ] Crear primer commit: falta definir nombre y email de autor.
+-   [x] Crear primer commit: `b62eaea`, con identidad autorizada por el usuario.
 -   [x] Definir estructura mínima de código sin abstracciones
     prematuras.
 -   [x] Crear configuración de variables de entorno.
@@ -142,6 +143,12 @@ crecer sin implementar funcionalidades de producto prematuramente.
   archivos quedó resuelto mediante ejecución con permisos ampliados.
 
 ### Criterio de salida
+
+Cumplido localmente. Primer commit creado con autor `dM7` y correo
+`mp8@live.com.ar`, configurados únicamente en este repositorio. `.env.local`
+permanece excluido. El intento de push no publicó cambios: GitHub requiere
+autenticación. Falta iniciar sesión mediante un flujo seguro de GitHub y repetir
+la publicación; no se requieren contraseñas ni tokens en el chat.
 
 Bloque 1 termina cuando el proyecto puede ejecutarse y verificarse
 localmente, la configuración sensible está protegida, la arquitectura
@@ -298,7 +305,7 @@ No iniciar fórmulas antes de relevar variables reales.
 -   Cobertura exacta de API-Football Free.
 -   Actualizar ESLint a una rama soportada cuando los plugins de Next sean compatibles.
 -   Organización, región y plan del proyecto Supabase independiente; conexión real.
--   Identidad de autor Git y acceso autenticado al repositorio dM7u/MLeprosoM.
+-   Acceso autenticado al repositorio dM7u/MLeprosoM para publicar.
 -   Modelo DB físico después de conocer cobertura.
 -   Cache/TTL por tipo de dato.
 -   Polling final según cuota.
