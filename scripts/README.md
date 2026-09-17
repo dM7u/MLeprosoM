@@ -23,6 +23,6 @@ Estado: pruebas unitarias aprobadas; dry-run real bloqueado por conexión BSD,
 también fuera del sandbox. Apply **no ejecutado**. No afirmar sincronización
 completada ni cobertura de escritura remota hasta probar la cadena completa.
 
-Auditoría pendiente: `supabase/check-access.sql` permite revisar RLS y permisos
+Auditoría confirmada por el usuario: `supabase/check-access.sql` permite revisar RLS y permisos
 con SQL Editor (solo lectura). Esperar cinco filas, RLS true y privilegios de
 anon/authenticated false. No confundir acceso administrativo con acceso público.

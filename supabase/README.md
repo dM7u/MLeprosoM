@@ -8,7 +8,8 @@ La clave del servidor nunca debe llegar al navegador.
 Estado remoto: **aplicada manualmente por el usuario**, confirmado el 2026-09-17.
 Lectura autenticada desde backend verificada: las cinco tablas respondieron
 HTTP 200. No se insertaron datos en esta comprobación. Permisos públicos/RLS
-probados localmente; auditoría de roles remotos todavía pendiente.
+probados localmente; el usuario ejecutó además `check-access.sql` remotamente
+y confirmó cinco filas con RLS true y privilegios anon/authenticated false.
 La Data API no ejecuta migraciones SQL.
 Se requiere sesión de administrador en el SQL Editor de este proyecto o conexión
 PostgreSQL administrativa guardada localmente, nunca enviada por chat.

@@ -184,7 +184,7 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 -   [ ] Validar ajustes del modelo contra respuestas reales.
 -   [x] Diseñar y probar primera migración mínima: equipos, competiciones, temporadas externas, partidos y sincronizaciones. RLS y restricciones verificadas en PostgreSQL embebido.
 -   [x] Aplicar `20260917000100_initial_football.sql` en Supabase: ejecución manual confirmada por el usuario; cinco tablas accesibles desde backend con HTTP 200 (2026-09-17).
--   [ ] Auditar permisos/RLS en Supabase remoto; restricciones probadas localmente, no confundir lectura administrativa exitosa con validación de roles públicos.
+-   [x] Auditar permisos/RLS en Supabase remoto: usuario ejecutó `supabase/check-access.sql` y confirmó cinco filas, RLS true y todos los privilegios comprobados de anon/authenticated false. Resultado comunicado por el usuario, no leído directamente por el agente.
 
 ### Investigación inicial — 2026-09-17
 
@@ -219,6 +219,11 @@ dry-run fallaron por conexión BSD, incluido uno fuera del sandbox: no se
 ejecutó apply ni se guardaron fixtures. Escritura e idempotencia remotas pendientes.
 Auditoría pública preparada en `supabase/check-access.sql`, aún sin ejecutar
 en la base remota. No se implementó UI ni scheduler.
+
+Actualización posterior: auditoría remota ejecutada y resultado esperado
+confirmado por el usuario. Nuevo dry-run BSD falló con BSD_CONNECTION_FAILED;
+no se ejecutó apply ni se cargaron partidos. La auditoría ya no bloquea la carga;
+queda pendiente recuperar conectividad y validar la primera escritura real.
 
 -   [ ] Implementar cliente backend API-Football.
 -   [ ] Implementar manejo básico de errores/rate limit.
