@@ -43,6 +43,7 @@
 -   [ ] Extender validación a todos los equipos antes de calcular posiciones; verificar sanciones, desempates y promedios. Clasificación de Newell's resuelta, tablas completas pendientes.
 -   [x] Extender mapeo a toda la liga: 480 encuentros oficiales vinculados uno a uno, 240 por torneo, 30 equipos, 16 partidos por equipo. Los 15 registros adicionales BSD son eliminatorias excluidas del mapeo de zonas.
 -   [ ] Certificar posiciones y ajustes disciplinarios con fuente oficial; validar base histórica de promedios. Ausencia de resultados de búsqueda no acredita ausencia de sanciones.
+-   [x] Relevar reglas oficiales de zonas, anual y descenso: `docs/research/REGLAS_TABLAS_2026.md`. Distinguir clasificación pendiente, ajustes disciplinarios e históricos incompletos.
 
 ## Decisiones ya tomadas
 
@@ -166,11 +167,11 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 -   [x] Identificar Newell's primer equipo: ID externo 457 (API-Football).
 -   [!] Acceder a temporada 2026: denegada; el mensaje de Free indica 2022–2024.
 -   [ ] Verificar cobertura de Newell's y competiciones necesarias.
--   [ ] Verificar fixtures.
+-   [x] Verificar correspondencia de fixtures 2026 BSD/LPF: 480 encuentros de zonas, sin certificar cada marcador.
 -   [ ] Verificar standings.
 -   [ ] Verificar jugadores.
--   [ ] Verificar alineaciones.
--   [ ] Verificar estadísticas de jugadores/partido.
+-   [x] Verificar alineaciones en muestra BSD 223705; no equivale a cobertura universal ni vivo.
+-   [x] Verificar estadísticas de jugadores/partido en muestra BSD 223705, con faltantes registrados.
 -   [ ] Verificar técnicos.
 -   [ ] Verificar árbitros.
 -   [ ] Verificar estadios.
