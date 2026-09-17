@@ -31,14 +31,14 @@
 -   [x] Estrategia conceptual de datos en vivo documentada.
 -   [x] Confirmado que el proyecto comienza sin código previo.
 -   [x] Bloque 1 --- Fundación técnica: base local, acceso Supabase y primer commit verificados.
--   [!] Publicación en GitHub pendiente de autenticación de la cuenta.
+-   [x] Repositorio publicado en GitHub: https://github.com/dM7u/MLeprosoM.
 
 ## Decisiones ya tomadas
 
 -   [x] Nombre corto: **MLeprosoM**, conservando “Movete, Leproso Movete!”
     como nombre completo. Identificador npm: `mleprosom` (minúsculas).
 -   [x] Repositorio indicado por el usuario: https://github.com/dM7u/MLeprosoM.
-    Remoto local `origin` configurado; publicación todavía pendiente.
+    Remoto local `origin` configurado y rama `main` publicada.
 
 -   [x] Proveedor inicial: API-Football / API-Sports Free.
 -   [x] Proyecto inicialmente centrado en Newell's Old Boys.
@@ -119,15 +119,11 @@ crecer sin implementar funcionalidades de producto prematuramente.
 - No hay Home, datos deportivos, ratings, vivo, noticias, endpoints,
   migraciones ni modelo físico de DB. No se consumió cuota de API-Football.
 - `sources/` se mantuvo intacto y solo lectura; documentación operativa en raíz.
-- Git inicializado sin remoto ni commit inicial: no hay identidad de autor
-  configurada. Para el primer commit falta nombre/email de autor; para publicar,
-  proveedor, cuenta/organización, nombre, visibilidad y acceso autorizado.
-- Los archivos siguen sin seguimiento: `git add` falló por permisos del entorno
-  sobre `.git/index.lock`, aun con permiso concedido. No se pudo validar el diff
-  staged; build, lint, typecheck y pruebas sí verificaron los archivos del disco.
+- Git configurado localmente con autor `dM7` y correo autorizado por el usuario.
+  El primer commit y el remoto quedaron creados y verificados.
 - Supabase: acceso autenticado verificado después de la configuración privada
   del usuario. `.env.local` sigue excluido de Git. No se crearon tablas ni datos.
-- No se inició Bloque 2. Bloque 1 permanece parcial por el registro Git pendiente.
+- No se inició Bloque 2. El Bloque 1 está completo.
 
 ### Continuación: nombre corto y repositorio
 
@@ -135,20 +131,17 @@ crecer sin implementar funcionalidades de producto prematuramente.
   `mleprosom`. Referencias sincronizadas en sources/ sin modificar.
 - Se resolvió la escritura de configuración Git mediante ejecución con permisos
   ampliados. `origin` apunta al repositorio indicado por el usuario.
-- Consulta remota con el Git instalado en Windows: exitosa, sin referencias
-  devueltas (sin ramas publicadas). Todavía no se comprobó permiso de escritura.
-- No se publicó código. Falta identidad de autor para el primer commit.
+- Acceso de GitHub autorizado mediante el flujo oficial de dispositivo.
+- Rama `main` publicada y configurada para seguir `origin/main`.
 - Archivos preparados en el índice de Git; revisión del diff sin errores de
   espacios. `.env.local` no está incluido. El bloqueo inicial de registro de
   archivos quedó resuelto mediante ejecución con permisos ampliados.
 
 ### Criterio de salida
 
-Cumplido localmente. Primer commit creado con autor `dM7` y correo
-`mp8@live.com.ar`, configurados únicamente en este repositorio. `.env.local`
-permanece excluido. El intento de push no publicó cambios: GitHub requiere
-autenticación. Falta iniciar sesión mediante un flujo seguro de GitHub y repetir
-la publicación; no se requieren contraseñas ni tokens en el chat.
+Cumplido. Primer commit creado con autor `dM7` y correo `mp8@live.com.ar`,
+configurados únicamente en este repositorio. `.env.local` permanece excluido.
+La rama `main` fue publicada en GitHub mediante el flujo oficial de dispositivo.
 
 Bloque 1 termina cuando el proyecto puede ejecutarse y verificarse
 localmente, la configuración sensible está protegida, la arquitectura
@@ -304,8 +297,6 @@ No iniciar fórmulas antes de relevar variables reales.
 
 -   Cobertura exacta de API-Football Free.
 -   Actualizar ESLint a una rama soportada cuando los plugins de Next sean compatibles.
--   Organización, región y plan del proyecto Supabase independiente; conexión real.
--   Acceso autenticado al repositorio dM7u/MLeprosoM para publicar.
 -   Modelo DB físico después de conocer cobertura.
 -   Cache/TTL por tipo de dato.
 -   Polling final según cuota.

@@ -85,9 +85,8 @@ El usuario creó el proyecto independiente y cargó la configuración en `.env.l
 Las credenciales se ingresan allí o en un gestor de secretos, nunca en el chat.
 El remoto `origin` apunta a `https://github.com/dM7u/MLeprosoM.git`, indicado por
 el usuario. La consulta de referencias remotas funcionó y no devolvió ramas.
-El primer commit local es `b62eaea`. La publicación sigue pendiente: el intento
-de push requirió autenticación de GitHub. Iniciar sesión mediante un flujo seguro;
-no compartir contraseñas ni tokens por chat.
+El primer commit de la fundación es `b62eaea`. La rama `main` está publicada y
+sigue `origin/main` en [dM7u/MLeprosoM](https://github.com/dM7u/MLeprosoM).
 
 ## Documentación de trabajo
 
