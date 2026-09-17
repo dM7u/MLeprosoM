@@ -262,6 +262,12 @@ identificado como tal.
 
 ### Evidencia BSD 2026
 
+El cotejo se extendió a los 480 partidos de zonas de los 30 clubes, con
+coincidencias únicas. Evidencia completa en
+`docs/research/lpf-2026-competition-map.json`. Las 15 eliminatorias BSD se
+mantienen separadas. Este mapeo resuelve pertenencia a torneo, no posiciones,
+ajustes disciplinarios o promedios.
+
 Actualización: se verificó un mapeo explícito de los 32 IDs de partidos de
 Newell's contra el fixture oficial LPF (16 por torneo), mediante equipos,
 localía y jornada, sin fechas calendario. Evidencia en

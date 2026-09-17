@@ -162,6 +162,32 @@ durante el bloque de vivo; no dar por resuelto HT→2H con datos históricos.
 
 ## Cierre pendiente
 
+### Fixture completo LPF contrastado — 2026-09-17
+
+Se extendió el cotejo con la agenda oficial LPF a ambos torneos completos.
+Tres GET BSD paginados (limit 200, offsets 0/200/400) devolvieron 495 eventos
+de liga 85/temporada 1635. Se revisaron alias de los 30 clubes y una errata
+de la página oficial (Central Córdboa). No se usaron coincidencias difusas.
+
+Resultado: 480 encuentros de fase de zonas con coincidencia única por equipos,
+localía y jornada, 240 por torneo. Verificaciones: 30 equipos, 16 encuentros
+por equipo y 15 por jornada en cada torneo; 480 IDs únicos; preservación de
+las 32 asignaciones previas de Newell's. Otros 15 eventos corresponden a
+octavos/cuartos/semifinal/final según BSD, no a jornadas de zonas.
+
+Evidencia: `docs/research/lpf-2026-competition-map.json`. Es una instantánea
+de investigación, no un cálculo de posiciones, ni valida marcadores contra
+fuente independiente. Fixture oficial: https://www.ligaprofesional.ar/?p=75980.
+Se corrigió durante la extracción un encabezado de fecha que contenía un guion;
+las verificaciones finales se ejecutaron sobre los 480 partidos corregidos.
+
+Las tablas siguen pendientes de contrastar con sanciones y desempates oficiales.
+La búsqueda pública no permite certificar que no existan quitas de puntos.
+Para promedios se localizó el Estatuto AFA publicado el 28/10/2025, art. 93
+(https://assets1.afa.com.ar/2025/GAIOLI---septoct/Estatuto----28.10.2025.pdf),
+que refiere últimas tres temporadas: falta validar texto completo, vigencia,
+casos de ascendidos y cobertura histórica antes de implementarlo.
+
 ### Mapeo oficial de Newell's resuelto — 2026-09-17
 
 Fuente: [agenda oficial LPF 2026](https://www.ligaprofesional.ar/?p=75980),

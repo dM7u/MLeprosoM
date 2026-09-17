@@ -32,7 +32,7 @@
 -   [x] Confirmado que el proyecto comienza sin código previo.
 -   [x] Bloque 1 --- Fundación técnica: base local, acceso Supabase y primer commit verificados.
 -   [x] Repositorio publicado en GitHub: https://github.com/dM7u/MLeprosoM.
--   [!] Bloque 2: clave validada; Free deniega 2026. Requiere decisión de proveedor/plan o alcance histórico.
+-   [~] Bloque 2: BSD permite 2026 y el fixture completo está mapeado contra LPF; pendientes tablas oficiales, históricos y cierre del modelo mínimo.
 -   [x] Alternativas gratuitas investigadas (2026-09-17), registradas en `PROVEEDORES.md`.
 -   [ ] Validar BSD con cuenta gratuita y muestras reales de Newell's; candidato recomendado, todavía no seleccionado. Confirmar condiciones vigentes y cobertura antes de reemplazar API-Football.
 -   [x] BSD: clave renombrada localmente y acceso autenticado a 2026 validado el 2026-09-17; ocho consultas HTTP 200, incluyendo un partido con XI, eventos y estadísticas individuales.
@@ -41,6 +41,8 @@
 -   [ ] Resolver fuente/mapeo verificable para tablas por torneo, anual y promedios; no inferir torneo por calendario ni publicar standings BSD como tabla oficial.
 -   [x] Vincular los 32 partidos BSD de Newell's 2026 con los fixtures oficiales LPF: 16 Apertura + 16 Clausura, sin ambigüedades ni uso de fecha calendario. Evidencia en `docs/research/newells-2026-competition-map.json`.
 -   [ ] Extender validación a todos los equipos antes de calcular posiciones; verificar sanciones, desempates y promedios. Clasificación de Newell's resuelta, tablas completas pendientes.
+-   [x] Extender mapeo a toda la liga: 480 encuentros oficiales vinculados uno a uno, 240 por torneo, 30 equipos, 16 partidos por equipo. Los 15 registros adicionales BSD son eliminatorias excluidas del mapeo de zonas.
+-   [ ] Certificar posiciones y ajustes disciplinarios con fuente oficial; validar base histórica de promedios. Ausencia de resultados de búsqueda no acredita ausencia de sanciones.
 
 ## Decisiones ya tomadas
 
