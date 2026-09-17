@@ -32,7 +32,7 @@
 -   [x] Confirmado que el proyecto comienza sin código previo.
 -   [x] Bloque 1 --- Fundación técnica: base local, acceso Supabase y primer commit verificados.
 -   [x] Repositorio publicado en GitHub: https://github.com/dM7u/MLeprosoM.
--   [~] Bloque 2: investigación pública documentada; pruebas autenticadas pendientes de clave API-Football.
+-   [!] Bloque 2: clave validada; Free deniega 2026. Requiere decisión de proveedor/plan o alcance histórico.
 
 ## Decisiones ya tomadas
 
@@ -151,8 +151,10 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 ## BLOQUE 2 --- Cobertura real y modelo mínimo
 
 -   [x] Investigar documentación pública actual de API-Football Free.
--   [!] Configurar API_FOOTBALL_API_KEY en .env.local para verificar cobertura real.
--   [ ] Verificar límites/cuota reales.
+-   [x] Configurar API_FOOTBALL_API_KEY en .env.local y validar autenticación.
+-   [x] Verificar límites/cuota reales: Free activo, 100/día y 10/minuto.
+-   [x] Identificar Newell's primer equipo: ID externo 457 (API-Football).
+-   [!] Acceder a temporada 2026: denegada; el mensaje de Free indica 2022–2024.
 -   [ ] Verificar cobertura de Newell's y competiciones necesarias.
 -   [ ] Verificar fixtures.
 -   [ ] Verificar standings.
@@ -172,6 +174,16 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 -   [ ] Diseñar primera migración mínima.
 
 ### Investigación inicial — 2026-09-17
+
+Actualización autenticada: tres solicitudes entre 12:16:55 y 12:17:20 UTC.
+Estado de cuenta y búsqueda de Newell's exitosos; ligas por equipo/temporada
+devolvió HTTP 200 con `errors.plan`. Se detuvieron las consultas dependientes.
+Estadio habitual recibido dentro de teams; el estadio por partido sigue pendiente.
+Evidencia sanitizada en `PROVEEDORES.md`. Clave protegida, sin tablas ni cambios
+en la aplicación. Falta decidir entre plan con acceso actual, otro proveedor o
+prototipo histórico antes de completar la matriz y diseñar la migración.
+
+Registro previo de investigación pública:
 
 - Estimación previa: 15–25 minutos para documentación y matriz inicial; pruebas
   dependientes de una clave directa de API-Sports y cuota disponible.

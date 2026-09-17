@@ -13,9 +13,10 @@ conceptos, relaciones y reglas que la persistencia deberá soportar.
 
 ### Ajustes del Bloque 2 — pendientes de muestras autenticadas
 
-El relevamiento y la matriz inicial están en `PROVEEDORES.md`. La documentación
-pública identifica operaciones, pero no confirma acceso Free a la temporada
-objetivo ni datos de Newell's. Por eso todavía no se fija una migración SQL.
+El relevamiento y la matriz están en `PROVEEDORES.md`. La primera prueba
+autenticada identificó Newell's y su estadio habitual, pero Free denegó 2026
+e indicó 2022–2024. Hasta decidir cómo obtener la temporada objetivo y verificar
+muestras de partidos/tablas, no se fija una migración SQL.
 
 La primera persistencia candidata se limita a equipo, competición, temporada,
 fixture y registro de sincronización, según lo que demuestren las respuestas.

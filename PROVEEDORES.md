@@ -2,12 +2,38 @@
 
 ## Estado del relevamiento (2026-09-17)
 
-Investigación pública inicial del Bloque 2. **Cobertura real de Newell's todavía
-no verificada**: `API_FOOTBALL_API_KEY` estaba vacía al comenzar. No se hicieron
-consultas autenticadas, ni se consumió cuota futbolística, ni se crearon tablas.
+Investigación pública y primera tanda autenticada del Bloque 2. La clave funciona,
+pero **Free rechaza la temporada 2026**. La respuesta indica acceso a 2022–2024.
+Se detuvieron las pruebas dependientes. No se crearon tablas.
 
 La documentación sirve para elegir qué probar; no certifica datos de la cuenta.
-No se asignaron IDs a Newell's, competiciones, temporadas ni partidos.
+Se verificó el ID externo de Newell's (457) y el de su estadio informado (93).
+No se confirmaron IDs de competiciones ni fixtures para la temporada objetivo.
+
+## Evidencia autenticada — 2026-09-17 (UTC)
+
+Tres solicitudes GET, secuenciales, sin reintentos. Clave leída desde `.env.local`
+y enviada solo en la cabecera al host oficial; no se registró su valor.
+
+| Hora UTC | Operación | HTTP | Resultado |
+|---|---|---|---|
+| 12:16:55 | `/status` | 200 | Plan Free activo; consumo 0/100; límite por minuto 10 |
+| 12:17:06 | `/teams?search=Newell` | 200 | 3 coincidencias, 1 página; 99 consultas diarias restantes |
+| 12:17:20 | `/leagues?team=457&season=2026` | 200 | `errors.plan`, cero resultados y sin cabeceras de cuota |
+
+Mensaje de la tercera respuesta: `Free plans do not have access to this season,
+try from 2022 to 2024.` El HTTP 200 no es éxito de datos. Tampoco demuestra que
+Newell's no participe en competiciones de 2026: es una denegación del plan.
+
+La búsqueda distinguió al primer equipo `Newells Old Boys`, Argentina, ID 457,
+de U20 (18371) y Reserva (18691). El proveedor informa estadio Marcelo Alberto
+Bielsa, ID 93, Rosario, capacidad 42.000. Son datos del proveedor, sin contraste
+independiente, y el estadio habitual no demuestra el de un fixture concreto.
+
+La consulta de estado no incrementó el contador visible; tras la búsqueda quedó
+en 99. No se conoce el saldo posterior al rechazo porque no trajo cabeceras y
+se detuvieron las consultas. No se probó todavía un año histórico: el rango
+2022–2024 proviene del mensaje de restricción, no de una muestra de esos años.
 
 ## Fuentes oficiales y límites documentados
 
@@ -38,12 +64,13 @@ No se asignaron IDs a Newell's, competiciones, temporadas ni partidos.
 
 Estado **D/P**: operación documentada / disponibilidad real pendiente de prueba.
 Estado **N/V**: no verificado como dato directo; requiere investigación adicional.
-No hay filas con disponibilidad real confirmada ni ausencia definitiva confirmada.
+Estado **V**: verificado en esta muestra. Estado **B**: bloqueado por el plan
+para 2026; no equivale a ausencia del dato. El resto sigue pendiente.
 
 | Necesidad | Operación documentada | Estado | Prueba o decisión propia de MLeprosoM |
 |---|---|---|---|
-| Identidad de Newell's | `/teams` | D/P | Resolver búsqueda y país; guardar ID recibido |
-| Competiciones y temporadas | `/leagues` | D/P | Acceso a temporada objetivo y flags de cobertura |
+| Identidad de Newell's | `/teams` | V | ID 457; Argentina; primer equipo diferenciado de Reserva/U20 |
+| Competiciones y temporadas | `/leagues` | B | La cuenta Free deniega 2026; indica 2022–2024 |
 | Próximos/últimos partidos | `/fixtures` | D/P | Consultar temporada objetivo, fechas y resultados reales |
 | Fases y fechas | `/fixtures/rounds` | D/P | Comparar etiquetas con formato argentino; no inferir IDs de fase |
 | Posiciones/zonas | `/standings` | D/P | Revisar todos los grupos, nombres y timestamps |
@@ -53,7 +80,7 @@ No hay filas con disponibilidad real confirmada ni ausencia definitiva confirmad
 | Estadísticas del partido | `/fixtures/statistics` | D/P | Comparar campos de ambos equipos |
 | Eventos | `/fixtures/events` | D/P | Secuencia y referencias a jugadores; revisar penales/rojas |
 | Técnico | `/coachs` | D/P | Identidad y períodos; contrastar con alineaciones |
-| Estadio | `/venues`, `/teams` | D/P | Reutilizar datos y comprobar estadio del partido |
+| Estadio | `/venues`, `/teams` | V parcial | Estadio habitual ID 93 recibido en teams; fixture sin verificar |
 | Árbitro | Campo en `/fixtures` | D/P | Comprobar identidad disponible antes de crear entidad |
 | Anual y promedios | Sin operación específica verificada | N/V | Inspeccionar tablas; derivar solo con reglas y partidos completos |
 | Historial del árbitro | Sin operación específica verificada | N/V | Evaluar identidad y muestra; no extrapolar historial completo |
@@ -135,6 +162,9 @@ durante el bloque de vivo; no dar por resuelto HT→2H con datos históricos.
 
 ## Cierre pendiente
 
-La matriz es inicial, no un certificado de cobertura. Falta la clave, el acceso
-real a la temporada objetivo y las muestras para cerrar el Bloque 2 y diseñar
-la primera migración. No se inicia el Bloque 3 mientras esa decisión esté abierta.
+La matriz no certifica cobertura de partidos actuales. La clave está configurada;
+falta resolver el acceso a 2026. Opciones: evaluar un plan de pago de API-Football,
+investigar otro proveedor para Argentina actual, o aceptar un prototipo histórico
+rotulado como tal. No comprar ni cambiar el alcance sin decisión del usuario.
+Tras resolverlo, repetir la consulta de acceso y continuar con las muestras.
+La primera migración y el Bloque 3 permanecen pendientes.
