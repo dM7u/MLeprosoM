@@ -112,6 +112,15 @@ Nunca registrar API keys ni secretos.
 
 ## Pendientes antes de implementar el vivo
 
+El análisis de cuota del Bloque 2 está en `PROVEEDORES.md`: 90 minutos activos
+a intervalos de 150 segundos representan aproximadamente 36 ciclos. Cuatro
+operaciones por ciclo sumarían 144 consultas, antes de tareas adicionales.
+No se aprueba esa estrategia con el límite Free documentado de 100/día.
+Primero verificar acceso a la temporada y reutilización de respuestas reales.
+También falta resolver el despertar tras HT: una pausa de consultas no detecta
+por sí sola el inicio del segundo tiempo. Estas observaciones no cambian los
+intervalos conceptuales ni implementan un scheduler.
+
 -   verificar cobertura real del plan API-Football Free;
 -   verificar estados reales del proveedor;
 -   verificar cuota y límites;

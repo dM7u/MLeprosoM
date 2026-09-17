@@ -11,6 +11,38 @@ conceptos, relaciones y reglas que la persistencia deberá soportar.
 
 ## Principios
 
+### Ajustes del Bloque 2 — pendientes de muestras autenticadas
+
+El relevamiento y la matriz inicial están en `PROVEEDORES.md`. La documentación
+pública identifica operaciones, pero no confirma acceso Free a la temporada
+objetivo ni datos de Newell's. Por eso todavía no se fija una migración SQL.
+
+La primera persistencia candidata se limita a equipo, competición, temporada,
+fixture y registro de sincronización, según lo que demuestren las respuestas.
+Jugadores, ratings, noticias, clima e históricos no integran esa primera migración
+por anticipación. Los conceptos que siguen describen el alcance futuro.
+
+- Distinguir el año usado por el proveedor de la identidad interna de una
+  temporada y de su formato competitivo. No hardcodear zonas ni participantes.
+- Mantener etiquetas originales de ronda/grupo hasta validar su correspondencia
+  con fase y zona. No asumir que la primera tabla recibida es la general.
+- Preservar `provider` y `external_id`; no usar el nombre como identidad externa.
+  Si el árbitro solo llega como texto, no fabricar un ID del proveedor.
+- Separar hora del partido, momento de consulta y fecha de actualización de la
+  fuente. Esta última puede ser desconocida y no debe inventarse.
+- Un fixture futuro puede tener goles desconocidos. No imponer cero como valor
+  predeterminado de marcador o estadísticas.
+- Conservar todos los grupos y el alcance temporal de standings. La anual y
+  promedios requieren una fuente validada o reglas explícitas antes de calcularse.
+- Un rating externo no pertenece a `own_ratings`; no sustituye el algoritmo propio.
+- Las tablas expuestas por Supabase requerirán permisos mínimos y RLS en la
+  migración. El cliente administrativo no prueba que el acceso público sea seguro.
+
+La migración se diseñará después de confirmar claves, nulos, estados, cobertura
+y consultas reales. No hay tablas creadas ni cambios remotos en este bloque.
+
+### Reglas generales
+
 -   Identificadores internos independientes de proveedores.
 -   Entidades externas con `provider`, `external_id` y timestamps.
 -   Ausencia de dato ≠ cero.

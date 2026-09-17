@@ -32,6 +32,7 @@
 -   [x] Confirmado que el proyecto comienza sin código previo.
 -   [x] Bloque 1 --- Fundación técnica: base local, acceso Supabase y primer commit verificados.
 -   [x] Repositorio publicado en GitHub: https://github.com/dM7u/MLeprosoM.
+-   [~] Bloque 2: investigación pública documentada; pruebas autenticadas pendientes de clave API-Football.
 
 ## Decisiones ya tomadas
 
@@ -149,7 +150,8 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 
 ## BLOQUE 2 --- Cobertura real y modelo mínimo
 
--   [ ] Investigar documentación actual de API-Football Free.
+-   [x] Investigar documentación pública actual de API-Football Free.
+-   [!] Configurar API_FOOTBALL_API_KEY en .env.local para verificar cobertura real.
 -   [ ] Verificar límites/cuota reales.
 -   [ ] Verificar cobertura de Newell's y competiciones necesarias.
 -   [ ] Verificar fixtures.
@@ -161,12 +163,27 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 -   [ ] Verificar árbitros.
 -   [ ] Verificar estadios.
 -   [ ] Verificar eventos y estadísticas en vivo.
--   [ ] Crear matriz requerido/disponible/no disponible/fuente
-    alternativa.
--   [ ] Crear `PROVEEDORES.md` si la investigación produce información
+-   [x] Crear matriz inicial requerido/documentado/pendiente/fuente alternativa.
+-   [ ] Completar matriz con resultados autenticados, alcance y muestras.
+-   [x] Crear `PROVEEDORES.md` si la investigación produce información
     estable que deba conservarse.
--   [ ] Ajustar `MODELO_DE_DATOS.md`.
+-   [x] Ajustar `MODELO_DE_DATOS.md` con límites del relevamiento público.
+-   [ ] Validar ajustes del modelo contra respuestas reales.
 -   [ ] Diseñar primera migración mínima.
+
+### Investigación inicial — 2026-09-17
+
+- Estimación previa: 15–25 minutos para documentación y matriz inicial; pruebas
+  dependientes de una clave directa de API-Sports y cuota disponible.
+- Fuentes oficiales y protocolo de pruebas en `PROVEEDORES.md`.
+- Free documenta 100/día y 10/minuto; la cuenta y sus temporadas accesibles
+  siguen sin verificar. No marcar cobertura de Newell's como confirmada.
+- El catálogo incluye competiciones argentinas, pero no demuestra su acceso
+  para la temporada objetivo. No se asignaron IDs externos ni se hicieron requests autenticadas.
+- Se detectó que cuatro operaciones cada 150 segundos excederían 100 consultas
+  en un partido de 90 minutos. Polling definitivo y transición HT→2H pendientes.
+- Sin cambios de código de producto ni DB. La primera migración sigue pendiente
+  hasta resolver acceso a temporada y muestras. No se inició Bloque 3.
 
 ## BLOQUE 3 --- Primera cadena de datos real
 
