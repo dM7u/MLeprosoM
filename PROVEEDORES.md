@@ -162,6 +162,38 @@ durante el bloque de vivo; no dar por resuelto HT→2H con datos históricos.
 
 ## Cierre pendiente
 
+### Alternativas gratuitas — revisión pública del 2026-09-17
+
+Alcance: comparar acceso gratuito a Argentina actual sin registrar cuentas,
+comprar planes ni cambiar código. Estas son declaraciones de los proveedores;
+ninguna alternativa fue validada todavía con muestras autenticadas de Newell's.
+
+| Proveedor | Evidencia pública | Evaluación para MLeprosoM |
+|---|---|---|
+| BSD / Bzzoiro Sports Data | [Cuota](https://goaldir.com/docs/conventions/): 7.500 requests/día gratis, reinicio UTC, uso razonable. [Cobertura](https://goaldir.com/football-coverage/): anuncia Liga Profesional argentina 2026, alineaciones, eventos y estadísticas. | Primer candidato para una prueba; falta verificar fixtures, zonas/tablas, actualidad y variables individuales de Newell's. |
+| GOAL API | [Cobertura](https://goal-api.com/coverage): Liga Profesional con temporadas hasta 2026; [sitio](https://goal-api.com/) anuncia plan gratuito. | Segundo candidato. La página de precios no permitió recuperar la cuota gratuita; no confirmar viabilidad ni frescura todavía. |
+| football-data.org | [Lista gratuita](https://www.football-data.org/coverage) sin Argentina. | No resuelve el objetivo sin pagar. |
+| Sportmonks | [Plan gratuito](https://www.sportmonks.com/football-api/free-plan/) para Dinamarca y Escocia. | No resuelve Argentina gratis. |
+| TheSportsDB | [Documentación](https://www.thesportsdb.com/documentation): respuestas gratuitas limitadas (15 eventos por temporada, 5 filas de tabla), vivo de pago. | Insuficiente como proveedor principal. |
+| OpenFootAPI | [Sitio](https://openfootapi.com/): vista pública de hasta 5 resultados; acceso completo con clave de pago. | Demo, no base gratuita completa verificada. |
+
+BSD documenta REST gratuito y WebSockets como complemento de pago: no confundir
+consulta periódica con conexión continua. Su [licencia publicada](https://goaldir.com/docs/api-license/)
+permite almacenamiento interno, visualización y resultados derivados, prohíbe
+redistribuir datos brutos como servicio y separa derechos sobre imágenes.
+Sin embargo, la versión visible 4.0 indica vigencia desde el **1 de octubre de
+2026**, posterior a esta revisión: confirmar condiciones aplicables antes de
+adoptarlo. Declara fuentes públicas, terceros y cálculos propios; no presentar
+su contenido como datos oficiales de una federación.
+
+Siguiente paso recomendado: cuenta gratuita de BSD mediante su
+[registro](https://sports.bzzoiro.com/register/), clave guardada localmente
+fuera del chat y prueba acotada de Newell's. Resolver IDs mediante búsquedas,
+no reutilizar IDs de API-Football. Verificar temporada, próximos/últimos partidos,
+tablas por fase/zona, un partido terminado y estadísticas individuales;
+registrar faltantes y cuota. No cambiar provider, SQL ni polling antes de esa
+evidencia. La recomendación de prueba no constituye selección definitiva.
+
 La matriz no certifica cobertura de partidos actuales. La clave está configurada;
 falta resolver el acceso a 2026. Opciones: evaluar un plan de pago de API-Football,
 investigar otro proveedor para Argentina actual, o aceptar un prototipo histórico

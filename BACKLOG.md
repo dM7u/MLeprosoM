@@ -33,6 +33,8 @@
 -   [x] Bloque 1 --- Fundación técnica: base local, acceso Supabase y primer commit verificados.
 -   [x] Repositorio publicado en GitHub: https://github.com/dM7u/MLeprosoM.
 -   [!] Bloque 2: clave validada; Free deniega 2026. Requiere decisión de proveedor/plan o alcance histórico.
+-   [x] Alternativas gratuitas investigadas (2026-09-17), registradas en `PROVEEDORES.md`.
+-   [ ] Validar BSD con cuenta gratuita y muestras reales de Newell's; candidato recomendado, todavía no seleccionado. Confirmar condiciones vigentes y cobertura antes de reemplazar API-Football.
 
 ## Decisiones ya tomadas
 
@@ -324,7 +326,7 @@ No iniciar fórmulas antes de relevar variables reales.
 
 ## Decisiones pendientes
 
--   Cobertura exacta de API-Football Free.
+-   Reemplazo gratuito de API-Football: Free denegó 2026; BSD candidato a validar, GOAL API alternativa secundaria con cuota pendiente de confirmar.
 -   Actualizar ESLint a una rama soportada cuando los plugins de Next sean compatibles.
 -   Modelo DB físico después de conocer cobertura.
 -   Cache/TTL por tipo de dato.
