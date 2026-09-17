@@ -212,6 +212,14 @@ Registro previo de investigación pública:
 
 ## BLOQUE 3 --- Primera cadena de datos real
 
+Avance 2026-09-17: cliente BSD y sincronización manual preparados en
+`scripts/sync-bsd.mjs`; normalización valida alcance, nulos, duplicados y páginas
+incompletas. Siete pruebas unitarias, lint, typecheck y build aprobados. Dos intentos
+dry-run fallaron por conexión BSD, incluido uno fuera del sandbox: no se
+ejecutó apply ni se guardaron fixtures. Escritura e idempotencia remotas pendientes.
+Auditoría pública preparada en `supabase/check-access.sql`, aún sin ejecutar
+en la base remota. No se implementó UI ni scheduler.
+
 -   [ ] Implementar cliente backend API-Football.
 -   [ ] Implementar manejo básico de errores/rate limit.
 -   [ ] Normalizar equipo/competición/temporada/fixture según cobertura
