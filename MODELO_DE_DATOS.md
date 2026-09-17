@@ -260,6 +260,26 @@ identificado como tal.
 
 ## Próximo paso del modelo
 
+### Evidencia BSD 2026
+
+Actualización: se verificó un mapeo explícito de los 32 IDs de partidos de
+Newell's contra el fixture oficial LPF (16 por torneo), mediante equipos,
+localía y jornada, sin fechas calendario. Evidencia en
+`docs/research/newells-2026-competition-map.json`. Puede orientar el futuro
+mapeo con fuente y fecha de validación; no generalizarlo a todos los equipos
+ni cargarlo automáticamente como tabla oficial.
+
+La temporada externa 1635 combina torneos: Newell's tiene dos jornadas 1
+con igual stage/group. No usar temporada + stage + round como clave única
+ni deducir Apertura/Clausura por fecha de juego. Identificar partidos mediante
+provider/external_id y permitir asignación local de torneo pendiente, con
+procedencia y estado de validación. Conservar etiquetas originales.
+
+Cuatro partidos aparecen como league-phase sin grupo; no excluirlos de la
+competición por ese motivo. Standings acumula los 25 resultados anuales de
+Newell's, pero no certifica tablas oficiales por torneo ni anual. No persistir
+esas etiquetas como verificadas. Ver evidencia y fuente LPF en PROVEEDORES.md.
+
 Después de verificar API-Football Free: 1. crear matriz dato requerido →
 endpoint/disponibilidad; 2. eliminar conceptos que no necesiten
 persistencia; 3. definir claves y relaciones concretas; 4. crear primera

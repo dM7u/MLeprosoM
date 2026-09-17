@@ -35,6 +35,12 @@
 -   [!] Bloque 2: clave validada; Free deniega 2026. Requiere decisión de proveedor/plan o alcance histórico.
 -   [x] Alternativas gratuitas investigadas (2026-09-17), registradas en `PROVEEDORES.md`.
 -   [ ] Validar BSD con cuenta gratuita y muestras reales de Newell's; candidato recomendado, todavía no seleccionado. Confirmar condiciones vigentes y cobertura antes de reemplazar API-Football.
+-   [x] BSD: clave renombrada localmente y acceso autenticado a 2026 validado el 2026-09-17; ocho consultas HTTP 200, incluyendo un partido con XI, eventos y estadísticas individuales.
+-   [ ] BSD: resolver separación Apertura/Clausura y significado de tablas acumuladas por grupo; contrastar calidad y condiciones antes de adopción definitiva. Bloque 2 continúa abierto.
+-   [x] Diagnosticar estructura BSD: temporada 2026 combinada, jornadas repetidas y fila acumulada de Newell's comprobada contra 25 resultados.
+-   [ ] Resolver fuente/mapeo verificable para tablas por torneo, anual y promedios; no inferir torneo por calendario ni publicar standings BSD como tabla oficial.
+-   [x] Vincular los 32 partidos BSD de Newell's 2026 con los fixtures oficiales LPF: 16 Apertura + 16 Clausura, sin ambigüedades ni uso de fecha calendario. Evidencia en `docs/research/newells-2026-competition-map.json`.
+-   [ ] Extender validación a todos los equipos antes de calcular posiciones; verificar sanciones, desempates y promedios. Clasificación de Newell's resuelta, tablas completas pendientes.
 
 ## Decisiones ya tomadas
 

@@ -162,6 +162,89 @@ durante el bloque de vivo; no dar por resuelto HT→2H con datos históricos.
 
 ## Cierre pendiente
 
+### Mapeo oficial de Newell's resuelto — 2026-09-17
+
+Fuente: [agenda oficial LPF 2026](https://www.ligaprofesional.ar/?p=75980),
+que enumera separadamente ambos fixtures. Se contrastaron sus 32 encuentros
+de Newell's contra una consulta BSD de temporada 1635, limit 100, sin paginación
+pendiente. Coincidencia exacta tras revisar alias de equipos, local/visitante
+y número de jornada: **32/32, un único ID BSD por encuentro**, 16 por torneo.
+No se utilizó kickoff para asignar torneo. El evento 223691 queda en Apertura
+fecha 9 pese a su fecha de juego de mayo. Interzonales con Banfield y Central
+quedan incluidos, aunque BSD los publique sin grupo.
+
+Evidencia estructurada en `docs/research/newells-2026-competition-map.json`.
+Es una instantánea de investigación, no configuración automática ni tabla de
+posiciones. Cambios oficiales de fixture o IDs requieren revalidación; no
+extrapolar a otras temporadas. La falta de separación BSD tiene solución para
+estos partidos; siguen pendientes el resto de equipos, rankings, sanciones,
+desempates y promedios. No se creó scraper de producción ni endpoint LPF.
+
+### Estructura argentina BSD — 2026-09-17
+
+Tres GET adicionales HTTP 200: `/api/v2/leagues/85/seasons/` y dos lecturas
+de `/api/v2/events/?team_id=4997&season_id=1635&limit=100` para inspección
+y comprobación aritmética. 32 IDs únicos, count 32, next null.
+BSD separa temporadas Apertura/Clausura 2025 (1637/1636), pero solo devuelve
+una temporada 2026 (1635). Las jornadas 1 del 24 de enero y 25 de julio
+comparten stage group-stage y Group A: stage/round no identifica un torneo.
+Cuatro encuentros (fechas 6 y 8 de ambas mitades) tienen league-phase y grupo
+null; filtrarlos fuera eliminaría resultados.
+
+Los 25 partidos finished suman 6 victorias, 10 empates, 9 derrotas, GF 25,
+GC 35 y 28 puntos: coinciden con la fila de standings. Es acumulación anual
+para esta muestra, no certificación de posición anual oficial.
+
+El [reglamento LPF 2026, art. 24](https://www.ligaprofesional.ar/wp-content/uploads/2026/01/Reglamento-Torneos-LPF-Primera-2026-1.pdf)
+define la general con las fases de zonas de ambos torneos, con desempates y
+tratamiento específico del descenso. Concatenar grupos no verifica esa tabla.
+La [guía BSD](https://goaldir.com/docs/football/competition-structure/) propone
+agrupar stage/round, insuficiente para esta muestra argentina.
+
+Decisión: conservar etiquetas crudas, permitir clasificación local pendiente
+y exigir fuente/mapeo verificable contra fixture oficial antes de asignar
+torneo. No deducirlo solo por calendario por posibles reprogramaciones.
+Standings no homologado para Apertura, Clausura, anual ni promedios. Se puede
+continuar el relevamiento de partidos, pero no publicar esas tablas ni cerrar
+el Bloque 2. No se cambió código de producto o SQL.
+
+### Prueba autenticada BSD — 2026-09-17
+
+El usuario confirmó que reemplazó la clave anterior por BSD. Se renombró solo
+esa variable de `.env.local` a `BSD_API_KEY`; no se imprimió ni versionó su valor.
+Ocho GET de lectura, todos HTTP 200, sin reintentos ni paginación automática:
+
+- `/api/v2/leagues/?country=Argentina`: una liga, ID 85; temporada actual
+  1635, Primera LPF 2026. Primera cabecera RateLimit: football, restante 7500.
+  Ese contador aislado no certifica cómo se contabilizan todas las consultas.
+- `/api/v2/events/?team_name=Newell&season_id=1635&limit=2`: count 32;
+  Newell's Old Boys ID 4997. Muestra futura con estado `notstarted`, scores null.
+  No asumir orden ascendente: los dos primeros resultados eran de noviembre.
+- `/api/v2/events/?team_id=4997&season_id=1635&status=finished&limit=1`:
+  count 25; evento 223705, Newell's–Vélez, 2026-09-11, 1–1 según BSD,
+  estado finished/FT. IDs de árbitro, estadio y técnicos presentes.
+- `/api/v2/leagues/85/standings/?season_id=1635`: grupos A/B;
+  Newell's aparece con played 25 y pts 28. No hay separación explícita
+  Apertura/Clausura en la respuesta inspeccionada. No etiquetar esta tabla
+  como Clausura ni anual oficial. La temporada combina fases y requiere análisis.
+- `/api/v2/events/223705/lineups/`: confirmed, 11 titulares y 12 suplentes
+  por equipo; bajas listadas; updated_at presente.
+- `/api/v2/events/223705/player-stats/`: 46 registros, con minutos, pases,
+  duelos, tarjetas y otras variables; existen nulls. Los ratings recibidos
+  son del proveedor y no sustituyen el algoritmo propio.
+- `/api/v2/events/223705/stats/`: estadísticas de equipos y tiempos,
+  22 tiros en shotmap, 92 puntos de momentum; xg_estimated false en raíz.
+  Diferencia observable para el local: expected_goals 2.05 y xg.actual 2.17;
+  mantener procedencia y no fusionar campos como si fueran idénticos.
+- `/api/v2/events/223705/incidents/`: 16 entradas.
+
+Resultado: acceso real a temporada actual y detalle de una muestra confirmado;
+exactitud independiente, cobertura histórica completa, vivo/HT→2T, tablas por
+torneo, anual y promedios siguen sin certificar. La documentación usa upcoming
+como filtro pero la respuesta contiene notstarted: normalizar desde evidencia.
+No se implementó adaptador, SQL ni UI. Siguiente trabajo: resolver semántica de
+competición y contrastar muestras antes de adopción definitiva.
+
 ### Alternativas gratuitas — revisión pública del 2026-09-17
 
 Alcance: comparar acceso gratuito a Argentina actual sin registrar cuentas,
