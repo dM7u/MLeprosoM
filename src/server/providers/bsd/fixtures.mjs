@@ -1,4 +1,5 @@
 import 'server-only';
+export { requestBsd as bsdGet } from './request.mjs';
 
 function requiredId(value) {
   if (!Number.isSafeInteger(value) || value <= 0) throw new Error('BSD_INVALID_ID');
@@ -37,18 +38,4 @@ export function normalizeFixtures(body, seasonId, teamId, fetchedAt) {
       fetched_at: fetchedAt, source_updated_at: null,
     } };
   });
-}
-
-export async function bsdGet(path, apiKey, fetcher = fetch) {
-  if (!apiKey?.trim()) throw new Error('BSD_KEY_MISSING');
-  const url = new URL(path, 'https://sports.bzzoiro.com/api/v2/');
-  if (url.origin !== 'https://sports.bzzoiro.com' || !url.pathname.startsWith('/api/v2/') || url.username || url.password) throw new Error('BSD_INVALID_URL');
-  let response;
-  try {
-    response = await fetcher(url, {
-      headers: { Authorization: `Token ${apiKey}` }, redirect: 'error', signal: AbortSignal.timeout(20000),
-    });
-  } catch { throw new Error('BSD_CONNECTION_FAILED'); }
-  if (!response.ok) throw new Error(`BSD_HTTP_${response.status}`);
-  try { return await response.json(); } catch { throw new Error('BSD_INVALID_JSON'); }
 }

@@ -212,6 +212,12 @@ Registro previo de investigación pública:
 
 ## BLOQUE 3 --- Primera cadena de datos real
 
+Tolerancia inicial a fallos: [x] reintento acotado de lecturas BSD, respeto de
+Retry-After, conteo real de intentos y registro de caídas en apply; [x] función
+de estados de frescura probada con snapshots simulados; [ ] conectar esa función
+al servicio/API/UI cuando exista. Once pruebas, lint, typecheck y build aprobados.
+No se consultó BSD ni se cargaron datos simulados para estas pruebas.
+
 Avance 2026-09-17: cliente BSD y sincronización manual preparados en
 `scripts/sync-bsd.mjs`; normalización valida alcance, nulos, duplicados y páginas
 incompletas. Siete pruebas unitarias, lint, typecheck y build aprobados. Dos intentos

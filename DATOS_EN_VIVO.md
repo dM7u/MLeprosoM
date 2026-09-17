@@ -87,6 +87,22 @@ resultado por la API interna.
 
 ## Observabilidad
 
+### Tolerancia inicial a caídas (sin implementar el vivo)
+
+El cliente BSD limita cada lectura a dos intentos para conexión/timeout y
+502/503/504. No reintenta 401/403/429 ni JSON inválido. Espera mínima 1 segundo;
+respeta Retry-After hasta 5 segundos y comunica plazos mayores sin esperar ni
+reintentar antes. Son límites del cliente manual, no una política de polling.
+
+`src/server/data-state.mjs` clasifica snapshots como empty/error/fresh/partial/stale.
+Requiere TTL explícito del consumidor; no fija TTL de partidos en vivo.
+Un fallo de actualización conserva los últimos datos y fuerza stale. Fechas
+ausentes, inválidas o futuras no acreditan frescura. Esta función aún no está
+conectada a API/UI; no se afirma protección visual implementada.
+
+La sincronización apply registra inicio antes de BSD y persiste intentos/error
+si Supabase responde. Los fallos no eliminan fixtures ni renuevan fetched_at.
+
 Registrar como mínimo: - fixture_id; - proveedor; -
 endpoint/operación; - hora de request; - hora de respuesta; -
 resultado/error; - estado del partido; - timestamp de los datos
