@@ -182,7 +182,8 @@ mínima es coherente y el repositorio contiene la documentación vigente.
     estable que deba conservarse.
 -   [x] Ajustar `MODELO_DE_DATOS.md` con límites del relevamiento público.
 -   [ ] Validar ajustes del modelo contra respuestas reales.
--   [ ] Diseñar primera migración mínima.
+-   [x] Diseñar y probar primera migración mínima: equipos, competiciones, temporadas externas, partidos y sincronizaciones. RLS y restricciones verificadas en PostgreSQL embebido.
+-   [ ] Aplicar `20260917000100_initial_football.sql` en Supabase y validar permisos remotos. Falta acceso administrativo SQL; la clave Data API disponible no permite crear tablas.
 
 ### Investigación inicial — 2026-09-17
 

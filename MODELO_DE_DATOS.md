@@ -5,6 +5,13 @@
 Modelo conceptual inicial. No representa todavía migraciones SQL
 definitivas.
 
+Actualización: primera migración mínima preparada y probada localmente en
+`supabase/migrations/20260917000100_initial_football.sql`, todavía no aplicada
+en Supabase. Incluye teams, competitions, seasons, fixtures y sync_runs.
+La evidencia BSD habilita esta persistencia; las restricciones históricas de
+API-Football descritas abajo ya no bloquean el almacenamiento de fixtures.
+El resto de entidades y las tablas de posiciones siguen siendo conceptuales.
+
 Antes de fijar tablas y columnas finales debe verificarse la cobertura
 real de API-Football Free. El objetivo de este documento es definir
 conceptos, relaciones y reglas que la persistencia deberá soportar.
