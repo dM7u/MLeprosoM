@@ -183,7 +183,8 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 -   [x] Ajustar `MODELO_DE_DATOS.md` con límites del relevamiento público.
 -   [ ] Validar ajustes del modelo contra respuestas reales.
 -   [x] Diseñar y probar primera migración mínima: equipos, competiciones, temporadas externas, partidos y sincronizaciones. RLS y restricciones verificadas en PostgreSQL embebido.
--   [ ] Aplicar `20260917000100_initial_football.sql` en Supabase y validar permisos remotos. Falta acceso administrativo SQL; la clave Data API disponible no permite crear tablas.
+-   [x] Aplicar `20260917000100_initial_football.sql` en Supabase: ejecución manual confirmada por el usuario; cinco tablas accesibles desde backend con HTTP 200 (2026-09-17).
+-   [ ] Auditar permisos/RLS en Supabase remoto; restricciones probadas localmente, no confundir lectura administrativa exitosa con validación de roles públicos.
 
 ### Investigación inicial — 2026-09-17
 

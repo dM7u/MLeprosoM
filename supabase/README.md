@@ -5,7 +5,11 @@ No importa muestras, no modifica tablas existentes ni aplica datos de investigac
 RLS habilitado sin políticas públicas; permisos CRUD solo para `service_role`.
 La clave del servidor nunca debe llegar al navegador.
 
-Estado remoto: **no aplicada**. La Data API no ejecuta migraciones SQL.
+Estado remoto: **aplicada manualmente por el usuario**, confirmado el 2026-09-17.
+Lectura autenticada desde backend verificada: las cinco tablas respondieron
+HTTP 200. No se insertaron datos en esta comprobación. Permisos públicos/RLS
+probados localmente; auditoría de roles remotos todavía pendiente.
+La Data API no ejecuta migraciones SQL.
 Se requiere sesión de administrador en el SQL Editor de este proyecto o conexión
 PostgreSQL administrativa guardada localmente, nunca enviada por chat.
 
