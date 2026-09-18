@@ -393,3 +393,12 @@ No iniciar fórmulas antes de relevar variables reales.
 -   Fuentes de contratos/transferencias.
 -   Anti-abuso de votaciones.
 -   Metodología de probable XI cuando el proveedor no lo ofrezca.
+
+## Ubicación local — 2026-09-18
+
+Proyecto copiado a `C:\MLeprosoM` por pedido del usuario, conservando Git y
+claves locales. `Fuentes/` reemplaza los cinco documentos iniciales por sus
+versiones actuales y agrega PROVEEDORES.md. Ejecutar `node scripts/sync-docs.mjs`
+tras actualizar documentos. Espejo original retenido como respaldo.
+16 pruebas aprobadas desde el destino. AGENTS.md heredado no se modificó:
+el sistema rechazó su escritura (EPERM); instrucciones de ubicación en README.

@@ -226,3 +226,13 @@ actualizar `BACKLOG.md`.
 
 No avanzar automáticamente cuando una decisión pendiente pueda cambiar
 la implementación.
+
+## Carpeta local principal
+
+Desde 2026-09-18, trabajar en `C:\MLeprosoM`. Los documentos de la raíz son
+las versiones de trabajo; `Fuentes` conserva copias actualizadas para gestionar
+las fuentes del proyecto. Después de editar documentación, ejecutar
+`node scripts/sync-docs.mjs`. No editar ambas copias por separado.
+El directorio original del espejo ChatGPT se conserva solo como respaldo.
+La tarea actual de Codex no cambia automáticamente de directorio: para futuras
+tareas, abrir `C:\MLeprosoM` como proyecto local en la aplicación.
