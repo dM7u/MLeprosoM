@@ -5,7 +5,7 @@
 BSD alimenta la cadena mínima Liga Profesional → Supabase → vista local.
 API-Football Free sigue limitado para 2026. Los registros siguientes conservan
 la historia del relevamiento; sus pendientes antiguos no reemplazan este estado.
-Copa Argentina aún no tiene proveedor integrado ni cobertura autenticada.
+Copa Argentina tiene una muestra autenticada de GOAL API contrastada con fuente oficial; integración pendiente.
 
 ### Copa Argentina: candidato gratuito para prueba
 
@@ -62,7 +62,7 @@ No sustituir BSD ni incorporar fixtures de Copa Argentina todavía.
    Conservar IDs externos y procedencia; no mezclar valores de distintos
    proveedores sin una regla de prioridad documentada.
 
-Bloqueo concreto: falta cuenta/clave de GOAL API para la prueba autenticada.
+Bloqueo de credencial resuelto el 2026-09-18; ver prueba autenticada siguiente.
 No hace falta contratar un plan ni compartir secretos en el chat.
 
 ## Registro histórico del relevamiento (2026-09-17)
@@ -389,3 +389,49 @@ investigar otro proveedor para Argentina actual, o aceptar un prototipo históri
 rotulado como tal. No comprar ni cambiar el alcance sin decisión del usuario.
 Tras resolverlo, repetir la consulta de acceso y continuar con las muestras.
 La primera migración y el Bloque 3 permanecen pendientes.
+
+### GOAL API: prueba autenticada — 2026-09-18
+
+Siete GET secuenciales desde backend; clave de `.env.local`, nunca registrada.
+Sin redirecciones, sin reintentos automáticos, timeout de 20 segundos. Se usó
+`https://api.goal-api.com/v1` con Bearer, según documentación principal.
+La combinación funciona: no fue necesario probar el host/cabecera alternativos.
+
+| Ruta bajo /v1 | HTTP | Evidencia |
+|---|---|---|
+| /leagues/515 | 404 | LEAGUE_NOT_FOUND; el apiId del ejemplo no sirve como id interno. |
+| /leagues | 200 | 1.019 registros, primera página 50, hasMore true. |
+| /countries | 200 | Argentina identificada en primera página; catálogo global incompleto. |
+| /countries/cmr77dvt50092rx068fv1p6ic/leagues | 200 | 16 ligas, hasMore false; Copa Argentina incluida. |
+| /leagues/cmr77dvtc0094rx067dgsgk4m/fixtures | 200 | Total 329 de varias ediciones, primera página 50; contiene muestra 2026. |
+| /teams/cmr7sjrx97uhirx06ll1213tl/fixtures | 200 | Total 226 multicompetición, primera página 50; misma muestra. |
+| /fixtures/cmrjgytzvwn3po807ahbz90c8 | 200 | Detalle accesible, estadio y árbitro null. |
+
+Cabeceras `x-ratelimit-limit=1000`, tipo DAILY; restante pasó de 999 a 993.
+El 404 también consumió cuota. Las otras cabeceras RateLimit corresponden a
+otro límite y no reemplazan la cuota diaria. No se recorrieron páginas restantes:
+la prueba verifica una muestra, no la completitud del catálogo o la temporada.
+
+IDs descubiertos: Copa Argentina `cmr77dvtc0094rx067dgsgk4m` (apiId 515),
+Newell's `cmr7sjrx97uhirx06ll1213tl`, Acassuso `cmr7sjx3s7wxprx0606kopdf3`.
+Son identidades GOAL API; no sustituyen IDs BSD ni UUIDs locales.
+
+Muestra: fixture `cmrjgytzvwn3po807ahbz90c8` (apiId 724541), leagueYear 2026,
+Newell's 0–2 Acassuso, FINISHED, kickoffUtc 2026-03-29T23:15:00.000Z
+(20:15 Argentina). `stageName=1/32-finals`, pero `matchRound=null`.
+Marcadores enviados como strings "0" y "2"; penales y prórroga null.
+No convertir nulos en cero ni usar el orden home/away para inferir estadio propio.
+
+Contraste con la [ficha oficial](https://www.copaargentina.org/es/pwa/match/3653_Newell-s-vs-Acassuso.html):
+coinciden participantes, marcador, fecha/hora, finalización y fase de 32avos.
+La [crónica oficial](https://www.copaargentina.org/es/news/11839_Acassuso-sorprendio-a-Newell-s-en-Rafaela.html)
+confirma eliminación de Newell's. La ficha informa sede en Rafaela y árbitro;
+esos campos siguen ausentes en la respuesta GOAL API y no se fusionaron.
+La presencia de campos lineups/statistics/events en el detalle no certifica
+contenido completo: su cobertura queda pendiente de inspección específica.
+
+Resultado: apto para continuar el diseño de importación mínima de esta muestra.
+Sin escritura Supabase ni cambios UI; sin afirmar cobertura universal, vivo,
+completitud histórica, continuidad del servicio o adopción definitiva.
+Siguiente bloque: equivalencia explícita del equipo y deduplicación entre fuentes,
+antes de un adaptador e importación. La credencial ya no bloquea el trabajo.

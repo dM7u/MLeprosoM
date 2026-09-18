@@ -390,7 +390,7 @@ Revisión de diferencias y formato; no corresponde repetir tests de producto.
 -   [ ] Antes de combinar proveedores, diseñar equivalencias de equipos y
     deduplicación de partidos; la identidad actual es específica de cada fuente.
 
--   Reemplazo gratuito de API-Football: Free denegó 2026; BSD operativo para fixtures LPF; GOAL API candidato complementario para Copa Argentina, con cuota pública revisada y acceso autenticado pendiente.
+-   Reemplazo gratuito de API-Football: Free denegó 2026; BSD operativo para fixtures LPF; GOAL API candidato complementario para Copa Argentina, con acceso autenticado y una muestra contrastada; integración pendiente.
 -   Actualizar ESLint a una rama soportada cuando los plugins de Next sean compatibles.
 -   Modelo DB físico después de conocer cobertura.
 -   Cache/TTL por tipo de dato.
@@ -417,3 +417,11 @@ Espejo original retenido como respaldo. 16 pruebas aprobadas desde el destino
 en la migración anterior; esta consolidación modifica solo documentación.
 AGENTS.md heredado no se modificó: el sistema rechazó su escritura (EPERM);
 las instrucciones de ubicación están en `fuentes/README.md`.
+
+## Validación GOAL API — 2026-09-18
+
+Credencial confirmada sin exponerla. La prueba anterior de documentación queda
+complementada por siete consultas reales; evidencia y límites en PROVEEDORES.md.
+No se completó paginación ni se certificaron estadísticas, vivo o históricos.
+Próximo paso: identidad compartida de equipos y deduplicación antes de importar.
+Cambios solo documentales; diff verificado, sin repetir tests de producto.
