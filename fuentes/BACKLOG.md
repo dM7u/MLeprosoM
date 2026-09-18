@@ -458,3 +458,28 @@ mezcla de competiciones/ediciones, duplicados y conversión indebida de null.
 
 No se importó ningún partido ni se modificó Supabase. La vista sigue usando BSD.
 Build de producción también aprobado; revisión final de diferencias sin errores.
+
+## Persistencia Copa y lectura conjunta — 2026-09-18
+
+Alcance: ampliación aditiva de fixtures, importador manual y lectura/UI con
+procedencia. Dependencia externa: aplicar SQL en Supabase. Sin datos simulados
+remotos ni nuevas dependencias del producto; pruebas DB usan PGlite local.
+
+- [x] Preparar migración de ronda textual y marcadores FT/prórroga/penales.
+- [x] Probar restricciones, nulos, unicidad y permisos con PostgreSQL embebido.
+- [x] Importador validado, upserts y registro de sincronizaciones/errores;
+  preflight de esquema impide consumir cuota/cargar antes de la migración.
+- [x] Conectar equivalencia de Newell's y ámbitos disjuntos a lectura conjunta.
+- [x] Mostrar competición, fuente y estados por proveedor; GOAL FINISHED/SCHEDULED.
+- [x] Dry-run real del importador: seis GET, 226 registros, uno en alcance.
+- [x] Lectura remota y navegador: 32 registros BSD conservados, GOAL Sin datos.
+- [x] Tests unitarios, lint, typecheck y build aprobados; prueba SQL local aprobada.
+- [ ] Aplicar `supabase/migrations/20260918000100_cup_score_breakdown.sql`
+  en el SQL Editor de Supabase. Pendiente de ejecución por el usuario, sin
+  credenciales SQL ni conexión de administración disponibles para el agente.
+- [ ] Ejecutar apply, repetir para verificar idempotencia remota y confirmar
+  33 partidos (32 BSD + muestra Copa), sin afirmar ese conteo antes de observarlo.
+
+No se ejecutó apply ni se modificó Supabase. La integración de Copa en producción
+local sigue pendiente del SQL y carga remota. Preview comprobada en puerto 3101.
+Conteo final: 31 pruebas unitarias aprobadas, además de la prueba de migración SQL.

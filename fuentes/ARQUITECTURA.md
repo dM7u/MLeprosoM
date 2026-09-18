@@ -218,3 +218,13 @@ Reglas de alcance y deduplicación en MODELO_DE_DATOS.md. La vista sigue leyendo
 Adaptador GOAL API de solo lectura disponible en src/server/providers/goal-api.
 El comando scripts/check-goal.mjs valida identidad, alcance y catálogo paginado.
 Todavía no integra DB ni UI; no crea llamadas externas al visitar la página.
+
+### Lectura conjunta preparada — 2026-09-18
+
+fixtureView resuelve el equipo revisado y consulta en paralelo snapshots de
+Supabase: BSD limitado a su competición/temporada revisadas, GOAL limitado a
+Copa Argentina 2026. readCombinedFixtures conserva resultados aunque falle otra
+fuente; informa estados independientes y frescura del snapshot más antiguo.
+La página muestra competición, proveedor y penales cuando existen, sin llamadas
+al proveedor. La migración remota y la carga inicial GOAL siguen pendientes;
+por ahora la vista muestra los 32 registros BSD y GOAL API Sin datos.

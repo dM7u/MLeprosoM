@@ -59,3 +59,30 @@ Resultado 2026-09-18: 5 requests/páginas, 226 registros revisados, 225 excluido
 campos faltantes null, valores inválidos o ausentes inesperados rechazados.
 La forma normalizada NO es todavía una fila SQL: round es texto y los scores
 adicionales necesitan resolver persistencia antes de implementar apply.
+
+## Importación Copa Argentina: preparada, activación pendiente
+
+Primero aplicar en SQL Editor de Supabase el archivo
+`supabase/migrations/20260918000100_cup_score_breakdown.sql` (una sola vez).
+Agrega columnas nullable de marcadores y ronda; no borra datos ni abre permisos.
+Se probó localmente con PostgreSQL embebido. La clave Data API de la aplicación
+no permite ejecutar DDL; no pedir ni pegar contraseñas de base en el chat.
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/sync-goal.mjs --dry-run
+node --conditions=react-server --env-file=.env.local scripts/sync-goal.mjs --apply
+```
+
+Dry-run de importación: seis requests, incluida metadata de competición.
+Apply comprueba las columnas antes de consultar al proveedor; crea sync_run,
+valida catálogo completo y hace upsert por provider/external_id. No borra datos.
+Season externa usa el año/etiqueta recibido, dentro de su competición, porque
+GOAL API no entregó ID separado de temporada. Idempotencia probada localmente;
+repetición remota pendiente. Sin transacción multitabla: un fallo puede dejar
+entidades parciales y un nuevo intento debe completarlas. No ejecutar en paralelo.
+Si se corta el proceso, puede quedar un sync_run running; no hay scheduler.
+
+Comprobación de esquema remoto y lectura 2026-09-18: columnas nuevas pendientes,
+32 fixtures BSD accesibles, GOAL API sin registros. La UI conjunta muestra fuente
+por partido y estado por origen; una fuente vacía/fallida no oculta la restante.
+No se ejecutó apply antes de aplicar la migración.

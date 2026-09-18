@@ -336,3 +336,16 @@ La identidad canónica no debe escribirse en columnas UUID existentes.
 Siguiente bloque verificable: adaptador GOAL API de solo lectura con validación
 de alcance, nulos y paginación; dry-run de Copa. Luego persistencia y lectura
 conjunta. No se cambia aún SQL ni se importan registros deportivos.
+
+### Persistencia Copa preparada — 2026-09-18
+
+Migración `20260918000100_cup_score_breakdown.sql`: seis columnas de marcador
+FT/prórroga/penales (integer nullable, no negativos) y source_round_label texto.
+source_round conserva su tipo integer para BSD. Los estados de origen se guardan
+sin alterar; UI reconoce FINISHED/SCHEDULED de GOAL, otros quedan sin confirmar.
+La etiqueta de temporada GOAL es external_id dentro de su competición.
+
+Importador `store-goal-fixtures.mjs` conserva identidades por proveedor y upserts.
+No se crean tablas canónicas nuevas: la equivalencia revisada se aplica al leer
+los ámbitos disjuntos LPF/BSD y Copa 2026/GOAL. Cada resultado muestra procedencia.
+Lectura conjunta conectada; importación real pendiente de migración remota.

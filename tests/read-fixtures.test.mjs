@@ -20,3 +20,13 @@ test('missing opponent names preserve data as partial',async()=>{
  const state=await readTeamFixtures(mock([{data:{id:a,name:'A'}},{data:[row]},{error:{message:'failed'}}]),options);
  assert.equal(state.status,'partial');assert.equal(state.data[0].away_team,null);
 });
+
+test('scoped cup read constrains competition and season before returning fixtures',async()=>{
+ const filters=[];
+ const responses=[{data:{id:a,name:'A'}},{data:[]}];
+ const db={from(){const result=responses.shift();const chain=new Proxy({}, {get(_,key){if(key==='then')return(resolve,reject)=>Promise.resolve(result).then(resolve,reject);return(...args)=>{if(key==='eq')filters.push(args);return chain;};}});return chain;}};
+ const state=await readTeamFixtures(db,{...options,provider:'goal-api',competitionId:'cup',seasonId:'2026'});
+ assert.equal(state.status,'empty');
+ assert.ok(filters.some(([key,value])=>key==='seasons.competitions.external_id'&&value==='cup'));
+ assert.ok(filters.some(([key,value])=>key==='seasons.external_id'&&value==='2026'));
+});
