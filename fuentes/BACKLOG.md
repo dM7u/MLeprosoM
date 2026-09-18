@@ -368,6 +368,19 @@ No iniciar fórmulas antes de relevar variables reales.
 -   [ ] Rendimiento.
 -   [ ] Cobertura de tests prioritaria.
 
+## Copa Argentina — revisión 2026-09-18
+
+- [x] Revisar candidato gratuito complementario: GOAL API anuncia Copa Argentina
+  2021–2026 y plan gratuito de 1.000 requests/día; verificación pública en navegador.
+  Evidencia, divergencia de autenticación y protocolo en `PROVEEDORES.md`.
+- [ ] Probar cuenta GOAL API y cotejar muestra Newell's 2026 contra Copa Argentina.
+  Falta que el usuario configure `GOAL_API_KEY` en `.env.local`; no contratar planes.
+- [ ] Resolver identidad entre proveedores antes de persistir Copa Argentina.
+
+Solo documentación y variable de ejemplo reservada; sin adaptador, migraciones
+ni consultas autenticadas nuevas. BSD sigue alimentando la vista local.
+Revisión de diferencias y formato; no corresponde repetir tests de producto.
+
 ## Decisiones pendientes
 
 -   [ ] Incorporar Copa Argentina al alcance de partidos de Newell's. BSD no la
@@ -377,7 +390,7 @@ No iniciar fórmulas antes de relevar variables reales.
 -   [ ] Antes de combinar proveedores, diseñar equivalencias de equipos y
     deduplicación de partidos; la identidad actual es específica de cada fuente.
 
--   Reemplazo gratuito de API-Football: Free denegó 2026; BSD candidato a validar, GOAL API alternativa secundaria con cuota pendiente de confirmar.
+-   Reemplazo gratuito de API-Football: Free denegó 2026; BSD operativo para fixtures LPF; GOAL API candidato complementario para Copa Argentina, con cuota pública revisada y acceso autenticado pendiente.
 -   Actualizar ESLint a una rama soportada cuando los plugins de Next sean compatibles.
 -   Modelo DB físico después de conocer cobertura.
 -   Cache/TTL por tipo de dato.

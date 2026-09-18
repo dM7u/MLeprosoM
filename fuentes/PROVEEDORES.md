@@ -1,6 +1,71 @@
 # Proveedores — MLeprosoM
 
-## Estado del relevamiento (2026-09-17)
+## Estado actual — 2026-09-18
+
+BSD alimenta la cadena mínima Liga Profesional → Supabase → vista local.
+API-Football Free sigue limitado para 2026. Los registros siguientes conservan
+la historia del relevamiento; sus pendientes antiguos no reemplazan este estado.
+Copa Argentina aún no tiene proveedor integrado ni cobertura autenticada.
+
+### Copa Argentina: candidato gratuito para prueba
+
+Revisión pública acotada (aproximadamente 15 minutos), sin crear cuentas,
+consumir claves privadas nuevas ni modificar datos deportivos.
+
+- [GOAL API: cobertura de Copa Argentina](https://goal-api.com/coverage/argentina-copa-argentina-api):
+  página renderizada en navegador, temporadas anunciadas 2021–2026, 326 partidos,
+  242 finalizados y 5 próximos; 324 con alineaciones, 236 con estadísticas y
+  267 con eventos. Son contadores agregados del catálogo, NO cifras de 2026
+  ni prueba de cobertura de Newell's. El ejemplo muestra competición 515;
+  tratar ese ID como candidato hasta validarlo con la cuenta.
+- [Plan gratuito](https://goal-api.com/pricing): navegador confirma 1.000
+  consultas/día, una clave y acceso anunciado a todas las competiciones.
+  La página de cobertura anuncia registro sin tarjeta. No se verificaron
+  cuota efectiva, latencia, completitud ni respuesta autenticada.
+- [Documentación](https://goal-api.com/documentation): base
+  `https://api.goal-api.com/v1`, autenticación Bearer, listas paginadas.
+  La página de cobertura usa otro ejemplo: `https://goal-api.com/api/v1`
+  con `X-API-Key`. Resolver esta divergencia con documentación/panel de la
+  cuenta antes de probar; nunca enviar la clave a hosts ajenos al proveedor
+  ni seguir redirecciones con credenciales. No se creó un adaptador supuesto.
+- [Condiciones publicadas](https://goal-api.com/terms), julio 2026: permiten
+  incorporar datos en aplicaciones con restricciones, excluyen redistribución
+  como feed y no garantizan cobertura por encuentro. El plan gratuito puede
+  cambiar. No se presume independencia de sus fuentes respecto de BSD ni
+  una garantía de continuidad por sumar otro proveedor.
+- [TheSportsDB](https://www.thesportsdb.com/documentation): el acceso gratuito
+  limita temporadas a 15 eventos y próximos/últimos del equipo a un evento
+  local; no sirve como garantía de fixture completo. No se intentó eludir
+  esos límites ni se certificó Copa Argentina con muestras.
+- API-Football ya declara Copa Argentina en su
+  [catálogo](https://www.api-football.com/coverage), pero la prueba previa
+  de nuestra cuenta Free rechazó 2026. Catálogo no equivale a acceso del plan.
+
+Recomendación: probar GOAL API como complemento de BSD, pendiente de clave.
+No sustituir BSD ni incorporar fixtures de Copa Argentina todavía.
+
+### Prueba pendiente y criterio de aceptación
+
+1. El usuario crea la cuenta gratuita en https://goal-api.com/signup y guarda
+   la clave SOLO en `C:\MLeprosoM\.env.local`, como `GOAL_API_KEY`, manteniendo
+   `BSD_API_KEY`. Variable reservada a investigación, aún sin consumidor.
+2. Confirmar autenticación, cuota y paginación; descubrir competición,
+   temporada y Newell's desde respuestas reales. No reutilizar IDs de BSD.
+3. Obtener la muestra de Copa Argentina 2026, verificar alcance y completitud,
+   y contrastar rival, fase, fecha y marcador con la
+   [web oficial de Copa Argentina](https://www.copaargentina.org/).
+4. Distinguir marcador de juego, prórroga y penales; datos ausentes siguen
+   ausentes. No deducir campeón/ganador ni estadísticas por un campo ambiguo.
+5. Antes de importar, definir equivalencias explícitas de equipos entre
+   proveedores y deduplicación por competición/edición/fase/participantes,
+   con revisión de ambigüedades. Nombre o fecha solos no prueban identidad.
+   Conservar IDs externos y procedencia; no mezclar valores de distintos
+   proveedores sin una regla de prioridad documentada.
+
+Bloqueo concreto: falta cuenta/clave de GOAL API para la prueba autenticada.
+No hace falta contratar un plan ni compartir secretos en el chat.
+
+## Registro histórico del relevamiento (2026-09-17)
 
 Investigación pública y primera tanda autenticada del Bloque 2. La clave funciona,
 pero **Free rechaza la temporada 2026**. La respuesta indica acceso a 2022–2024.
