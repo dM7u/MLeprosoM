@@ -98,7 +98,7 @@ crecer sin implementar funcionalidades de producto prematuramente.
     todavía operaciones sobre tablas ni políticas RLS.
 -   [x] Definir frontera cliente/servidor.
 -   [x] Preparar capa provider sin implementar cobertura no verificada.
--   [x] Incorporar esta documentación al repositorio (copias operativas en raíz).
+-   [x] Incorporar esta documentación al repositorio (documentos de trabajo en fuentes/).
 -   [x] Ejecutar build/lint/typecheck disponibles.
 -   [x] Actualizar backlog con el estado real del bloque.
 
@@ -397,8 +397,10 @@ No iniciar fórmulas antes de relevar variables reales.
 ## Ubicación local — 2026-09-18
 
 Proyecto copiado a `C:\MLeprosoM` por pedido del usuario, conservando Git y
-claves locales. `Fuentes/` reemplaza los cinco documentos iniciales por sus
-versiones actuales y agrega PROVEEDORES.md. Ejecutar `node scripts/sync-docs.mjs`
-tras actualizar documentos. Espejo original retenido como respaldo.
-16 pruebas aprobadas desde el destino. AGENTS.md heredado no se modificó:
-el sistema rechazó su escritura (EPERM); instrucciones de ubicación en README.
+claves locales. Los seis documentos de trabajo residen únicamente en `fuentes/`.
+Se comprobó la igualdad de las copias antes de eliminar los duplicados de la raíz.
+Se retiró `scripts/sync-docs.mjs`; las actualizaciones se hacen directamente en `fuentes/`.
+Espejo original retenido como respaldo. 16 pruebas aprobadas desde el destino
+en la migración anterior; esta consolidación modifica solo documentación.
+AGENTS.md heredado no se modificó: el sistema rechazó su escritura (EPERM);
+las instrucciones de ubicación están en `fuentes/README.md`.

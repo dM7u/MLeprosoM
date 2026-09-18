@@ -90,7 +90,7 @@ sigue `origin/main` en [dM7u/MLeprosoM](https://github.com/dM7u/MLeprosoM).
 
 ## Documentación de trabajo
 
-Los documentos de la raíz son las copias operativas para versionar; `BACKLOG.md`
+Los documentos de `fuentes/` son las únicas versiones de trabajo; `fuentes/BACKLOG.md`
 es la fuente de verdad del avance. `sources/` conserva las referencias
 sincronizadas de solo lectura y queda fuera de Git. No editar esas referencias.
 Git contiene el primer commit de la fundación técnica. La escritura de Git
@@ -213,8 +213,7 @@ La ausencia de un dato nunca debe representarse como cero.
 -   `DATOS_EN_VIVO.md`: sincronización de partidos.
 -   `BACKLOG.md`: única fuente de verdad del estado del trabajo.
 
-Cuando la investigación del proveedor lo justifique podrá agregarse
-`PROVEEDORES.md` con la matriz de cobertura real.
+`PROVEEDORES.md` contiene la investigación y la cobertura verificada de los proveedores.
 
 ## Forma de trabajo
 
@@ -229,10 +228,10 @@ la implementación.
 
 ## Carpeta local principal
 
-Desde 2026-09-18, trabajar en `C:\MLeprosoM`. Los documentos de la raíz son
-las versiones de trabajo; `Fuentes` conserva copias actualizadas para gestionar
-las fuentes del proyecto. Después de editar documentación, ejecutar
-`node scripts/sync-docs.mjs`. No editar ambas copias por separado.
+Desde 2026-09-18, trabajar en `C:\MLeprosoM`. Los seis documentos del proyecto
+se mantienen únicamente en `C:\MLeprosoM\fuentes` y se versionan en Git.
+Editar directamente esos archivos; no hay copias en la raíz ni sincronización.
+Las rutas de código mencionadas en estos documentos parten de la raíz del repositorio.
 El directorio original del espejo ChatGPT se conserva solo como respaldo.
 La tarea actual de Codex no cambia automáticamente de directorio: para futuras
 tareas, abrir `C:\MLeprosoM` como proyecto local en la aplicación.
