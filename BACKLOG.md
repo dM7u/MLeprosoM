@@ -370,6 +370,13 @@ No iniciar fórmulas antes de relevar variables reales.
 
 ## Decisiones pendientes
 
+-   [ ] Incorporar Copa Argentina al alcance de partidos de Newell's. BSD no la
+    devolvió en el catálogo Argentina, incluso con include_inactive=true
+    (2026-09-18: count 1, solo Liga Profesional). Investigar proveedor alternativo
+    y verificar acceso real antes de implementar.
+-   [ ] Antes de combinar proveedores, diseñar equivalencias de equipos y
+    deduplicación de partidos; la identidad actual es específica de cada fuente.
+
 -   Reemplazo gratuito de API-Football: Free denegó 2026; BSD candidato a validar, GOAL API alternativa secundaria con cuota pendiente de confirmar.
 -   Actualizar ESLint a una rama soportada cuando los plugins de Next sean compatibles.
 -   Modelo DB físico después de conocer cobertura.

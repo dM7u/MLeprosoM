@@ -162,6 +162,21 @@ durante el bloque de vivo; no dar por resuelto HT→2H con datos históricos.
 
 ## Cierre pendiente
 
+### Copa Argentina — 2026-09-18
+
+Petición del usuario: incluir esta competición, evaluando una fuente adicional.
+Consulta autenticada BSD `leagues/?country=Argentina&include_inactive=true`:
+count 1, next null, solo liga 85 (Liga Profesional de Fútbol, activa).
+Copa Argentina no aparece en este catálogo; esto no prueba inexistencia absoluta
+en otros productos del proveedor. No asumir cobertura ni fabricar un ID.
+
+Una segunda fuente es viable conceptualmente, pero requiere validar cuota,
+temporadas y detalle real, además de equivalencias de equipos entre proveedores.
+El esquema mínimo separa identidades y relaciones por provider; aún no permite
+unificar automáticamente el mismo club entre fuentes. Diseñar esa correspondencia
+antes de presentar un calendario combinado. Los 32 partidos actuales son de LPF,
+no la totalidad de las competiciones de Newell's.
+
 ### Fixture completo LPF contrastado — 2026-09-17
 
 Se extendió el cotejo con la agenda oficial LPF a ambos torneos completos.
