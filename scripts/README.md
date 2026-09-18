@@ -33,3 +33,29 @@ de conexión fallaron durante la caída de BSD; el servicio volvió a responder.
 Auditoría confirmada por el usuario: `supabase/check-access.sql` permite revisar RLS y permisos
 con SQL Editor (solo lectura). Esperar cinco filas, RLS true y privilegios de
 anon/authenticated false. No confundir acceso administrativo con acceso público.
+
+## GOAL API: validación de solo lectura
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/check-goal.mjs --dry-run
+```
+
+Único modo admitido; no importa cliente Supabase ni tiene operación apply.
+Requiere GOAL_API_KEY privada. Alcance revisado en
+`src/server/providers/goal-api/reviewed-scope.json`, vinculado al registro de
+identidad. El listado de equipo contiene varias competiciones/temporadas:
+se recorre completo y se selecciona Copa Argentina 2026 explícitamente.
+
+Páginas de hasta 50, límite duro de diez requests; sin reintentos ni redirecciones.
+Cualquier error, cambio de total, offset incoherente o ID duplicado aborta sin
+resultado parcial. Si supera el presupuesto, requiere revisar el alcance;
+no reiniciar en bucle. Una lista vacía es un resultado explícito, no un partido.
+El control no ofrece aislamiento de snapshot: cambios de contenido sin variar
+el total podrían requerir una futura reconciliación. No certifica exactitud del
+proveedor ni incorpora datos al producto.
+
+Resultado 2026-09-18: 5 requests/páginas, 226 registros revisados, 225 excluidos,
+1 fixture en alcance. Estados crudos y scores FT/prórroga/penales separados;
+campos faltantes null, valores inválidos o ausentes inesperados rechazados.
+La forma normalizada NO es todavía una fila SQL: round es texto y los scores
+adicionales necesitan resolver persistencia antes de implementar apply.

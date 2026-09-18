@@ -434,9 +434,27 @@ clubes/partidos distintos. Sin dependencias nuevas ni consultas externas.
 - [x] Resolver server-only con desconocidos sin asignar y rechazo de conflictos.
 - [x] Documentar idempotencia y separación inicial LPF/BSD y Copa/GOAL API.
 - [x] Cuatro pruebas nuevas de identidad y conflictos; 20 pruebas totales OK.
-- [ ] Conectar estas reglas a un adaptador GOAL API y comprobar dry-run acotado.
+- [x] Conectar identidad y alcance revisados al adaptador GOAL API; dry-run completo, cinco páginas y un fixture de Copa Argentina 2026.
 - [ ] Persistir Copa Argentina y habilitar lectura conjunta con procedencia.
 
 No se importaron partidos, modificaron tablas ni cambió la vista. La tarea de
 identidad integrada permanece abierta hasta conectar y verificar el flujo.
 Validación final: 20 tests, lint, typecheck y build de producción aprobados.
+
+## GOAL API: adaptador de lectura — 2026-09-18
+
+Alcance: cliente backend, normalización y paginación limitada, sin SQL ni UI.
+Sin dependencias nuevas. Riesgos cubiertos: credenciales, páginas incompletas,
+mezcla de competiciones/ediciones, duplicados y conversión indebida de null.
+
+- [x] Cliente server-only con origen fijo, timeout, sin redirecciones/reintentos.
+- [x] Validar IDs, fechas, alcance y marcadores; conservar FT/prórroga/penales.
+- [x] Recorrer catálogo con presupuesto diez páginas y rechazo de inconsistencias.
+- [x] Conectar equivalencia revisada de Newell's al comando dry-run.
+- [x] Ejecutar prueba real: 5 consultas, 226 IDs, 225 excluidos, 1 en alcance.
+- [x] 25 pruebas unitarias, lint y typecheck aprobados.
+- [ ] Próximo bloque: persistencia de Copa Argentina y lectura conjunta;
+  resolver campos de prórroga/penales y normalización de estados antes de apply.
+
+No se importó ningún partido ni se modificó Supabase. La vista sigue usando BSD.
+Build de producción también aprobado; revisión final de diferencias sin errores.

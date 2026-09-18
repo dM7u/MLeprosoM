@@ -214,3 +214,7 @@ Nunca registrar secretos.
 Resolver server-only de identidad de equipos en src/server/identity, con registro
 explícito revisado y rechazo de conflictos. Aún sin conectar al flujo operativo.
 Reglas de alcance y deduplicación en MODELO_DE_DATOS.md. La vista sigue leyendo BSD.
+
+Adaptador GOAL API de solo lectura disponible en src/server/providers/goal-api.
+El comando scripts/check-goal.mjs valida identidad, alcance y catálogo paginado.
+Todavía no integra DB ni UI; no crea llamadas externas al visitar la página.

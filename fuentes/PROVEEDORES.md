@@ -435,3 +435,19 @@ Sin escritura Supabase ni cambios UI; sin afirmar cobertura universal, vivo,
 completitud histórica, continuidad del servicio o adopción definitiva.
 Siguiente bloque: equivalencia explícita del equipo y deduplicación entre fuentes,
 antes de un adaptador e importación. La credencial ya no bloquea el trabajo.
+
+### Adaptador GOAL API y paginación real — 2026-09-18
+
+Implementado en `src/server/providers/goal-api/fixtures.mjs`. Dry-run en
+`scripts/check-goal.mjs`: cinco GET exitosos al endpoint de fixtures del equipo,
+con limit=50 y offsets 0, 50, 100, 150 y 200. Total estable de 226 IDs únicos;
+selección local explícita por leagueId y leagueYear: un fixture de Copa Argentina
+2026 y 225 registros excluidos. No se asume orden por fecha ni se corta al
+primer encuentro. Esto completa el catálogo devuelto en esa ejecución, no
+certifica que el proveedor posea todos los partidos históricos del equipo.
+
+Sin escritura Supabase, sin consumo desde UI. Sin reintento automático; cuota,
+red o respuesta inválida detienen el proceso con código sanitizado. Límite diez
+páginas, rechazo de duplicados, cambios de total y páginas incoherentes.
+Se conserva el estado crudo; no hay conversión de FINISHED al estado de BSD aún.
+Prórroga/penales preservados por separado; no se infiere ganador.
