@@ -299,3 +299,40 @@ endpoint/disponibilidad; 2. eliminar conceptos que no necesiten
 persistencia; 3. definir claves y relaciones concretas; 4. crear primera
 migración mínima; 5. agregar constraints e índices según consultas
 reales; 6. evitar diseñar tablas futuras sin necesidad comprobada.
+
+## Identidad entre proveedores — 2026-09-18
+
+Preparación implementada en `src/server/identity/team-identity.mjs` y registro
+revisado `reviewed-teams.json`. Identidad de dominio separada de UUIDs de DB:
+Newell's primer equipo vincula BSD 4997 con GOAL API
+cmr7sjrx97uhirx06ll1213tl, respaldado por los fixtures LPF y la ficha de Copa.
+El registro es configuración versionada revisable, no descubrimiento automático.
+No se usa el nombre del club como clave. Referencias desconocidas quedan
+unresolved; las repetidas o contradictorias hacen fallar la validación.
+
+La primera migración permanece válida: `teams` y `fixtures` son registros
+por fuente; se conservan sus claves y relaciones. El resolver está probado,
+pero todavía NO está conectado a importación, servicio de lectura ni UI.
+La identidad canónica no debe escribirse en columnas UUID existentes.
+
+### Reglas para la próxima importación
+
+- Idempotencia dentro de una fuente: upsert por (provider, external_id).
+- Alcance exclusivo inicial: BSD para LPF y GOAL API para Copa Argentina 2026.
+  El importador deberá rechazar partidos ajenos al alcance, aunque la lista
+  del proveedor mezcle temporadas o competiciones. No habilitar fallback LPF.
+- La fecha no es clave de partido: una reprogramación actualiza el mismo ID.
+  Tampoco son suficientes equipos, nombre del torneo, jornada o marcador.
+- Si en el futuro dos fuentes cubren el mismo torneo, exigir un vínculo de
+  partido revisado que identifique competición, edición, fase, participantes
+  y encuentro/ida/vuelta. Coincidencias incompletas quedan para revisión;
+  no fusionar ni publicar automáticamente un segundo registro ambiguo.
+- Mantener un único proveedor elegido por ámbito; no completar campos null
+  mezclando registros silenciosamente. Los conflictos conservan procedencia.
+- Lectura futura: resolver las referencias del equipo, consultar cada ámbito
+  habilitado y conservar competición/proveedor por partido. Una fuente caída
+  no debe ocultar las otras ni aparecer como ausencia de partidos.
+
+Siguiente bloque verificable: adaptador GOAL API de solo lectura con validación
+de alcance, nulos y paginación; dry-run de Copa. Luego persistencia y lectura
+conjunta. No se cambia aún SQL ni se importan registros deportivos.

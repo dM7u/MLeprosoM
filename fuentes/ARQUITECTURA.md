@@ -208,3 +208,9 @@ Nunca registrar secretos.
 -   Tests en normalización y lógica de dominio.
 -   Arquitectura extensible a otros equipos sin generalizar
     prematuramente todo el producto.
+
+## Preparación multiproveedor — 2026-09-18
+
+Resolver server-only de identidad de equipos en src/server/identity, con registro
+explícito revisado y rechazo de conflictos. Aún sin conectar al flujo operativo.
+Reglas de alcance y deduplicación en MODELO_DE_DATOS.md. La vista sigue leyendo BSD.

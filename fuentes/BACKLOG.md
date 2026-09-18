@@ -424,3 +424,19 @@ complementada por siete consultas reales; evidencia y límites en PROVEEDORES.md
 No se completó paginación ni se certificaron estadísticas, vivo o históricos.
 Próximo paso: identidad compartida de equipos y deduplicación antes de importar.
 Cambios solo documentales; diff verificado, sin repetir tests de producto.
+
+## Preparación de identidad — 2026-09-18
+
+Alcance acotado: resolver identidad sin reescribir DB; riesgo principal, unir
+clubes/partidos distintos. Sin dependencias nuevas ni consultas externas.
+
+- [x] Implementar registro explícito BSD/GOAL API para Newell's primer equipo.
+- [x] Resolver server-only con desconocidos sin asignar y rechazo de conflictos.
+- [x] Documentar idempotencia y separación inicial LPF/BSD y Copa/GOAL API.
+- [x] Cuatro pruebas nuevas de identidad y conflictos; 20 pruebas totales OK.
+- [ ] Conectar estas reglas a un adaptador GOAL API y comprobar dry-run acotado.
+- [ ] Persistir Copa Argentina y habilitar lectura conjunta con procedencia.
+
+No se importaron partidos, modificaron tablas ni cambió la vista. La tarea de
+identidad integrada permanece abierta hasta conectar y verificar el flujo.
+Validación final: 20 tests, lint, typecheck y build de producción aprobados.

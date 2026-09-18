@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "teams": [
+    {
+      "canonicalId": "newells-old-boys-first-team",
+      "reviewedAt": "2026-09-18T00:00:00Z",
+      "references": [
+        {"provider": "bsd", "externalId": "4997"},
+        {"provider": "goal-api", "externalId": "cmr7sjrx97uhirx06ll1213tl"}
+      ],
+      "evidence": [
+        "fuentes/PROVEEDORES.md: prueba BSD 2026-09-17 y GOAL API 2026-09-18",
+        "docs/research/newells-2026-competition-map.json",
+        "https://www.copaargentina.org/es/pwa/match/3653_Newell-s-vs-Acassuso.html"
+      ]
+    }
+  ]
+}
