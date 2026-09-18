@@ -86,3 +86,12 @@ Comprobación de esquema remoto y lectura 2026-09-18: columnas nuevas pendientes
 32 fixtures BSD accesibles, GOAL API sin registros. La UI conjunta muestra fuente
 por partido y estado por origen; una fuente vacía/fallida no oculta la restante.
 No se ejecutó apply antes de aplicar la migración.
+
+## Activación verificada — 2026-09-18
+
+Migración remota aplicada por el usuario y comprobada mediante el preflight y
+la carga. Dos apply GOAL exitosos (6 requests cada uno) conservan un solo fixture,
+dos equipos, una competición y una temporada. Ambas sincronizaciones succeeded.
+Lectura conjunta: 33 partidos (32 BSD + Newell's–Acassuso, Copa Argentina, 0–2).
+Penales siguen null. BSD continúa stale; GOAL actualizado al verificar. La
+activación reemplaza los pendientes de migración/importación de notas previas.

@@ -374,7 +374,7 @@ No iniciar fórmulas antes de relevar variables reales.
   2021–2026 y plan gratuito de 1.000 requests/día; verificación pública en navegador.
   Evidencia, divergencia de autenticación y protocolo en `PROVEEDORES.md`.
 - [x] Probar cuenta GOAL API y cotejar muestra Newell's 2026 contra Copa Argentina. Siete GET: seis HTTP 200 y un 404 por ID público incompatible. Cuota 1.000/día, restante 993; muestra contrastada con ficha oficial. Sin importación.
-- [ ] Resolver identidad entre proveedores antes de persistir Copa Argentina.
+- [x] Resolver identidad entre proveedores para el alcance revisado: Newell's, LPF/BSD y Copa/GOAL API; carga y lectura verificadas.
 
 Solo documentación y variable de ejemplo reservada; sin adaptador, migraciones
 ni consultas autenticadas nuevas. BSD sigue alimentando la vista local.
@@ -435,7 +435,7 @@ clubes/partidos distintos. Sin dependencias nuevas ni consultas externas.
 - [x] Documentar idempotencia y separación inicial LPF/BSD y Copa/GOAL API.
 - [x] Cuatro pruebas nuevas de identidad y conflictos; 20 pruebas totales OK.
 - [x] Conectar identidad y alcance revisados al adaptador GOAL API; dry-run completo, cinco páginas y un fixture de Copa Argentina 2026.
-- [ ] Persistir Copa Argentina y habilitar lectura conjunta con procedencia.
+- [x] Persistir Copa Argentina y habilitar lectura conjunta con procedencia (verificación remota 2026-09-18).
 
 No se importaron partidos, modificaron tablas ni cambió la vista. La tarea de
 identidad integrada permanece abierta hasta conectar y verificar el flujo.
@@ -453,8 +453,7 @@ mezcla de competiciones/ediciones, duplicados y conversión indebida de null.
 - [x] Conectar equivalencia revisada de Newell's al comando dry-run.
 - [x] Ejecutar prueba real: 5 consultas, 226 IDs, 225 excluidos, 1 en alcance.
 - [x] 25 pruebas unitarias, lint y typecheck aprobados.
-- [ ] Próximo bloque: persistencia de Copa Argentina y lectura conjunta;
-  resolver campos de prórroga/penales y normalización de estados antes de apply.
+- [x] Persistencia Copa y lectura conjunta completadas para la muestra verificada; marcadores separados y estados conocidos normalizados.
 
 No se importó ningún partido ni se modificó Supabase. La vista sigue usando BSD.
 Build de producción también aprobado; revisión final de diferencias sin errores.
@@ -474,12 +473,23 @@ remotos ni nuevas dependencias del producto; pruebas DB usan PGlite local.
 - [x] Dry-run real del importador: seis GET, 226 registros, uno en alcance.
 - [x] Lectura remota y navegador: 32 registros BSD conservados, GOAL Sin datos.
 - [x] Tests unitarios, lint, typecheck y build aprobados; prueba SQL local aprobada.
-- [ ] Aplicar `supabase/migrations/20260918000100_cup_score_breakdown.sql`
-  en el SQL Editor de Supabase. Pendiente de ejecución por el usuario, sin
-  credenciales SQL ni conexión de administración disponibles para el agente.
-- [ ] Ejecutar apply, repetir para verificar idempotencia remota y confirmar
-  33 partidos (32 BSD + muestra Copa), sin afirmar ese conteo antes de observarlo.
+- [x] Aplicar `supabase/migrations/20260918000100_cup_score_breakdown.sql`: usuario confirmó ejecución; columnas verificadas por preflight e importación reales.
+- [x] Dos apply exitosos y lectura remota: 33 partidos, 32 BSD y uno GOAL API, sin duplicación de la muestra.
 
 No se ejecutó apply ni se modificó Supabase. La integración de Copa en producción
 local sigue pendiente del SQL y carga remota. Preview comprobada en puerto 3101.
 Conteo final: 31 pruebas unitarias aprobadas, además de la prueba de migración SQL.
+
+## Copa Argentina activada — 2026-09-18
+
+Usuario confirmó migración. Dos ejecuciones apply exitosas, seis requests cada
+una, ambas sync_runs succeeded y error_code null. Consulta remota confirma GOAL
+con un fixture, dos equipos, una competición y una temporada. Lectura conjunta:
+33 partidos, 32 BSD + Newell's 0–2 Acassuso por Copa Argentina. Penales null.
+BSD conserva frescura stale de su snapshot anterior; GOAL fresh al verificar.
+No se refrescó BSD ni se alteraron sus partidos. Sin scheduler ni datos vivos.
+La prueba remota completa los pendientes de activación registrados arriba;
+los párrafos anteriores describen estados históricos, no bloqueos actuales.
+
+Verificación en navegador: Copa Argentina · GOAL API, 29/03/2026 20:15,
+Newell's–Acassuso 0–2 dentro de Resultados guardados. Preview en puerto 3101.

@@ -228,3 +228,12 @@ fuente; informa estados independientes y frescura del snapshot más antiguo.
 La página muestra competición, proveedor y penales cuando existen, sin llamadas
 al proveedor. La migración remota y la carga inicial GOAL siguen pendientes;
 por ahora la vista muestra los 32 registros BSD y GOAL API Sin datos.
+
+## Activación verificada — 2026-09-18
+
+Migración remota aplicada por el usuario y comprobada mediante el preflight y
+la carga. Dos apply GOAL exitosos (6 requests cada uno) conservan un solo fixture,
+dos equipos, una competición y una temporada. Ambas sincronizaciones succeeded.
+Lectura conjunta: 33 partidos (32 BSD + Newell's–Acassuso, Copa Argentina, 0–2).
+Penales siguen null. BSD continúa stale; GOAL actualizado al verificar. La
+activación reemplaza los pendientes de migración/importación de notas previas.

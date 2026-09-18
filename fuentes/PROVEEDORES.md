@@ -451,3 +451,12 @@ red o respuesta inválida detienen el proceso con código sanitizado. Límite di
 páginas, rechazo de duplicados, cambios de total y páginas incoherentes.
 Se conserva el estado crudo; no hay conversión de FINISHED al estado de BSD aún.
 Prórroga/penales preservados por separado; no se infiere ganador.
+
+## Activación verificada — 2026-09-18
+
+Migración remota aplicada por el usuario y comprobada mediante el preflight y
+la carga. Dos apply GOAL exitosos (6 requests cada uno) conservan un solo fixture,
+dos equipos, una competición y una temporada. Ambas sincronizaciones succeeded.
+Lectura conjunta: 33 partidos (32 BSD + Newell's–Acassuso, Copa Argentina, 0–2).
+Penales siguen null. BSD continúa stale; GOAL actualizado al verificar. La
+activación reemplaza los pendientes de migración/importación de notas previas.
