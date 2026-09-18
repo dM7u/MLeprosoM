@@ -373,8 +373,7 @@ No iniciar fórmulas antes de relevar variables reales.
 - [x] Revisar candidato gratuito complementario: GOAL API anuncia Copa Argentina
   2021–2026 y plan gratuito de 1.000 requests/día; verificación pública en navegador.
   Evidencia, divergencia de autenticación y protocolo en `PROVEEDORES.md`.
-- [ ] Probar cuenta GOAL API y cotejar muestra Newell's 2026 contra Copa Argentina.
-  Falta que el usuario configure `GOAL_API_KEY` en `.env.local`; no contratar planes.
+- [x] Probar cuenta GOAL API y cotejar muestra Newell's 2026 contra Copa Argentina. Siete GET: seis HTTP 200 y un 404 por ID público incompatible. Cuota 1.000/día, restante 993; muestra contrastada con ficha oficial. Sin importación.
 - [ ] Resolver identidad entre proveedores antes de persistir Copa Argentina.
 
 Solo documentación y variable de ejemplo reservada; sin adaptador, migraciones
