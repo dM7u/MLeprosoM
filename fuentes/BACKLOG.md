@@ -512,3 +512,22 @@ No se consultó el proveedor ni se escribió en Supabase. Copa Argentina conserv
 su identificación independiente. El snapshot revisado no certifica cambios
 posteriores del fixture oficial ni posiciones, sanciones o promedios.
 Siguiente pendiente: verificación de tablas y ajustes antes de implementar standings.
+
+## Validación de tablas — 2026-09-18
+
+Alcance: cerrar el contraste antes bloqueado por caída BSD y observar tablas LPF.
+Sin cambios de producto, importación, migraciones ni fórmulas definitivas.
+
+- [x] Revalidar 480 IDs mapeados con equipos/localía/jornada en catálogo de 495.
+- [x] Comparar acumulados de 375 partidos finalizados con standings BSD:
+  30/30 equipos coinciden en ocho campos básicos, eliminatorias excluidas.
+- [x] Contrastar puntos y PJ de los 30 equipos con Tabla General oficial renderizada.
+- [x] Registrar orden publicado y muestra Newell's de Clausura/promedios con fuente.
+- [ ] Verificar Apertura final publicado y tablas de zonas completas.
+- [ ] Implementar snapshots por ámbito y validación de empates/ajustes pendientes.
+- [ ] Verificar históricos/denominadores de promedios para todos los equipos.
+
+Evidencia JSON y conclusión en docs/research/REGLAS_TABLAS_2026.md. Igualdad actual
+no certifica ausencia de sanciones. No publicar standings BSD como Clausura.
+Validación mediante aserciones de integridad/alcance y comparación; no se
+repitieron tests de aplicación porque no cambió el código de producto.

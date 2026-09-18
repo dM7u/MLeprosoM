@@ -42,3 +42,26 @@ el tiempo de conexión). No se generó informe ni se afirma igualdad de los
 - No bloquear la futura persistencia de fixtures por datos faltantes de tablas:
   son capacidades diferentes. La primera migración puede limitarse a entidades
   y partidos verificados, manteniendo tablas/ajustes para una tarea separada.
+
+## Contraste resuelto parcialmente — 2026-09-18
+
+El bloqueo de conectividad de la revisión anterior quedó resuelto. Informe:
+`bsd-standings-consistency-20260918.json`. Cinco páginas BSD: 495 IDs únicos;
+480 partidos mapeados de zonas y 15 eliminatorias excluidas. Terminados:
+240 Apertura y 135 Clausura. La suma 3/1/0 coincide en los 30 equipos con
+played/won/drawn/lost/gf/ga/gd/pts del standings BSD. No es una tabla Clausura.
+
+La página oficial [Clausura LPF](https://www.ligaprofesional.ar/torneo-clausura-mercado-libre-2026)
+cargó sus widgets tras esperar. Se transcribieron orden, puntos y PJ de la Tabla
+General: 30/30 coinciden en puntos y 25 PJ con el acumulado BSD. Orden guardado
+como observación oficial, no como resultado de un algoritmo propio de desempate.
+Newell's figura 22 en anual (28 puntos), 9 en Grupo A Clausura (13 puntos/9 PJ)
+y 25 en promedios (110 puntos/98 PJ, valor publicado 1,122). No confundir esos
+puestos con el 12 que BSD devuelve en su grupo acumulado anual.
+
+Esto habilita diseñar snapshots separados por torneo/ámbito con procedencia y
+fecha. Antes de publicar tablas automáticamente, implementar cálculo/validación
+de zonas y anual, detectar diferencias con puntos oficiales como ajuste pendiente,
+y conservar empates no resueltos. No inferir ausencia de sanciones de una suma
+coincidente. Promedios: la fila Newell's fue observada, faltan históricos y reglas
+de todos los ascendidos para automatizar. No se creó scraper ni API oficial.

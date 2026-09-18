@@ -1,0 +1,824 @@
+{
+  "checked_at": "2026-09-18T16:59:06.527Z",
+  "scope": "Internal consistency only; not official positions or confirmation of no sanctions",
+  "requests": 6,
+  "total_provider_events": 495,
+  "mapped_events": 480,
+  "excluded_events": [
+    {
+      "id": 223932,
+      "stage": "final",
+      "status": "finished"
+    },
+    {
+      "id": 223931,
+      "stage": "semifinals",
+      "status": "finished"
+    },
+    {
+      "id": 223930,
+      "stage": "semifinals",
+      "status": "finished"
+    },
+    {
+      "id": 223929,
+      "stage": "quarterfinals",
+      "status": "finished"
+    },
+    {
+      "id": 223928,
+      "stage": "quarterfinals",
+      "status": "finished"
+    },
+    {
+      "id": 223927,
+      "stage": "quarterfinals",
+      "status": "finished"
+    },
+    {
+      "id": 223926,
+      "stage": "quarterfinals",
+      "status": "finished"
+    },
+    {
+      "id": 223925,
+      "stage": "round-of-16",
+      "status": "finished"
+    },
+    {
+      "id": 223924,
+      "stage": "round-of-16",
+      "status": "finished"
+    },
+    {
+      "id": 223923,
+      "stage": "round-of-16",
+      "status": "finished"
+    },
+    {
+      "id": 223922,
+      "stage": "round-of-16",
+      "status": "finished"
+    },
+    {
+      "id": 223921,
+      "stage": "round-of-16",
+      "status": "finished"
+    },
+    {
+      "id": 223920,
+      "stage": "round-of-16",
+      "status": "finished"
+    },
+    {
+      "id": 223919,
+      "stage": "round-of-16",
+      "status": "finished"
+    },
+    {
+      "id": 223918,
+      "stage": "round-of-16",
+      "status": "finished"
+    }
+  ],
+  "tournaments": {
+    "Apertura": {
+      "mapped": 240,
+      "finished": 240
+    },
+    "Clausura": {
+      "mapped": 240,
+      "finished": 135
+    }
+  },
+  "teams": 30,
+  "teams_with_differences": 0,
+  "comparisons": [
+    {
+      "team_id": 2397,
+      "name": "Vélez Sarsfield",
+      "calculated": {
+        "team_id": 2397,
+        "played": 25,
+        "won": 11,
+        "drawn": 12,
+        "lost": 2,
+        "gf": 30,
+        "ga": 19,
+        "gd": 11,
+        "pts": 45
+      },
+      "differences": []
+    },
+    {
+      "team_id": 780,
+      "name": "Boca Juniors",
+      "calculated": {
+        "team_id": 780,
+        "played": 25,
+        "won": 11,
+        "drawn": 11,
+        "lost": 3,
+        "gf": 34,
+        "ga": 20,
+        "gd": 14,
+        "pts": 44
+      },
+      "differences": []
+    },
+    {
+      "team_id": 787,
+      "name": "Estudiantes de La Plata",
+      "calculated": {
+        "team_id": 787,
+        "played": 25,
+        "won": 12,
+        "drawn": 5,
+        "lost": 8,
+        "gf": 28,
+        "ga": 16,
+        "gd": 12,
+        "pts": 41
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4996,
+      "name": "Instituto De Córdoba",
+      "calculated": {
+        "team_id": 4996,
+        "played": 25,
+        "won": 12,
+        "drawn": 4,
+        "lost": 9,
+        "gf": 27,
+        "ga": 23,
+        "gd": 4,
+        "pts": 40
+      },
+      "differences": []
+    },
+    {
+      "team_id": 2390,
+      "name": "CA Independiente",
+      "calculated": {
+        "team_id": 2390,
+        "played": 25,
+        "won": 10,
+        "drawn": 8,
+        "lost": 7,
+        "gf": 32,
+        "ga": 27,
+        "gd": 5,
+        "pts": 38
+      },
+      "differences": []
+    },
+    {
+      "team_id": 785,
+      "name": "CA Lanús",
+      "calculated": {
+        "team_id": 785,
+        "played": 25,
+        "won": 10,
+        "drawn": 7,
+        "lost": 8,
+        "gf": 29,
+        "ga": 23,
+        "gd": 6,
+        "pts": 37
+      },
+      "differences": []
+    },
+    {
+      "team_id": 3136,
+      "name": "Defensa y Justicia",
+      "calculated": {
+        "team_id": 3136,
+        "played": 25,
+        "won": 9,
+        "drawn": 9,
+        "lost": 7,
+        "gf": 29,
+        "ga": 30,
+        "gd": -1,
+        "pts": 36
+      },
+      "differences": []
+    },
+    {
+      "team_id": 3125,
+      "name": "Gimnasia y Esgrima Mendoza",
+      "calculated": {
+        "team_id": 3125,
+        "played": 25,
+        "won": 10,
+        "drawn": 5,
+        "lost": 10,
+        "gf": 28,
+        "ga": 31,
+        "gd": -3,
+        "pts": 35
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4620,
+      "name": "Club Atlético Unión de Santa Fe",
+      "calculated": {
+        "team_id": 4620,
+        "played": 25,
+        "won": 9,
+        "drawn": 7,
+        "lost": 9,
+        "gf": 40,
+        "ga": 34,
+        "gd": 6,
+        "pts": 34
+      },
+      "differences": []
+    },
+    {
+      "team_id": 2391,
+      "name": "CA Talleres",
+      "calculated": {
+        "team_id": 2391,
+        "played": 25,
+        "won": 9,
+        "drawn": 7,
+        "lost": 9,
+        "gf": 27,
+        "ga": 27,
+        "gd": 0,
+        "pts": 34
+      },
+      "differences": []
+    },
+    {
+      "team_id": 742,
+      "name": "San Lorenzo",
+      "calculated": {
+        "team_id": 742,
+        "played": 25,
+        "won": 8,
+        "drawn": 9,
+        "lost": 8,
+        "gf": 18,
+        "ga": 20,
+        "gd": -2,
+        "pts": 33
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4997,
+      "name": "Newell's Old Boys",
+      "calculated": {
+        "team_id": 4997,
+        "played": 25,
+        "won": 6,
+        "drawn": 10,
+        "lost": 9,
+        "gf": 25,
+        "ga": 35,
+        "gd": -10,
+        "pts": 28
+      },
+      "differences": []
+    },
+    {
+      "team_id": 796,
+      "name": "Club Atlético Platense",
+      "calculated": {
+        "team_id": 796,
+        "played": 25,
+        "won": 5,
+        "drawn": 10,
+        "lost": 10,
+        "gf": 19,
+        "ga": 29,
+        "gd": -10,
+        "pts": 25
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4995,
+      "name": "Central Córdoba",
+      "calculated": {
+        "team_id": 4995,
+        "played": 25,
+        "won": 6,
+        "drawn": 5,
+        "lost": 14,
+        "gf": 16,
+        "ga": 32,
+        "gd": -16,
+        "pts": 23
+      },
+      "differences": []
+    },
+    {
+      "team_id": 743,
+      "name": "Deportivo Riestra",
+      "calculated": {
+        "team_id": 743,
+        "played": 25,
+        "won": 3,
+        "drawn": 11,
+        "lost": 11,
+        "gf": 13,
+        "ga": 22,
+        "gd": -9,
+        "pts": 20
+      },
+      "differences": []
+    },
+    {
+      "team_id": 774,
+      "name": "Independiente Rivadavia",
+      "calculated": {
+        "team_id": 774,
+        "played": 25,
+        "won": 14,
+        "drawn": 6,
+        "lost": 5,
+        "gf": 42,
+        "ga": 28,
+        "gd": 14,
+        "pts": 48
+      },
+      "differences": []
+    },
+    {
+      "team_id": 806,
+      "name": "Argentinos Juniors",
+      "calculated": {
+        "team_id": 806,
+        "played": 25,
+        "won": 13,
+        "drawn": 8,
+        "lost": 4,
+        "gf": 30,
+        "ga": 21,
+        "gd": 9,
+        "pts": 47
+      },
+      "differences": []
+    },
+    {
+      "team_id": 792,
+      "name": "Rosario Central",
+      "calculated": {
+        "team_id": 792,
+        "played": 25,
+        "won": 12,
+        "drawn": 7,
+        "lost": 6,
+        "gf": 30,
+        "ga": 24,
+        "gd": 6,
+        "pts": 43
+      },
+      "differences": []
+    },
+    {
+      "team_id": 755,
+      "name": "River Plate",
+      "calculated": {
+        "team_id": 755,
+        "played": 25,
+        "won": 13,
+        "drawn": 3,
+        "lost": 9,
+        "gf": 34,
+        "ga": 22,
+        "gd": 12,
+        "pts": 42
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4998,
+      "name": "Gimnasia y Esgrima",
+      "calculated": {
+        "team_id": 4998,
+        "played": 25,
+        "won": 13,
+        "drawn": 3,
+        "lost": 9,
+        "gf": 32,
+        "ga": 32,
+        "gd": 0,
+        "pts": 42
+      },
+      "differences": []
+    },
+    {
+      "team_id": 3299,
+      "name": "Club Atlético Belgrano",
+      "calculated": {
+        "team_id": 3299,
+        "played": 25,
+        "won": 10,
+        "drawn": 9,
+        "lost": 6,
+        "gf": 26,
+        "ga": 19,
+        "gd": 7,
+        "pts": 39
+      },
+      "differences": []
+    },
+    {
+      "team_id": 2352,
+      "name": "Huracán",
+      "calculated": {
+        "team_id": 2352,
+        "played": 25,
+        "won": 8,
+        "drawn": 11,
+        "lost": 6,
+        "gf": 25,
+        "ga": 20,
+        "gd": 5,
+        "pts": 35
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4999,
+      "name": "Sarmiento",
+      "calculated": {
+        "team_id": 4999,
+        "played": 25,
+        "won": 11,
+        "drawn": 2,
+        "lost": 12,
+        "gf": 29,
+        "ga": 33,
+        "gd": -4,
+        "pts": 35
+      },
+      "differences": []
+    },
+    {
+      "team_id": 734,
+      "name": "Barracas Central",
+      "calculated": {
+        "team_id": 734,
+        "played": 25,
+        "won": 8,
+        "drawn": 9,
+        "lost": 8,
+        "gf": 20,
+        "ga": 21,
+        "gd": -1,
+        "pts": 33
+      },
+      "differences": []
+    },
+    {
+      "team_id": 739,
+      "name": "Tigre",
+      "calculated": {
+        "team_id": 739,
+        "played": 25,
+        "won": 7,
+        "drawn": 11,
+        "lost": 7,
+        "gf": 25,
+        "ga": 21,
+        "gd": 4,
+        "pts": 32
+      },
+      "differences": []
+    },
+    {
+      "team_id": 3132,
+      "name": "Atlético Tucumán",
+      "calculated": {
+        "team_id": 3132,
+        "played": 25,
+        "won": 6,
+        "drawn": 9,
+        "lost": 10,
+        "gf": 22,
+        "ga": 25,
+        "gd": -3,
+        "pts": 27
+      },
+      "differences": []
+    },
+    {
+      "team_id": 733,
+      "name": "Racing Club",
+      "calculated": {
+        "team_id": 733,
+        "played": 25,
+        "won": 6,
+        "drawn": 8,
+        "lost": 11,
+        "gf": 25,
+        "ga": 30,
+        "gd": -5,
+        "pts": 26
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4994,
+      "name": "Banfield",
+      "calculated": {
+        "team_id": 4994,
+        "played": 25,
+        "won": 7,
+        "drawn": 5,
+        "lost": 13,
+        "gf": 26,
+        "ga": 33,
+        "gd": -7,
+        "pts": 26
+      },
+      "differences": []
+    },
+    {
+      "team_id": 4993,
+      "name": "Aldosivi",
+      "calculated": {
+        "team_id": 4993,
+        "played": 25,
+        "won": 1,
+        "drawn": 10,
+        "lost": 14,
+        "gf": 17,
+        "ga": 35,
+        "gd": -18,
+        "pts": 13
+      },
+      "differences": []
+    },
+    {
+      "team_id": 5000,
+      "name": "Estudiantes de Río Cuarto",
+      "calculated": {
+        "team_id": 5000,
+        "played": 25,
+        "won": 2,
+        "drawn": 5,
+        "lost": 18,
+        "gf": 9,
+        "ga": 35,
+        "gd": -26,
+        "pts": 11
+      },
+      "differences": []
+    }
+  ],
+  "official_comparison": {
+    "source": "https://www.ligaprofesional.ar/torneo-clausura-mercado-libre-2026",
+    "observed_at": "2026-09-18T17:00:47.243Z",
+    "method": "Manual transcription of rendered Tabla General; reviewed club aliases, points and played compared for 30 teams. Positions recorded as published, not recalculated.",
+    "annual": [
+      {
+        "position": 1,
+        "bsd_team_id": 774,
+        "name": "Independiente Rivadavia",
+        "played": 25,
+        "points": 48
+      },
+      {
+        "position": 2,
+        "bsd_team_id": 806,
+        "name": "Argentinos Juniors",
+        "played": 25,
+        "points": 47
+      },
+      {
+        "position": 3,
+        "bsd_team_id": 2397,
+        "name": "Vélez Sarsfield",
+        "played": 25,
+        "points": 45
+      },
+      {
+        "position": 4,
+        "bsd_team_id": 780,
+        "name": "Boca Juniors",
+        "played": 25,
+        "points": 44
+      },
+      {
+        "position": 5,
+        "bsd_team_id": 792,
+        "name": "Rosario Central",
+        "played": 25,
+        "points": 43
+      },
+      {
+        "position": 6,
+        "bsd_team_id": 755,
+        "name": "River Plate",
+        "played": 25,
+        "points": 42
+      },
+      {
+        "position": 7,
+        "bsd_team_id": 4998,
+        "name": "Gimnasia y Esgrima",
+        "played": 25,
+        "points": 42
+      },
+      {
+        "position": 8,
+        "bsd_team_id": 787,
+        "name": "Estudiantes de La Plata",
+        "played": 25,
+        "points": 41
+      },
+      {
+        "position": 9,
+        "bsd_team_id": 4996,
+        "name": "Instituto De Córdoba",
+        "played": 25,
+        "points": 40
+      },
+      {
+        "position": 10,
+        "bsd_team_id": 3299,
+        "name": "Club Atlético Belgrano",
+        "played": 25,
+        "points": 39
+      },
+      {
+        "position": 11,
+        "bsd_team_id": 2390,
+        "name": "CA Independiente",
+        "played": 25,
+        "points": 38
+      },
+      {
+        "position": 12,
+        "bsd_team_id": 785,
+        "name": "CA Lanús",
+        "played": 25,
+        "points": 37
+      },
+      {
+        "position": 13,
+        "bsd_team_id": 3136,
+        "name": "Defensa y Justicia",
+        "played": 25,
+        "points": 36
+      },
+      {
+        "position": 14,
+        "bsd_team_id": 2352,
+        "name": "Huracán",
+        "played": 25,
+        "points": 35
+      },
+      {
+        "position": 15,
+        "bsd_team_id": 3125,
+        "name": "Gimnasia y Esgrima Mendoza",
+        "played": 25,
+        "points": 35
+      },
+      {
+        "position": 16,
+        "bsd_team_id": 4999,
+        "name": "Sarmiento",
+        "played": 25,
+        "points": 35
+      },
+      {
+        "position": 17,
+        "bsd_team_id": 4620,
+        "name": "Club Atlético Unión de Santa Fe",
+        "played": 25,
+        "points": 34
+      },
+      {
+        "position": 18,
+        "bsd_team_id": 2391,
+        "name": "CA Talleres",
+        "played": 25,
+        "points": 34
+      },
+      {
+        "position": 19,
+        "bsd_team_id": 734,
+        "name": "Barracas Central",
+        "played": 25,
+        "points": 33
+      },
+      {
+        "position": 20,
+        "bsd_team_id": 742,
+        "name": "San Lorenzo",
+        "played": 25,
+        "points": 33
+      },
+      {
+        "position": 21,
+        "bsd_team_id": 739,
+        "name": "Tigre",
+        "played": 25,
+        "points": 32
+      },
+      {
+        "position": 22,
+        "bsd_team_id": 4997,
+        "name": "Newell's Old Boys",
+        "played": 25,
+        "points": 28
+      },
+      {
+        "position": 23,
+        "bsd_team_id": 3132,
+        "name": "Atlético Tucumán",
+        "played": 25,
+        "points": 27
+      },
+      {
+        "position": 24,
+        "bsd_team_id": 733,
+        "name": "Racing Club",
+        "played": 25,
+        "points": 26
+      },
+      {
+        "position": 25,
+        "bsd_team_id": 4994,
+        "name": "Banfield",
+        "played": 25,
+        "points": 26
+      },
+      {
+        "position": 26,
+        "bsd_team_id": 796,
+        "name": "Club Atlético Platense",
+        "played": 25,
+        "points": 25
+      },
+      {
+        "position": 27,
+        "bsd_team_id": 4995,
+        "name": "Central Córdoba",
+        "played": 25,
+        "points": 23
+      },
+      {
+        "position": 28,
+        "bsd_team_id": 743,
+        "name": "Deportivo Riestra",
+        "played": 25,
+        "points": 20
+      },
+      {
+        "position": 29,
+        "bsd_team_id": 4993,
+        "name": "Aldosivi",
+        "played": 25,
+        "points": 13
+      },
+      {
+        "position": 30,
+        "bsd_team_id": 5000,
+        "name": "Estudiantes de Río Cuarto",
+        "played": 25,
+        "points": 11
+      }
+    ],
+    "matching_points_and_played": 30,
+    "newells_clausura": {
+      "group": "A",
+      "position": 9,
+      "played": 9,
+      "points": 13,
+      "won": 3,
+      "drawn": 4,
+      "lost": 2,
+      "gf": 10,
+      "ga": 8,
+      "gd": 2
+    },
+    "newells_averages": {
+      "position": 25,
+      "played": 98,
+      "points_2024": 49,
+      "points_2025": 33,
+      "points_2026": 28,
+      "total_points": 110,
+      "displayed_average": "1,122"
+    },
+    "limits": [
+      "No certification of absent or future disciplinary adjustments",
+      "No verification of tie-break order algorithm",
+      "Apertura final published table not inspected this turn",
+      "Historical averages for all clubs still unverified",
+      "Research snapshot only; no automatic official feed or UI integration"
+    ]
+  }
+}

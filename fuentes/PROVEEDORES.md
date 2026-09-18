@@ -460,3 +460,15 @@ dos equipos, una competición y una temporada. Ambas sincronizaciones succeeded.
 Lectura conjunta: 33 partidos (32 BSD + Newell's–Acassuso, Copa Argentina, 0–2).
 Penales siguen null. BSD continúa stale; GOAL actualizado al verificar. La
 activación reemplaza los pendientes de migración/importación de notas previas.
+
+## Standings BSD frente a LPF — 2026-09-18
+
+Consistencia aritmética verificada para los 30 equipos: 480 encuentros mapeados,
+375 terminados, excluyendo 15 eliminatorias. Todos los campos básicos coinciden
+con standings BSD; informe en docs/research/bsd-standings-consistency-20260918.json.
+La Tabla General renderizada de LPF coincide en puntos y PJ para los 30 equipos.
+Se registraron posiciones tal como las publica LPF; no se validó algoritmo de
+desempate. Clausura y promedios: fila de Newell's observada, sin certificar cobertura
+completa de esos ámbitos. Investigación sin DB/UI ni actualizaciones deportivas.
+Ocho operaciones lógicas BSD durante el bloque (dos exploratorias y seis del
+informe), todas exitosas. No se instrumentó conteo de posibles reintentos internos.
