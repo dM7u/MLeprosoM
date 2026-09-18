@@ -2,6 +2,12 @@
 
 ## Estado
 
+Actualización 2026-09-18: cadena mínima BSD → validación → Supabase comprobada,
+con sincronización manual en `scripts/sync-bsd.mjs`. Lectura independiente en
+`src/server/db/read-fixtures.mjs`, sin consultas al proveedor y con TTL explícito
+del consumidor. Conserva nulls y clasifica frescura por el registro más antiguo;
+si faltan nombres devuelve datos parciales. API/UI y scheduler aún pendientes.
+
 Arquitectura conceptual con una base mínima implementada en el Bloque 1.
 El flujo completo todavía no está implementado.
 

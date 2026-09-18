@@ -25,9 +25,10 @@ intentos reales. Si Supabase tampoco responde, se informa SYNC_LOG_FAILED sin
 exponer cuerpos de error. Un corte del proceso puede dejar running pendiente.
 Dry-run nunca escribe. No ejecutar concurrentemente; scheduler y lock pendientes.
 
-Estado: pruebas unitarias aprobadas; dry-run real bloqueado por conexión BSD,
-también fuera del sandbox. Apply **no ejecutado**. No afirmar sincronización
-completada ni cobertura de escritura remota hasta probar la cadena completa.
+Estado 2026-09-18: dry-run y dos apply consecutivos exitosos. Conteos remotos
+estables: 32 fixtures, 17 equipos, una competición y una temporada. Lectura
+desde Supabase comprobada, incluidos marcadores null. Las pruebas anteriores
+de conexión fallaron durante la caída de BSD; el servicio volvió a responder.
 
 Auditoría confirmada por el usuario: `supabase/check-access.sql` permite revisar RLS y permisos
 con SQL Editor (solo lectura). Esperar cinco filas, RLS true y privilegios de

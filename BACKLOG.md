@@ -212,6 +212,14 @@ Registro previo de investigación pública:
 
 ## BLOQUE 3 --- Primera cadena de datos real
 
+Actualización 2026-09-18: BSD recuperado. Dry-run exitoso (3 requests/32 fixtures),
+dos apply exitosos consecutivos (3 requests cada uno). Lectura remota confirma
+32 fixtures, 17 equipos, una competición y una temporada, sin duplicados.
+`readTeamFixtures` consulta exclusivamente Supabase y usa estados de frescura;
+prueba remota devuelve 32 partidos, nombres completos y 7 marcadores null.
+TTL de 60 segundos usado solo para la prueba, no política definitiva del vivo.
+Quince pruebas unitarias, lint y typecheck aprobados. UI/API pública pendientes.
+
 Tolerancia inicial a fallos: [x] reintento acotado de lecturas BSD, respeto de
 Retry-After, conteo real de intentos y registro de caídas en apply; [x] función
 de estados de frescura probada con snapshots simulados; [ ] conectar esa función
@@ -231,17 +239,17 @@ confirmado por el usuario. Nuevo dry-run BSD falló con BSD_CONNECTION_FAILED;
 no se ejecutó apply ni se cargaron partidos. La auditoría ya no bloquea la carga;
 queda pendiente recuperar conectividad y validar la primera escritura real.
 
--   [ ] Implementar cliente backend API-Football.
--   [ ] Implementar manejo básico de errores/rate limit.
--   [ ] Normalizar equipo/competición/temporada/fixture según cobertura
+-   [x] Implementar cliente backend BSD (API-Football sustituido para esta cadena mínima).
+-   [x] Implementar manejo básico de errores/rate limit.
+-   [x] Normalizar equipo/competición/temporada/fixture según cobertura
     confirmada.
--   [ ] Crear migraciones mínimas necesarias.
--   [ ] Sincronizar Newell's.
--   [ ] Sincronizar próximos/últimos fixtures.
--   [ ] Persistir en Supabase.
+-   [x] Crear migraciones mínimas necesarias.
+-   [x] Sincronizar Newell's y rivales de sus fixtures.
+-   [x] Sincronizar fixtures disponibles de la temporada 2026.
+-   [x] Persistir en Supabase y verificar repetición sin duplicados.
 -   [ ] Exponer mediante servicio/API interna.
 -   [ ] Mostrar primera información real en UI.
--   [ ] Tests de normalización.
+-   [x] Tests de normalización y lectura de datos ausentes/parciales/desactualizados.
 -   [ ] Verificar cadena proveedor → UI.
 
 ## BLOQUE 4 --- Standings y Home inicial
