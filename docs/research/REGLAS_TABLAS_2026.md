@@ -65,3 +65,28 @@ de zonas y anual, detectar diferencias con puntos oficiales como ajuste pendient
 y conservar empates no resueltos. No inferir ausencia de sanciones de una suma
 coincidente. Promedios: la fila Newell's fue observada, faltan históricos y reglas
 de todos los ascendidos para automatizar. No se creó scraper ni API oficial.
+
+## Zonas completas contrastadas — 2026-09-18
+
+Evidencia en `lpf-zones-validation-20260918.json`: filas renderizadas LPF de
+Apertura y Clausura, dos zonas de 15 equipos por torneo. Alias revisados para
+vincular cada club con BSD. Cinco consultas paginadas, catálogo completo de
+495 partidos, cotejo por IDs/equipos/localía/jornada del mapeo de 480.
+
+Las 60 filas coinciden en ocho campos (PTS, PJ, G, E, P, GF, GC, DG).
+Apertura: 16 PJ por club; Clausura: 9 PJ en este corte. En las cuatro zonas,
+orden descendente por puntos, DG y GF reproduce todas las posiciones publicadas.
+No quedan empatados tras esos tres criterios en esta muestra. Esto NO prueba
+el algoritmo de enfrentamientos directos, Fair Play ni sorteo; esas ramas
+necesitan pruebas y datos específicos y deberán dejar posiciones sin resolver.
+
+Newell's: Apertura Grupo A puesto 14, 15 puntos; Clausura Grupo A puesto 9,
+13 puntos. Es un snapshot observado; no una posición vigente indefinidamente.
+No se detectó diferencia aritmética de puntos respecto de la tabla publicada;
+no se certifica inexistencia de sanciones pendientes o posteriores.
+
+La investigación ya permite iniciar el bloque de cálculo/snapshots separados
+por torneo y anual con procedencia y frescura. No seguir bloqueándolo por el
+contraste de zonas ahora completado. Alcance inicial: criterios PTS/DG/GF,
+empates adicionales sin posición definitiva, ajustes explícitamente pendientes
+si no existe evidencia actual. Promedios queda como bloque independiente.

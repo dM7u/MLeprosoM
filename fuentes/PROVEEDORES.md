@@ -472,3 +472,11 @@ desempate. Clausura y promedios: fila de Newell's observada, sin certificar cobe
 completa de esos ámbitos. Investigación sin DB/UI ni actualizaciones deportivas.
 Ocho operaciones lógicas BSD durante el bloque (dos exploratorias y seis del
 informe), todas exitosas. No se instrumentó conteo de posibles reintentos internos.
+
+### Zonas Apertura/Clausura — 2026-09-18
+
+Comparación completada: 60 filas oficiales renderizadas (30 por torneo) frente
+a acumulados de fixtures BSD mapeados, con ocho campos idénticos por fila.
+Los cuatro órdenes publicados se explican por PTS/DG/GF sin empates residuales.
+Informe en docs/research/lpf-zones-validation-20260918.json. No habilita usar
+standings BSD directamente como tabla de un torneo, ni certifica futuros ajustes.

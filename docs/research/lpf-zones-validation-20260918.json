@@ -1,0 +1,1610 @@
+{
+  "checked_at": "2026-09-18T17:10:53.048Z",
+  "sources": {
+    "Apertura": "https://www.ligaprofesional.ar/torneo-apertura-2026/",
+    "Clausura": "https://www.ligaprofesional.ar/torneo-clausura-mercado-libre-2026"
+  },
+  "method": "Rendered LPF tables transcribed with explicit reviewed club aliases; compared to BSD mapped zone fixtures. Research only.",
+  "requests": 5,
+  "zones": [
+    {
+      "tournament": "Apertura",
+      "group": "A",
+      "rows": [
+        {
+          "position": 1,
+          "bsd_team_id": 787,
+          "name": "Estudiantes de La Plata",
+          "published": {
+            "pts": 31,
+            "played": 16,
+            "won": 9,
+            "drawn": 4,
+            "lost": 3,
+            "gf": 19,
+            "ga": 7,
+            "gd": 12
+          },
+          "calculated": {
+            "pts": 31,
+            "played": 16,
+            "won": 9,
+            "drawn": 4,
+            "lost": 3,
+            "gf": 19,
+            "ga": 7,
+            "gd": 12
+          },
+          "differences": []
+        },
+        {
+          "position": 2,
+          "bsd_team_id": 780,
+          "name": "Boca Juniors",
+          "published": {
+            "pts": 30,
+            "played": 16,
+            "won": 8,
+            "drawn": 6,
+            "lost": 2,
+            "gf": 22,
+            "ga": 9,
+            "gd": 13
+          },
+          "calculated": {
+            "pts": 30,
+            "played": 16,
+            "won": 8,
+            "drawn": 6,
+            "lost": 2,
+            "gf": 22,
+            "ga": 9,
+            "gd": 13
+          },
+          "differences": []
+        },
+        {
+          "position": 3,
+          "bsd_team_id": 2397,
+          "name": "Vélez Sarsfield",
+          "published": {
+            "pts": 28,
+            "played": 16,
+            "won": 7,
+            "drawn": 7,
+            "lost": 2,
+            "gf": 18,
+            "ga": 12,
+            "gd": 6
+          },
+          "calculated": {
+            "pts": 28,
+            "played": 16,
+            "won": 7,
+            "drawn": 7,
+            "lost": 2,
+            "gf": 18,
+            "ga": 12,
+            "gd": 6
+          },
+          "differences": []
+        },
+        {
+          "position": 4,
+          "bsd_team_id": 2391,
+          "name": "CA Talleres",
+          "published": {
+            "pts": 26,
+            "played": 16,
+            "won": 7,
+            "drawn": 5,
+            "lost": 4,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 26,
+            "played": 16,
+            "won": 7,
+            "drawn": 5,
+            "lost": 4,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 5,
+          "bsd_team_id": 2390,
+          "name": "CA Independiente",
+          "published": {
+            "pts": 24,
+            "played": 16,
+            "won": 6,
+            "drawn": 6,
+            "lost": 4,
+            "gf": 24,
+            "ga": 20,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 24,
+            "played": 16,
+            "won": 6,
+            "drawn": 6,
+            "lost": 4,
+            "gf": 24,
+            "ga": 20,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 6,
+          "bsd_team_id": 785,
+          "name": "CA Lanús",
+          "published": {
+            "pts": 24,
+            "played": 16,
+            "won": 6,
+            "drawn": 6,
+            "lost": 4,
+            "gf": 18,
+            "ga": 15,
+            "gd": 3
+          },
+          "calculated": {
+            "pts": 24,
+            "played": 16,
+            "won": 6,
+            "drawn": 6,
+            "lost": 4,
+            "gf": 18,
+            "ga": 15,
+            "gd": 3
+          },
+          "differences": []
+        },
+        {
+          "position": 7,
+          "bsd_team_id": 742,
+          "name": "San Lorenzo",
+          "published": {
+            "pts": 22,
+            "played": 16,
+            "won": 5,
+            "drawn": 7,
+            "lost": 4,
+            "gf": 14,
+            "ga": 14,
+            "gd": 0
+          },
+          "calculated": {
+            "pts": 22,
+            "played": 16,
+            "won": 5,
+            "drawn": 7,
+            "lost": 4,
+            "gf": 14,
+            "ga": 14,
+            "gd": 0
+          },
+          "differences": []
+        },
+        {
+          "position": 8,
+          "bsd_team_id": 4620,
+          "name": "Club Atlético Unión de Santa Fe",
+          "published": {
+            "pts": 21,
+            "played": 16,
+            "won": 5,
+            "drawn": 6,
+            "lost": 5,
+            "gf": 24,
+            "ga": 20,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 21,
+            "played": 16,
+            "won": 5,
+            "drawn": 6,
+            "lost": 5,
+            "gf": 24,
+            "ga": 20,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 9,
+          "bsd_team_id": 4996,
+          "name": "Instituto De Córdoba",
+          "published": {
+            "pts": 21,
+            "played": 16,
+            "won": 6,
+            "drawn": 3,
+            "lost": 7,
+            "gf": 17,
+            "ga": 17,
+            "gd": 0
+          },
+          "calculated": {
+            "pts": 21,
+            "played": 16,
+            "won": 6,
+            "drawn": 3,
+            "lost": 7,
+            "gf": 17,
+            "ga": 17,
+            "gd": 0
+          },
+          "differences": []
+        },
+        {
+          "position": 10,
+          "bsd_team_id": 3136,
+          "name": "Defensa y Justicia",
+          "published": {
+            "pts": 19,
+            "played": 16,
+            "won": 4,
+            "drawn": 7,
+            "lost": 5,
+            "gf": 18,
+            "ga": 21,
+            "gd": -3
+          },
+          "calculated": {
+            "pts": 19,
+            "played": 16,
+            "won": 4,
+            "drawn": 7,
+            "lost": 5,
+            "gf": 18,
+            "ga": 21,
+            "gd": -3
+          },
+          "differences": []
+        },
+        {
+          "position": 11,
+          "bsd_team_id": 3125,
+          "name": "Gimnasia y Esgrima Mendoza",
+          "published": {
+            "pts": 19,
+            "played": 16,
+            "won": 5,
+            "drawn": 4,
+            "lost": 7,
+            "gf": 14,
+            "ga": 22,
+            "gd": -8
+          },
+          "calculated": {
+            "pts": 19,
+            "played": 16,
+            "won": 5,
+            "drawn": 4,
+            "lost": 7,
+            "gf": 14,
+            "ga": 22,
+            "gd": -8
+          },
+          "differences": []
+        },
+        {
+          "position": 12,
+          "bsd_team_id": 796,
+          "name": "Club Atlético Platense",
+          "published": {
+            "pts": 16,
+            "played": 16,
+            "won": 3,
+            "drawn": 7,
+            "lost": 6,
+            "gf": 10,
+            "ga": 15,
+            "gd": -5
+          },
+          "calculated": {
+            "pts": 16,
+            "played": 16,
+            "won": 3,
+            "drawn": 7,
+            "lost": 6,
+            "gf": 10,
+            "ga": 15,
+            "gd": -5
+          },
+          "differences": []
+        },
+        {
+          "position": 13,
+          "bsd_team_id": 4995,
+          "name": "Central Córdoba",
+          "published": {
+            "pts": 16,
+            "played": 16,
+            "won": 4,
+            "drawn": 4,
+            "lost": 8,
+            "gf": 11,
+            "ga": 21,
+            "gd": -10
+          },
+          "calculated": {
+            "pts": 16,
+            "played": 16,
+            "won": 4,
+            "drawn": 4,
+            "lost": 8,
+            "gf": 11,
+            "ga": 21,
+            "gd": -10
+          },
+          "differences": []
+        },
+        {
+          "position": 14,
+          "bsd_team_id": 4997,
+          "name": "Newell's Old Boys",
+          "published": {
+            "pts": 15,
+            "played": 16,
+            "won": 3,
+            "drawn": 6,
+            "lost": 7,
+            "gf": 15,
+            "ga": 27,
+            "gd": -12
+          },
+          "calculated": {
+            "pts": 15,
+            "played": 16,
+            "won": 3,
+            "drawn": 6,
+            "lost": 7,
+            "gf": 15,
+            "ga": 27,
+            "gd": -12
+          },
+          "differences": []
+        },
+        {
+          "position": 15,
+          "bsd_team_id": 743,
+          "name": "Deportivo Riestra",
+          "published": {
+            "pts": 11,
+            "played": 16,
+            "won": 1,
+            "drawn": 8,
+            "lost": 7,
+            "gf": 5,
+            "ga": 12,
+            "gd": -7
+          },
+          "calculated": {
+            "pts": 11,
+            "played": 16,
+            "won": 1,
+            "drawn": 8,
+            "lost": 7,
+            "gf": 5,
+            "ga": 12,
+            "gd": -7
+          },
+          "differences": []
+        }
+      ],
+      "unresolved_after_points_gd_gf": [],
+      "order_matches_published": true
+    },
+    {
+      "tournament": "Apertura",
+      "group": "B",
+      "rows": [
+        {
+          "position": 1,
+          "bsd_team_id": 774,
+          "name": "Independiente Rivadavia",
+          "published": {
+            "pts": 34,
+            "played": 16,
+            "won": 10,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 29,
+            "ga": 15,
+            "gd": 14
+          },
+          "calculated": {
+            "pts": 34,
+            "played": 16,
+            "won": 10,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 29,
+            "ga": 15,
+            "gd": 14
+          },
+          "differences": []
+        },
+        {
+          "position": 2,
+          "bsd_team_id": 755,
+          "name": "River Plate",
+          "published": {
+            "pts": 29,
+            "played": 16,
+            "won": 9,
+            "drawn": 2,
+            "lost": 5,
+            "gf": 22,
+            "ga": 12,
+            "gd": 10
+          },
+          "calculated": {
+            "pts": 29,
+            "played": 16,
+            "won": 9,
+            "drawn": 2,
+            "lost": 5,
+            "gf": 22,
+            "ga": 12,
+            "gd": 10
+          },
+          "differences": []
+        },
+        {
+          "position": 3,
+          "bsd_team_id": 806,
+          "name": "Argentinos Juniors",
+          "published": {
+            "pts": 29,
+            "played": 16,
+            "won": 8,
+            "drawn": 5,
+            "lost": 3,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 29,
+            "played": 16,
+            "won": 8,
+            "drawn": 5,
+            "lost": 3,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 4,
+          "bsd_team_id": 792,
+          "name": "Rosario Central",
+          "published": {
+            "pts": 28,
+            "played": 16,
+            "won": 8,
+            "drawn": 4,
+            "lost": 4,
+            "gf": 20,
+            "ga": 16,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 28,
+            "played": 16,
+            "won": 8,
+            "drawn": 4,
+            "lost": 4,
+            "gf": 20,
+            "ga": 16,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 5,
+          "bsd_team_id": 3299,
+          "name": "Club Atlético Belgrano",
+          "published": {
+            "pts": 26,
+            "played": 16,
+            "won": 7,
+            "drawn": 5,
+            "lost": 4,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 26,
+            "played": 16,
+            "won": 7,
+            "drawn": 5,
+            "lost": 4,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 6,
+          "bsd_team_id": 4998,
+          "name": "Gimnasia y Esgrima",
+          "published": {
+            "pts": 26,
+            "played": 16,
+            "won": 8,
+            "drawn": 2,
+            "lost": 6,
+            "gf": 19,
+            "ga": 19,
+            "gd": 0
+          },
+          "calculated": {
+            "pts": 26,
+            "played": 16,
+            "won": 8,
+            "drawn": 2,
+            "lost": 6,
+            "gf": 19,
+            "ga": 19,
+            "gd": 0
+          },
+          "differences": []
+        },
+        {
+          "position": 7,
+          "bsd_team_id": 2352,
+          "name": "Huracán",
+          "published": {
+            "pts": 22,
+            "played": 16,
+            "won": 5,
+            "drawn": 7,
+            "lost": 4,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 22,
+            "played": 16,
+            "won": 5,
+            "drawn": 7,
+            "lost": 4,
+            "gf": 17,
+            "ga": 13,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 8,
+          "bsd_team_id": 733,
+          "name": "Racing Club",
+          "published": {
+            "pts": 21,
+            "played": 16,
+            "won": 5,
+            "drawn": 6,
+            "lost": 5,
+            "gf": 17,
+            "ga": 15,
+            "gd": 2
+          },
+          "calculated": {
+            "pts": 21,
+            "played": 16,
+            "won": 5,
+            "drawn": 6,
+            "lost": 5,
+            "gf": 17,
+            "ga": 15,
+            "gd": 2
+          },
+          "differences": []
+        },
+        {
+          "position": 9,
+          "bsd_team_id": 734,
+          "name": "Barracas Central",
+          "published": {
+            "pts": 21,
+            "played": 16,
+            "won": 5,
+            "drawn": 6,
+            "lost": 5,
+            "gf": 15,
+            "ga": 15,
+            "gd": 0
+          },
+          "calculated": {
+            "pts": 21,
+            "played": 16,
+            "won": 5,
+            "drawn": 6,
+            "lost": 5,
+            "gf": 15,
+            "ga": 15,
+            "gd": 0
+          },
+          "differences": []
+        },
+        {
+          "position": 10,
+          "bsd_team_id": 739,
+          "name": "Tigre",
+          "published": {
+            "pts": 20,
+            "played": 16,
+            "won": 4,
+            "drawn": 8,
+            "lost": 4,
+            "gf": 18,
+            "ga": 15,
+            "gd": 3
+          },
+          "calculated": {
+            "pts": 20,
+            "played": 16,
+            "won": 4,
+            "drawn": 8,
+            "lost": 4,
+            "gf": 18,
+            "ga": 15,
+            "gd": 3
+          },
+          "differences": []
+        },
+        {
+          "position": 11,
+          "bsd_team_id": 4999,
+          "name": "Sarmiento",
+          "published": {
+            "pts": 19,
+            "played": 16,
+            "won": 6,
+            "drawn": 1,
+            "lost": 9,
+            "gf": 13,
+            "ga": 20,
+            "gd": -7
+          },
+          "calculated": {
+            "pts": 19,
+            "played": 16,
+            "won": 6,
+            "drawn": 1,
+            "lost": 9,
+            "gf": 13,
+            "ga": 20,
+            "gd": -7
+          },
+          "differences": []
+        },
+        {
+          "position": 12,
+          "bsd_team_id": 4994,
+          "name": "Banfield",
+          "published": {
+            "pts": 18,
+            "played": 16,
+            "won": 5,
+            "drawn": 3,
+            "lost": 8,
+            "gf": 17,
+            "ga": 19,
+            "gd": -2
+          },
+          "calculated": {
+            "pts": 18,
+            "played": 16,
+            "won": 5,
+            "drawn": 3,
+            "lost": 8,
+            "gf": 17,
+            "ga": 19,
+            "gd": -2
+          },
+          "differences": []
+        },
+        {
+          "position": 13,
+          "bsd_team_id": 3132,
+          "name": "Atlético Tucumán",
+          "published": {
+            "pts": 14,
+            "played": 16,
+            "won": 3,
+            "drawn": 5,
+            "lost": 8,
+            "gf": 15,
+            "ga": 20,
+            "gd": -5
+          },
+          "calculated": {
+            "pts": 14,
+            "played": 16,
+            "won": 3,
+            "drawn": 5,
+            "lost": 8,
+            "gf": 15,
+            "ga": 20,
+            "gd": -5
+          },
+          "differences": []
+        },
+        {
+          "position": 14,
+          "bsd_team_id": 4993,
+          "name": "Aldosivi",
+          "published": {
+            "pts": 8,
+            "played": 16,
+            "won": 0,
+            "drawn": 8,
+            "lost": 8,
+            "gf": 6,
+            "ga": 19,
+            "gd": -13
+          },
+          "calculated": {
+            "pts": 8,
+            "played": 16,
+            "won": 0,
+            "drawn": 8,
+            "lost": 8,
+            "gf": 6,
+            "ga": 19,
+            "gd": -13
+          },
+          "differences": []
+        },
+        {
+          "position": 15,
+          "bsd_team_id": 5000,
+          "name": "Estudiantes de Río Cuarto",
+          "published": {
+            "pts": 5,
+            "played": 16,
+            "won": 1,
+            "drawn": 2,
+            "lost": 13,
+            "gf": 5,
+            "ga": 24,
+            "gd": -19
+          },
+          "calculated": {
+            "pts": 5,
+            "played": 16,
+            "won": 1,
+            "drawn": 2,
+            "lost": 13,
+            "gf": 5,
+            "ga": 24,
+            "gd": -19
+          },
+          "differences": []
+        }
+      ],
+      "unresolved_after_points_gd_gf": [],
+      "order_matches_published": true
+    },
+    {
+      "tournament": "Clausura",
+      "group": "A",
+      "rows": [
+        {
+          "position": 1,
+          "bsd_team_id": 4996,
+          "name": "Instituto De Córdoba",
+          "published": {
+            "pts": 19,
+            "played": 9,
+            "won": 6,
+            "drawn": 1,
+            "lost": 2,
+            "gf": 10,
+            "ga": 6,
+            "gd": 4
+          },
+          "calculated": {
+            "pts": 19,
+            "played": 9,
+            "won": 6,
+            "drawn": 1,
+            "lost": 2,
+            "gf": 10,
+            "ga": 6,
+            "gd": 4
+          },
+          "differences": []
+        },
+        {
+          "position": 2,
+          "bsd_team_id": 2397,
+          "name": "Vélez Sarsfield",
+          "published": {
+            "pts": 17,
+            "played": 9,
+            "won": 4,
+            "drawn": 5,
+            "lost": 0,
+            "gf": 12,
+            "ga": 7,
+            "gd": 5
+          },
+          "calculated": {
+            "pts": 17,
+            "played": 9,
+            "won": 4,
+            "drawn": 5,
+            "lost": 0,
+            "gf": 12,
+            "ga": 7,
+            "gd": 5
+          },
+          "differences": []
+        },
+        {
+          "position": 3,
+          "bsd_team_id": 3136,
+          "name": "Defensa y Justicia",
+          "published": {
+            "pts": 17,
+            "played": 9,
+            "won": 5,
+            "drawn": 2,
+            "lost": 2,
+            "gf": 11,
+            "ga": 9,
+            "gd": 2
+          },
+          "calculated": {
+            "pts": 17,
+            "played": 9,
+            "won": 5,
+            "drawn": 2,
+            "lost": 2,
+            "gf": 11,
+            "ga": 9,
+            "gd": 2
+          },
+          "differences": []
+        },
+        {
+          "position": 4,
+          "bsd_team_id": 3125,
+          "name": "Gimnasia y Esgrima Mendoza",
+          "published": {
+            "pts": 16,
+            "played": 9,
+            "won": 5,
+            "drawn": 1,
+            "lost": 3,
+            "gf": 14,
+            "ga": 9,
+            "gd": 5
+          },
+          "calculated": {
+            "pts": 16,
+            "played": 9,
+            "won": 5,
+            "drawn": 1,
+            "lost": 3,
+            "gf": 14,
+            "ga": 9,
+            "gd": 5
+          },
+          "differences": []
+        },
+        {
+          "position": 5,
+          "bsd_team_id": 780,
+          "name": "Boca Juniors",
+          "published": {
+            "pts": 14,
+            "played": 9,
+            "won": 3,
+            "drawn": 5,
+            "lost": 1,
+            "gf": 12,
+            "ga": 11,
+            "gd": 1
+          },
+          "calculated": {
+            "pts": 14,
+            "played": 9,
+            "won": 3,
+            "drawn": 5,
+            "lost": 1,
+            "gf": 12,
+            "ga": 11,
+            "gd": 1
+          },
+          "differences": []
+        },
+        {
+          "position": 6,
+          "bsd_team_id": 2390,
+          "name": "CA Independiente",
+          "published": {
+            "pts": 14,
+            "played": 9,
+            "won": 4,
+            "drawn": 2,
+            "lost": 3,
+            "gf": 8,
+            "ga": 7,
+            "gd": 1
+          },
+          "calculated": {
+            "pts": 14,
+            "played": 9,
+            "won": 4,
+            "drawn": 2,
+            "lost": 3,
+            "gf": 8,
+            "ga": 7,
+            "gd": 1
+          },
+          "differences": []
+        },
+        {
+          "position": 7,
+          "bsd_team_id": 785,
+          "name": "CA Lanús",
+          "published": {
+            "pts": 13,
+            "played": 9,
+            "won": 4,
+            "drawn": 1,
+            "lost": 4,
+            "gf": 11,
+            "ga": 8,
+            "gd": 3
+          },
+          "calculated": {
+            "pts": 13,
+            "played": 9,
+            "won": 4,
+            "drawn": 1,
+            "lost": 4,
+            "gf": 11,
+            "ga": 8,
+            "gd": 3
+          },
+          "differences": []
+        },
+        {
+          "position": 8,
+          "bsd_team_id": 4620,
+          "name": "Club Atlético Unión de Santa Fe",
+          "published": {
+            "pts": 13,
+            "played": 9,
+            "won": 4,
+            "drawn": 1,
+            "lost": 4,
+            "gf": 16,
+            "ga": 14,
+            "gd": 2
+          },
+          "calculated": {
+            "pts": 13,
+            "played": 9,
+            "won": 4,
+            "drawn": 1,
+            "lost": 4,
+            "gf": 16,
+            "ga": 14,
+            "gd": 2
+          },
+          "differences": []
+        },
+        {
+          "position": 9,
+          "bsd_team_id": 4997,
+          "name": "Newell's Old Boys",
+          "published": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 10,
+            "ga": 8,
+            "gd": 2
+          },
+          "calculated": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 10,
+            "ga": 8,
+            "gd": 2
+          },
+          "differences": []
+        },
+        {
+          "position": 10,
+          "bsd_team_id": 742,
+          "name": "San Lorenzo",
+          "published": {
+            "pts": 11,
+            "played": 9,
+            "won": 3,
+            "drawn": 2,
+            "lost": 4,
+            "gf": 4,
+            "ga": 6,
+            "gd": -2
+          },
+          "calculated": {
+            "pts": 11,
+            "played": 9,
+            "won": 3,
+            "drawn": 2,
+            "lost": 4,
+            "gf": 4,
+            "ga": 6,
+            "gd": -2
+          },
+          "differences": []
+        },
+        {
+          "position": 11,
+          "bsd_team_id": 787,
+          "name": "Estudiantes de La Plata",
+          "published": {
+            "pts": 10,
+            "played": 9,
+            "won": 3,
+            "drawn": 1,
+            "lost": 5,
+            "gf": 9,
+            "ga": 9,
+            "gd": 0
+          },
+          "calculated": {
+            "pts": 10,
+            "played": 9,
+            "won": 3,
+            "drawn": 1,
+            "lost": 5,
+            "gf": 9,
+            "ga": 9,
+            "gd": 0
+          },
+          "differences": []
+        },
+        {
+          "position": 12,
+          "bsd_team_id": 743,
+          "name": "Deportivo Riestra",
+          "published": {
+            "pts": 9,
+            "played": 9,
+            "won": 2,
+            "drawn": 3,
+            "lost": 4,
+            "gf": 8,
+            "ga": 10,
+            "gd": -2
+          },
+          "calculated": {
+            "pts": 9,
+            "played": 9,
+            "won": 2,
+            "drawn": 3,
+            "lost": 4,
+            "gf": 8,
+            "ga": 10,
+            "gd": -2
+          },
+          "differences": []
+        },
+        {
+          "position": 13,
+          "bsd_team_id": 796,
+          "name": "Club Atlético Platense",
+          "published": {
+            "pts": 9,
+            "played": 9,
+            "won": 2,
+            "drawn": 3,
+            "lost": 4,
+            "gf": 9,
+            "ga": 14,
+            "gd": -5
+          },
+          "calculated": {
+            "pts": 9,
+            "played": 9,
+            "won": 2,
+            "drawn": 3,
+            "lost": 4,
+            "gf": 9,
+            "ga": 14,
+            "gd": -5
+          },
+          "differences": []
+        },
+        {
+          "position": 14,
+          "bsd_team_id": 2391,
+          "name": "CA Talleres",
+          "published": {
+            "pts": 8,
+            "played": 9,
+            "won": 2,
+            "drawn": 2,
+            "lost": 5,
+            "gf": 10,
+            "ga": 14,
+            "gd": -4
+          },
+          "calculated": {
+            "pts": 8,
+            "played": 9,
+            "won": 2,
+            "drawn": 2,
+            "lost": 5,
+            "gf": 10,
+            "ga": 14,
+            "gd": -4
+          },
+          "differences": []
+        },
+        {
+          "position": 15,
+          "bsd_team_id": 4995,
+          "name": "Central Córdoba",
+          "published": {
+            "pts": 7,
+            "played": 9,
+            "won": 2,
+            "drawn": 1,
+            "lost": 6,
+            "gf": 5,
+            "ga": 11,
+            "gd": -6
+          },
+          "calculated": {
+            "pts": 7,
+            "played": 9,
+            "won": 2,
+            "drawn": 1,
+            "lost": 6,
+            "gf": 5,
+            "ga": 11,
+            "gd": -6
+          },
+          "differences": []
+        }
+      ],
+      "unresolved_after_points_gd_gf": [],
+      "order_matches_published": true
+    },
+    {
+      "tournament": "Clausura",
+      "group": "B",
+      "rows": [
+        {
+          "position": 1,
+          "bsd_team_id": 806,
+          "name": "Argentinos Juniors",
+          "published": {
+            "pts": 18,
+            "played": 9,
+            "won": 5,
+            "drawn": 3,
+            "lost": 1,
+            "gf": 13,
+            "ga": 8,
+            "gd": 5
+          },
+          "calculated": {
+            "pts": 18,
+            "played": 9,
+            "won": 5,
+            "drawn": 3,
+            "lost": 1,
+            "gf": 13,
+            "ga": 8,
+            "gd": 5
+          },
+          "differences": []
+        },
+        {
+          "position": 2,
+          "bsd_team_id": 4999,
+          "name": "Sarmiento",
+          "published": {
+            "pts": 16,
+            "played": 9,
+            "won": 5,
+            "drawn": 1,
+            "lost": 3,
+            "gf": 16,
+            "ga": 13,
+            "gd": 3
+          },
+          "calculated": {
+            "pts": 16,
+            "played": 9,
+            "won": 5,
+            "drawn": 1,
+            "lost": 3,
+            "gf": 16,
+            "ga": 13,
+            "gd": 3
+          },
+          "differences": []
+        },
+        {
+          "position": 3,
+          "bsd_team_id": 4998,
+          "name": "Gimnasia y Esgrima",
+          "published": {
+            "pts": 16,
+            "played": 9,
+            "won": 5,
+            "drawn": 1,
+            "lost": 3,
+            "gf": 13,
+            "ga": 13,
+            "gd": 0
+          },
+          "calculated": {
+            "pts": 16,
+            "played": 9,
+            "won": 5,
+            "drawn": 1,
+            "lost": 3,
+            "gf": 13,
+            "ga": 13,
+            "gd": 0
+          },
+          "differences": []
+        },
+        {
+          "position": 4,
+          "bsd_team_id": 792,
+          "name": "Rosario Central",
+          "published": {
+            "pts": 15,
+            "played": 9,
+            "won": 4,
+            "drawn": 3,
+            "lost": 2,
+            "gf": 10,
+            "ga": 8,
+            "gd": 2
+          },
+          "calculated": {
+            "pts": 15,
+            "played": 9,
+            "won": 4,
+            "drawn": 3,
+            "lost": 2,
+            "gf": 10,
+            "ga": 8,
+            "gd": 2
+          },
+          "differences": []
+        },
+        {
+          "position": 5,
+          "bsd_team_id": 774,
+          "name": "Independiente Rivadavia",
+          "published": {
+            "pts": 14,
+            "played": 9,
+            "won": 4,
+            "drawn": 2,
+            "lost": 3,
+            "gf": 13,
+            "ga": 13,
+            "gd": 0
+          },
+          "calculated": {
+            "pts": 14,
+            "played": 9,
+            "won": 4,
+            "drawn": 2,
+            "lost": 3,
+            "gf": 13,
+            "ga": 13,
+            "gd": 0
+          },
+          "differences": []
+        },
+        {
+          "position": 6,
+          "bsd_team_id": 3299,
+          "name": "Club Atlético Belgrano",
+          "published": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 9,
+            "ga": 6,
+            "gd": 3
+          },
+          "calculated": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 9,
+            "ga": 6,
+            "gd": 3
+          },
+          "differences": []
+        },
+        {
+          "position": 7,
+          "bsd_team_id": 755,
+          "name": "River Plate",
+          "published": {
+            "pts": 13,
+            "played": 9,
+            "won": 4,
+            "drawn": 1,
+            "lost": 4,
+            "gf": 12,
+            "ga": 10,
+            "gd": 2
+          },
+          "calculated": {
+            "pts": 13,
+            "played": 9,
+            "won": 4,
+            "drawn": 1,
+            "lost": 4,
+            "gf": 12,
+            "ga": 10,
+            "gd": 2
+          },
+          "differences": []
+        },
+        {
+          "position": 8,
+          "bsd_team_id": 3132,
+          "name": "Atlético Tucumán",
+          "published": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 7,
+            "ga": 5,
+            "gd": 2
+          },
+          "calculated": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 7,
+            "ga": 5,
+            "gd": 2
+          },
+          "differences": []
+        },
+        {
+          "position": 9,
+          "bsd_team_id": 2352,
+          "name": "Huracán",
+          "published": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 8,
+            "ga": 7,
+            "gd": 1
+          },
+          "calculated": {
+            "pts": 13,
+            "played": 9,
+            "won": 3,
+            "drawn": 4,
+            "lost": 2,
+            "gf": 8,
+            "ga": 7,
+            "gd": 1
+          },
+          "differences": []
+        },
+        {
+          "position": 10,
+          "bsd_team_id": 739,
+          "name": "Tigre",
+          "published": {
+            "pts": 12,
+            "played": 9,
+            "won": 3,
+            "drawn": 3,
+            "lost": 3,
+            "gf": 7,
+            "ga": 6,
+            "gd": 1
+          },
+          "calculated": {
+            "pts": 12,
+            "played": 9,
+            "won": 3,
+            "drawn": 3,
+            "lost": 3,
+            "gf": 7,
+            "ga": 6,
+            "gd": 1
+          },
+          "differences": []
+        },
+        {
+          "position": 11,
+          "bsd_team_id": 734,
+          "name": "Barracas Central",
+          "published": {
+            "pts": 12,
+            "played": 9,
+            "won": 3,
+            "drawn": 3,
+            "lost": 3,
+            "gf": 5,
+            "ga": 6,
+            "gd": -1
+          },
+          "calculated": {
+            "pts": 12,
+            "played": 9,
+            "won": 3,
+            "drawn": 3,
+            "lost": 3,
+            "gf": 5,
+            "ga": 6,
+            "gd": -1
+          },
+          "differences": []
+        },
+        {
+          "position": 12,
+          "bsd_team_id": 4994,
+          "name": "Banfield",
+          "published": {
+            "pts": 8,
+            "played": 9,
+            "won": 2,
+            "drawn": 2,
+            "lost": 5,
+            "gf": 9,
+            "ga": 14,
+            "gd": -5
+          },
+          "calculated": {
+            "pts": 8,
+            "played": 9,
+            "won": 2,
+            "drawn": 2,
+            "lost": 5,
+            "gf": 9,
+            "ga": 14,
+            "gd": -5
+          },
+          "differences": []
+        },
+        {
+          "position": 13,
+          "bsd_team_id": 5000,
+          "name": "Estudiantes de Río Cuarto",
+          "published": {
+            "pts": 6,
+            "played": 9,
+            "won": 1,
+            "drawn": 3,
+            "lost": 5,
+            "gf": 4,
+            "ga": 11,
+            "gd": -7
+          },
+          "calculated": {
+            "pts": 6,
+            "played": 9,
+            "won": 1,
+            "drawn": 3,
+            "lost": 5,
+            "gf": 4,
+            "ga": 11,
+            "gd": -7
+          },
+          "differences": []
+        },
+        {
+          "position": 14,
+          "bsd_team_id": 4993,
+          "name": "Aldosivi",
+          "published": {
+            "pts": 5,
+            "played": 9,
+            "won": 1,
+            "drawn": 2,
+            "lost": 6,
+            "gf": 11,
+            "ga": 16,
+            "gd": -5
+          },
+          "calculated": {
+            "pts": 5,
+            "played": 9,
+            "won": 1,
+            "drawn": 2,
+            "lost": 6,
+            "gf": 11,
+            "ga": 16,
+            "gd": -5
+          },
+          "differences": []
+        },
+        {
+          "position": 15,
+          "bsd_team_id": 733,
+          "name": "Racing Club",
+          "published": {
+            "pts": 5,
+            "played": 9,
+            "won": 1,
+            "drawn": 2,
+            "lost": 6,
+            "gf": 8,
+            "ga": 15,
+            "gd": -7
+          },
+          "calculated": {
+            "pts": 5,
+            "played": 9,
+            "won": 1,
+            "drawn": 2,
+            "lost": 6,
+            "gf": 8,
+            "ga": 15,
+            "gd": -7
+          },
+          "differences": []
+        }
+      ],
+      "unresolved_after_points_gd_gf": [],
+      "order_matches_published": true
+    }
+  ],
+  "differing_rows": 0,
+  "limits": [
+    "No future or pending disciplinary adjustments certified",
+    "Head-to-head/Fair Play/lottery not validated by this snapshot",
+    "No automatic official source integration",
+    "No production standings implemented"
+  ]
+}

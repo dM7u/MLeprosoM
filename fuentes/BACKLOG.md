@@ -523,7 +523,7 @@ Sin cambios de producto, importación, migraciones ni fórmulas definitivas.
   30/30 equipos coinciden en ocho campos básicos, eliminatorias excluidas.
 - [x] Contrastar puntos y PJ de los 30 equipos con Tabla General oficial renderizada.
 - [x] Registrar orden publicado y muestra Newell's de Clausura/promedios con fuente.
-- [ ] Verificar Apertura final publicado y tablas de zonas completas.
+- [x] Verificar Apertura final publicado y zonas completas de ambos torneos: 60/60 filas y orden coincidentes en corte 2026-09-18.
 - [ ] Implementar snapshots por ámbito y validación de empates/ajustes pendientes.
 - [ ] Verificar históricos/denominadores de promedios para todos los equipos.
 
@@ -531,3 +531,19 @@ Evidencia JSON y conclusión en docs/research/REGLAS_TABLAS_2026.md. Igualdad ac
 no certifica ausencia de sanciones. No publicar standings BSD como Clausura.
 Validación mediante aserciones de integridad/alcance y comparación; no se
 repitieron tests de aplicación porque no cambió el código de producto.
+
+## Cierre del contraste de zonas — 2026-09-18
+
+- [x] Leer tablas LPF renderizadas: Apertura/Clausura, grupos A/B, 60 filas.
+- [x] Comparar ocho campos por fila con fixtures BSD mapeados: cero diferencias.
+- [x] Verificar orden PTS/DG/GF contra posiciones publicadas: coincide en las
+  cuatro zonas; ningún empate residual en esta muestra.
+- [x] Guardar evidencia, fuentes, fecha y límites en
+  docs/research/lpf-zones-validation-20260918.json.
+- [ ] Siguiente bloque: motor de acumulados por ámbito con snapshots, tests de
+  nulos/partidos computables y empates no resueltos; no implementar promedios aún.
+
+Cinco consultas BSD, sin escrituras Supabase ni cambios UI. Aserciones de
+integridad y comparación aprobadas; no corresponde repetir build por archivos
+de investigación. Fair Play/H2H/sorteo y sanciones futuras no certificados.
+El contraste de zonas ya no bloquea implementar el alcance mínimo documentado.
