@@ -2,6 +2,13 @@
 
 ## Estado
 
+Vista mínima de partidos implementada como Server Component dinámico. Consume
+`fixtureView` → `readTeamFixtures` → Supabase; nunca BSD durante una visita.
+Configuración privada: FOOTBALL_PROVIDER, FOOTBALL_TEAM_ID y
+FIXTURES_STALE_AFTER_SECONDS. Localmente bsd/4997/900, sin claves públicas.
+TTL solo para advertir antigüedad del snapshot; no programa refrescos ni vivo.
+No hay endpoint HTTP de datos adicional: la frontera de lectura es server-only.
+
 Actualización 2026-09-18: cadena mínima BSD → validación → Supabase comprobada,
 con sincronización manual en `scripts/sync-bsd.mjs`. Lectura independiente en
 `src/server/db/read-fixtures.mjs`, sin consultas al proveedor y con TTL explícito

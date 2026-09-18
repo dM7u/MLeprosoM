@@ -247,10 +247,16 @@ queda pendiente recuperar conectividad y validar la primera escritura real.
 -   [x] Sincronizar Newell's y rivales de sus fixtures.
 -   [x] Sincronizar fixtures disponibles de la temporada 2026.
 -   [x] Persistir en Supabase y verificar repetición sin duplicados.
--   [ ] Exponer mediante servicio/API interna.
--   [ ] Mostrar primera información real en UI.
+-   [x] Exponer mediante servicio server-only consumido por Server Component.
+-   [x] Mostrar partidos programados, resultados y otros estados desde Supabase.
 -   [x] Tests de normalización y lectura de datos ausentes/parciales/desactualizados.
--   [ ] Verificar cadena proveedor → UI.
+-   [x] Verificar cadena proveedor → Supabase → UI local: 32 partidos, siete marcadores pendientes, carga y stale visibles; HTTP 200 y sin secretos en HTML. Sin despliegue público.
+
+Vista mínima 2026-09-18: equipo/proveedor por configuración privada; TTL local
+de registros 900 segundos (conservador, configurable, no política del vivo).
+Horarios de Argentina; null no se representa como cero; estados no reconocidos
+se muestran sin confirmar. 16 pruebas, lint, typecheck, build y revisión visual
+local aprobados. Sin Home, tablas, ratings ni sincronización automática.
 
 ## BLOQUE 4 --- Standings y Home inicial
 
