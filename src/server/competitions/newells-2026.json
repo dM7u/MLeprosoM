@@ -1,0 +1,235 @@
+{
+  "scope": "Reviewed classification of Newells 2026 fixtures only; not standings",
+  "verified_at": "2026-09-17T12:49:30.661Z",
+  "official_source": "https://www.ligaprofesional.ar/?p=75980",
+  "provider": "bsd",
+  "provider_season_id": 1635,
+  "method": "Explicit reviewed team aliases + home/away + matchday; kickoff date is not used",
+  "rows": [
+    {
+      "tournament": "Apertura",
+      "round": 1,
+      "bsd_event_id": 223437,
+      "home_team_id": 2391,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 2,
+      "bsd_event_id": 223465,
+      "home_team_id": 4997,
+      "away_team_id": 2390
+    },
+    {
+      "tournament": "Apertura",
+      "round": 3,
+      "bsd_event_id": 223495,
+      "home_team_id": 780,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 4,
+      "bsd_event_id": 223525,
+      "home_team_id": 4997,
+      "away_team_id": 3136
+    },
+    {
+      "tournament": "Apertura",
+      "round": 5,
+      "bsd_event_id": 223564,
+      "home_team_id": 743,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 6,
+      "bsd_event_id": 223588,
+      "home_team_id": 4994,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 7,
+      "bsd_event_id": 223619,
+      "home_team_id": 4997,
+      "away_team_id": 787
+    },
+    {
+      "tournament": "Apertura",
+      "round": 8,
+      "bsd_event_id": 223645,
+      "home_team_id": 4997,
+      "away_team_id": 792
+    },
+    {
+      "tournament": "Apertura",
+      "round": 9,
+      "bsd_event_id": 223691,
+      "home_team_id": 2397,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 10,
+      "bsd_event_id": 223710,
+      "home_team_id": 4997,
+      "away_team_id": 796
+    },
+    {
+      "tournament": "Apertura",
+      "round": 11,
+      "bsd_event_id": 223750,
+      "home_team_id": 785,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 12,
+      "bsd_event_id": 223772,
+      "home_team_id": 4997,
+      "away_team_id": 3125
+    },
+    {
+      "tournament": "Apertura",
+      "round": 13,
+      "bsd_event_id": 223810,
+      "home_team_id": 4995,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 14,
+      "bsd_event_id": 223835,
+      "home_team_id": 4997,
+      "away_team_id": 742
+    },
+    {
+      "tournament": "Apertura",
+      "round": 15,
+      "bsd_event_id": 223858,
+      "home_team_id": 4620,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Apertura",
+      "round": 16,
+      "bsd_event_id": 223899,
+      "home_team_id": 4997,
+      "away_team_id": 4996
+    },
+    {
+      "tournament": "Clausura",
+      "round": 1,
+      "bsd_event_id": 223454,
+      "home_team_id": 4997,
+      "away_team_id": 2391
+    },
+    {
+      "tournament": "Clausura",
+      "round": 2,
+      "bsd_event_id": 223485,
+      "home_team_id": 2390,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Clausura",
+      "round": 3,
+      "bsd_event_id": 223512,
+      "home_team_id": 4997,
+      "away_team_id": 780
+    },
+    {
+      "tournament": "Clausura",
+      "round": 4,
+      "bsd_event_id": 223542,
+      "home_team_id": 3136,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Clausura",
+      "round": 5,
+      "bsd_event_id": 223574,
+      "home_team_id": 4997,
+      "away_team_id": 743
+    },
+    {
+      "tournament": "Clausura",
+      "round": 6,
+      "bsd_event_id": 223606,
+      "home_team_id": 4997,
+      "away_team_id": 4994
+    },
+    {
+      "tournament": "Clausura",
+      "round": 7,
+      "bsd_event_id": 223636,
+      "home_team_id": 787,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Clausura",
+      "round": 8,
+      "bsd_event_id": 223669,
+      "home_team_id": 792,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Clausura",
+      "round": 9,
+      "bsd_event_id": 223705,
+      "home_team_id": 4997,
+      "away_team_id": 2397
+    },
+    {
+      "tournament": "Clausura",
+      "round": 10,
+      "bsd_event_id": 223728,
+      "home_team_id": 796,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Clausura",
+      "round": 11,
+      "bsd_event_id": 223765,
+      "home_team_id": 4997,
+      "away_team_id": 785
+    },
+    {
+      "tournament": "Clausura",
+      "round": 12,
+      "bsd_event_id": 223791,
+      "home_team_id": 3125,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Clausura",
+      "round": 13,
+      "bsd_event_id": 223824,
+      "home_team_id": 4997,
+      "away_team_id": 4995
+    },
+    {
+      "tournament": "Clausura",
+      "round": 14,
+      "bsd_event_id": 223856,
+      "home_team_id": 742,
+      "away_team_id": 4997
+    },
+    {
+      "tournament": "Clausura",
+      "round": 15,
+      "bsd_event_id": 223884,
+      "home_team_id": 4997,
+      "away_team_id": 4620
+    },
+    {
+      "tournament": "Clausura",
+      "round": 16,
+      "bsd_event_id": 223914,
+      "home_team_id": 4996,
+      "away_team_id": 4997
+    }
+  ],
+  "provider_competition_id": "85"
+}

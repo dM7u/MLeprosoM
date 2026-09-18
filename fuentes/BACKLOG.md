@@ -493,3 +493,22 @@ los párrafos anteriores describen estados históricos, no bloqueos actuales.
 
 Verificación en navegador: Copa Argentina · GOAL API, 29/03/2026 20:15,
 Newell's–Acassuso 0–2 dentro de Resultados guardados. Preview en puerto 3101.
+
+## Identificación Apertura/Clausura — 2026-09-18
+
+Bloque acotado de clasificación del fixture, sin tablas de posiciones ni DB nueva.
+
+- [x] Promover el mapeo revisado de Newell's 2026 a configuración versionada
+  en src/server/competitions/newells-2026.json, conservando fuente y revisión.
+- [x] Resolver por proveedor, competición, temporada, ID de partido, participantes,
+  localía y jornada; no usar fecha calendario para inferir torneo.
+- [x] Mostrar Apertura/Clausura y jornada; discrepancias quedan Torneo sin confirmar.
+- [x] Contrastar los registros remotos actuales: 16 Apertura + 16 Clausura,
+  ninguna discrepancia entre los 32 partidos BSD guardados.
+- [x] 34 pruebas, lint, typecheck y build aprobados. HTTP local 200 con Apertura,
+  Clausura, jornada y Copa Argentina; servidor 3101 reiniciado con el build nuevo.
+
+No se consultó el proveedor ni se escribió en Supabase. Copa Argentina conserva
+su identificación independiente. El snapshot revisado no certifica cambios
+posteriores del fixture oficial ni posiciones, sanciones o promedios.
+Siguiente pendiente: verificación de tablas y ajustes antes de implementar standings.

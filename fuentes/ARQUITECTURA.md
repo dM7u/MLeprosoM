@@ -237,3 +237,12 @@ dos equipos, una competición y una temporada. Ambas sincronizaciones succeeded.
 Lectura conjunta: 33 partidos (32 BSD + Newell's–Acassuso, Copa Argentina, 0–2).
 Penales siguen null. BSD continúa stale; GOAL actualizado al verificar. La
 activación reemplaza los pendientes de migración/importación de notas previas.
+
+## Clasificación visible de torneos — 2026-09-18
+
+fixtureView aplica createTournamentResolver sobre identidades externas leídas
+exclusivamente de Supabase. Configuración revisada en src/server/competitions;
+la investigación original queda intacta en docs/research. La clasificación exige
+coincidencia de ámbito, ID, equipos/localía y jornada; cambios no revisados quedan
+sin confirmar. UI muestra torneo y fecha de juego (jornada). No se reconstruyen
+posiciones ni se deduce torneo a partir de kickoff_at. Prueba remota: 16+16.

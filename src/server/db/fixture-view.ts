@@ -1,4 +1,6 @@
 import 'server-only';
+import {createTournamentResolver} from '../competitions/resolve-tournament.mjs';
+import tournamentMap from '../competitions/newells-2026.json';
 import {createSupabaseAdminClient} from './supabase';
 import {readCombinedFixtures} from './read-combined-fixtures.mjs';
 import {createTeamResolver} from '../identity/team-identity.mjs';
@@ -11,7 +13,7 @@ export type StoredFixture = {
   kickoff_at: string | null; home_team: string | null; away_team: string | null;
   home_score: number | null; away_score: number | null;
   home_penalty_score?: number | null; away_penalty_score?: number | null;
-  source_status: string; source_stage?: string | null;
+  tournament?: {name:string;round:number} | null; source_status: string; source_stage?: string | null;
 };
 const unavailable=(status:string)=>({status,label:'Sin datos',data:[] as StoredFixture[],updatedAt:null as string|null,sources:[] as {provider:string;status:string;label:string;updatedAt:string|null}[]});
 
@@ -29,6 +31,7 @@ export async function fixtureView() {
       scopes.push({provider:'goal-api',externalTeamId:cup.teamId,competitionId:cup.leagueId,seasonId:cup.season});
     }
     const result=await readCombinedFixtures(createSupabaseAdminClient(),scopes,{ttlMs,now:Date.now()});
-    return {...result,data:result.data as StoredFixture[]};
+    const resolveTournament=createTournamentResolver(tournamentMap);
+    return {...result,data:result.data.map(row=>({...row,tournament:resolveTournament(row)})) as StoredFixture[]};
   }catch{return unavailable('error');}
 }

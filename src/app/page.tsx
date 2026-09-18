@@ -9,7 +9,7 @@ function FixtureList({title,fixtures}:{title:string;fixtures:StoredFixture[]}) {
     {!fixtures.length?<p className="text-neutral-400">Sin datos</p>:<ul className="divide-y divide-neutral-800">
       {fixtures.map(f=><li key={`${f.provider}:${f.id}`} className="py-5 first:pt-0 last:pb-0">
         <p className="text-xs text-neutral-400">{fixtureDate(f.kickoff_at)} · {fixtureStatus(normalizedFixtureStatus(f.provider,f.source_status))}</p>
-        <p className="mt-1 text-xs text-neutral-400">{f.competition??'Competición sin datos'} · {providerLabel(f.provider)}</p>
+        <p className="mt-1 text-xs text-neutral-400">{f.competition??'Competición sin datos'}{f.tournament?` · ${f.tournament.name} · Fecha ${f.tournament.round}`:f.provider==='bsd'?' · Torneo sin confirmar':''} · {providerLabel(f.provider)}</p>
         <div className="mt-3 flex items-center justify-between gap-4">
           <div className="min-w-0 text-sm font-semibold leading-6"><p>{f.home_team??'Equipo sin datos'} <span className="font-normal text-neutral-500">(local)</span></p><p>{f.away_team??'Equipo sin datos'} <span className="font-normal text-neutral-500">(visitante)</span></p></div>
           <div className="shrink-0 text-right"><p className="text-lg font-bold tabular-nums">{fixtureScore(f.home_score,f.away_score)}</p>{(f.home_penalty_score!=null||f.away_penalty_score!=null)&&<p className="text-xs text-neutral-400">Penales: {fixtureScore(f.home_penalty_score,f.away_penalty_score)}</p>}</div>
