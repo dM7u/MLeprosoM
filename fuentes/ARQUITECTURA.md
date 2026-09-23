@@ -246,3 +246,13 @@ la investigación original queda intacta en docs/research. La clasificación exi
 coincidencia de ámbito, ID, equipos/localía y jornada; cambios no revisados quedan
 sin confirmar. UI muestra torneo y fecha de juego (jornada). No se reconstruyen
 posiciones ni se deduce torneo a partir de kickoff_at. Prueba remota: 16+16.
+
+## Motor de tablas — 2026-09-24
+
+El servicio puro src/server/standings/calculate.mjs recibe calendario revisado,
+equipos por zona y resultados del mismo proveedor/competición/temporada. Calcula
+acumulados por torneo/zona o anual; conserva ámbito, evidencia y fecha más antigua.
+Contrato y límites en src/server/standings/README.md. Sin consultas externas,
+escrituras DB ni integración UI todavía. Los fixtures guardados solo de Newell's
+no son cobertura suficiente para una tabla completa. Un snapshot incompleto no
+expone filas; las posiciones calculadas nunca se marcan como oficiales.

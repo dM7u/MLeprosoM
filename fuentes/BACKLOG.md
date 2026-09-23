@@ -524,7 +524,7 @@ Sin cambios de producto, importación, migraciones ni fórmulas definitivas.
 - [x] Contrastar puntos y PJ de los 30 equipos con Tabla General oficial renderizada.
 - [x] Registrar orden publicado y muestra Newell's de Clausura/promedios con fuente.
 - [x] Verificar Apertura final publicado y zonas completas de ambos torneos: 60/60 filas y orden coincidentes en corte 2026-09-18.
-- [ ] Implementar snapshots por ámbito y validación de empates/ajustes pendientes.
+- [x] Implementar snapshots en memoria por ámbito con empates y ajustes explícitamente pendientes (2026-09-24); persistencia/publicación aún pendientes.
 - [ ] Verificar históricos/denominadores de promedios para todos los equipos.
 
 Evidencia JSON y conclusión en docs/research/REGLAS_TABLAS_2026.md. Igualdad actual
@@ -540,10 +540,36 @@ repitieron tests de aplicación porque no cambió el código de producto.
   cuatro zonas; ningún empate residual en esta muestra.
 - [x] Guardar evidencia, fuentes, fecha y límites en
   docs/research/lpf-zones-validation-20260918.json.
-- [ ] Siguiente bloque: motor de acumulados por ámbito con snapshots, tests de
+- [x] Motor de acumulados por ámbito con snapshots en memoria, tests de
   nulos/partidos computables y empates no resueltos; no implementar promedios aún.
 
 Cinco consultas BSD, sin escrituras Supabase ni cambios UI. Aserciones de
 integridad y comparación aprobadas; no corresponde repetir build por archivos
 de investigación. Fair Play/H2H/sorteo y sanciones futuras no certificados.
 El contraste de zonas ya no bloquea implementar el alcance mínimo documentado.
+
+
+## Motor mínimo de tablas — 2026-09-24
+
+Alcance pequeño: servicio puro de servidor y pruebas. Reutiliza las reglas ya
+contrastadas; no necesita dependencias nuevas, migraciones ni credenciales.
+
+- [x] Acumular PJ/G/E/P/GF/GC/DG/PTS por torneo, zona o anual; incluir interzonas.
+- [x] Validar calendario revisado, IDs, ámbito, localía, jornada y timestamps.
+- [x] Excluir fixtures ajenos/eliminatorias no mapeadas y rechazar duplicados.
+- [x] Bloquear filas ante cobertura incompleta, resultado nulo o estado incierto.
+- [x] Orden PTS/DG/GF; empate residual sin posición asignada. Ajustes no verificados
+  explícitos y posiciones oficiales siempre null.
+- [x] Conservar fuente, fecha de revisión, fecha de cálculo y observación más antigua.
+- [x] 43 pruebas aprobadas (9 nuevas), lint, typecheck y build aprobados.
+- [x] Orden contrastado con las 60 filas históricas del 18/09; no son datos actuales.
+
+Código y contrato en src/server/standings. No consultas a BSD/GOAL, cambios en
+Supabase ni tablas visibles nuevas. La DB actual contiene partidos de Newell's,
+no resultados suficientes de toda la liga. complete indica cobertura frente al
+calendario entregado, no oficialidad, frescura ni ausencia de sanciones.
+
+Siguiente bloque: adaptador y dry-run sobre catálogo completo actualizado, con
+calendario/membresías revisados y contraste oficial. Luego definir persistencia y
+publicación con frescura y ajustes visibles. H2H/Fair Play/sorteo, sanciones,
+promedios y ratings siguen pendientes; no se asumieron reglas nuevas.
