@@ -31,17 +31,31 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 - Fundación y cadena de partidos operativas: BSD para liga y GOAL para Copa.
 - Pantalla básica de partidos; Home/dashboard completo todavía pendiente.
 - Motor de zonas/anual y catálogo completo contrastados en cortes fechados.
-- Lotes, revisión oficial y activación implementados y probados localmente.
+- Lotes, revisión oficial, activación y lector persistido implementados y probados localmente.
 - Dos migraciones de tablas pendientes en Supabase remoto; sin tablas en UI.
-- 75 pruebas unitarias y pruebas PostgreSQL locales aprobadas al cierre previo.
+- 83 pruebas unitarias, pruebas PostgreSQL locales, lint, typecheck y build aprobados.
+- Seguimiento cerrado: backlog consolidado y avances anteriores guardados en `1dfe880`.
 
 ### Cola inmediata
 
-1. Consolidar documentación y registrar los avances locales en Git.
-2. Implementar lector persistido por ámbito, última revisión y frescura.
-3. Preparar operación manual de revisión y TTL de despliegue; aplicar/verificar
+1. Preparar operación manual de revisión y TTL de despliegue; aplicar/verificar
    migraciones remotas y cargar un lote actual revisado.
-4. Construir Home/dashboard inicial con navegación, partidos y tablas.
+2. Construir Home/dashboard inicial con navegación, partidos y tablas.
+3. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
+   del lector por una consulta paginada o transaccional validada.
+
+### Lector persistido — 24/09/2026
+
+- [x] Lectura privada por proveedor/competición/temporada y selección de tabla.
+- [x] Validación del lote y revisión; última denegación invalida aprobaciones anteriores.
+- [x] Frescura de resultados, calendario y evidencia; tabla anterior habilitada
+  disponible como desactualizada ante un lote nuevo no habilitado.
+- [x] Fallos de almacenamiento, corrupción, empates de revisión y cambios
+  detectados durante lectura devuelven error sanitizado sin publicar filas.
+- [x] Ocho pruebas nuevas; 83 en total. Sin consultas al proveedor ni escrituras.
+- [ ] Conectar lector a API/UI después de preparar operación y esquema remoto.
+- Límite inicial: 100 lotes/500 revisiones por ámbito; al excederlo falla de
+  forma explícita. Relectura optimista de revisión, sin aislamiento transaccional.
 
 ### Capacidades y pendientes
 

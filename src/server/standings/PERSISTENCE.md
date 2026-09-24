@@ -173,3 +173,36 @@ decisiones distintas debe bloquear, no resolverse por UUID. Entre lotes debe
 respetar la observación de datos y volver a aplicar los TTL al leer. No hay aún
 lector persistido, comando operativo de revisión ni conexión UI. La activación
 remota y cualquier automatización siguen pendientes.
+
+## Lector persistido implementado — 24/09/2026
+
+Este apartado actualiza los pendientes de lector anteriores.
+`db/read-standings.mjs` recibe un cliente backend, scope, selection y tres TTL
+positivos explícitos. Solo consulta almacenamiento; no escribe ni llama al
+proveedor. Recalcula y valida el lote y su revisión antes de devolver filas.
+Normaliza fechas SQL sin cambiar las fechas originales del payload firmado.
+
+La última revisión manda, incluida una denegación. Revisiones simultáneas con
+decisiones distintas producen error. Entre lotes prima data_as_of y luego
+generated_at; identidades distintas empatadas no se desempatan por UUID.
+Un lote nuevo incompleto, no revisado o denegado permite conservar otro lote
+anterior habilitado, marcado stale. No se recupera una aprobación anterior
+del mismo lote. Si no existe candidato habilitado, devuelve empty/Sin datos.
+
+Aplica el menor TTL entre la política actual y la guardada en la revisión para
+resultados, calendario y evidencia. Vencimiento conserva las filas como tabla
+provisional desactualizada; nunca renueva timestamps ni certifica posiciones.
+Una caída de DB o datos corruptos devuelve error sanitizado sin filas: no usa
+una copia en memoria que pueda ocultar una denegación almacenada.
+
+Antes de devolver el candidato vuelve a consultar las últimas revisiones para
+detectar cambios concurrentes. Es una comprobación optimista, no una transacción:
+una revisión posterior a esa consulta se verá en la siguiente lectura. Para
+publicación con exigencia de aislamiento habrá que implementar una consulta
+transaccional. Tampoco existe snapshot transaccional entre páginas BSD.
+
+Límites iniciales explícitos: 100 lotes y 500 revisiones por ámbito. Consulta
+un registro extra para detectar exceso y falla con history_limit_exceeded en
+vez de truncar el historial y rescatar una aprobación vieja. Resolver paginación
+o selección transaccional antes de automatizar cargas frecuentes. Sin conexión
+UI, TTL de despliegue ni activación remota en este bloque.

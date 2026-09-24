@@ -106,6 +106,8 @@ payload, evidencia ligada al lote y pruebas locales antes de activación remota.
 anual y zonas completas. Calcula diferencias sin alterar puntos ni posiciones
 oficiales. `db/store-official-review.mjs` guarda comparación y decisión de
 activación atómicamente, con idempotencia y comprobación de vigencia al escribir.
-Migración local preparada y prueba PostgreSQL aprobada. Falta el lector DB que
-aplique la revisión más reciente y frescura al consultar; UI/remoto pendientes.
+Migración local preparada y prueba PostgreSQL aprobada. El lector DB
+`db/read-standings.mjs` aplica la revisión más reciente y frescura al consultar;
+UI/remoto pendientes. Valida hashes y contenido, bloquea decisiones ambiguas y
+conserva un lote anterior habilitado como desactualizado cuando corresponde.
 Contrato detallado y límites en `PERSISTENCE.md`.
