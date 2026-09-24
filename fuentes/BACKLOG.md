@@ -30,7 +30,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 
 - Fundación y cadena de partidos operativas: BSD para liga y GOAL para Copa.
 - Home inicial con navegación, próximo partido, últimos/próximos tres,
-  historial y tablas persistidas. Panel completo y drilldowns pendientes.
+  historial y tablas persistidas. Ficha básica de partido implementada;
+  panel completo y detalle estadístico pendientes.
 - Motor de zonas/anual y catálogo completo contrastados en cortes fechados.
 - Lotes, revisión oficial, activación y lector persistido implementados y probados localmente.
 - Primer lote de liga y revisión oficial guardados y activados provisionalmente
@@ -45,10 +46,32 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 
 ### Cola inmediata
 
-1. Completar panel de equipo y detalle de partidos según cobertura real;
-   actualizar fixtures antes de evaluar información deportiva actual.
+1. Relevar cobertura actual de alineaciones/eventos/estadísticas y definir
+   el bloque mínimo de persistencia para enriquecer la ficha. Sin ratings todavía.
+   Posición contextual del equipo/rival también pendiente.
 2. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
    del lector por una consulta paginada o transaccional validada.
+
+### Ficha de partido y revisión móvil — 24/09/2026
+
+- [x] Enlaces desde tarjetas e historial a `/partidos/[id]`; UUID validado antes
+  de leer. Acceso restringido al conjunto del equipo mediante fixtureView.
+- [x] Marcador, torneo/fecha revisada, localía, fuente y fecha de consulta.
+  Copa conserva desglose reglamentario/prórroga/penales con faltantes Sin datos.
+- [x] Ruta no disponible y fallo de lectura diferenciados; sin consultas al
+  proveedor durante navegación. Eventos, XI, estadio, árbitro y clima sin datos
+  persistidos se muestran explícitamente como no disponibles.
+- [x] Home y ficha verificadas visualmente a 390 × 844; controles táctiles
+  ampliados y espacio de título corregido. No equivale a auditoría responsive completa.
+- [x] Sincronización manual BSD: dry-run/apply 3+3 requests; 32 fixtures.
+  GOAL: 6+6 requests, 230 registros inspeccionados por ejecución, uno en alcance.
+  Conteos remotos posteriores: 32 BSD + 1 GOAL. Evidencia en
+  `docs/research/fixtures-refresh-20260924.json`.
+- [x] 89 pruebas, lint, tipos y build; ficha de Copa y ruta inválida comprobadas
+  por HTTP, ficha de partido finalizado comprobada en navegador.
+- La actualización ocurrió a las 12:49/12:50 UTC; la verificación posterior ya
+  muestra stale conforme al TTL de fixtures. No extender TTL ni repetir consultas
+  para ocultar el paso del tiempo. Sin refresco nuevo de standings en este bloque.
 
 ### Home inicial — 24/09/2026
 
@@ -62,7 +85,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 - [x] Loading, empty/error, stale por origen, fecha de observación y carácter
   provisional visibles; empates sin posición inventada. Sin requests al proveedor.
 - [x] Dos pruebas de selección temporal añadidas (89 totales), lint y build.
-- [ ] Drilldowns, posiciones contextuales de rival, XI, técnico y resto del panel.
+- [x] Ficha básica de partido (ver bloque posterior).
+- [ ] Detalle estadístico, posiciones contextuales de rival, XI, técnico y resto del panel.
 - Los fixtures pueden ser más antiguos que las tablas; se muestran sus fechas
   por separado. No se sincronizan proveedores durante una visita.
 

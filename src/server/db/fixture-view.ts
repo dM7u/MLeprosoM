@@ -13,6 +13,9 @@ export type StoredFixture = {
   kickoff_at: string | null; home_team: string | null; away_team: string | null;
   home_score: number | null; away_score: number | null;
   home_penalty_score?: number | null; away_penalty_score?: number | null;
+  home_fulltime_score?: number | null; away_fulltime_score?: number | null;
+  home_extra_score?: number | null; away_extra_score?: number | null;
+  fetched_at?: string | null;
   tournament?: {name:string;round:number} | null; source_status: string; source_stage?: string | null;
 };
 const unavailable=(status:string)=>({status,label:'Sin datos',data:[] as StoredFixture[],updatedAt:null as string|null,sources:[] as {provider:string;status:string;label:string;updatedAt:string|null}[]});

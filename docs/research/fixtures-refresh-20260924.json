@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-09-24T17:36:08.507Z",
+  "counts": [
+    {
+      "provider": "bsd",
+      "count": 32,
+      "oldest_fetched_at": "2026-09-24T12:49:59.601+00:00"
+    },
+    {
+      "provider": "goal-api",
+      "count": 1,
+      "oldest_fetched_at": "2026-09-24T12:50:33.456+00:00"
+    }
+  ],
+  "provider_requests": {
+    "bsd": 6,
+    "goal_api": 12
+  },
+  "checks": {
+    "cup_detail": true,
+    "invalid_route": true
+  },
+  "cup_id": "52aa2d61-d5db-40dc-a72d-3d467dc287db"
+}

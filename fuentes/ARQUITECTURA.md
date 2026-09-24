@@ -2,6 +2,12 @@
 
 ## Estado
 
+Ficha `/partidos/[id]` implementada el 24/09/2026: valida UUID y reutiliza
+fixtureView, por lo que solo expone partidos del equipo/ámbitos configurados.
+No consulta proveedores ni agrega persistencia. Muestra datos guardados y
+desglose de Copa; errores parciales por origen no se interpretan como ausencia
+definitiva del partido. La ficha estadística ampliada continúa pendiente.
+
 Actualización 24/09/2026: Home dinámica con `fixtureView` y
 `dashboardStandings` → `readStandings` → Supabase. Selección mediante query
 params validados contra los ámbitos del lote; enlaces sin prefetch de tablas.

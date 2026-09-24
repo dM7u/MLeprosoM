@@ -1,5 +1,11 @@
 # Sincronización manual BSD
 
+Actualización 24/09/2026: dry-run y apply BSD exitosos, tres requests cada uno,
+32 partidos. GOAL: seis requests cada modo, 230 registros revisados y un partido
+en alcance. Lectura remota posterior conserva 32 BSD + 1 GOAL; evidencia en
+`docs/research/fixtures-refresh-20260924.json`. La observación de fixtures es
+12:49/12:50 UTC; su vigencia no se renueva al abrir Home o ficha.
+
 ## Tablas de liga: solo lectura
 
 ```powershell
