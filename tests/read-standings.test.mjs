@@ -40,6 +40,9 @@ test('reads scoped approved table, validates SQL timestamp spellings, returns pr
   const view = await readStandings(database(s), s.args);
   assert.equal(view.status, 'fresh'); assert.equal(view.snapshot.rows.length, 30);
   assert.equal(view.batch_id, s.o.batch.id); assert.equal(view.official_status, 'unverified');
+  assert.equal(view.teams.length, 30); assert.equal(view.selections.length, 7);
+  assert.deepEqual(Object.keys(view.teams[0]).sort(), ['groups', 'id']);
+  assert.equal(view.payload, undefined);
   assert.ok(view.snapshot.rows.every(r => r.official_position === null));
   const foreign = await readStandings(database(s), {...s.args, scope: {...s.args.scope, season_id: 'foreign'}});
   assert.equal(foreign.status, 'empty'); assert.equal(foreign.snapshot, null);

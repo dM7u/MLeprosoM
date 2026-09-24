@@ -1,0 +1,132 @@
+{
+  "scope": {
+    "provider": "bsd",
+    "competition_id": "85",
+    "season_id": "1635",
+    "source": "https://www.ligaprofesional.ar/?p=75980",
+    "reviewed_at": "2026-09-23T23:02:31.283Z"
+  },
+  "teams": [
+    {
+      "id": "787",
+      "label": "Estudiantes"
+    },
+    {
+      "id": "780",
+      "label": "Boca Jrs."
+    },
+    {
+      "id": "2397",
+      "label": "Vélez"
+    },
+    {
+      "id": "2391",
+      "label": "Talleres"
+    },
+    {
+      "id": "2390",
+      "label": "Independiente"
+    },
+    {
+      "id": "785",
+      "label": "Lanús"
+    },
+    {
+      "id": "742",
+      "label": "San Lorenzo"
+    },
+    {
+      "id": "4620",
+      "label": "Unión"
+    },
+    {
+      "id": "4996",
+      "label": "Instituto"
+    },
+    {
+      "id": "3136",
+      "label": "Defensa"
+    },
+    {
+      "id": "3125",
+      "label": "Gimnasia Mendoza"
+    },
+    {
+      "id": "796",
+      "label": "Platense"
+    },
+    {
+      "id": "4995",
+      "label": "Central Córdoba"
+    },
+    {
+      "id": "4997",
+      "label": "Newell's"
+    },
+    {
+      "id": "743",
+      "label": "Dep. Riestra"
+    },
+    {
+      "id": "774",
+      "label": "Independiente Riv."
+    },
+    {
+      "id": "755",
+      "label": "River"
+    },
+    {
+      "id": "806",
+      "label": "Argentinos Jrs."
+    },
+    {
+      "id": "792",
+      "label": "Central"
+    },
+    {
+      "id": "3299",
+      "label": "Belgrano"
+    },
+    {
+      "id": "4998",
+      "label": "Gimnasia LP"
+    },
+    {
+      "id": "2352",
+      "label": "Huracán"
+    },
+    {
+      "id": "733",
+      "label": "Racing"
+    },
+    {
+      "id": "734",
+      "label": "Barracas"
+    },
+    {
+      "id": "739",
+      "label": "Tigre"
+    },
+    {
+      "id": "4999",
+      "label": "Sarmiento"
+    },
+    {
+      "id": "4994",
+      "label": "Banfield"
+    },
+    {
+      "id": "3132",
+      "label": "At. Tucumán"
+    },
+    {
+      "id": "4993",
+      "label": "Aldosivi"
+    },
+    {
+      "id": "5000",
+      "label": "Estudiantes RC"
+    }
+  ],
+  "evidence": "docs/research/lpf-2026-standings-review.json"
+}

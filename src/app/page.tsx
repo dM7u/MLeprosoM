@@ -1,49 +1,45 @@
+import Link from 'next/link';
 import {fixtureView, type StoredFixture} from '@/server/db/fixture-view';
+import {dashboardStandings, highlightedTeam, type TableView} from '@/server/db/dashboard-standings';
+import {dashboardFixtures,defaultTournament} from './dashboard-model.mjs';
 import {fixtureDate,fixtureScore,fixtureStatus,normalizedFixtureStatus,providerLabel} from './fixture-format.mjs';
-
 export const dynamic='force-dynamic';
 
-function FixtureList({title,fixtures}:{title:string;fixtures:StoredFixture[]}) {
-  return <section className="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-5 sm:p-6">
-    <h2 className="mb-5 text-xl font-bold">{title}</h2>
-    {!fixtures.length?<p className="text-neutral-400">Sin datos</p>:<ul className="divide-y divide-neutral-800">
-      {fixtures.map(f=><li key={`${f.provider}:${f.id}`} className="py-5 first:pt-0 last:pb-0">
-        <p className="text-xs text-neutral-400">{fixtureDate(f.kickoff_at)} · {fixtureStatus(normalizedFixtureStatus(f.provider,f.source_status))}</p>
-        <p className="mt-1 text-xs text-neutral-400">{f.competition??'Competición sin datos'}{f.tournament?` · ${f.tournament.name} · Fecha ${f.tournament.round}`:f.provider==='bsd'?' · Torneo sin confirmar':''} · {providerLabel(f.provider)}</p>
-        <div className="mt-3 flex items-center justify-between gap-4">
-          <div className="min-w-0 text-sm font-semibold leading-6"><p>{f.home_team??'Equipo sin datos'} <span className="font-normal text-neutral-500">(local)</span></p><p>{f.away_team??'Equipo sin datos'} <span className="font-normal text-neutral-500">(visitante)</span></p></div>
-          <div className="shrink-0 text-right"><p className="text-lg font-bold tabular-nums">{fixtureScore(f.home_score,f.away_score)}</p>{(f.home_penalty_score!=null||f.away_penalty_score!=null)&&<p className="text-xs text-neutral-400">Penales: {fixtureScore(f.home_penalty_score,f.away_penalty_score)}</p>}</div>
-        </div>
-      </li>)}
-    </ul>}
-  </section>;
+function FixtureCard({fixture:f}:{fixture:StoredFixture}) {
+  return <article className="match-card">
+    <p className="eyebrow">{f.tournament?.name ?? f.competition ?? 'Competición sin datos'}{f.tournament ? ` · Fecha ${f.tournament.round}` : ''}</p>
+    <p className="match-date">{fixtureDate(f.kickoff_at)}</p>
+    <div className="match-teams"><span>{f.home_team ?? 'Equipo sin datos'}<small>Local</small></span><strong>{fixtureScore(f.home_score,f.away_score)}</strong><span>{f.away_team ?? 'Equipo sin datos'}<small>Visitante</small></span></div>
+    <p className="fine">{fixtureStatus(normalizedFixtureStatus(f.provider,f.source_status))} · {providerLabel(f.provider)}</p>
+    {(f.home_penalty_score!=null||f.away_penalty_score!=null)&&<p className="fine">Penales: {fixtureScore(f.home_penalty_score,f.away_penalty_score)}</p>}
+  </article>;
 }
-
-export default async function Page() {
-  const snapshot=await fixtureView();
-  const finished=snapshot.data.filter(f=>normalizedFixtureStatus(f.provider,f.source_status)==='finished').sort((a,b)=>(Date.parse(b.kickoff_at??'')||0)-(Date.parse(a.kickoff_at??'')||0));
-  const scheduled=snapshot.data.filter(f=>normalizedFixtureStatus(f.provider,f.source_status)==='notstarted').sort((a,b)=>(Date.parse(a.kickoff_at??'')||Infinity)-(Date.parse(b.kickoff_at??'')||Infinity));
-  const other=snapshot.data.filter(f=>!['finished','notstarted'].includes(normalizedFixtureStatus(f.provider,f.source_status)));
-  return (
-    <main className="mx-auto min-h-dvh max-w-6xl px-5 py-10 sm:px-8 sm:py-16">
-      <header className="mb-9 border-l-4 border-red-600 pl-5">
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-red-400">MLeprosoM · Partidos</p>
-        <h1 className="max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">Movete, Leproso Movete!</h1>
-        <p className="mt-4 text-neutral-400">El fixture a mano. La memoria del hincha, con respaldo.</p>
-      </header>
-      <div className="mb-7 rounded-xl border border-neutral-800 p-4 text-sm" role="status">
-        <p className={snapshot.status==='stale'?'font-semibold text-amber-300':'font-semibold text-neutral-200'}>{snapshot.label}</p>
-        {snapshot.updatedAt&&<p className="mt-1 text-neutral-400">Última consulta de los datos mostrados: {fixtureDate(snapshot.updatedAt)}</p>}
-        <p className="mt-1 text-neutral-400">Horarios de Argentina. Datos guardados; esta vista no es un seguimiento en vivo.</p>
-        {snapshot.sources.map(s=><p key={s.provider} className="mt-1 text-neutral-400">{providerLabel(s.provider)}: {s.status==='error'?'No se pudo consultar':s.label}</p>)}
-        {snapshot.status==='error'&&<p className="mt-2 text-red-300">No pudimos leer los partidos. Volvé a intentar más tarde.</p>}
-      </div>
-      <div className="grid gap-6 lg:grid-cols-2">
-        <FixtureList title="Partidos programados" fixtures={scheduled}/>
-        <FixtureList title="Resultados guardados" fixtures={finished}/>
-      </div>
-      {other.length>0&&<div className="mt-6"><FixtureList title="Otros estados" fixtures={other}/></div>}
-      <footer className="mt-8 text-xs text-neutral-500">Fuente indicada por partido. Tablas de posiciones pendientes de validación.</footer>
-    </main>
-  );
+function Matches({title,rows}:{title:string;rows:StoredFixture[]}) {
+  return <section className="panel"><h2>{title}</h2>{rows.length?rows.map(f=><FixtureCard key={`${f.provider}:${f.id}`} fixture={f}/>):<p className="empty">Sin datos</p>}</section>;
+}
+function Positions({view}:{view:TableView}) {
+  if(!view.snapshot)return <div className="empty" role="status"><strong>Sin datos</strong><p>{view.status==='error'?'No pudimos consultar la tabla. Volvé a intentar más tarde.':'No hay una tabla habilitada para esta selección.'}</p></div>;
+  const names=new Map(view.teams?.map(t=>[t.id,t.label]));
+  return <div className="table-scroll" tabIndex={0} aria-label="Tabla de posiciones, desplazamiento horizontal"><table><caption className="sr-only">Posiciones calculadas. Ajustes oficiales sin verificar.</caption><thead><tr>{['Pos.*','Equipo','PJ','G','E','P','GF','GC','DG','PTS'].map(h=><th key={h} scope="col">{h}</th>)}</tr></thead><tbody>{view.snapshot.rows.map(r=><tr key={r.team_id} className={r.team_id===highlightedTeam?'our-team':''}><td>{r.calculated_position??'Empate'}</td><th scope="row">{names.get(r.team_id)??'Sin datos'}</th>{[r.played,r.won,r.drawn,r.lost,r.gf,r.ga,r.gd,r.pts].map((v,i)=><td key={i}>{v??'Sin datos'}</td>)}</tr>)}</tbody></table></div>;
+}
+export default async function Page({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}) {
+  const [snapshot,annual,params]=await Promise.all([fixtureView(),dashboardStandings(),searchParams]);
+  const now=annual.checked_at;
+  const {finished,upcoming,unresolved}=dashboardFixtures(snapshot.data,now) as {finished:StoredFixture[];upcoming:StoredFixture[];unresolved:StoredFixture[]};
+  const tournaments=[...new Set(annual.selections?.flatMap(s=>s.tournament?[s.tournament]:[])??[])];
+  const requested=typeof params.table==='string'?params.table:undefined;
+  const selected=requested && [...tournaments,'Anual','Promedios'].includes(requested)?requested:defaultTournament(snapshot.data,tournaments,now);
+  const groups=annual.selections?.filter(s=>s.tournament===selected&&s.group).map(s=>s.group!)??[];
+  const group=typeof params.zone==='string'&&groups.includes(params.zone)?params.zone:undefined;
+  const view=selected==='Anual'||selected==='Promedios'?annual:await dashboardStandings({kind:'tournament',tournament:selected,...(group?{group}:{})});
+  const href=(table:string,zone?:string)=>`/?${new URLSearchParams({table,...(zone?{zone}:{})})}#tablas`;
+  return <div className="app-shell"><a className="skip-link" href="#contenido">Saltar al contenido</a><aside className="sidebar"><Link href="/" className="brand"><span className="brand-mark">M<span>L</span>M</span><span>Movete, Leproso<br/>Movete!</span></Link><p className="sidebar-label">EL TABLERO DEL HINCHA</p><nav aria-label="Navegación principal"><a href="#contenido">↗ Resumen</a><a href="#partidos">◷ Partidos</a><a href="#tablas">▤ Tablas</a></nav><p className="sidebar-note">Rojo y negro.<br/>Los números, a la vista.</p></aside>
+    <main id="contenido"><header className="page-header"><div><p className="eyebrow">NEWELL’S OLD BOYS / EL TABLERO</p><h1>La Lepra, en números.</h1><p className="muted">Para discutir con datos. La pasión ya la tenemos.</p></div><span className="badge">Actualización manual</span></header>
+      <section className="hero"><div><p className="eyebrow">PRÓXIMO PARTIDO GUARDADO</p><h2>Otra fecha.<br/><span>La misma camiseta.</span></h2><p className="fine">Horarios de Argentina · Sin seguimiento en vivo</p></div><div>{upcoming[0]?<FixtureCard fixture={upcoming[0]}/>:<p className="empty">Sin datos de un próximo partido con fecha futura confirmada.</p>}</div></section>
+      <div className={`data-notice ${snapshot.status==='stale'?'warning':''}`} role="status"><strong>Partidos · {snapshot.label}</strong><span>{snapshot.updatedAt?`Consultados: ${fixtureDate(snapshot.updatedAt)}`:'Sin fecha de actualización'}</span>{snapshot.sources.map(s=><span key={s.provider}>{providerLabel(s.provider)}: {s.status==='error'?'No se pudo consultar':s.label}</span>)}{snapshot.status==='error'&&<span>No pudimos leer los partidos.</span>}</div>
+      <div className="matches-grid" id="partidos"><Matches title="Últimos 3 partidos" rows={finished.slice(0,3)}/><Matches title="Próximos 3 partidos" rows={upcoming.slice(0,3)}/></div>
+      <section className="panel standings" id="tablas"><div className="section-heading"><div><p className="eyebrow">EL CONTEXTO DE LA FECHA</p><h2>Tablas de la liga</h2></div><span className="badge">Cálculo propio</span></div><nav className="tabs" aria-label="Seleccionar tabla">{[...new Set([...tournaments,'Anual','Promedios'])].map(t=><Link prefetch={false} key={t} className={t===selected?'selected':''} aria-current={t===selected?'page':undefined} href={href(t)}>{t}</Link>)}</nav>
+      {selected==='Promedios'?<div className="empty"><strong>Sin datos</strong><p>Promedios y contexto de descenso pendientes de validación.</p></div>:<><nav className="zone-tabs" aria-label="Seleccionar zona">{groups.length>0&&[undefined,...groups].map(g=><Link prefetch={false} key={g??'general'} className={g===group?'selected':''} aria-current={g===group?'page':undefined} href={href(selected,g)}>{g?`Zona ${g}`:'General'}</Link>)}</nav><div className={`data-notice ${view.status==='stale'?'warning':''}`} role="status"><strong>{view.label}</strong>{view.results_as_of&&<span>Resultados observados: {fixtureDate(view.results_as_of)}</span>}</div><Positions view={view}/><p className="table-note">* Posición calculada, no oficial. Ajustes disciplinarios sin verificar. Los empates pendientes no reciben una posición inventada.</p></>}
+      </section><details className="panel archive"><summary>Ver todos los partidos guardados ({snapshot.data.length})</summary><div className="matches-grid"><Matches title="Resultados" rows={finished}/><Matches title="Programados" rows={upcoming}/></div>{unresolved.length>0&&<Matches title="Fecha pendiente u otros estados" rows={unresolved}/>}</details><footer>Movete, Leproso Movete! · Fuentes externas identificadas por partido. Tablas calculadas a partir de resultados BSD contrastados con LPF.</footer>
+    </main></div>;
 }

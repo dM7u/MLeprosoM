@@ -29,7 +29,8 @@ Resumen consolidado al 24/09/2026. Este apartado y la cola inmediata prevalecen
 sobre las notas de ejecución fechadas, que se conservan como historial.
 
 - Fundación y cadena de partidos operativas: BSD para liga y GOAL para Copa.
-- Pantalla básica de partidos; Home/dashboard completo todavía pendiente.
+- Home inicial con navegación, próximo partido, últimos/próximos tres,
+  historial y tablas persistidas. Panel completo y drilldowns pendientes.
 - Motor de zonas/anual y catálogo completo contrastados en cortes fechados.
 - Lotes, revisión oficial, activación y lector persistido implementados y probados localmente.
 - Primer lote de liga y revisión oficial guardados y activados provisionalmente
@@ -38,15 +39,32 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   restricciones visibles compatibles. Las definiciones largas de las capturas
   están recortadas: no se certifica equivalencia textual completa del DDL.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 87 pruebas unitarias, pruebas PostgreSQL locales, lint, typecheck y build aprobados.
+- 89 pruebas unitarias, lint, typecheck y build aprobados en el bloque de Home;
+  pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Seguimiento cerrado: backlog consolidado y avances anteriores guardados en `1dfe880`.
 
 ### Cola inmediata
 
-1. Construir Home/dashboard inicial con navegación, partidos y tablas.
-   Consumir lector persistido y política vigente; contemplar stale/Sin datos.
+1. Completar panel de equipo y detalle de partidos según cobertura real;
+   actualizar fixtures antes de evaluar información deportiva actual.
 2. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
    del lector por una consulta paginada o transaccional validada.
+
+### Home inicial — 24/09/2026
+
+- [x] Diseño oscuro rojo/negro, navegación lateral y adaptación CSS a mobile.
+- [x] Próximo partido futuro, últimos/próximos tres e historial completo desplegable.
+  Programados vencidos o sin fecha quedan separados, nunca como próximo partido.
+- [x] Tablas desde Supabase: selección de torneo por clasificación revisada de
+  fixtures, general/zonas, anual y Promedios con Sin datos.
+- [x] Equipos resaltados por ID; nombres de catálogo revisado y acotado al ámbito.
+  El lote inmutable no contiene nombres y no se modifica para presentación.
+- [x] Loading, empty/error, stale por origen, fecha de observación y carácter
+  provisional visibles; empates sin posición inventada. Sin requests al proveedor.
+- [x] Dos pruebas de selección temporal añadidas (89 totales), lint y build.
+- [ ] Drilldowns, posiciones contextuales de rival, XI, técnico y resto del panel.
+- Los fixtures pueden ser más antiguos que las tablas; se muestran sus fechas
+  por separado. No se sincronizan proveedores durante una visita.
 
 ### Primer lote remoto — 24/09/2026
 

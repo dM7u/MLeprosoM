@@ -2,6 +2,14 @@
 
 ## Estado
 
+Actualización 24/09/2026: Home dinámica con `fixtureView` y
+`dashboardStandings` → `readStandings` → Supabase. Selección mediante query
+params validados contra los ámbitos del lote; enlaces sin prefetch de tablas.
+Nombres desde catálogo revisado por ámbito, separados del lote de cálculo.
+`manual-policy.json` compartida con operación manual. Solo Server Components
+para datos; ninguna visita consulta proveedores ni ejecuta escrituras.
+Las notas anteriores de pantalla mínima se conservan como evolución histórica.
+
 Vista mínima de partidos implementada como Server Component dinámico. Consume
 `fixtureView` → `readTeamFixtures` → Supabase; nunca BSD durante una visita.
 Configuración privada: FOOTBALL_PROVIDER, FOOTBALL_TEAM_ID y

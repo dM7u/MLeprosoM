@@ -72,7 +72,9 @@ export async function readStandings(db, {scope, selection, policy, now = Date.no
         resultsTtlMs: Math.min(policy.resultsTtlMs, review.payload.policy.resultsTtlMs), reviewTtlMs: Math.min(policy.reviewTtlMs, review.payload.policy.reviewTtlMs)});
       const evidenceStale = now - instant(review.observed_at) >= Math.min(policy.evidenceTtlMs, review.payload.policy.evidenceTtlMs);
       if (evidenceStale) {view.status = 'stale'; view.label = 'Tabla provisional desactualizada'; view.warnings.push('stale_evidence');}
-      return {...view, batch_id: batch.id, official_review_id: review.id, evidence_as_of: review.observed_at, read_issues: [...new Set(readIssues)]};
+      return {...view, teams: batch.payload.input.teams.map(t => ({id: t.id, groups: {...t.groups}})),
+        selections: batch.payload.snapshots.map(s => ({...s.selection})),
+        batch_id: batch.id, official_review_id: review.id, evidence_as_of: review.observed_at, read_issues: [...new Set(readIssues)]};
     }
     return {...empty, batch_id: null, official_review_id: null, read_issues: [...new Set(readIssues)]};
   } catch { return unavailable('invalid_or_unavailable_storage'); }

@@ -6,8 +6,9 @@ con las reglas de nombres de paquetes. Repositorio: [dM7u/MLeprosoM](https://git
 
 ## Estado
 
-Fundación técnica local implementada. La ruta `/` muestra solamente una página
-de construcción con `Sin datos`; todavía no hay funcionalidades deportivas.
+La ruta `/` muestra la Home inicial con partidos guardados, navegación y tablas
+provisionales de liga. Incluye frescura, fuentes y estados Sin datos.
+El panel completo, seguimiento en vivo y algoritmos propios siguen pendientes.
 
 Este documento describe el producto y sirve como puerta de entrada a la
 documentación. El estado operativo de las tareas se mantiene
