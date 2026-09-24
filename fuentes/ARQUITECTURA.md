@@ -256,3 +256,22 @@ Contrato y límites en src/server/standings/README.md. Sin consultas externas,
 escrituras DB ni integración UI todavía. Los fixtures guardados solo de Newell's
 no son cobertura suficiente para una tabla completa. Un snapshot incompleto no
 expone filas; las posiciones calculadas nunca se marcan como oficiales.
+
+### Persistencia local preparada — 2026-09-24
+
+batch.mjs prepara entradas normalizadas, calcula todos los ámbitos y valida
+payload/hashes por recálculo antes de escribir. store-standings-batch.mjs inserta
+una fila inmutable con idempotencia; store-standings.mjs ofrece ejecución manual
+desde archivos locales, sin consultas al proveedor. Esquema probado localmente,
+sin migración remota aplicada. No se conecta todavía al lector/UI ni se hereda
+automáticamente la validación oficial histórica a un nuevo lote.
+
+### Contraste oficial por lote — 2026-09-24
+
+official-review.mjs compara evidencia completa vinculada a ID/hash de lote y
+aplica TTL explícitos de datos/revisión/evidencia para una activación provisional.
+store-official-review.mjs inserta comparación y decisión atómicamente en un
+historial privado e inmutable. FK/trigger validan vínculo y lote completo en DB;
+la validación exhaustiva está en backend. Implementado y probado localmente,
+sin cambios remotos. Lector DB debe contemplar denegaciones posteriores y
+revalidar frescura antes de exponer tablas; esa integración continúa pendiente.

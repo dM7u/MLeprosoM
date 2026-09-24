@@ -1,5 +1,63 @@
 # Sincronización manual BSD
 
+## Tablas de liga: solo lectura
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/check-standings.mjs --dry-run docs/research/lpf-2026-standings-review.json
+```
+
+Lee toda la liga/temporada configurada, sin filtro de Newell's. Máximo diez
+páginas de 100 y hasta dos intentos por página (cliente BSD existente). Valida
+total estable, IDs únicos, ámbito, enlace siguiente y presupuesto. No sigue
+URLs arbitrarias con la clave. No importa Supabase, no escribe archivos ni DB,
+no admite apply, no programa polling. El informe JSON se emite por stdout.
+
+Reproducción sin red ni credenciales del corte observado:
+
+```powershell
+node --conditions=react-server scripts/check-standings.mjs --dry-run docs/research/lpf-2026-standings-review.json --catalog-file docs/research/bsd-catalog-20260924.json
+```
+
+El informe distingue timestamp de cada página, cálculo, revisión y comparación
+oficial. En replay requests=0; el catálogo conserva las cinco consultas de su
+obtención. La ejecución de este bloque consumió seis GET BSD en total: uno de
+inspección y cinco del catálogo. Sin requests a Supabase ni escrituras remotas.
+
+La comparación usa una observación oficial fechada; una consulta futura exige
+renovar esa evidencia antes de interpretar discrepancias como errores o sanciones.
+Exit 1 ante datos incompletos o diferencias. No existe snapshot transaccional del
+proveedor: un cambio durante la paginación que conserve total e IDs puede pasar
+inadvertido. La cobertura completa no garantiza frescura ni oficialidad.
+
+Evidencia: `docs/research/standings-dry-run-20260924.json`. Revisión y reemplazo
+puntual explicados en `src/server/standings/README.md`. Antes de reutilizar el
+calendario en otra temporada hay que revisar configuración y fuentes.
+
+## Almacenamiento manual de lotes de tablas
+
+`store-standings.mjs` toma catálogo local, revisión local, UUID de ejecución,
+fecha ISO de cálculo y modo. No consulta BSD ni publica datos. El modo dry-run
+no necesita credenciales y no escribe en DB. Ejemplo reproducible histórico:
+
+```powershell
+node --conditions=react-server scripts/store-standings.mjs docs/research/bsd-catalog-20260924.json docs/research/lpf-2026-standings-review.json 00000000-0000-4000-8000-000000000001 2026-09-24T12:00:00Z --dry-run
+```
+
+Para un lote real usar un UUID nuevo y fecha de cálculo real. Aplicar primero
+la migración `20260924000100_standings_batches.sql`; luego el mismo comando con
+`--env-file=.env.local` y `--apply` guarda una fila privada. No se ejecutó apply
+remoto en este bloque. No usar el UUID de ejemplo para ingestiones reales ni
+cargar evidencia histórica como si fuera una consulta actual.
+
+En un reintento conservar UUID, fecha y archivos exactos. Contenido idéntico
+devuelve replay=true; cambiarlo reutilizando UUID falla sin sobrescribir. Si
+cambia la revisión o la observación, es una nueva ejecución. Un lote incomplete
+se guarda solo como auditoría; el comando no habilita ningún lote para la UI.
+La escritura rechaza generated_at futuro. Requests guardados provienen del
+catálogo, no indican nuevas consultas de este comando. Errores sanitizados.
+
+## Comandos de partidos del equipo
+
 Desde la raíz, con secretos solo en `.env.local`:
 
 ```powershell

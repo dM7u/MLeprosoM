@@ -25,6 +25,26 @@
 
 ## Estado actual
 
+Resumen consolidado al 24/09/2026. Este apartado y la cola inmediata prevalecen
+sobre las notas de ejecución fechadas, que se conservan como historial.
+
+- Fundación y cadena de partidos operativas: BSD para liga y GOAL para Copa.
+- Pantalla básica de partidos; Home/dashboard completo todavía pendiente.
+- Motor de zonas/anual y catálogo completo contrastados en cortes fechados.
+- Lotes, revisión oficial y activación implementados y probados localmente.
+- Dos migraciones de tablas pendientes en Supabase remoto; sin tablas en UI.
+- 75 pruebas unitarias y pruebas PostgreSQL locales aprobadas al cierre previo.
+
+### Cola inmediata
+
+1. Consolidar documentación y registrar los avances locales en Git.
+2. Implementar lector persistido por ámbito, última revisión y frescura.
+3. Preparar operación manual de revisión y TTL de despliegue; aplicar/verificar
+   migraciones remotas y cargar un lote actual revisado.
+4. Construir Home/dashboard inicial con navegación, partidos y tablas.
+
+### Capacidades y pendientes
+
 -   [x] Alcance funcional inicial definido.
 -   [x] Arquitectura conceptual definida.
 -   [x] Proveedor inicial elegido.
@@ -32,15 +52,15 @@
 -   [x] Confirmado que el proyecto comienza sin código previo.
 -   [x] Bloque 1 --- Fundación técnica: base local, acceso Supabase y primer commit verificados.
 -   [x] Repositorio publicado en GitHub: https://github.com/dM7u/MLeprosoM.
--   [~] Bloque 2: BSD permite 2026 y el fixture completo está mapeado contra LPF; pendientes tablas oficiales, históricos y cierre del modelo mínimo.
+-   [~] Bloque 2: fixtures y tablas básicas contrastados; pendientes cobertura ampliada, condiciones de adopción, históricos y sanciones.
 -   [x] Alternativas gratuitas investigadas (2026-09-17), registradas en `PROVEEDORES.md`.
--   [ ] Validar BSD con cuenta gratuita y muestras reales de Newell's; candidato recomendado, todavía no seleccionado. Confirmar condiciones vigentes y cobertura antes de reemplazar API-Football.
+-   [x] Validar acceso BSD y muestras reales de Newell's; utilizado para fixtures LPF. Condiciones de adopción definitiva y cobertura ampliada siguen pendientes.
 -   [x] BSD: clave renombrada localmente y acceso autenticado a 2026 validado el 2026-09-17; ocho consultas HTTP 200, incluyendo un partido con XI, eventos y estadísticas individuales.
--   [ ] BSD: resolver separación Apertura/Clausura y significado de tablas acumuladas por grupo; contrastar calidad y condiciones antes de adopción definitiva. Bloque 2 continúa abierto.
+-   [x] BSD: resolver Apertura/Clausura y significado de grupos acumulados; no usarlos como tablas oficiales de torneo.
 -   [x] Diagnosticar estructura BSD: temporada 2026 combinada, jornadas repetidas y fila acumulada de Newell's comprobada contra 25 resultados.
--   [ ] Resolver fuente/mapeo verificable para tablas por torneo, anual y promedios; no inferir torneo por calendario ni publicar standings BSD como tabla oficial.
+-   [x] Resolver fuente/mapeo de torneo y anual, motor propio y contraste fechado. Promedios/históricos siguen pendientes.
 -   [x] Vincular los 32 partidos BSD de Newell's 2026 con los fixtures oficiales LPF: 16 Apertura + 16 Clausura, sin ambigüedades ni uso de fecha calendario. Evidencia en `docs/research/newells-2026-competition-map.json`.
--   [ ] Extender validación a todos los equipos antes de calcular posiciones; verificar sanciones, desempates y promedios. Clasificación de Newell's resuelta, tablas completas pendientes.
+-   [x] Extender validación a toda la liga: zonas y anual contrastadas. Desempates inferiores, sanciones y promedios no resueltos.
 -   [x] Extender mapeo a toda la liga: 480 encuentros oficiales vinculados uno a uno, 240 por torneo, 30 equipos, 16 partidos por equipo. Los 15 registros adicionales BSD son eliminatorias excluidas del mapeo de zonas.
 -   [ ] Certificar posiciones y ajustes disciplinarios con fuente oficial; validar base histórica de promedios. Ausencia de resultados de búsqueda no acredita ausencia de sanciones.
 -   [x] Relevar reglas oficiales de zonas, anual y descenso: `docs/research/REGLAS_TABLAS_2026.md`. Distinguir clasificación pendiente, ajustes disciplinarios e históricos incompletos.
@@ -168,7 +188,7 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 -   [!] Acceder a temporada 2026: denegada; el mensaje de Free indica 2022–2024.
 -   [ ] Verificar cobertura de Newell's y competiciones necesarias.
 -   [x] Verificar correspondencia de fixtures 2026 BSD/LPF: 480 encuentros de zonas, sin certificar cada marcador.
--   [ ] Verificar standings.
+-   [x] Contrastar standings de zonas/anual en cortes fechados; no acredita sanciones ni vigencia permanente.
 -   [ ] Verificar jugadores.
 -   [x] Verificar alineaciones en muestra BSD 223705; no equivale a cobertura universal ni vivo.
 -   [x] Verificar estadísticas de jugadores/partido en muestra BSD 223705, con faltantes registrados.
@@ -181,7 +201,7 @@ mínima es coherente y el repositorio contiene la documentación vigente.
 -   [x] Crear `PROVEEDORES.md` si la investigación produce información
     estable que deba conservarse.
 -   [x] Ajustar `MODELO_DE_DATOS.md` con límites del relevamiento público.
--   [ ] Validar ajustes del modelo contra respuestas reales.
+-   [~] Modelo de partidos y tablas validado con muestras reales; entidades ampliadas pendientes.
 -   [x] Diseñar y probar primera migración mínima: equipos, competiciones, temporadas externas, partidos y sincronizaciones. RLS y restricciones verificadas en PostgreSQL embebido.
 -   [x] Aplicar `20260917000100_initial_football.sql` en Supabase: ejecución manual confirmada por el usuario; cinco tablas accesibles desde backend con HTTP 200 (2026-09-17).
 -   [x] Auditar permisos/RLS en Supabase remoto: usuario ejecutó `supabase/check-access.sql` y confirmó cinco filas, RLS true y todos los privilegios comprobados de anon/authenticated false. Resultado comunicado por el usuario, no leído directamente por el agente.
@@ -260,14 +280,14 @@ local aprobados. Sin Home, tablas, ratings ni sincronización automática.
 
 ## BLOQUE 4 --- Standings y Home inicial
 
--   [ ] Modelar estructura argentina confirmada.
--   [ ] Standings.
--   [ ] Tabla anual si corresponde.
+-   [x] Modelar calendario y membresías configurables para estructura argentina revisada.
+-   [~] Standings: motor, almacenamiento y activación locales listos; lector/remoto/UI pendientes.
+-   [~] Tabla anual: cálculo y contraste implementados; lectura/publicación pendientes.
 -   [ ] Promedios/descenso si corresponde.
 -   [ ] Navegación lateral.
 -   [ ] Próximo partido.
 -   [ ] Posiciones.
--   [ ] Últimos/próximos partidos.
+-   [~] Listas básicas de resultados/programados implementadas; tarjetas Home pendientes.
 -   [ ] Tablas disponibles.
 -   [ ] Estados loading/empty/error/stale/parcial/`Sin datos`.
 -   [ ] Responsive inicial.
@@ -382,16 +402,14 @@ Revisión de diferencias y formato; no corresponde repetir tests de producto.
 
 ## Decisiones pendientes
 
--   [ ] Incorporar Copa Argentina al alcance de partidos de Newell's. BSD no la
-    devolvió en el catálogo Argentina, incluso con include_inactive=true
-    (2026-09-18: count 1, solo Liga Profesional). Investigar proveedor alternativo
-    y verificar acceso real antes de implementar.
--   [ ] Antes de combinar proveedores, diseñar equivalencias de equipos y
-    deduplicación de partidos; la identidad actual es específica de cada fuente.
+-   [x] Incorporar Copa Argentina mediante GOAL API: importación y lectura conjunta
+    verificadas el 18/09. No equivale a sincronización automática ni cobertura universal.
+-   [x] Equivalencias revisadas de equipos para combinar ámbitos disjuntos LPF/Copa;
+    no existe fusión automática de partidos entre proveedores.
 
--   Reemplazo gratuito de API-Football: Free denegó 2026; BSD operativo para fixtures LPF; GOAL API candidato complementario para Copa Argentina, con acceso autenticado y una muestra contrastada; integración pendiente.
+-   Proveedores: API-Football Free denegó 2026; BSD operativo para LPF y GOAL API integrado para Copa. Revalidar condiciones/cobertura antes de ampliar uso.
 -   Actualizar ESLint a una rama soportada cuando los plugins de Next sean compatibles.
--   Modelo DB físico después de conocer cobertura.
+-   Modelo DB: base de partidos aplicada; lotes/revisiones de tablas probados localmente, remoto pendiente. Ampliar otras entidades según cobertura.
 -   Cache/TTL por tipo de dato.
 -   Polling final según cuota.
 -   Scheduler y mecanismo de lock.
@@ -573,3 +591,155 @@ Siguiente bloque: adaptador y dry-run sobre catálogo completo actualizado, con
 calendario/membresías revisados y contraste oficial. Luego definir persistencia y
 publicación con frescura y ajustes visibles. H2H/Fair Play/sorteo, sanciones,
 promedios y ratings siguen pendientes; no se asumieron reglas nuevas.
+
+## Catálogo completo y dry-run — 2026-09-24
+
+Alcance evaluado: bloque acotado de lector paginado, adaptación, revisión externa
+y pruebas; riesgo principal en cobertura y cambios de identidad del proveedor.
+Sin dependencias nuevas, migraciones ni cambios UI. Base inspeccionada limpia:
+`c7d64a0`. Documentación de trabajo en fuentes/; sources/ intacto.
+
+- [x] Consultar catálogo actualizado completo de liga 85/temporada 1635: cinco
+  páginas, 496 IDs únicos; un GET previo de inspección (seis GET BSD totales).
+- [x] Releer agenda LPF: 480 cruces/localías/jornadas coinciden con el mapeo;
+  revisar las membresías de las 60 filas de zonas actuales. Cantidades por
+  equipo/jornada/torneo verificadas. No se revisaron todos los horarios futuros.
+- [x] Resolver explícitamente Sarmiento–River, Clausura fecha 11: registro
+  223766 aplazado sustituido por 604493; nuevo horario oficial 07/10 22:30 UTC.
+  BSD tiene replaced_by null en ambos. Excepción manual con controles, sin
+  inferencia automática por calendario ni conteo doble.
+- [x] Adaptar estados comprobados y los 60 interzonales league-phase; bloquear
+  catálogo no revisado, cambios de fase/reemplazo y datos inciertos.
+- [x] Ejecutar dry-run sin escrituras remotas sobre el catálogo recién obtenido:
+  siete snapshots; 480 encuentros de calendario y 390 finalizados (240 + 150).
+  Excluir 15 eliminatorias y el registro aplazado sustituido.
+- [x] Contrastar 90 filas oficiales (60 zonas + 30 anual): ocho campos y orden
+  coincidentes, cero diferencias. Evidencia del 18/09 conservada como histórica.
+- [x] Conservar catálogo sin secretos y configuración/evidencia reproducibles en
+  docs/research; comando check-standings documentado, apply rechazado sin red.
+- [x] 53 pruebas aprobadas (10 nuevas), lint, typecheck y build aprobados.
+
+Fuentes oficiales: agenda https://www.ligaprofesional.ar/?p=75980,
+Apertura https://www.ligaprofesional.ar/torneo-apertura-2026/ y
+Clausura https://www.ligaprofesional.ar/torneo-clausura-mercado-libre-2026.
+Observación nocturna: 23/09 UTC, 24/09 Europe/Paris. Archivos con fecha local;
+timestamps ISO UTC de consultas/revisión/cálculo conservados. Informe:
+`docs/research/standings-dry-run-20260924.json`.
+
+Newell's observado: Apertura A 14.º/15 puntos; Clausura A 8.º/16 puntos;
+anual 22.º/31 puntos. No implica publicación ni vigencia indefinida.
+official_position continúa null y adjustments_status unverified. Igualdad de
+puntos no prueba inexistencia de sanciones. No se implementaron promedios,
+ratings ni desempates pendientes. Sin modificaciones en Supabase.
+
+Siguiente bloque pendiente: definir persistencia/publicación de snapshots,
+frescura y actualización de evidencia oficial/ajustes. No avanzar a publicación
+automática con esta observación estática. La paginación no garantiza aislamiento
+ante cambios simultáneos del proveedor que mantengan total e IDs.
+
+## Contrato de snapshots y política de lectura — 2026-09-24
+
+Alcance evaluado: bloque pequeño, sin dependencias externas; separar definición
+de almacenamiento y lectura antes de crear tablas/publicar datos. Reutilizar
+dataState y salidas del motor. Riesgos: rejuvenecer datos al recalcular, mezclar
+ámbitos o perder el último resultado válido al fallar una actualización.
+
+- [x] Definir contrato en `src/server/standings/PERSISTENCE.md`: lote inmutable
+  de liga, inserción atómica, idempotencia por ejecución, entrada reproducible,
+  versión/hashes, auditoría y evidencia oficial ligada al lote. Es diseño;
+  todavía no existen migración, tabla, persistencia ni activación implementadas.
+- [x] Implementar `standingsSnapshotView`: selección por ámbito, rechazo de
+  snapshots incompletos/ajenos y conservación del último válido ante fallos.
+- [x] Separar frescura de resultados y revisión con dos TTL explícitos; sin
+  valores de despliegue arbitrarios. Recalcular no renueva la observación.
+- [x] Preservar etiquetas de cálculo provisional, ajustes sin verificar y
+  empates pendientes. Sin datos no se transforma en una tabla de ceros.
+- [x] Evitar que una observación anterior desplace a otra más nueva solo por
+  tener fecha de cálculo posterior; salida independiente sin mutar entradas.
+- [x] 61 pruebas (8 nuevas), lint, typecheck y build aprobados.
+- [x] Preparar migración y almacenamiento manual de lotes con validación de
+  payload, idempotencia, atomicidad/RLS y pruebas locales.
+- [x] Persistir contraste oficial ligado al lote y controlar activación ante
+  diferencias: implementado y probado localmente; esquema remoto pendiente.
+- [ ] Fijar TTL explícitos de despliegue y conectar lector persistido; luego
+  activar esquema/carga remotos y publicar tablas provisionales en UI.
+
+La política nueva funciona en memoria sobre snapshots ya validados del motor;
+no es un validador de JSON externo ni habilita publicación por sí sola.
+Sin consultas BSD/GOAL/Supabase, cambios remotos, cron o UI en este bloque.
+Promedios, ratings, sanciones y desempates inferiores continúan pendientes.
+Los cambios de este bloque y del catálogo anterior siguen locales, sin commit.
+
+## Almacenamiento inmutable de lotes — 2026-09-24
+
+AGENTS.md actualizado leído y respetado; cambios del usuario conservados.
+Alcance: completar el almacenamiento privado definido en el bloque anterior,
+sin activar producto ni requerir decisiones funcionales nuevas. Riesgos evaluados:
+escrituras parciales, reintentos que sobrescriben historia, payload inconsistente
+y acceso público. Sin dependencias nuevas; PGlite local existente reutilizado.
+
+- [x] Preparar migración `20260924000100_standings_batches.sql`: una fila por
+  lote completo/incompleto, JSONB, UUID de ejecución, ámbito externo, versiones,
+  hashes y fechas. RLS; service_role solo SELECT/INSERT, sin acceso público.
+- [x] Construir lotes con entrada normalizada de liga y todos sus ámbitos;
+  conservar observaciones originales, incidencias e IDs excluidos. Campos
+  adicionales del catálogo no se copian al payload.
+- [x] Validar por recálculo antes de escribir: filas, versiones, identidad y
+  hashes; rechazar alteraciones y fecha de cálculo futura.
+- [x] Insertar lote atómicamente e implementar reintento idéntico sin duplicar.
+  Reutilizar UUID con otro contenido falla, sin UPDATE ni borrado.
+- [x] Agregar comando manual `scripts/store-standings.mjs`: dry-run sin red ni
+  credenciales y apply privado; sin consultas BSD ni activación/publicación.
+- [x] Probar sobre las tres migraciones en PostgreSQL local: siete snapshots
+  del catálogo observado, reintento, conflicto, rechazo atómico de filas
+  inválidas, RLS/permisos e historial completo conservado ante lote incompleto.
+- [x] 67 pruebas unitarias (6 nuevas), prueba PostgreSQL local, lint, typecheck
+  y build aprobados. Dry-run reproducible aprobado sin escrituras remotas.
+- [ ] Aplicar migración y verificar esquema/permisos en Supabase remoto.
+- [x] Implementar contraste oficial persistido ligado al lote y control de
+  activación, probado localmente; lector DB y TTL de despliegue pendientes.
+
+complete significa cobertura del motor, no lote habilitado para UI. No existe
+publicación en este comando. Los fallos anteriores a construir el lote siguen
+sin registro persistido de intento; se devuelven códigos sanitizados. El payload
+reproduce el cálculo, no toda la investigación del adaptador: la evidencia de
+sustituciones permanece en docs/research. No se agregaron promedios ni ratings.
+
+Sin consultas a proveedores/Supabase en este bloque; migración remota pendiente,
+UI intacta. Archivos locales sin commit. Próximo bloque prioritario: contraste
+oficial por lote y activación controlada, antes de conectar lectura/publicación.
+
+## Contraste oficial y activación por lote — 2026-09-24
+
+Alcance evaluado: bloque de complejidad media, sin proveedores ni dependencias
+nuevas; reutilizar motor, validación de lote y política de frescura. Riesgos:
+heredar evidencia vieja, activar datos incompletos o separar la aprobación de
+su evidencia. Se conserva historial inmutable con una única escritura por revisión.
+
+- [x] Validar evidencia ligada al ID y hash exactos del lote, con fuente HTTPS,
+  fecha, anual y todas las zonas/equipos. No heredar el match histórico.
+- [x] Comparar ocho campos y orden básico; registrar diferencias sin cambiar
+  puntos ni asignar posiciones oficiales al motor.
+- [x] Controlar activación explícita: lote completo, match, resultados/revisión/
+  evidencia frescos, evidencia no anterior al catálogo. Tres TTL obligatorios.
+- [x] Revalidar vigencia al escribir y rechazar reloj futuro o activación vencida.
+- [x] Guardar evidencia, diferencias, política y decisión en una fila privada
+  inmutable, con reintento idempotente y conflicto de UUID explícito.
+- [x] Preparar migración `20260924000200_standings_official_reviews.sql`: FK a
+  ID/hash, trigger que rechaza activar lote incompleto, RLS y permisos mínimos.
+- [x] 75 pruebas unitarias (8 nuevas), prueba PostgreSQL de las cuatro
+  migraciones, lint, typecheck y build aprobados. SQL verifica hashes ajenos,
+  activación de incompletos, auditoría de diferencias y denegación pública.
+
+No se consultaron fuentes externas ni se renovó evidencia deportiva: las pruebas
+reutilizan el corte observado y relojes/TTL controlados. HTTPS por sí solo no
+certifica una fuente oficial; la transcripción exige revisión explícita.
+La activación es provisional, no una posición oficial ni vigencia permanente.
+Las migraciones siguen sin aplicar remotamente; no hubo escrituras Supabase.
+
+Próximo bloque: lector persistido por ámbito. Debe considerar la última revisión
+de cada lote (también denegaciones), impedir que reaparezcan aprobaciones viejas,
+bloquear empates temporales contradictorios y revalidar TTL al leer. Quedan
+pendientes comando operativo de revisión, TTL de despliegue, activación remota
+y UI. Fallos anteriores a construir lote/revisión aún no tienen auditoría DB.
+Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.

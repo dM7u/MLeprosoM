@@ -1,0 +1,465 @@
+{
+  "generated_at": "2026-09-23T23:02:31.366Z",
+  "mode": "dry-run",
+  "catalog_count": 496,
+  "pages": 5,
+  "audit_issues": [],
+  "excluded": [
+    {
+      "id": 223766,
+      "stage": "group-stage",
+      "status": "postponed",
+      "replaced_by": null
+    },
+    {
+      "id": 223932,
+      "stage": "final",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223931,
+      "stage": "semifinals",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223930,
+      "stage": "semifinals",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223929,
+      "stage": "quarterfinals",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223928,
+      "stage": "quarterfinals",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223927,
+      "stage": "quarterfinals",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223926,
+      "stage": "quarterfinals",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223925,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223924,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223923,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223922,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223921,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223920,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223919,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    },
+    {
+      "id": 223918,
+      "stage": "round-of-16",
+      "status": "finished",
+      "replaced_by": null
+    }
+  ],
+  "snapshots": [
+    {
+      "scope": {
+        "provider": "bsd",
+        "competition_id": "85",
+        "season_id": "1635",
+        "source": "https://www.ligaprofesional.ar/?p=75980",
+        "reviewed_at": "2026-09-23T23:02:31.283Z"
+      },
+      "selection": {
+        "kind": "annual"
+      },
+      "generated_at": "2026-09-23T23:02:31.366Z",
+      "data_as_of": "2026-09-23T22:57:19.090Z",
+      "state": "complete",
+      "origin": "own_calculation",
+      "adjustments_status": "unverified",
+      "criteria": [
+        "points",
+        "goal_difference",
+        "goals_for"
+      ],
+      "coverage": {
+        "expected": 480,
+        "received": 480,
+        "finished": 390,
+        "excluded": 0
+      },
+      "issues": [],
+      "row_count": 30,
+      "newells": {
+        "team_id": "4997",
+        "played": 26,
+        "won": 7,
+        "drawn": 10,
+        "lost": 9,
+        "gf": 26,
+        "ga": 35,
+        "gd": -9,
+        "pts": 31,
+        "calculated_position": 22,
+        "position_range": [
+          22,
+          22
+        ],
+        "tie_status": "resolved_basic",
+        "official_position": null
+      }
+    },
+    {
+      "scope": {
+        "provider": "bsd",
+        "competition_id": "85",
+        "season_id": "1635",
+        "source": "https://www.ligaprofesional.ar/?p=75980",
+        "reviewed_at": "2026-09-23T23:02:31.283Z"
+      },
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Apertura"
+      },
+      "generated_at": "2026-09-23T23:02:31.366Z",
+      "data_as_of": "2026-09-23T22:57:20.446Z",
+      "state": "complete",
+      "origin": "own_calculation",
+      "adjustments_status": "unverified",
+      "criteria": [
+        "points",
+        "goal_difference",
+        "goals_for"
+      ],
+      "coverage": {
+        "expected": 240,
+        "received": 240,
+        "finished": 240,
+        "excluded": 240
+      },
+      "issues": [],
+      "row_count": 30,
+      "newells": {
+        "team_id": "4997",
+        "played": 16,
+        "won": 3,
+        "drawn": 6,
+        "lost": 7,
+        "gf": 15,
+        "ga": 27,
+        "gd": -12,
+        "pts": 15,
+        "calculated_position": 26,
+        "position_range": [
+          26,
+          26
+        ],
+        "tie_status": "resolved_basic",
+        "official_position": null
+      }
+    },
+    {
+      "scope": {
+        "provider": "bsd",
+        "competition_id": "85",
+        "season_id": "1635",
+        "source": "https://www.ligaprofesional.ar/?p=75980",
+        "reviewed_at": "2026-09-23T23:02:31.283Z"
+      },
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Apertura",
+        "group": "A"
+      },
+      "generated_at": "2026-09-23T23:02:31.366Z",
+      "data_as_of": "2026-09-23T22:57:20.446Z",
+      "state": "complete",
+      "origin": "own_calculation",
+      "adjustments_status": "unverified",
+      "criteria": [
+        "points",
+        "goal_difference",
+        "goals_for"
+      ],
+      "coverage": {
+        "expected": 135,
+        "received": 135,
+        "finished": 135,
+        "excluded": 345
+      },
+      "issues": [],
+      "row_count": 15,
+      "newells": {
+        "team_id": "4997",
+        "played": 16,
+        "won": 3,
+        "drawn": 6,
+        "lost": 7,
+        "gf": 15,
+        "ga": 27,
+        "gd": -12,
+        "pts": 15,
+        "calculated_position": 14,
+        "position_range": [
+          14,
+          14
+        ],
+        "tie_status": "resolved_basic",
+        "official_position": null
+      }
+    },
+    {
+      "scope": {
+        "provider": "bsd",
+        "competition_id": "85",
+        "season_id": "1635",
+        "source": "https://www.ligaprofesional.ar/?p=75980",
+        "reviewed_at": "2026-09-23T23:02:31.283Z"
+      },
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Apertura",
+        "group": "B"
+      },
+      "generated_at": "2026-09-23T23:02:31.366Z",
+      "data_as_of": "2026-09-23T22:57:20.446Z",
+      "state": "complete",
+      "origin": "own_calculation",
+      "adjustments_status": "unverified",
+      "criteria": [
+        "points",
+        "goal_difference",
+        "goals_for"
+      ],
+      "coverage": {
+        "expected": 135,
+        "received": 135,
+        "finished": 135,
+        "excluded": 345
+      },
+      "issues": [],
+      "row_count": 15
+    },
+    {
+      "scope": {
+        "provider": "bsd",
+        "competition_id": "85",
+        "season_id": "1635",
+        "source": "https://www.ligaprofesional.ar/?p=75980",
+        "reviewed_at": "2026-09-23T23:02:31.283Z"
+      },
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Clausura"
+      },
+      "generated_at": "2026-09-23T23:02:31.366Z",
+      "data_as_of": "2026-09-23T22:57:19.090Z",
+      "state": "complete",
+      "origin": "own_calculation",
+      "adjustments_status": "unverified",
+      "criteria": [
+        "points",
+        "goal_difference",
+        "goals_for"
+      ],
+      "coverage": {
+        "expected": 240,
+        "received": 240,
+        "finished": 150,
+        "excluded": 240
+      },
+      "issues": [],
+      "row_count": 30,
+      "newells": {
+        "team_id": "4997",
+        "played": 10,
+        "won": 4,
+        "drawn": 4,
+        "lost": 2,
+        "gf": 11,
+        "ga": 8,
+        "gd": 3,
+        "pts": 16,
+        "calculated_position": 13,
+        "position_range": [
+          13,
+          13
+        ],
+        "tie_status": "resolved_basic",
+        "official_position": null
+      }
+    },
+    {
+      "scope": {
+        "provider": "bsd",
+        "competition_id": "85",
+        "season_id": "1635",
+        "source": "https://www.ligaprofesional.ar/?p=75980",
+        "reviewed_at": "2026-09-23T23:02:31.283Z"
+      },
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Clausura",
+        "group": "A"
+      },
+      "generated_at": "2026-09-23T23:02:31.366Z",
+      "data_as_of": "2026-09-23T22:57:19.090Z",
+      "state": "complete",
+      "origin": "own_calculation",
+      "adjustments_status": "unverified",
+      "criteria": [
+        "points",
+        "goal_difference",
+        "goals_for"
+      ],
+      "coverage": {
+        "expected": 135,
+        "received": 135,
+        "finished": 87,
+        "excluded": 345
+      },
+      "issues": [],
+      "row_count": 15,
+      "newells": {
+        "team_id": "4997",
+        "played": 10,
+        "won": 4,
+        "drawn": 4,
+        "lost": 2,
+        "gf": 11,
+        "ga": 8,
+        "gd": 3,
+        "pts": 16,
+        "calculated_position": 8,
+        "position_range": [
+          8,
+          8
+        ],
+        "tie_status": "resolved_basic",
+        "official_position": null
+      }
+    },
+    {
+      "scope": {
+        "provider": "bsd",
+        "competition_id": "85",
+        "season_id": "1635",
+        "source": "https://www.ligaprofesional.ar/?p=75980",
+        "reviewed_at": "2026-09-23T23:02:31.283Z"
+      },
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Clausura",
+        "group": "B"
+      },
+      "generated_at": "2026-09-23T23:02:31.366Z",
+      "data_as_of": "2026-09-23T22:57:19.090Z",
+      "state": "complete",
+      "origin": "own_calculation",
+      "adjustments_status": "unverified",
+      "criteria": [
+        "points",
+        "goal_difference",
+        "goals_for"
+      ],
+      "coverage": {
+        "expected": 135,
+        "received": 135,
+        "finished": 87,
+        "excluded": 345
+      },
+      "issues": [],
+      "row_count": 15
+    }
+  ],
+  "requests": 0,
+  "replay": true,
+  "comparison_observed_at": "2026-09-23T23:02:31.284Z",
+  "comparison": [
+    {
+      "key": "Apertura:A",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "Apertura:B",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "Clausura:A",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "Clausura:B",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "annual",
+      "compared": 30,
+      "state": "match",
+      "differences": []
+    }
+  ],
+  "catalog_file": "docs/research/bsd-catalog-20260924.json",
+  "catalog_requests": 5,
+  "total_bsd_requests_this_task": 6,
+  "discovery_requests": 1,
+  "writes_to_supabase": 0,
+  "calendar_review": {
+    "source": "https://www.ligaprofesional.ar/?p=75980",
+    "matches": 480,
+    "identity_differences": 0,
+    "zone_membership_differences": 0,
+    "scope": "Pairings, home/away and rounds; not all kickoff timestamps. Current round 11 reschedule independently checked in rendered fixture.",
+    "html_sha256": "12f3d81094cc710233b166acf7661cd238cf299a4e44fe417f137d8e5f8cea1c"
+  }
+}

@@ -349,3 +349,24 @@ Importador `store-goal-fixtures.mjs` conserva identidades por proveedor y upsert
 No se crean tablas canónicas nuevas: la equivalencia revisada se aplica al leer
 los ámbitos disjuntos LPF/BSD y Copa 2026/GOAL. Cada resultado muestra procedencia.
 Lectura conjunta conectada; importación real pendiente de migración remota.
+
+### Lotes de tablas preparados localmente — 2026-09-24
+
+Nueva migración standings_batches: una fila JSONB inmutable por ejecución de
+liga, ámbito con IDs externos, contrato/motor versionados, hashes y fechas.
+Conserva entrada normalizada reproducible y snapshots por ámbito. Inserción
+atómica; reintento idéntico no duplica y conflicto de contenido no sobrescribe.
+Lotes incompletos son auditoría, nunca sustituyen automáticamente los completos.
+No existe activación/publicación. Contraste oficial ligado al lote y lector
+persistido pendientes. Detalle en src/server/standings/PERSISTENCE.md.
+Migración probada en PostgreSQL local; aplicación remota pendiente.
+
+### Evidencia oficial por lote — 2026-09-24
+
+standings_official_reviews conserva transcripción normalizada, fuentes/fecha,
+diferencias, política TTL y decisión explícita de activación en una fila
+inmutable. FK compuesta batch_id/batch_payload_hash. No contiene sanciones
+inferidas ni cambia cálculos deportivos. Un match no se transfiere entre lotes.
+La revisión más reciente puede negar la activación; el lector pendiente no debe
+seleccionar únicamente aprobaciones antiguas. Esquema y servicio probados
+localmente; sin aplicación remota ni UI.

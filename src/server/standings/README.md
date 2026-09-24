@@ -54,7 +54,58 @@ marcadores válidos, estados pendientes, configuración, fechas y empates. El or
 básico también se contrasta con las 60 filas reales guardadas del 18/09/2026;
 esto no las convierte en posiciones actuales ni valida desempates inferiores.
 
-Siguiente bloque: adaptar un catálogo completo actualizado a este contrato,
-revisar calendario y membresías, ejecutar un dry-run y contrastarlo con la fuente
-oficial antes de diseñar persistencia/publicación de snapshots. Permanecen
-pendientes ajustes disciplinarios, criterios inferiores y promedios.
+## Adaptador BSD y dry-run — 2026-09-24
+
+`bsd-adapter.mjs` adapta el catálogo completo leído por `providers/bsd/catalog.mjs`.
+La revisión explícita en `docs/research/lpf-2026-standings-review.json` referencia
+el mapeo de 480 partidos existente, configura membresías y controles de cantidad
+por torneo/equipo/jornada. Las cifras pertenecen a esa temporada, no al motor.
+Se contrastaron otra vez los 480 cruces/localías/jornadas contra la agenda LPF
+y las 60 membresías contra sus tablas renderizadas. No se certifican todos los
+horarios futuros ni ausencia de cambios posteriores.
+
+BSD utiliza `group-stage` para encuentros de la misma zona y `league-phase`
+para los 60 interzonales; ambos se validan contra la revisión. Los grupos de
+equipos provienen de la revisión oficial, no del group_name de cada partido.
+Solo `finished` y `notstarted` se traducen a estados computables. Un estado
+desconocido/aplazado en un partido esperado impide completar el ámbito afectado.
+Un registro adicional no revisado o cambio de fase/reemplazo bloquea todas las
+tablas del dry-run, incluso si el motor habría excluido ese ID desconocido.
+
+Sarmiento–River (Clausura, fecha 11) tiene una sustitución revisada manualmente:
+223766 → 604493. La LPF publica el nuevo horario, 07/10 22:30 UTC. BSD no declara
+el vínculo en replaced_by. Se conserva el registro viejo como evidencia, sin
+contarlo; si cambia de estado, equipos, jornada, fase o aparecen goles, se bloquea.
+No se deduplican automáticamente partidos por nombre, fecha o parecido.
+
+Resultado observado: 496 registros, 480 partidos computables en calendario,
+390 finalizados; excluidos 15 eliminatorias y el registro sustituido. Las 90
+filas oficiales observadas coinciden en ocho campos y orden. La evidencia del
+18/09 permanece histórica e intacta. El nuevo corte también envejece: no acredita
+vigencia indefinida ni ausencia de sanciones. Ver comando en `scripts/README.md`.
+
+Siguiente bloque: definir persistencia/publicación y política de frescura de
+snapshots; ajustes disciplinarios, criterios inferiores y promedios pendientes.
+
+## Política de lectura — 2026-09-24
+
+Contrato de persistencia y activación definido en `PERSISTENCE.md`; todavía no
+hay tabla SQL, escritura ni publicación UI. `snapshot-view.mjs` implementa la
+selección en memoria por ámbito, conserva el último resultado ante fallos y
+evalúa por separado frescura de resultados y revisión con TTL explícitos.
+Toda salida utilizable es provisional, con ajustes sin verificar. Una nueva
+fecha de cálculo no rejuvenece la observación. La evidencia de contraste oficial
+no se hereda automáticamente a nuevos lotes.
+
+Próximo paso: almacenamiento atómico e idempotente de un lote, validación del
+payload, evidencia ligada al lote y pruebas locales antes de activación remota.
+
+## Contraste y activación por lote — 2026-09-24
+
+`official-review.mjs` exige evidencia fechada vinculada al ID/hash del lote,
+anual y zonas completas. Calcula diferencias sin alterar puntos ni posiciones
+oficiales. `db/store-official-review.mjs` guarda comparación y decisión de
+activación atómicamente, con idempotencia y comprobación de vigencia al escribir.
+Migración local preparada y prueba PostgreSQL aprobada. Falta el lector DB que
+aplique la revisión más reciente y frescura al consultar; UI/remoto pendientes.
+Contrato detallado y límites en `PERSISTENCE.md`.

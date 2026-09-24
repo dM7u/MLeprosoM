@@ -34,3 +34,37 @@ proveedor. `fetched_at` debe actualizarse en cada escritura de sincronización;
 `source_updated_at` solo cuando la fuente lo proporcione. Estado, fase, grupo
 y jornada son valores crudos, no clasificación local definitiva. Marcadores
 sin valor predeterminado: null significa desconocido.
+
+## Lotes de tablas — migración local preparada, remoto pendiente
+
+`migrations/20260924000100_standings_batches.sql` agrega una tabla privada de
+lotes inmutables; no modifica fixtures ni activa tablas en el producto. Backend
+con SELECT/INSERT, sin UPDATE/DELETE; anon/authenticated sin acceso, RLS activo.
+Validación profunda y recálculo en servidor, constraints básicos en SQL.
+
+Prueba local sobre las cuatro migraciones en secuencia:
+
+```powershell
+node --conditions=react-server tests/database/standings-migration.mjs
+```
+
+Usa el PGlite aislado existente en .tools/db-validation, sin dependencias nuevas
+de aplicación. Verifica lote real observado de siete snapshots, idempotencia,
+conflicto de UUID, rechazo atómico de filas inválidas, permisos y conservación de
+lotes completos al registrar uno incompleto. No prueba la Data API remota.
+La migración todavía no se aplicó remotamente. Contrato:
+`src/server/standings/PERSISTENCE.md`; comando manual en `scripts/README.md`.
+
+## Revisiones oficiales y activación — local, remoto pendiente
+
+`20260924000200_standings_official_reviews.sql` agrega un historial inmutable de
+evidencia y decisiones, FK al ID/hash exacto del lote y trigger que impide
+activar uno incompleto. RLS y SELECT/INSERT exclusivos de service_role.
+Comparación/frescura se validan en backend antes de una sola inserción atómica.
+
+La misma prueba standings-migration cubre ahora ambos almacenamientos: hash
+ajeno rechazado, lotes incompletos no activables incluso mediante SQL directo,
+reintento sin duplicados, diferencias auditadas sin activar y permisos privados.
+No aplica la migración en Supabase ni prueba la Data API remota. No hay un
+puntero mutable de tabla activa: el futuro lector deberá considerar la última
+revisión por lote, incluida una denegación, según el contrato PERSISTENCE.md.
