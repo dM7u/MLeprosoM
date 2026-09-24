@@ -105,7 +105,30 @@ la nota previa de migración pendiente; no certifica restricciones ni permisos.
 `supabase/check-standings-access.sql` prepara esa auditoría administrativa de
 solo lectura. No se ejecutaron escrituras remotas ni se activó evidencia vieja.
 
-## Comandos de partidos del equipo
+## Primer lote de tablas remoto verificado — 24/09/2026
+
+Actualiza el preflight vacío anterior. Catálogo nuevo obtenido con cinco GET BSD
+en `docs/research/bsd-catalog-20260924-current.json`; 496 registros, 480 mapeados
+y 390 finalizados. La nueva transcripción LPF se conserva en
+`docs/research/lpf-tables-20260924-current.txt` (90 filas); evidencia vinculada
+en `standings-evidence-20260924-current.json`. No se reutilizó la fecha de una
+observación antigua como si fuera una nueva. Calendario conserva su revisión
+del 23/09, sin nueva certificación de todos los horarios.
+
+Lote `63d61fa9-dca7-4a00-9b9d-3378b4f72a47`, generated_at
+`2026-09-24T12:33:51.528Z`, y revisión
+`c80b6761-66cd-4db7-94a6-8c16270218a0` insertados y lectura posterior verificada.
+Para reproducir el lote usar el catálogo nuevo, la revisión
+`lpf-2026-standings-review.json`, ese UUID y generated_at en store-standings
+**dry-run**. No volver a activar automáticamente una revisión que haya vencido.
+
+`standings-activation-20260924.json` registra siete lecturas remotas fresh, todas
+del mismo lote, con official_status=unverified. Son cálculos provisionales.
+Permisos/RLS y trigger comprobados mediante resultados aportados por el usuario;
+definiciones largas de constraints recortadas en capturas, sin certificación
+de igualdad textual completa con las migraciones. No hay conexión UI todavía.
+
+## Sincronización de partidos del equipo
 
 Desde la raíz, con secretos solo en `.env.local`:
 

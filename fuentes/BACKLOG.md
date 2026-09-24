@@ -32,19 +32,39 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 - Pantalla básica de partidos; Home/dashboard completo todavía pendiente.
 - Motor de zonas/anual y catálogo completo contrastados en cortes fechados.
 - Lotes, revisión oficial, activación y lector persistido implementados y probados localmente.
-- Ambas tablas de standings y sus columnas comprobadas en Supabase remoto:
-  cero filas al 24/09/2026. Auditoría administrativa de permisos/restricciones pendiente.
+- Primer lote de liga y revisión oficial guardados y activados provisionalmente
+  en Supabase el 24/09/2026. Siete tablas leídas como fresh al verificar.
+- Permisos/RLS y trigger confirmados por resultados administrativos del usuario;
+  restricciones visibles compatibles. Las definiciones largas de las capturas
+  están recortadas: no se certifica equivalencia textual completa del DDL.
 - Operación manual de revisión y política inicial de vigencia implementadas.
 - 87 pruebas unitarias, pruebas PostgreSQL locales, lint, typecheck y build aprobados.
 - Seguimiento cerrado: backlog consolidado y avances anteriores guardados en `1dfe880`.
 
 ### Cola inmediata
 
-1. Completar auditoría administrativa remota con `supabase/check-standings-access.sql`;
-   obtener catálogo y evidencia oficial actuales, guardar lote y revisión y verificar lectura.
-2. Construir Home/dashboard inicial con navegación, partidos y tablas.
-3. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
+1. Construir Home/dashboard inicial con navegación, partidos y tablas.
+   Consumir lector persistido y política vigente; contemplar stale/Sin datos.
+2. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
    del lector por una consulta paginada o transaccional validada.
+
+### Primer lote remoto — 24/09/2026
+
+- [x] Auditoría aportada: RLS activo en ambas tablas; anon/authenticated sin
+  acceso; service_role SELECT/INSERT sin UPDATE/DELETE; trigger habilitado.
+- [x] Catálogo nuevo: cinco GET BSD, 496 registros, 480 encuentros mapeados,
+  390 finalizados. Conservadas exclusiones y sustitución revisadas; sin incidencias.
+- [x] Nueva observación de las páginas LPF: 90 filas, ocho campos y orden sin
+  diferencias. Calendario/zonas conserva revisión del 23/09, dentro de su TTL;
+  no se renueva artificialmente su timestamp ni se declara auditado cada horario.
+- [x] Dry-run elegible; lote y revisión insertados una vez. Lectura remota de
+  anual, generales y cuatro zonas: fresh, sin incidencias, mismo UUID de lote.
+- Lote: `63d61fa9-dca7-4a00-9b9d-3378b4f72a47`.
+  Revisión: `c80b6761-66cd-4db7-94a6-8c16270218a0`.
+- Evidencia y resultado: `docs/research/standings-check-20260924-current.json`,
+  `standings-evidence-20260924-current.json` y `standings-activation-20260924.json`.
+- La activación es provisional y caduca según política; no certifica sanciones
+  ni desempates pendientes. UI aún no conectada. Sin cambios de código en este bloque.
 
 ### Operación manual — 24/09/2026
 
@@ -55,7 +75,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 - [x] Política editable: resultados/evidencia 6 h; calendario/zonas 7 días.
   No programa sincronizaciones ni promete datos en vivo.
 - [x] Preflight remoto: ambas tablas vacías y columnas accesibles; cero escrituras.
-- [ ] Auditoría SQL administrativa remota y primer lote actual revisado.
+- [x] Permisos/trigger administrativos revisados y primer lote actual activado;
+  alcance y límite de capturas documentados en el apartado anterior.
 - Verificación: cuatro pruebas nuevas, 87 en total; PostgreSQL local, lint,
   typecheck y build. Evidencia de pruebas histórica, sin presentarla como actual.
 

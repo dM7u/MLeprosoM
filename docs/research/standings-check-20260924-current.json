@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-09-24T12:33:51.528Z",
+  "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+  "payload_hash": "042c44fa4094cf9c1dc602f34720489e539688593e0bc266d070a1f5475ba774",
+  "review_id": "c80b6761-66cd-4db7-94a6-8c16270218a0",
+  "catalog_count": 496,
+  "requests": 5,
+  "mapped": 480,
+  "finished": 390,
+  "scope_reviewed_at": "2026-09-23T23:02:31.283Z",
+  "comparison": [
+    {
+      "key": "Apertura:A",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "Apertura:B",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "Clausura:A",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "Clausura:B",
+      "compared": 15,
+      "state": "match",
+      "differences": []
+    },
+    {
+      "key": "annual",
+      "compared": 30,
+      "state": "match",
+      "differences": []
+    }
+  ]
+}

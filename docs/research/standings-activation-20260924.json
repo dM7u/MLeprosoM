@@ -1,0 +1,98 @@
+{
+  "verified_at": "2026-09-24T12:34:27.686Z",
+  "stored": {
+    "id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+    "status": "complete",
+    "stored": true,
+    "replay": false
+  },
+  "review": {
+    "id": "c80b6761-66cd-4db7-94a6-8c16270218a0",
+    "status": "match",
+    "activated": true,
+    "replay": false
+  },
+  "views": [
+    {
+      "selection": {
+        "kind": "annual"
+      },
+      "status": "fresh",
+      "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+      "rows": 30,
+      "official_status": "unverified",
+      "read_issues": []
+    },
+    {
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Apertura"
+      },
+      "status": "fresh",
+      "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+      "rows": 30,
+      "official_status": "unverified",
+      "read_issues": []
+    },
+    {
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Apertura",
+        "group": "A"
+      },
+      "status": "fresh",
+      "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+      "rows": 15,
+      "official_status": "unverified",
+      "read_issues": []
+    },
+    {
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Apertura",
+        "group": "B"
+      },
+      "status": "fresh",
+      "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+      "rows": 15,
+      "official_status": "unverified",
+      "read_issues": []
+    },
+    {
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Clausura"
+      },
+      "status": "fresh",
+      "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+      "rows": 30,
+      "official_status": "unverified",
+      "read_issues": []
+    },
+    {
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Clausura",
+        "group": "A"
+      },
+      "status": "fresh",
+      "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+      "rows": 15,
+      "official_status": "unverified",
+      "read_issues": []
+    },
+    {
+      "selection": {
+        "kind": "tournament",
+        "tournament": "Clausura",
+        "group": "B"
+      },
+      "status": "fresh",
+      "batch_id": "63d61fa9-dca7-4a00-9b9d-3378b4f72a47",
+      "rows": 15,
+      "official_status": "unverified",
+      "read_issues": []
+    }
+  ],
+  "valid": true
+}

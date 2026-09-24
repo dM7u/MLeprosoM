@@ -1,0 +1,99 @@
+# Nueva transcripción de tablas renderizadas LPF, 24/09/2026; no filas del motor.
+# Apertura: https://www.ligaprofesional.ar/torneo-apertura-2026/
+# Clausura y anual: https://www.ligaprofesional.ar/torneo-clausura-mercado-libre-2026
+# Pos|Equipo|PTS|PJ|G|E|P|GF|GC|DG
+[Apertura:A]
+1|Estudiantes|31|16|9|4|3|19|7|12
+2|Boca Jrs.|30|16|8|6|2|22|9|13
+3|Vélez|28|16|7|7|2|18|12|6
+4|Talleres|26|16|7|5|4|17|13|4
+5|Independiente|24|16|6|6|4|24|20|4
+6|Lanús|24|16|6|6|4|18|15|3
+7|San Lorenzo|22|16|5|7|4|14|14|0
+8|Unión|21|16|5|6|5|24|20|4
+9|Instituto|21|16|6|3|7|17|17|0
+10|Defensa|19|16|4|7|5|18|21|-3
+11|Gimnasia Mendoza|19|16|5|4|7|14|22|-8
+12|Platense|16|16|3|7|6|10|15|-5
+13|Central Córdoba|16|16|4|4|8|11|21|-10
+14|Newell's|15|16|3|6|7|15|27|-12
+15|Dep. Riestra|11|16|1|8|7|5|12|-7
+[Apertura:B]
+1|Independiente Riv.|34|16|10|4|2|29|15|14
+2|River|29|16|9|2|5|22|12|10
+3|Argentinos Jrs.|29|16|8|5|3|17|13|4
+4|Central|28|16|8|4|4|20|16|4
+5|Belgrano|26|16|7|5|4|17|13|4
+6|Gimnasia LP|26|16|8|2|6|19|19|0
+7|Huracán|22|16|5|7|4|17|13|4
+8|Racing|21|16|5|6|5|17|15|2
+9|Barracas|21|16|5|6|5|15|15|0
+10|Tigre|20|16|4|8|4|18|15|3
+11|Sarmiento|19|16|6|1|9|13|20|-7
+12|Banfield|18|16|5|3|8|17|19|-2
+13|At. Tucumán|14|16|3|5|8|15|20|-5
+14|Aldosivi|8|16|0|8|8|6|19|-13
+15|Estudiantes RC|5|16|1|2|13|5|24|-19
+[Clausura:A]
+1|Instituto|22|10|7|1|2|13|7|6
+2|Vélez|20|10|5|5|0|15|9|6
+3|Defensa|18|10|5|3|2|13|11|2
+4|Gimnasia Mendoza|17|10|5|2|3|14|9|5
+5|Boca Jrs.|17|10|4|5|1|14|11|3
+6|Independiente|17|10|5|2|3|10|8|2
+7|Lanús|16|10|5|1|4|13|9|4
+8|Newell's|16|10|4|4|2|11|8|3
+9|Unión|13|10|4|1|5|17|16|1
+10|San Lorenzo|11|10|3|2|5|4|8|-4
+11|Estudiantes|10|10|3|1|6|10|11|-1
+12|Dep. Riestra|10|10|2|4|4|8|10|-2
+13|Platense|9|10|2|3|5|9|15|-6
+14|Talleres|8|10|2|2|6|11|17|-6
+15|Central Córdoba|8|10|2|2|6|7|13|-6
+[Clausura:B]
+1|Argentinos Jrs.|18|10|5|3|2|13|9|4
+2|Central|18|10|5|3|2|11|8|3
+3|Independiente Riv.|17|10|5|2|3|14|13|1
+4|Gimnasia LP|17|10|5|2|3|15|15|0
+5|Belgrano|16|10|4|4|2|11|7|4
+6|Huracán|16|10|4|4|2|10|8|2
+7|Sarmiento|16|10|5|1|4|17|16|1
+8|River|13|10|4|1|5|13|12|1
+9|At. Tucumán|13|10|3|4|3|7|6|1
+10|Tigre|12|10|3|3|4|9|9|0
+11|Barracas|12|10|3|3|4|5|7|-2
+12|Banfield|9|10|2|3|5|11|16|-5
+13|Aldosivi|8|10|2|2|6|12|16|-4
+14|Racing|8|10|2|2|6|11|16|-5
+15|Estudiantes RC|6|10|1|3|6|5|13|-8
+[annual]
+1|Independiente Riv.|51|26|15|6|5|43|28|15
+2|Vélez|48|26|12|12|2|33|21|12
+3|Boca Jrs.|47|26|12|11|3|36|20|16
+4|Argentinos Jrs.|47|26|13|8|5|30|22|8
+5|Central|46|26|13|7|6|31|24|7
+6|Instituto|43|26|13|4|9|30|24|6
+7|Gimnasia LP|43|26|13|4|9|34|34|0
+8|River|42|26|13|3|10|35|24|11
+9|Belgrano|42|26|11|9|6|28|20|8
+10|Estudiantes|41|26|12|5|9|29|18|11
+11|Independiente|41|26|11|8|7|34|28|6
+12|Lanús|40|26|11|7|8|31|24|7
+13|Huracán|38|26|9|11|6|27|21|6
+14|Defensa|37|26|9|10|7|31|32|-1
+15|Gimnasia Mendoza|36|26|10|6|10|28|31|-3
+16|Sarmiento|35|26|11|2|13|30|36|-6
+17|Unión|34|26|9|7|10|41|36|5
+18|Talleres|34|26|9|7|10|28|30|-2
+19|Barracas|33|26|8|9|9|20|22|-2
+20|San Lorenzo|33|26|8|9|9|18|22|-4
+21|Tigre|32|26|7|11|8|27|24|3
+22|Newell's|31|26|7|10|9|26|35|-9
+23|Racing|29|26|7|8|11|28|31|-3
+24|At. Tucumán|27|26|6|9|11|22|26|-4
+25|Banfield|27|26|7|6|13|28|35|-7
+26|Platense|25|26|5|10|11|19|30|-11
+27|Central Córdoba|24|26|6|6|14|18|34|-16
+28|Dep. Riestra|21|26|3|12|11|13|22|-9
+29|Aldosivi|16|26|2|10|14|18|35|-17
+30|Estudiantes RC|11|26|2|5|19|10|37|-27
