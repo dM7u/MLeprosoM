@@ -206,3 +206,22 @@ un registro extra para detectar exceso y falla con history_limit_exceeded en
 vez de truncar el historial y rescatar una aprobación vieja. Resolver paginación
 o selección transaccional antes de automatizar cargas frecuentes. Sin conexión
 UI, TTL de despliegue ni activación remota en este bloque.
+
+## Operación manual implementada — 24/09/2026
+
+`scripts/review-standings.mjs` y `manual-review.mjs` conectan validación y
+almacenamiento con dry-run sin cliente DB. Solicitud estable con lote completo,
+evidencia, UUID, reviewedAt y booleano requestActivation. La vigencia se verifica
+tanto en el instante de revisión como al ejecutar; apply vuelve a verificarla
+en la escritura. Ninguna ejecución consulta al proveedor ni genera evidencia.
+
+La política inicial versionada en `manual-policy.json` fija 6 h para resultados
+y evidencia y 7 días para calendario/membresías. Es configuración técnica
+editable de operación manual, no frecuencia de polling ni garantía de exactitud.
+Cambios conocidos de calendario requieren revisión inmediata. Pasar esta misma
+política al lector al conectar producto; no crear valores independientes en UI.
+Guía, formato y semántica de exit codes en `scripts/README.md`.
+
+Preflight remoto de lectura: ambas tablas y columnas accesibles, cero registros.
+No prueba equivalencia de DDL, RLS ni privilegios: queda auditoría administrativa
+con `supabase/check-standings-access.sql`. Sin escrituras remotas en este bloque.

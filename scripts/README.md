@@ -56,6 +56,55 @@ se guarda solo como auditoría; el comando no habilita ningún lote para la UI.
 La escritura rechaza generated_at futuro. Requests guardados provienen del
 catálogo, no indican nuevas consultas de este comando. Errores sanitizados.
 
+## Revisión manual de tablas — 24/09/2026
+
+`review-standings.mjs` recibe un archivo de solicitud, un archivo de política y
+`--dry-run` o `--apply`. No consulta proveedores. Dry-run no crea cliente DB ni
+requiere credenciales. Apply inserta únicamente una revisión inmutable ligada
+al lote existente; no carga ni modifica partidos, lotes o filas de tabla.
+
+Política inicial explícita: `src/server/standings/manual-policy.json`.
+Resultados y evidencia oficial: 6 horas; revisión de calendario/zonas: 7 días.
+Son umbrales conservadores para operación manual, no un SLA ni polling en vivo.
+Un cambio conocido de calendario exige revisión inmediata aunque no venza el
+plazo. Al vencer se muestra stale; nunca se rejuvenece una observación guardada.
+El futuro consumidor deberá usar esta misma política y el lector mantendrá el
+menor TTL entre ella y el registrado al aprobar cada lote.
+
+Preparación de la solicitud JSON (campos exactos):
+
+- `id`: UUID nuevo de revisión, conservado al reintentar.
+- `batch`: objeto completo producido por `store-standings.mjs`. Agregar
+  `--batch-out .tools/lote.json` al final de su comando **dry-run** para exportar
+  explícitamente un archivo local nuevo. No sobrescribe archivos existentes.
+- `evidence`: transcripción oficial revisada, con batch_id, payload_hash,
+  observed_at y tables; contrato en `src/server/standings/PERSISTENCE.md`.
+  Nunca crearla copiando las filas calculadas ni renovando una fecha histórica.
+- `reviewedAt`: fecha ISO real con zona de esta revisión; conservar al reintentar.
+- `requestActivation`: booleano obligatorio. false registra auditoría sin habilitar;
+  true solicita activación, sujeta a cobertura, contraste y frescura.
+
+Ejecutar desde la raíz, una vez preparados los archivos reales:
+
+```powershell
+node --conditions=react-server scripts/review-standings.mjs .tools/revision.json src/server/standings/manual-policy.json --dry-run
+node --conditions=react-server --env-file=.env.local scripts/review-standings.mjs .tools/revision.json src/server/standings/manual-policy.json --apply
+```
+
+Dry-run distingue eligible_for_activation de activated (siempre false sin
+escritura). Las diferencias aparecen en el informe y no corrigen puntos.
+Exit 1 por diferencias o activación solicitada no elegible; apply puede haber
+guardado esa denegación como auditoría. Revisar stored/result antes de reintentar.
+Una activación que era válida en reviewedAt pero venció antes de ejecutar se
+rechaza sin escritura. No cambiar UUID/fecha para eludir el rechazo.
+Los errores no imprimen rutas, credenciales ni respuestas crudas.
+
+Comprobación remota de solo lectura del 24/09/2026: ambas tablas existen,
+sus columnas del contrato son accesibles y tienen cero filas. Esto actualiza
+la nota previa de migración pendiente; no certifica restricciones ni permisos.
+`supabase/check-standings-access.sql` prepara esa auditoría administrativa de
+solo lectura. No se ejecutaron escrituras remotas ni se activó evidencia vieja.
+
 ## Comandos de partidos del equipo
 
 Desde la raíz, con secretos solo en `.env.local`:

@@ -32,17 +32,32 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 - Pantalla básica de partidos; Home/dashboard completo todavía pendiente.
 - Motor de zonas/anual y catálogo completo contrastados en cortes fechados.
 - Lotes, revisión oficial, activación y lector persistido implementados y probados localmente.
-- Dos migraciones de tablas pendientes en Supabase remoto; sin tablas en UI.
-- 83 pruebas unitarias, pruebas PostgreSQL locales, lint, typecheck y build aprobados.
+- Ambas tablas de standings y sus columnas comprobadas en Supabase remoto:
+  cero filas al 24/09/2026. Auditoría administrativa de permisos/restricciones pendiente.
+- Operación manual de revisión y política inicial de vigencia implementadas.
+- 87 pruebas unitarias, pruebas PostgreSQL locales, lint, typecheck y build aprobados.
 - Seguimiento cerrado: backlog consolidado y avances anteriores guardados en `1dfe880`.
 
 ### Cola inmediata
 
-1. Preparar operación manual de revisión y TTL de despliegue; aplicar/verificar
-   migraciones remotas y cargar un lote actual revisado.
+1. Completar auditoría administrativa remota con `supabase/check-standings-access.sql`;
+   obtener catálogo y evidencia oficial actuales, guardar lote y revisión y verificar lectura.
 2. Construir Home/dashboard inicial con navegación, partidos y tablas.
 3. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
    del lector por una consulta paginada o transaccional validada.
+
+### Operación manual — 24/09/2026
+
+- [x] Comando review-standings con dry-run sin DB y apply de revisión inmutable.
+- [x] Solicitud explícita de activación; reintentos con UUID/fecha estables;
+  revisión antigua no evita comprobar vigencia al ejecutar.
+- [x] Exportación opcional de lote a archivo nuevo para preparar evidencia ligada al hash.
+- [x] Política editable: resultados/evidencia 6 h; calendario/zonas 7 días.
+  No programa sincronizaciones ni promete datos en vivo.
+- [x] Preflight remoto: ambas tablas vacías y columnas accesibles; cero escrituras.
+- [ ] Auditoría SQL administrativa remota y primer lote actual revisado.
+- Verificación: cuatro pruebas nuevas, 87 en total; PostgreSQL local, lint,
+  typecheck y build. Evidencia de pruebas histórica, sin presentarla como actual.
 
 ### Lector persistido — 24/09/2026
 
