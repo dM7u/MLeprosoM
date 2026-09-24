@@ -40,17 +40,34 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   restricciones visibles compatibles. Las definiciones largas de las capturas
   están recortadas: no se certifica equivalencia textual completa del DDL.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 89 pruebas unitarias, lint, typecheck y build aprobados en el bloque de Home;
+- 92 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Seguimiento cerrado: backlog consolidado y avances anteriores guardados en `1dfe880`.
 
 ### Cola inmediata
 
-1. Relevar cobertura actual de alineaciones/eventos/estadísticas y definir
-   el bloque mínimo de persistencia para enriquecer la ficha. Sin ratings todavía.
-   Posición contextual del equipo/rival también pendiente.
+1. Implementar persistencia de snapshots de estadísticas de equipo, vinculación
+   al fixture y lectura con frescura propia; probar migración local antes de carga
+   remota y UI. Contrato en `docs/research/DETALLE_PARTIDOS_20260924.md`.
+   Alineaciones confirmadas/eventos y posición contextual siguen pendientes.
 2. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
    del lector por una consulta paginada o transaccional validada.
+
+### Cobertura y normalización de estadísticas — 24/09/2026
+
+- [x] Seis GET BSD de lectura: lineups/incidents/stats de 223728 (finalizado)
+  y 223765 (programado). Sin escrituras remotas ni nuevo refresco de fixtures.
+- [x] Finalizado: XI confirmed, 11 titulares + 12 suplentes por lado; 22 eventos;
+  once métricas seleccionadas por equipo disponibles.
+- [x] Programado: estadísticas null/ausentes, eventos vacíos y XI predicted/beta
+  con ai_score. Este XI se excluye de incorporación inicial, sin presumir confirmación.
+- [x] Normalizador de once estadísticas totales, identidad de evento, fechas y
+  valores validados. complete/partial/empty; ceros reales distintos de null.
+- [x] CLI dry-run y replay sin credenciales/red; muestras acotadas versionadas.
+  Ratings, xG, períodos parciales y estadísticas individuales fuera de este bloque.
+- [x] 92 pruebas y controles técnicos aprobados. Datos declarados por BSD,
+  sin contraste oficial independiente nuevo del detalle.
+- [ ] Persistencia/migración y UI: la ficha todavía muestra Sin datos estadísticos.
 
 ### Ficha de partido y revisión móvil — 24/09/2026
 

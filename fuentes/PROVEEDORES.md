@@ -1,5 +1,15 @@
 # Proveedores — MLeprosoM
 
+## Detalle BSD — 2026-09-24
+
+Nueva inspección de dos partidos: terminado 223728 y programado 223765,
+seis GET en total. Cobertura, límites y muestras en
+`docs/research/DETALLE_PARTIDOS_20260924.md`. El próximo encuentro trae XI
+predicted/beta con ai_score: excluido de la primera incorporación. El terminado
+trae XI confirmado, 22 eventos y estadísticas. Normalización de once métricas
+de equipo implementada, sin persistencia ni UI todavía; ratings/xG fuera.
+No generalizar la cobertura de estas dos muestras a toda la temporada.
+
 ## Estado actual — 2026-09-18
 
 BSD alimenta la cadena mínima Liga Profesional → Supabase → vista local.

@@ -1,0 +1,30 @@
+{
+  "source": "https://sports.bzzoiro.com/api/v2/events/223765/stats/",
+  "fetched_at": "2026-09-24T20:32:58.665Z",
+  "scope": "Selected full-match team fields; all other response fields omitted",
+  "body": {
+    "event_id": 223765,
+    "stats": {
+      "home": {
+        "ball_possession": null,
+        "total_shots": null,
+        "shots_on_target": null,
+        "corner_kicks": null,
+        "fouls": null,
+        "offsides": null,
+        "yellow_cards": null,
+        "red_cards": null
+      },
+      "away": {
+        "ball_possession": null,
+        "total_shots": null,
+        "shots_on_target": null,
+        "corner_kicks": null,
+        "fouls": null,
+        "offsides": null,
+        "yellow_cards": null,
+        "red_cards": null
+      }
+    }
+  }
+}

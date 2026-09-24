@@ -1,0 +1,36 @@
+{
+  "source": "https://sports.bzzoiro.com/api/v2/events/223728/stats/",
+  "fetched_at": "2026-09-24T20:32:25.838Z",
+  "scope": "Selected full-match team fields; all other response fields omitted",
+  "body": {
+    "event_id": 223728,
+    "stats": {
+      "home": {
+        "ball_possession": 57,
+        "total_shots": 5,
+        "shots_on_target": 2,
+        "corner_kicks": 6,
+        "fouls": 13,
+        "offsides": 5,
+        "passes": 470,
+        "accurate_passes": 384,
+        "pass_accuracy_pct": 81.7,
+        "yellow_cards": 4,
+        "red_cards": 1
+      },
+      "away": {
+        "ball_possession": 43,
+        "total_shots": 9,
+        "shots_on_target": 4,
+        "corner_kicks": 1,
+        "fouls": 11,
+        "offsides": 3,
+        "passes": 363,
+        "accurate_passes": 252,
+        "pass_accuracy_pct": 69.4,
+        "yellow_cards": 2,
+        "red_cards": 0
+      }
+    }
+  }
+}

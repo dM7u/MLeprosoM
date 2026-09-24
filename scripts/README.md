@@ -1,5 +1,19 @@
 # Sincronización manual BSD
 
+## Estadísticas de equipo: inspección sin escrituras
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/check-team-statistics.mjs 223728 --dry-run
+node --conditions=react-server scripts/check-team-statistics.mjs 223728 --dry-run --sample-file docs/research/bsd-team-stats-223728-20260924.json
+```
+
+Solo dry-run, sin Supabase ni escritura de archivos. Una consulta stats y como
+máximo un reintento con el cliente BSD existente; replay hace cero requests y
+conserva la fecha de la muestra. Una muestra inválida nunca dispara una consulta
+de reemplazo. El ID del ejemplo es histórico, no un partido actual implícito.
+Devuelve complete/partial/empty; null nunca se transforma en cero. No persiste
+ni conecta UI. Contrato y cobertura en `docs/research/DETALLE_PARTIDOS_20260924.md`.
+
 Actualización 24/09/2026: dry-run y apply BSD exitosos, tres requests cada uno,
 32 partidos. GOAL: seis requests cada modo, 230 registros revisados y un partido
 en alcance. Lectura remota posterior conserva 32 BSD + 1 GOAL; evidencia en
