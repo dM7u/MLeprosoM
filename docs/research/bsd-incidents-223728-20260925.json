@@ -1,0 +1,207 @@
+{
+  "fetched_at": "2026-09-25T07:59:09.813Z",
+  "body": {
+    "event_id": 223728,
+    "incidents": [
+      {
+        "type": "period",
+        "minute": 90,
+        "text": "FT",
+        "home_score": 0,
+        "away_score": 1
+      },
+      {
+        "type": "substitution",
+        "minute": 90,
+        "added_time": 1,
+        "is_home": false,
+        "player_in": "F. Scarpeccio",
+        "player_in_id": 90522,
+        "player_out": "M. Cóccaro",
+        "player_out_id": 10316
+      },
+      {
+        "type": "substitution",
+        "minute": 90,
+        "added_time": 1,
+        "is_home": false,
+        "player_in": "O. Salomón",
+        "player_in_id": 90524,
+        "player_out": "W. Mazzantti",
+        "player_out_id": 90516
+      },
+      {
+        "type": "injuryTime",
+        "minute": 90,
+        "length": 5
+      },
+      {
+        "type": "card",
+        "minute": 88,
+        "added_time": null,
+        "is_home": false,
+        "player": "J. G. Mattar",
+        "player_id": 90727,
+        "card_type": "yellow"
+      },
+      {
+        "type": "card",
+        "minute": 87,
+        "added_time": null,
+        "is_home": true,
+        "player": "M. Amarfil",
+        "player_id": 23735,
+        "card_type": "yellow"
+      },
+      {
+        "type": "card",
+        "minute": 82,
+        "added_time": null,
+        "is_home": true,
+        "player": "C. Ingenthron",
+        "player_id": 23748,
+        "card_type": "red"
+      },
+      {
+        "type": "substitution",
+        "minute": 80,
+        "added_time": null,
+        "is_home": true,
+        "player_in": "G. Lencina",
+        "player_in_id": 23739,
+        "player_out": "N. Retamar",
+        "player_out_id": 23744
+      },
+      {
+        "type": "substitution",
+        "minute": 80,
+        "added_time": null,
+        "is_home": true,
+        "player_in": "I. Gómez",
+        "player_in_id": 23741,
+        "player_out": "M. Barrios",
+        "player_out_id": 23745
+      },
+      {
+        "type": "substitution",
+        "minute": 76,
+        "added_time": null,
+        "is_home": false,
+        "player_in": "W. Nuñez",
+        "player_in_id": 90519,
+        "player_out": "S. Solari",
+        "player_out_id": 22742
+      },
+      {
+        "type": "substitution",
+        "minute": 76,
+        "added_time": null,
+        "is_home": false,
+        "player_in": "J. G. Mattar",
+        "player_in_id": 90727,
+        "player_out": "F. Gauch",
+        "player_out_id": 90518
+      },
+      {
+        "type": "substitution",
+        "minute": 68,
+        "added_time": null,
+        "is_home": true,
+        "player_in": "F. Zapiola",
+        "player_in_id": 23737,
+        "player_out": "B. Merlini",
+        "player_out_id": 23747
+      },
+      {
+        "type": "substitution",
+        "minute": 68,
+        "added_time": null,
+        "is_home": true,
+        "player_in": "J. Gauto",
+        "player_in_id": 23742,
+        "player_out": "G. Mainero",
+        "player_out_id": 23734
+      },
+      {
+        "type": "card",
+        "minute": 67,
+        "added_time": null,
+        "is_home": true,
+        "player": "G. Mainero",
+        "player_id": 23734,
+        "card_type": "yellow"
+      },
+      {
+        "type": "card",
+        "minute": 66,
+        "added_time": null,
+        "is_home": true,
+        "player": "Víctor Cuesta",
+        "player_id": 23732,
+        "card_type": "yellow"
+      },
+      {
+        "type": "substitution",
+        "minute": 66,
+        "added_time": null,
+        "is_home": false,
+        "player_in": "B. Cabrera",
+        "player_in_id": 90512,
+        "player_out": "L. Carrizo",
+        "player_out_id": 82480
+      },
+      {
+        "type": "substitution",
+        "minute": 57,
+        "added_time": null,
+        "is_home": true,
+        "player_in": "M. Amarfil",
+        "player_in_id": 23735,
+        "player_out": "P. Ferreira",
+        "player_out_id": 23736
+      },
+      {
+        "type": "period",
+        "minute": 45,
+        "text": "HT",
+        "home_score": 0,
+        "away_score": 1
+      },
+      {
+        "type": "injuryTime",
+        "minute": 45,
+        "length": 1
+      },
+      {
+        "type": "card",
+        "minute": 44,
+        "added_time": null,
+        "is_home": true,
+        "player": "I. Vazquez",
+        "player_id": 23731,
+        "card_type": "yellow"
+      },
+      {
+        "type": "card",
+        "minute": 33,
+        "added_time": null,
+        "is_home": false,
+        "player": "R. Herrera",
+        "player_id": 90730,
+        "card_type": "yellow"
+      },
+      {
+        "type": "goal",
+        "minute": 18,
+        "added_time": null,
+        "is_home": false,
+        "player": "S. Solari",
+        "player_id": 22742,
+        "goal_type": "regular",
+        "home_score": 0,
+        "away_score": 1
+      }
+    ]
+  },
+  "source": "https://sports.bzzoiro.com/api/v2/events/223728/incidents/"
+}

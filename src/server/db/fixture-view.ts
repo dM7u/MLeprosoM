@@ -10,6 +10,9 @@ import cup from '../providers/goal-api/reviewed-scope.json';
 
 export type StoredFixture = {
   id: string; provider: string; competition: string | null;
+  external_id: string; home_team_id: string; away_team_id: string;
+  home_external_id?: string | null; away_external_id?: string | null;
+  competition_external_id?: string | null; season_external_id?: string | null;
   kickoff_at: string | null; home_team: string | null; away_team: string | null;
   home_score: number | null; away_score: number | null;
   home_penalty_score?: number | null; away_penalty_score?: number | null;

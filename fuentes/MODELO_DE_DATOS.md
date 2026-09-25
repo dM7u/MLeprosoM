@@ -1,5 +1,12 @@
 # Modelo de datos --- Movete, Leproso Movete!
 
+Estado físico al 25/09/2026: además de entidades y fixtures, existen migraciones
+para standings_batches, standings_official_reviews, team_statistics_observations,
+lineup_observations e incident_observations. Ver supabase/migrations y los contratos
+en src/server/db y src/server/standings. Las observaciones son inmutables y conservan
+procedencia/fecha. Los apartados iniciales siguientes son históricos; el resto del
+modelo sigue siendo conceptual donde no exista migración respaldada por evidencia.
+
 ## Estado
 
 Modelo conceptual inicial. No representa todavía migraciones SQL

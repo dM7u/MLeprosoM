@@ -1,5 +1,11 @@
 # Arquitectura --- Movete, Leproso Movete!
 
+Estado vigente al 25/09/2026: la ficha lee estadísticas, alineaciones confirmadas
+y eventos mediante servicios server-only y observaciones persistidas en Supabase.
+Las importaciones son manuales desde muestras fechadas; ninguna visita consulta
+proveedores. Home incluye contexto de tabla y comparativa anual con el rival.
+Los estados anteriores siguientes documentan la evolución, no tareas pendientes actuales.
+
 ## Estado
 
 Ficha `/partidos/[id]` implementada el 24/09/2026: valida UUID y reutiliza

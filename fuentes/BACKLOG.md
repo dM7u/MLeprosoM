@@ -25,13 +25,14 @@
 
 ## Estado actual
 
-Resumen consolidado al 24/09/2026. Este apartado y la cola inmediata prevalecen
+Resumen consolidado al 25/09/2026. Este apartado y la cola inmediata prevalecen
 sobre las notas de ejecución fechadas, que se conservan como historial.
 
 - Fundación y cadena de partidos operativas: BSD para liga y GOAL para Copa.
 - Home inicial con navegación, próximo partido, últimos/próximos tres,
-  historial y tablas persistidas. Ficha básica de partido implementada;
-  panel completo y detalle estadístico pendientes.
+  historial y tablas persistidas, contexto de Newell's y comparativa anual del rival.
+  Ficha con estadísticas, alineaciones confirmadas y eventos persistidos;
+  primera carga remota y revisión visual verificadas. Panel completo pendiente.
 - Motor de zonas/anual y catálogo completo contrastados en cortes fechados.
 - Lotes, revisión oficial, activación y lector persistido implementados y probados localmente.
 - Primer lote de liga y revisión oficial guardados y activados provisionalmente
@@ -40,18 +41,235 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   restricciones visibles compatibles. Las definiciones largas de las capturas
   están recortadas: no se certifica equivalencia textual completa del DDL.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 92 pruebas unitarias, lint, typecheck y build aprobados;
+- 124 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Seguimiento cerrado: backlog consolidado y avances anteriores guardados en `1dfe880`.
 
 ### Cola inmediata
 
-1. Implementar persistencia de snapshots de estadísticas de equipo, vinculación
-   al fixture y lectura con frescura propia; probar migración local antes de carga
-   remota y UI. Contrato en `docs/research/DETALLE_PARTIDOS_20260924.md`.
-   Alineaciones confirmadas/eventos y posición contextual siguen pendientes.
+1. Certificar DDL/permisos remotos por consulta administrativa cuando se disponga
+   de ese acceso. Documentación y bloque de detalle consolidados localmente.
+   Revisión visual de ficha ampliada completada a 390×844 y 1280×900;
+   Eventos: tabla remota disponible, muestra cargada y 22 registros verificados
+   por HTTP; estadísticas y alineaciones siguen visibles.
+   Contrato: `docs/research/EVENTOS_20260925.md`. Alineaciones:
+   tabla remota disponible, primera carga y lectura/UI verificadas por HTTP.
+   Contrato en `docs/research/ALINEACIONES_20260925.md`.
+   Contexto de Newell's en tabla seleccionada y comparativa anual con próximo
+   rival implementados. Estadísticas: carga remota y UI verificadas;
+   ampliar carga requiere muestras con fecha real, sin rejuvenecer las históricas.
+   Falta certificar DDL/permisos remotos por consulta administrativa (las pruebas
+   locales y el acceso Data API no certifican toda la configuración remota).
 2. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
-   del lector por una consulta paginada o transaccional validada.
+   de standings y estadísticas por consultas paginadas o transaccionales validadas.
+3. XI periodístico: preparar validación y dry-run de evidencia revisada de
+   La Capital; resolver política de antigüedad antes de persistencia/UI.
+   Automatización de acceso aún no verificada; no bloquea estadísticas.
+
+### Revisión visual de ficha ampliada — 25/09/2026
+
+- [x] Navegador revisado en móvil 390×844 y escritorio 1280×900 con datos reales.
+  Tabla de estadísticas corregida: ambas columnas visibles en móvil, nombres
+  permiten salto de línea y métricas mantienen alineación.
+- [x] Listas de jugadores con separación de filas y encabezados de titulares/
+  suplentes; dos columnas en escritorio, apiladas en móvil.
+- [x] Accesos por anclas a estadísticas, alineaciones y eventos, objetivos
+  táctiles de al menos 44px. Salto a Eventos comprobado en navegador.
+- [x] Eventos legibles en ambos tamaños. Override de viewport restablecido.
+  Lint, typecheck y build aprobados; sin cambios de lógica de datos ni nuevas
+  pruebas unitarias para ajustes visuales. Suite previa: 124 aprobadas.
+- Alcance: ficha de Platense–Newell's. No equivale a auditoría responsive o de
+  accesibilidad completa de todas las pantallas y dispositivos.
+
+### Activación de eventos — 25/09/2026
+
+- [x] Usuario confirmó ejecución SQL; nuevo GET devuelve 200 y tabla vacía.
+  Resuelto el PGRST205 del bloque previo; no repetir migración.
+- [x] Muestra 223728 insertada con UUID bbefc85a-448c-4fc1-b7f0-33a74ba50b79,
+  observado 25/09 07:59:09.813Z, cero requests BSD.
+- [x] Preview reiniciado en 3001; HTTP 200, 22 eventos, gol de Solari, cambio
+  de Scarpeccio por Cóccaro y minuto 90+1 comprobados. Alineaciones y estadísticas
+  conservadas en la misma respuesta. Sin modificación de código en esta carga.
+- [ ] Auditoría visual y certificación administrativa completa de permisos
+  remotos pendientes. Las 124 pruebas/build corresponden al bloque anterior.
+
+### Importación y ficha de eventos — 25/09/2026
+
+- [x] CLI dry-run/apply con fixture/equipos acotados mediante lector existente.
+  Muestra 223728 validada remotamente sin escrituras ni nuevas consultas BSD;
+  conserva fecha 25/09 07:59:09.813Z y UUID de operación estable.
+- [x] UI preparada para lista en orden de fuente, goles, tarjetas, cambios,
+  períodos y descuento anunciado. No modifica resultado ni calcula minutos.
+  Tipo desconocido sin interpretar y null explícito, fuente/fecha propia.
+- [x] TTL inicial de advertencia 6 h en incident-policy.json; sin cron. Error
+  de eventos independiente de estadísticas/alineaciones.
+- [x] 124 pruebas, lint, tipos y build aprobados.
+- [ ] Migración remota/carga: incident_observations devuelve PGRST205.
+  Verificación UI con eventos reales pendiente; no se ejecutó apply.
+
+### Persistencia y lector local de eventos — 25/09/2026
+
+- [x] Observaciones atómicas e inmutables, FK de fixture/proveedor/evento/equipos,
+  retries estables y validación de payload mediante renormalización.
+- [x] Última lista válida no vacía reemplaza la anterior incluso si es más corta;
+  parcial se muestra parcial. No fusiona listas ni conserva eventos retractados
+  de listas previas. Empty/failed conserva anterior como stale sin renovar fecha.
+- [x] Migración probada en PostgreSQL local: permisos/RLS, FK, inmutabilidad,
+  retries y corrección de lista. 122 pruebas, lint, tipos y build aprobados.
+- [ ] CLI de importación, aplicación remota y UI. Sin requests BSD ni escrituras
+  remotas. Límite 100 observaciones antes de requerir consulta mejorada.
+
+### Normalización de eventos — 25/09/2026
+
+- [x] Una consulta nueva BSD de 223728, 22 registros: gol, tarjetas, cambios,
+  períodos y descuento. Muestra acotada con fecha real, sin secuencias ni ratings.
+- [x] Valida identidad, fechas y campos; conserva ceros/nulls y orden original.
+  Sin IDs estables: source_index solo identifica posición en esa observación.
+  No deduplica cambios simultáneos ni mezcla listas de consultas diferentes.
+- [x] Tipos desconocidos quedan partial/unknown; empty no acredita ausencia
+  de eventos. Cobertura unverified, sin actualizar marcadores del fixture.
+- [x] CLI replay sin red/escrituras y cuatro pruebas nuevas: 118 totales.
+  Lint, typecheck y build aprobados.
+- [ ] Persistencia, lector y UI pendientes. No se escribió en Supabase.
+
+### Activación de alineaciones — 25/09/2026
+
+- [x] Usuario confirmó existencia de lineup_observations por SQL; nuevo GET
+  Data API devuelve HTTP 200 y tabla vacía. Resuelto PGRST205 anterior.
+- [x] Importada muestra 223728 con UUID 6b1cf1e5-50a6-489d-98b3-7300c6dcb7f5,
+  observado 25/09 07:25:22.809Z, sin nuevas consultas BSD.
+- [x] Lector remoto recupera 11 titulares y 12 suplentes por equipo; conserva
+  fechas de observación y actualización del proveedor. HTTP de ficha 200,
+  nombres de ambos equipos y atribución a BSD presentes, sin error de lectura.
+- Las 114 pruebas/build del bloque anterior siguen vigentes: este bloque solo
+  cargó datos y actualizó documentación. No certifica DDL/permisos remotos completos
+  ni equivale a auditoría visual. No repetir la migración.
+
+### Importación, lector y UI de alineaciones — 25/09/2026
+
+- [x] CLI desde muestra con UUID/fecha estables, lookup reutilizado de fixtures
+  y equipos acotados a competición/temporada. Dry-run remoto completo, sin writes
+  ni requests BSD; fixture 5862b5d0-c7c9-4c75-964a-e8690910141d.
+- [x] Lector valida identidades/payload; conserva último conjunto útil ante
+  parcial/predicción o revisión de fuente más antigua, sin mezclar jugadores.
+  Una nueva confirmada completa puede corregir la anterior. Límite 100 filas.
+- [x] Ficha preparada para titulares, banco, dorsales, capitán, formación,
+  confirmación del proveedor y fechas. TTL de advertencia 6 h independiente,
+  configurado en `lineup-policy.json`; sin cron ni llamadas BSD durante visitas.
+- [x] 114 pruebas, lint, tipos y build. HTTP 200: error de alineaciones no
+  oculta estadísticas existentes. Rama UI con datos todavía sin prueba remota.
+- [ ] Carga remota: GET de lineup_observations devuelve PGRST205 pese al aviso
+  del usuario. No ejecutar apply hasta resolver esquema. No se escribió en DB.
+
+### Persistencia local de alineaciones — 25/09/2026
+
+- [x] Observaciones inmutables, vínculo a fixture/localía e IDs externos de
+  equipos por FK. Payload renormalizado antes de escribir, retries idénticos
+  diferenciados de conflictos, errores sanitizados.
+- [x] Predicción posterior se registra unavailable sin jugadores; observación
+  confirmada previa permanece intacta. Selección de lectura aún pendiente.
+- [x] RLS, permisos SELECT/INSERT y restricciones probados en PostgreSQL local.
+  110 pruebas unitarias, lint, tipos y build aprobados.
+- [ ] Comando de importación con lookup DB, lector, migración remota y UI.
+  No se consultó BSD ni se escribió en Supabase en este bloque.
+
+### Normalización de alineaciones — 25/09/2026
+
+- [x] Una consulta nueva BSD de 223728: confirmed, beta=false, 11 titulares y
+  12 suplentes por lado. Muestra acotada guardada con fecha real de recepción.
+- [x] Valida evento/equipos/localía, fechas, duplicados y tipos. Preserva nulls;
+  titulares incompletos o banco ausente quedan partial, sin inventar jugadores.
+- [x] Predicted/beta no expone jugadores confirmados; sin ratings/ai_score ni
+  uso de unavailable_players para afirmaciones médicas. Confirmación del
+  proveedor diferenciada de contraste oficial independiente.
+- [x] CLI replay sin red/escrituras, 107 pruebas, lint, tipos y build aprobados.
+- [ ] Persistencia/lector/UI y eventos pendientes; ficha mantiene Sin datos
+  para alineaciones. Sin escrituras remotas en este bloque.
+
+### Próximo rival en la anual — 25/09/2026
+
+- [x] Home compara Newell's y próximo rival usando la anual ya leída, sin
+  nuevas consultas DB/proveedor. Local primero y visitante después, con rango
+  calculado, puntos y estadísticas de la tabla; fecha y stale conservados.
+- [x] Verifica proveedor, competición, temporada e IDs externos de ambos
+  equipos. Copa u otro ámbito sin tabla compatible muestran Sin datos.
+- [x] La comparación anual no cambia al navegar tabs de tablas; etiqueta
+  explícita y aviso de que no es la posición al momento del partido futuro.
+  Empates pendientes siguen sin rango inventado.
+- [x] 103 pruebas, lint, tipos y build. HTTP y dos filas Newell's/Lanús
+  comprobadas en Home y con tab Promedios. Sin auditoría visual nueva.
+
+### Contexto de Newell's en Home — 25/09/2026
+
+- [x] Panel con Newell's y filas contiguas de la tabla seleccionada, reutilizando
+  la lectura existente sin consultas extra al proveedor ni a DB.
+- [x] Respeta torneo/zona/anual y mantiene etiquetas de fuente calculada,
+  fecha y stale. No asigna rango a empates ni interpreta orden como desempate.
+- [x] Sin equipo en esa selección: Sin datos. Promedios no muestra este panel.
+  Extremos de tabla no generan equipos de relleno.
+- [x] 102 pruebas, lint, typecheck y build aprobados; HTTP de Anual y Promedios
+  verificado en puerto 3001. Sin auditoría visual nueva.
+- [ ] Posición del rival en próximo partido, alineaciones y eventos pendientes.
+
+### Estadísticas remotas y ficha — 25/09/2026
+
+- [x] Nuevo preflight GET: tabla disponible, HTTP 200 y vacía; reemplaza el
+  PGRST205 del bloque anterior. No se ejecutó DDL desde la app.
+- [x] Muestra histórica de Platense–Newell's insertada como observación
+  `64a6d4f6-8b4f-40b5-88d4-dc8cde1f1327`; lectura valida identidad y conserva
+  timestamp 24/09 20:32:25.838Z, estado stale. Cero consultas BSD.
+- [x] Ficha muestra once métricas por equipo, ceros/null diferenciados,
+  fuente BSD, fecha propia y aviso de desactualización. Consulta solo DB.
+- [x] Política inicial de advertencia: 6 horas, configurable en
+  `src/server/db/statistics-policy.json`; no es frecuencia de sincronización.
+- [x] 100 pruebas, lint, tipos y build; HTTP 200 y contenido comprobado en
+  partido con datos, próximo partido sin estadísticas y Copa sin estadísticas.
+- [ ] Certificación administrativa del DDL/RLS/permisos remotos pendiente;
+  la inserción/lectura exitosa no equivale a certificar todos los permisos.
+- Preview verificado en puerto 3001. Sin auditoría visual nueva en este bloque.
+
+### Operación de estadísticas — 25/09/2026
+
+- [x] CLI desde muestra guardada con UUID/fecha estables; dry-run no escribe,
+  apply usa inserción idempotente. Sin llamadas BSD ni actualización artificial.
+- [x] Verifica equipo, fixture, competición y temporada en DB antes de insertar.
+  Permite importar una observación failed explícita sin guardar errores crudos.
+- [x] Dry-run remoto de 223728 completo, vinculado a fixture
+  `5862b5d0-c7c9-4c75-964a-e8690910141d`, observado 24/09 20:32:25.838Z.
+- [x] 100 pruebas, lint, typecheck y build. Tres pruebas nuevas de importación.
+- [ ] Migración administrativa remota: GET devolvió 404/PGRST205; no se hizo
+  apply. Script SQL y comando de carga preparados en `scripts/README.md`.
+- [ ] Carga remota y UI. Este bloque no cambia pantallas ni escribe en Supabase.
+
+### Persistencia local de estadísticas — 25/09/2026
+
+- [x] Observaciones inmutables y atómicas; vínculo SQL al fixture, proveedor,
+  evento y equipos/localía; retries idénticos y conflictos diferenciados.
+- [x] Lector backend con frescura propia y TTL obligatorio. Conserva el último
+  conjunto útil ante pérdida de métricas, empty o failed sin renovar su fecha.
+  No mezcla valores entre observaciones; mantiene fecha/estado del último intento.
+- [x] RLS y permisos SELECT/INSERT exclusivos del backend; migración probada
+  en PostgreSQL local con FK, permisos, atomicidad e idempotencia.
+- [x] 97 pruebas, lint, typecheck y build aprobados. Cinco pruebas unitarias
+  nuevas y prueba SQL local. Sin requests al proveedor ni escrituras remotas.
+- [ ] CLI operacional, aplicación remota, TTL de presentación y UI pendientes.
+- Límite inicial de 100 observaciones por fixture; exceso devuelve error,
+  sin seleccionar una historia truncada. Ver `src/server/db/TEAM_STATISTICS.md`.
+
+### La Capital / Ovación — 25/09/2026
+
+- [x] Medio propuesto por el Product Owner y evaluado con dos notas públicas:
+  previa parcial del clásico y XI completo histórico ante Platense.
+- [x] Criterios de atribución, identidad del partido, revisión, deduplicación
+  y distinción periodístico/oficial documentados en
+  `docs/research/LA_CAPITAL_XI_20260925.md`.
+- [x] Prueba acotada de RSS y sitemap: dos GET, ambos HTTP 403 desde el entorno.
+  No hay feed/API operativo verificado; robots no acredita reutilización.
+- [ ] Implementar incorporación revisada, persistencia y presentación del XI.
+- [ ] Resolver acceso estable y condiciones antes de automatizar extracción.
+- No se cargaron formaciones ni se alteró UI. Las muestras son históricas,
+  no un XI del próximo encuentro. Verificación documental y diff sin errores;
+  las 92 pruebas reportadas arriba corresponden al bloque de código anterior.
 
 ### Cobertura y normalización de estadísticas — 24/09/2026
 
@@ -462,7 +680,8 @@ No iniciar fórmulas antes de relevar variables reales.
 
 ## BLOQUE 9 --- Noticias y probable XI
 
--   [ ] Definir fuentes confiables.
+-   [~] Definir fuentes confiables: La Capital/Ovación evaluada como primera
+    candidata periodística; automatización y otras fuentes pendientes.
 -   [ ] Categorías iniciales.
 -   [ ] Modelo/atribución.
 -   [ ] Evaluar fuentes oficiales.
@@ -852,3 +1071,13 @@ bloquear empates temporales contradictorios y revalidar TTL al leer. Quedan
 pendientes comando operativo de revisión, TTL de despliegue, activación remota
 y UI. Fallos anteriores a construir lote/revisión aún no tienen auditoría DB.
 Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
+
+## Consolidación del detalle — 25/09/2026
+
+- Documentación operativa actualizada para distinguir estado vigente de notas históricas.
+- Bloque de estadísticas, alineaciones, eventos y contexto de Home preparado para commit local.
+- Verificación conjunta: 124 pruebas, lint, typecheck y build aprobados; las tres
+  pruebas PostgreSQL locales de migraciones de detalle también aprobadas.
+- Sin nuevas consultas al proveedor ni escrituras remotas en esta consolidación.
+- Pendientes: certificación administrativa remota, historial paginado antes de
+  cargas frecuentes y decisión de antigüedad del XI periodístico.

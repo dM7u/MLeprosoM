@@ -1,5 +1,11 @@
 # Cobertura del detalle BSD — 24/09/2026
 
+Estado posterior al relevamiento: estadísticas, alineaciones confirmadas y eventos
+ya cuentan con persistencia, primera carga remota y UI verificadas al 25/09/2026.
+Ver TEAM_STATISTICS.md en src/server/db y los contratos ALINEACIONES_20260925.md
+y EVENTOS_20260925.md de este directorio. Las conclusiones de cobertura siguen
+limitadas a las muestras fechadas; las notas de implementación previas son históricas.
+
 Seis GET autenticados de solo lectura mediante el cliente backend existente,
 sin reintentos, escrituras remotas ni cambios de UI. Tres recursos por evento:
 `lineups/`, `incidents/` y `stats/`, bajo `/api/v2/events/{id}/`.
@@ -33,6 +39,10 @@ futura necesita comprobar el fixture persistido y sus equipos, no inferirlos
 por nombres ni por el orden de otra respuesta.
 
 ## Persistencia siguiente
+
+Actualización 25/09: persistencia/lector y migración implementados y probados
+localmente. Contrato en `src/server/db/TEAM_STATISTICS.md`; todavía sin aplicación
+remota ni UI. Lo que sigue conserva la propuesta original del relevamiento.
 
 Unidad mínima propuesta: snapshot de estadísticas por fixture con provider,
 external event ID, fixture UUID, home/away team IDs comprobados, versión,

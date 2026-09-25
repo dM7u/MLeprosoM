@@ -1,5 +1,19 @@
 # Proveedores — MLeprosoM
 
+Estado vigente al 25/09/2026: BSD alimenta liga y detalle persistido; GOAL alimenta
+Copa Argentina. Estadísticas, alineaciones confirmadas y eventos del partido
+223728 están cargados y visibles. Las notas fechadas siguientes son históricas;
+no acreditan cobertura general ni datos actuales del próximo partido.
+
+## La Capital / Ovación — 2026-09-25
+
+Primera candidata periodística indicada por el Product Owner para posible XI.
+Dos notas públicas examinadas: una parcial y otra con once titulares históricos.
+Criterios y evidencia en `docs/research/LA_CAPITAL_XI_20260925.md`.
+RSS y sitemap devolvieron 403 desde el entorno; no hay vía automática verificada.
+La incorporación revisada y atribuida queda separada de la automatización.
+Sin ingesta, persistencia ni UI implementadas; no se valida un XI actual.
+
 ## Detalle BSD — 2026-09-24
 
 Nueva inspección de dos partidos: terminado 223728 y programado 223765,

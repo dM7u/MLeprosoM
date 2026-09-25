@@ -8,6 +8,8 @@ con las reglas de nombres de paquetes. Repositorio: [dM7u/MLeprosoM](https://git
 
 La ruta `/` muestra la Home inicial con partidos guardados, navegación y tablas
 provisionales de liga. Incluye frescura, fuentes y estados Sin datos.
+La ficha de partido muestra estadísticas, alineaciones confirmadas y eventos
+guardados, con estados independientes de disponibilidad y antigüedad.
 El panel completo, seguimiento en vivo y algoritmos propios siguen pendientes.
 
 Este documento describe el producto y sirve como puerta de entrada a la

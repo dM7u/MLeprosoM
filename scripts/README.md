@@ -146,7 +146,7 @@ Para reproducir el lote usar el catálogo nuevo, la revisión
 del mismo lote, con official_status=unverified. Son cálculos provisionales.
 Permisos/RLS y trigger comprobados mediante resultados aportados por el usuario;
 definiciones largas de constraints recortadas en capturas, sin certificación
-de igualdad textual completa con las migraciones. No hay conexión UI todavía.
+de igualdad textual completa con las migraciones. La conexión con Home está implementada; esta verificación administrativa es histórica.
 
 ## Sincronización de partidos del equipo
 
@@ -210,7 +210,7 @@ campos faltantes null, valores inválidos o ausentes inesperados rechazados.
 La forma normalizada NO es todavía una fila SQL: round es texto y los scores
 adicionales necesitan resolver persistencia antes de implementar apply.
 
-## Importación Copa Argentina: preparada, activación pendiente
+## Importación Copa Argentina: preparación histórica (activada el 18/09)
 
 Primero aplicar en SQL Editor de Supabase el archivo
 `supabase/migrations/20260918000100_cup_score_breakdown.sql` (una sola vez).
@@ -236,6 +236,73 @@ Comprobación de esquema remoto y lectura 2026-09-18: columnas nuevas pendientes
 32 fixtures BSD accesibles, GOAL API sin registros. La UI conjunta muestra fuente
 por partido y estado por origen; una fuente vacía/fallida no oculta la restante.
 No se ejecutó apply antes de aplicar la migración.
+
+## Replay de eventos — 2026-09-25
+
+Carga desde muestra con fixture/equipos verificados en DB:
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/import-incidents.mjs docs/research/bsd-incidents-223728-20260925.json bbefc85a-448c-4fc1-b7f0-33a74ba50b79 --dry-run
+```
+
+Tras aplicar `supabase/migrations/20260925000300_incident_observations.sql` y
+verificar que la API reconoce la tabla, cambiar a --apply. Mantener UUID y archivo
+para retries. No consulta BSD ni modifica fechas. Failed explícito admite archivo
+con `failed: true`, `event_id` y `fetched_at`, sin body ni mensajes crudos.
+El preflight inicial devolvió PGRST205, resuelto tras la migración. Apply y
+lectura remota verificados el 25/09: 22 eventos; UUID del ejemplo conservado.
+
+```powershell
+node --conditions=react-server scripts/check-incidents.mjs docs/research/bsd-incidents-223728-20260925.json 223728 --dry-run
+```
+
+Sin red, credenciales ni escrituras. Mantiene orden de fuente y nulls, no inventa
+IDs estables ni acredita cobertura completa. Persistencia/UI implementadas. Contrato
+en `docs/research/EVENTOS_20260925.md`.
+
+## Replay de alineaciones — 2026-09-25
+
+Importación con lookup de partido/equipos en Supabase (sin llamadas BSD):
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/import-lineups.mjs docs/research/bsd-lineups-223728-20260925.json 6b1cf1e5-50a6-489d-98b3-7300c6dcb7f5 --dry-run
+```
+
+Después de verificar disponibilidad de `lineup_observations`, cambiar a --apply.
+Conservar archivo y UUID para retry. La migración correspondiente es
+`supabase/migrations/20260925000200_lineup_observations.sql`, posterior a la de
+estadísticas. Si ya se ejecutó, comprobar en SQL Editor del mismo proyecto
+`select to_regclass('public.lineup_observations');`. Si existe pero la API no la
+encuentra, puede recargarse su esquema con `NOTIFY pgrst, 'reload schema';`.
+No volver a ejecutar CREATE TABLE sobre una tabla existente.
+
+```powershell
+node --conditions=react-server scripts/check-lineups.mjs docs/research/bsd-lineups-223728-20260925.json 223728 796 4997 --dry-run
+```
+
+Archivo, ID de evento, ID local e ID visitante esperados. Sin red ni credenciales
+ni escrituras. Confirmación del proveedor, no auditoría oficial. Predicted/beta
+queda unavailable. Persistencia/UI verificadas con la muestra y UUID anteriores. Ver `docs/research/ALINEACIONES_20260925.md`.
+
+## Importación manual de estadísticas — 2026-09-25
+
+Reutiliza muestras guardadas, sin consultar BSD. Requiere configuración privada
+Supabase para verificar fixture, equipo, competición y temporada incluso en
+dry-run. La fecha de observación se conserva; no pasa a ser la fecha de importación.
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/import-team-statistics.mjs docs/research/bsd-team-stats-223728-20260924.json 64a6d4f6-8b4f-40b5-88d4-dc8cde1f1327 --dry-run
+```
+
+Después de aplicar `supabase/migrations/20260925000100_team_statistics.sql`
+en el SQL Editor administrativo y verificar permisos, ejecutar el mismo comando
+con `--apply`. Para retry conservar archivo y UUID. Una muestra nueva requiere
+UUID nuevo; no modificar fechas para evitar conflictos. El archivo SQL ya fue
+probado localmente. La clave Data API no permite ejecutar esta migración.
+
+Dry-run, apply y lectura remota verificados el 25/09; PGRST205 inicial resuelto. Contrato y formato de observaciones fallidas en
+`src/server/db/TEAM_STATISTICS.md`. Fallos de DB/muestras inválidas terminan con
+código sanitizado y salida no exitosa. La ficha lee observaciones persistidas; no se programa cron.
 
 ## Activación verificada — 2026-09-18
 
