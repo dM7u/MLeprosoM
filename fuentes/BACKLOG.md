@@ -42,7 +42,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 130 pruebas unitarias, lint, typecheck y build aprobados;
+- 133 pruebas unitarias y lint aprobados; typecheck/build del bloque de 130 pruebas
+  siguen como última validación de aplicación (el job no modifica el producto);
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -66,9 +67,12 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    rival implementados. Estadísticas: carga remota y UI verificadas;
    ampliar carga requiere muestras con fecha real, sin rejuvenecer las históricas.
    El contraste de catálogos no certifica toda la configuración del proyecto remoto.
-2. Lectura paginada de historiales implementada y verificada (25/09). Antes de
-   automatizar cargas, evaluar costo de recorrer el historial con volumen real
-   y las garantías de aislamiento necesarias; no hay scheduler habilitado.
+2. Costo de historiales evaluado con volumen remoto actual (26/09): una fila
+   por historial en el alcance medido, insuficiente para certificar escala.
+   Próximo bloque: reutilizar lote/revisiones dentro de una petición de Home
+   para anual/torneo, sin cache global ni perder revalidación de denegaciones.
+   Antes de cargas frecuentes, diseñar aislamiento coherente y medir volumen
+   representativo aislado. No hay scheduler de sincronización deportiva.
 3. XI periodístico: preparar validación y dry-run de evidencia revisada de
    La Capital; resolver política de antigüedad antes de persistencia/UI.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
@@ -1168,3 +1172,16 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - [ ] Confirmar preferencias personales de notificaciones Actions para fallos.
 - Contrato y límites de Free/schedule: docs/SUPABASE_HEALTH.md. No sustituye
   sincronización deportiva ni garantiza evitar pausas en el plan gratuito.
+
+## Evaluación de costo de historiales — 26/09/2026
+
+- [x] Medir cuatro lectores con datos remotos actuales: siete GET de servicios
+  y dos de preparación, sin escrituras ni requests deportivos a proveedores.
+- [x] Documentar bytes JSON, tiempos de una muestra, alcance y limitaciones:
+  standings cuatro GET/221096 bytes; detalles un GET por recurso. Todos stale.
+- [x] Inspeccionar duplicación anual/torneo de Home y límites de concurrencia.
+  Recomendación: compartir contexto validado dentro de una petición antes de
+  abordar selección transaccional para cargas frecuentes. No habilitar ingesta
+  automática basándose en una sola fila por historial.
+- Evidencia: docs/research/HISTORY_COST_20260926.md y JSON asociado. Solo
+  documentación/investigación; git diff --check aprobado, sin repetir build/tests.

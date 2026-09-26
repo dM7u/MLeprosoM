@@ -23,8 +23,9 @@ revisiones y se compara con el inicial, incluyendo revisiones retroactivas.
 No existe una transacción global entre lotes y revisiones: una inserción posterior
 a la última comprobación se observa en la próxima lectura. Una intervención
 administrativa que borre/actualice registros rompe la precondición de inmutabilidad;
-los conteos no certifican esos cambios. La certificación remota de permisos sigue
-pendiente y no se reemplaza por esta paginación.
+los conteos no certifican esos cambios. Los campos de catálogo y permisos de los
+cinco historiales fueron contrastados el 26/09 con evidencia administrativa del
+usuario; alcance en docs/research/HISTORY_AUDIT_20260926.md. No equivale a aislamiento.
 
 Se conserva lastKnownGoodData con fecha original, sin mezclar snapshots, y las
 políticas de reemplazo particulares de cada recurso. No hay migración, escrituras,
@@ -35,3 +36,7 @@ revisiones; retención antigua, denegación posterior, inserciones entre página
 errores, duplicados, páginas limitadas por servidor y contrato HTTP del SDK instalado.
 Lectura remota de los cuatro servicios aprobada con la muestra 223728 y tabla anual;
 la prueba remota no agrega historial sintético ni acredita escala de producción.
+
+Evaluación de costo con la muestra remota actual y siguiente bloque recomendado:
+docs/research/HISTORY_COST_20260926.md. Una observación por historial no certifica
+capacidad de ingesta frecuente.

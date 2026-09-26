@@ -1,0 +1,97 @@
+{
+  "measured_at": "2026-09-26T15:23:55.814Z",
+  "fixture_external_id": "223728",
+  "setup_reads": 2,
+  "method": "Single sequential read per service, instrumented fetch with response clone; bytes are decoded JSON, not network transfer size. Includes network/client validation, no SQL execution plan.",
+  "measurements": [
+    {
+      "resource": "standings",
+      "requests": [
+        {
+          "table": "standings_batches",
+          "status": 200,
+          "elapsed_ms": 541,
+          "body_bytes": 235,
+          "content_range": "0-0/1"
+        },
+        {
+          "table": "standings_official_reviews",
+          "status": 200,
+          "elapsed_ms": 220,
+          "body_bytes": 12713,
+          "content_range": "0-0/1"
+        },
+        {
+          "table": "standings_batches",
+          "status": 200,
+          "elapsed_ms": 723,
+          "body_bytes": 195435,
+          "content_range": "0-0/*"
+        },
+        {
+          "table": "standings_official_reviews",
+          "status": 200,
+          "elapsed_ms": 259,
+          "body_bytes": 12713,
+          "content_range": "0-0/1"
+        }
+      ],
+      "elapsed_ms": 1822,
+      "data_status": "stale",
+      "has_data": true,
+      "request_count": 4,
+      "body_bytes": 221096
+    },
+    {
+      "resource": "statistics",
+      "requests": [
+        {
+          "table": "team_statistics_observations",
+          "status": 200,
+          "elapsed_ms": 207,
+          "body_bytes": 956,
+          "content_range": "0-0/1"
+        }
+      ],
+      "elapsed_ms": 208,
+      "data_status": "stale",
+      "has_data": true,
+      "request_count": 1,
+      "body_bytes": 956
+    },
+    {
+      "resource": "lineups",
+      "requests": [
+        {
+          "table": "lineup_observations",
+          "status": 200,
+          "elapsed_ms": 259,
+          "body_bytes": 5767,
+          "content_range": "0-0/1"
+        }
+      ],
+      "elapsed_ms": 261,
+      "data_status": "stale",
+      "has_data": true,
+      "request_count": 1,
+      "body_bytes": 5767
+    },
+    {
+      "resource": "incidents",
+      "requests": [
+        {
+          "table": "incident_observations",
+          "status": 200,
+          "elapsed_ms": 282,
+          "body_bytes": 5591,
+          "content_range": "0-0/1"
+        }
+      ],
+      "elapsed_ms": 284,
+      "data_status": "stale",
+      "has_data": true,
+      "request_count": 1,
+      "body_bytes": 5591
+    }
+  ]
+}
