@@ -42,8 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 133 pruebas unitarias y lint aprobados; typecheck/build del bloque de 130 pruebas
-  siguen como última validación de aplicación (el job no modifica el producto);
+- 136 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -69,8 +68,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    El contraste de catálogos no certifica toda la configuración del proyecto remoto.
 2. Costo de historiales evaluado con volumen remoto actual (26/09): una fila
    por historial en el alcance medido, insuficiente para certificar escala.
-   Próximo bloque: reutilizar lote/revisiones dentro de una petición de Home
-   para anual/torneo, sin cache global ni perder revalidación de denegaciones.
+   Home ya reutiliza lote/revisiones dentro de una petición para anual/torneo,
+   sin cache global ni perder revalidación de denegaciones (26/09).
    Antes de cargas frecuentes, diseñar aislamiento coherente y medir volumen
    representativo aislado. No hay scheduler de sincronización deportiva.
 3. XI periodístico: preparar validación y dry-run de evidencia revisada de
@@ -1185,3 +1184,21 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   automática basándose en una sola fila por historial.
 - Evidencia: docs/research/HISTORY_COST_20260926.md y JSON asociado. Solo
   documentación/investigación; git diff --check aprobado, sin repetir build/tests.
+
+## Lectura compartida de standings en Home — 26/09/2026
+
+- [x] Extraer lectura común conservando API individual. readStandingsSet proyecta
+  todas las selecciones del lote validado tras la reconsulta final de revisiones.
+- [x] Home consume un contexto local por petición para anual y torneo/zona;
+  mismo lote, revisión y reloj, sin cache global ni almacenamiento entre visitas.
+- [x] Regresiones: equivalencia de las siete selecciones con lector individual,
+  cuatro consultas, TTL, revocación en siguiente petición, revisión retroactiva
+  y fallo en comprobación final sin publicar selecciones parciales.
+- [x] 136 pruebas, lint, typecheck y build aprobados. Lectura real: cuatro GET,
+  221096 bytes JSON y siete selecciones stale con datos, sin escrituras.
+  Evidencia: docs/research/standings-shared-read-20260926.json.
+- [x] HTTP local 200 en Anual, Clausura zona A y Promedios; etiquetas de
+  antigüedad presentes y Promedios conserva Sin datos. git diff --check aprobado.
+- Con la muestra actual, anual+torneo pasa de ocho GET a cuatro. No es una
+  garantía de latencia ni habilita ingesta frecuente; el aislamiento entre
+  consultas DB sigue siendo el documentado en HISTORY_READS.md.

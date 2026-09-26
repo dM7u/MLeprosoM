@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readStandings} from '../src/server/db/read-standings.mjs';
+import {readStandings, readStandingsSet} from '../src/server/db/read-standings.mjs';
 import {officialReviewSample} from './fixtures/official-review.mjs';
 import {createOfficialReview} from '../src/server/standings/official-review.mjs';
 import {createStandingsBatch} from '../src/server/standings/batch.mjs';
@@ -33,6 +33,44 @@ function database(state, onQuery = () => null) {
     }; return query;
   }};
 }
+
+test('one standings set matches all independent selections with only four queries', async () => {
+  const s = sample(); let calls=0;
+  const result = await readStandingsSet(database(s,()=>{calls++;return null;}),s.args);
+  assert.equal(calls,4); assert.equal(result.views.length,7);
+  for (const entry of result.views) {
+    assert.deepEqual(entry.view,await readStandings(database(s),{...s.args,selection:entry.selection}));
+    assert.equal(entry.view.batch_id,result.batch_id);
+    assert.equal(entry.view.official_review_id,result.official_review_id);
+  }
+  result.views[0].view.snapshot.rows[0].pts=999;
+  assert.notEqual(result.snapshot.rows[0].pts,999);
+  const fresh = await readStandingsSet(database(s),s.args);
+  assert.notEqual(fresh.views[0].view.snapshot.rows[0].pts,999);
+});
+
+test('shared standings preserves TTL and sees revocation on the next request', async () => {
+  const s=sample();
+  const result=await readStandingsSet(database(s),{...s.args,policy:{...s.args.policy,evidenceTtlMs:1}});
+  assert.ok(result.views.every(({view})=>view.status==='stale'&&view.warnings.includes('stale_evidence')));
+  s.reviews.push(createOfficialReview({...s.o,id:'20000000-0000-4000-8000-000000000002',now:s.o.now+1000,requestActivation:false}));
+  const revoked=await readStandingsSet(database(s),s.args);
+  assert.equal(revoked.snapshot,null);assert.equal(revoked.views,undefined);
+  assert.ok(revoked.read_issues.includes('latest_review_denied'));
+});
+
+test('shared standings publishes no selections when final recheck changes or fails', async () => {
+  for(const fail of [false,true]) {
+    const s=sample();
+    const result=await readStandingsSet(database(s,n=>{
+      if(n!==4)return null;
+      if(fail)return {error:{message:'private'}};
+      s.reviews.push({...s.reviews[0],id:'20000000-0000-4000-8000-000000000099',reviewed_at:new Date(s.o.now-1000).toISOString()});
+      return null;
+    }),s.args);
+    assert.equal(result.status,'error');assert.equal(result.snapshot,null);assert.equal(result.views,undefined);
+  }
+});
 
 test('reads scoped approved table, validates SQL timestamp spellings, returns provisional rows', async () => {
   const s = sample();

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {fixtureView, type StoredFixture} from '@/server/db/fixture-view';
-import {dashboardStandings, highlightedTeam, type TableView} from '@/server/db/dashboard-standings';
+import {dashboardStandingsSet, highlightedTeam, type TableView} from '@/server/db/dashboard-standings';
 import {dashboardFixtures,defaultTournament} from './dashboard-model.mjs';
 import {standingsContext,matchupStandings} from './standings-context.mjs';
 import primaryScope from '@/server/identity/reviewed-primary-scope.json';
@@ -26,7 +26,8 @@ function Positions({view}:{view:TableView}) {
   return <div className="table-scroll" tabIndex={0} aria-label="Tabla de posiciones, desplazamiento horizontal"><table><caption className="sr-only">Posiciones calculadas. Ajustes oficiales sin verificar.</caption><thead><tr>{['Pos.*','Equipo','PJ','G','E','P','GF','GC','DG','PTS'].map(h=><th key={h} scope="col">{h}</th>)}</tr></thead><tbody>{view.snapshot.rows.map(r=><tr key={r.team_id} className={r.team_id===highlightedTeam?'our-team':''}><td>{r.calculated_position??'Empate'}</td><th scope="row">{names.get(r.team_id)??'Sin datos'}</th>{[r.played,r.won,r.drawn,r.lost,r.gf,r.ga,r.gd,r.pts].map((v,i)=><td key={i}>{v??'Sin datos'}</td>)}</tr>)}</tbody></table></div>;
 }
 export default async function Page({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}) {
-  const [snapshot,annual,params]=await Promise.all([fixtureView(),dashboardStandings(),searchParams]);
+  const [snapshot,standings,params]=await Promise.all([fixtureView(),dashboardStandingsSet(),searchParams]);
+  const annual=standings.annual;
   const now=annual.checked_at;
   const {finished,upcoming,unresolved}=dashboardFixtures(snapshot.data,now) as {finished:StoredFixture[];upcoming:StoredFixture[];unresolved:StoredFixture[]};
   const tournaments=[...new Set(annual.selections?.flatMap(s=>s.tournament?[s.tournament]:[])??[])];
@@ -34,7 +35,7 @@ export default async function Page({searchParams}:{searchParams:Promise<Record<s
   const selected=requested && [...tournaments,'Anual','Promedios'].includes(requested)?requested:defaultTournament(snapshot.data,tournaments,now);
   const groups=annual.selections?.filter(s=>s.tournament===selected&&s.group).map(s=>s.group!)??[];
   const group=typeof params.zone==='string'&&groups.includes(params.zone)?params.zone:undefined;
-  const view=selected==='Anual'||selected==='Promedios'?annual:await dashboardStandings({kind:'tournament',tournament:selected,...(group?{group}:{})});
+  const view=selected==='Anual'||selected==='Promedios'?annual:standings.select({kind:'tournament',tournament:selected,...(group?{group}:{})});
   const contextRows=standingsContext(view.snapshot?.rows,highlightedTeam);
   const opponentRows=matchupStandings(annual.snapshot?.rows,upcoming[0],primaryScope);
   const href=(table:string,zone?:string)=>`/?${new URLSearchParams({table,...(zone?{zone}:{})})}#tablas`;

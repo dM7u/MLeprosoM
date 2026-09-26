@@ -29,6 +29,15 @@ function hydrateReview(row, batch, now) {
 
 /** Private backend read only. Paginated immutable history fails closed on concurrent changes. */
 export async function readStandings(db, {scope, selection, policy, now = Date.now()}) {
+  return readStandingsContext(db, {scope, selection, policy, now});
+}
+
+/** One request-local result for all selections, never cached between requests. */
+export async function readStandingsSet(db, options) {
+  return readStandingsContext(db, {...options, selection: {kind:'annual'}}, true);
+}
+
+async function readStandingsContext(db, {scope, selection, policy, now = Date.now()}, allSelections = false) {
   if (!policy || !Number.isFinite(policy.evidenceTtlMs) || policy.evidenceTtlMs <= 0) throw new Error('INVALID_FRESHNESS_POLICY');
   const base = {scope, selection, now, resultsTtlMs: policy.resultsTtlMs, reviewTtlMs: policy.reviewTtlMs};
   const empty = standingsSnapshotView(base); // Validate caller inputs before catching DB failures.
@@ -68,13 +77,17 @@ export async function readStandings(db, {scope, selection, policy, now = Date.no
       // Concurrent new reviews must not make us expose a now-revoked older approval.
       const rechecked = await readHistory(() => db.from('standings_official_reviews').select('*', {count:'exact'}).eq('batch_id', batch.id));
       if (canonicalJson([...rechecked].sort((a,b)=>a.id.localeCompare(b.id))) !== canonicalJson([...history].sort((a,b)=>a.id.localeCompare(b.id)))) return unavailable('review_changed_during_read');
-      const view = standingsSnapshotView({...base, candidate: snapshot, refreshFailed: readIssues.length > 0 || newestAttempt > instant(batch.generated_at),
+      const project = candidate => {
+      const view = standingsSnapshotView({...base, selection: candidate.selection, candidate, refreshFailed: readIssues.length > 0 || newestAttempt > instant(batch.generated_at),
         resultsTtlMs: Math.min(policy.resultsTtlMs, review.payload.policy.resultsTtlMs), reviewTtlMs: Math.min(policy.reviewTtlMs, review.payload.policy.reviewTtlMs)});
       const evidenceStale = now - instant(review.observed_at) >= Math.min(policy.evidenceTtlMs, review.payload.policy.evidenceTtlMs);
       if (evidenceStale) {view.status = 'stale'; view.label = 'Tabla provisional desactualizada'; view.warnings.push('stale_evidence');}
       return {...view, teams: batch.payload.input.teams.map(t => ({id: t.id, groups: {...t.groups}})),
         selections: batch.payload.snapshots.map(s => ({...s.selection})),
         batch_id: batch.id, official_review_id: review.id, evidence_as_of: review.observed_at, read_issues: [...new Set(readIssues)]};
+      };
+      const result = project(snapshot);
+      return allSelections ? {...result, views: batch.payload.snapshots.map(candidate => ({selection: {...candidate.selection}, view: project(candidate)}))} : result;
     }
     return {...empty, batch_id: null, official_review_id: null, read_issues: [...new Set(readIssues)]};
   } catch { return unavailable('invalid_or_unavailable_storage'); }

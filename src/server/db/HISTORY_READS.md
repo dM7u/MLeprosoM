@@ -40,3 +40,11 @@ la prueba remota no agrega historial sintético ni acredita escala de producció
 Evaluación de costo con la muestra remota actual y siguiente bloque recomendado:
 docs/research/HISTORY_COST_20260926.md. Una observación por historial no certifica
 capacidad de ingesta frecuente.
+
+Home usa `readStandingsSet` (26/09): una lectura/validación del lote y una
+reconsulta final de revisiones producen todas sus selecciones. Cada selección
+mantiene sus propias reglas de disponibilidad/frescura; comparten lote, revisión
+y reloj. El contexto pertenece a una invocación de Page, sin cache global ni
+retención entre peticiones. El lector individual sigue disponible y compatible.
+Una revocación posterior a la comprobación final se observa en la siguiente
+petición, como antes; esto no agrega aislamiento transaccional de base de datos.
