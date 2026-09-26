@@ -48,6 +48,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 
 ### Cola inmediata
 
+0. Chequeo externo Supabase autorizado: workflow cada seis horas preparado;
+   lectura real mínima aprobada. Pendiente autenticación GitHub, secretos de
+   Actions, publicación y primera ejecución remota. No está activo todavía.
+
 1. Contraste administrativo de los cinco historiales cerrado el 26/09 para los
    campos exportados por `supabase/check-history-access.sql`. No repetir migraciones.
    Documentación y bloque de detalle consolidados localmente.
@@ -1147,3 +1151,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   actualizar estado vigente. git diff --check aprobado.
 - Evidencia suministrada por el usuario, sin consultas/escrituras remotas del
   agente. Solo documentación: no se repitieron build ni pruebas de aplicación.
+
+## Chequeo externo de disponibilidad — 26/09/2026
+
+- [x] Preparar workflow GitHub Actions cada seis horas y ejecución manual,
+  acciones fijadas a commits oficiales, permisos contents:read y secretos solo
+  en el paso de lectura. No requiere PC encendida ni dependencias npm.
+- [x] Script GET mínimo a fixtures, timeout, redirecciones rechazadas, errores
+  sanitizados, sin escrituras ni consultas deportivas a proveedores.
+- [x] Lectura real con configuración local: HEALTH_READ_OK. 133 pruebas y lint
+  aprobados. No cambia aplicación; build/typecheck anteriores no repetidos.
+- [ ] Autenticar GitHub CLI, configurar secretos, publicar workflow en rama
+  predeterminada y verificar primera ejecución. No afirmar job activo antes.
+- [ ] Confirmar preferencias personales de notificaciones Actions para fallos.
+- Contrato y límites de Free/schedule: docs/SUPABASE_HEALTH.md. No sustituye
+  sincronización deportiva ni garantiza evitar pausas en el plan gratuito.
