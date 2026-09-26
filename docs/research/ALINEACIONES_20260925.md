@@ -68,7 +68,8 @@ parciales posteriores no reemplazan el conjunto útil ni se mezclan. Prediccione
 solo dejan registro de intento excluido. Toda retención advierte stale.
 
 TTL inicial de advertencia de 6 h en `lineup-policy.json`, sin scheduler.
-Límite de 100 observaciones; corrupción, ambigüedad o exceso falla cerrado.
+Lectura paginada: ver src/server/db/HISTORY_READS.md. Corrupción, ambigüedad
+o cambios entre páginas fallan cerrado.
 114 pruebas, lint, tipos, build y HTTP de estado error aprobados. Mostrar datos
 reales y revisar visualmente continúa pendiente de habilitar tabla y cargar.
 

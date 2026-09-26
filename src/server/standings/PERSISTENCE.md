@@ -201,11 +201,10 @@ una revisión posterior a esa consulta se verá en la siguiente lectura. Para
 publicación con exigencia de aislamiento habrá que implementar una consulta
 transaccional. Tampoco existe snapshot transaccional entre páginas BSD.
 
-Límites iniciales explícitos: 100 lotes y 500 revisiones por ámbito. Consulta
-un registro extra para detectar exceso y falla con history_limit_exceeded en
-vez de truncar el historial y rescatar una aprobación vieja. Resolver paginación
-o selección transaccional antes de automatizar cargas frecuentes. Sin conexión
-UI, TTL de despliegue ni activación remota en este bloque.
+Actualización 25/09: los límites iniciales de 100 lotes y 500 revisiones fueron
+reemplazados por lectura paginada con conteo exacto. La reconsulta cubre todas las
+revisiones del candidato. Ver ../db/HISTORY_READS.md para límites defensivos y
+garantías de concurrencia; no equivale a una transacción global.
 
 ## Operación manual implementada — 24/09/2026
 

@@ -24,7 +24,6 @@ test('incidents reject forged payload, mixed binding, collisions and truncated h
   const forged=structuredClone(a);forged.payload.incidents[0].source_index=50;assert.throws(()=>validateIncidentObservation(forged,{now:options.now}));
   assert.throws(()=>incidentSnapshotView([{...a,external_id:'1'}],options),/IDENTITY/);
   assert.throws(()=>incidentSnapshotView([a,a],options),/AMBIGUOUS/);
-  assert.throws(()=>incidentSnapshotView(Array(101).fill(a),options),/HISTORY_LIMIT/);
 });
 test('incident storage retries identical content; conflicts and read failures are sanitized',async()=>{
   let saved;const db={from(){return this;},async insert(r){if(saved)return {error:{code:'23505'}};saved=r;return {};},select(){return this;},eq(){return this;},async single(){return {data:saved};}};

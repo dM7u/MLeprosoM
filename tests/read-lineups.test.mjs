@@ -26,11 +26,10 @@ test('lineup reader accepts newer complete revision; rejects mixed identity, col
   assert.equal(lineupSnapshotView([a,b],options).data.home.formation,'4-4-2');
   assert.throws(()=>lineupSnapshotView([{...a,home_external_id:'9'}],options),/IDENTITY/);
   assert.throws(()=>lineupSnapshotView([a,a],options),/AMBIGUOUS/);
-  assert.throws(()=>lineupSnapshotView(Array(101).fill(a),options),/HISTORY_LIMIT/);
   assert.equal(lineupSnapshotView([a],{...options,now:start+100000}).status,'stale');
 });
 test('lineup storage read stays scoped and sanitizes failures',async()=>{
-  const filters=[];const db={from(table){assert.equal(table,'lineup_observations');return this;},select(){return this;},eq(k,v){filters.push([k,v]);return this;},order(){return this;},async limit(n){assert.equal(n,101);return {data:[row(1)]};}};
+  const filters=[];const db={from(table){assert.equal(table,'lineup_observations');return this;},select(){return this;},eq(k,v){filters.push([k,v]);return this;},order(){return this;},async range(from,to){assert.equal(from,0);assert.equal(to,99);return {data:[row(1)],count:1};}};
   assert.equal((await readLineups(db,options)).status,'fresh');
   assert.deepEqual(filters,[['fixture_id',fixture.id],['provider','bsd']]);
   assert.equal((await readLineups({from(){throw new Error('private');}},options)).status,'error');

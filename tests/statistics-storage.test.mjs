@@ -40,7 +40,6 @@ test('identity, corrupted payload, timestamp collisions and truncated history fa
     {...a,payload:{...a.payload,fetched_at:row(2).observed_at}}, {...a,status:'empty'}])
     assert.throws(()=>statisticsView([changed],options));
   assert.throws(()=>statisticsView([a,a],options),/AMBIGUOUS/);
-  assert.throws(()=>statisticsView(Array(101).fill(a),options),/HISTORY_LIMIT/);
   const sqlTime={...a,observed_at:a.observed_at.replace('Z','+00:00')};
   assert.equal(statisticsView([sqlTime],options).status,'fresh');
 });
@@ -48,7 +47,7 @@ test('identity, corrupted payload, timestamp collisions and truncated history fa
 test('reader scopes storage and sanitizes failures without querying providers',async()=>{
   const calls=[];
   const db={from(table){assert.equal(table,'team_statistics_observations');return this;},select(){return this;},
-    eq(k,v){calls.push([k,v]);return this;},order(){return this;},async limit(n){assert.equal(n,101);return {data:[row(1)]};}};
+    eq(k,v){calls.push([k,v]);return this;},order(){return this;},async range(from,to){assert.equal(from,0);assert.equal(to,99);return {data:[row(1)],count:1};}};
   assert.equal((await readStatistics(db,options)).status,'fresh');
   assert.deepEqual(calls,[['fixture_id',fixture.id],['provider','bsd']]);
   assert.equal((await readStatistics({from(){throw new Error('private information');}},options)).status,'error');

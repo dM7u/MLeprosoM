@@ -17,17 +17,18 @@ function database(state, onQuery = () => null) {
   let calls = 0;
   return {from: table => {
     assert.ok(['standings_batches', 'standings_official_reviews'].includes(table));
-    const filters = [], ordering = []; let limit = Infinity, single = false;
+    const filters = [], ordering = []; let limit = Infinity, start = 0, single = false;
     const query = {
       select: () => query, eq: (k, v) => {filters.push(r => r[k] === v); return query;},
       in: (k, values) => {filters.push(r => values.includes(r[k])); return query;},
       order: (k, opts) => {ordering.push([k, opts]); return query;}, limit: n => {limit = n; return query;},
+      range: (a,b) => {start=a; limit=b-a+1; return query;},
       single: () => {single = true; return query;},
       then: (resolve, reject) => Promise.resolve().then(() => {
         const override = onQuery(++calls, table); if (override) return override;
         const rows = structuredClone(table === 'standings_batches' ? state.batches : state.reviews).filter(r => filters.every(f => f(r)));
-        rows.sort((a, b) => {for (const [k, opts] of ordering) {const result = (Date.parse(a[k]) || 0) - (Date.parse(b[k]) || 0); if (result) return opts.ascending ? result : -result;} return 0;});
-        return {data: single ? rows[0] : rows.slice(0, limit), error: null};
+        rows.sort((a, b) => {for (const [k, opts] of ordering) {const result = k === 'id' ? a.id.localeCompare(b.id) : (Date.parse(a[k]) || 0) - (Date.parse(b[k]) || 0); if (result) return opts.ascending ? result : -result;} return 0;});
+        return {data: single ? rows[0] : rows.slice(start, start+limit), count: rows.length, error: null};
       }).then(resolve, reject),
     }; return query;
   }};
@@ -98,10 +99,34 @@ test('corrupt batch/review payloads fail validation instead of publishing altere
   }
 });
 
-test('review changes during the read and oversized history fail closed', async () => {
+test('review changes during the read and invalid history fail closed', async () => {
   const s = sample();
-  const changed = await readStandings(database(s, n => n === 4 ? {data: [{...s.reviews[0], id: 'new', reviewed_at: new Date(s.o.now + 1000).toISOString(), activated: false}]} : null), s.args);
+  const changed = await readStandings(database(s, n => n === 4 ? {data: [{...s.reviews[0], id: '20000000-0000-4000-8000-000000000099', reviewed_at: new Date(s.o.now + 1000).toISOString(), activated: false}],count:1} : null), s.args);
   assert.deepEqual(changed.read_issues, ['review_changed_during_read']);
   const large = await readStandings(database(s, n => n === 1 ? {data: Array(101).fill(s.batches[0])} : null), s.args);
-  assert.deepEqual(large.read_issues, ['history_limit_exceeded']);
+  assert.deepEqual(large.read_issues, ['invalid_or_unavailable_storage']);
+});
+
+test('standings rejects retroactive reviews inserted before the final history recheck', async () => {
+  const s = sample();
+  const view = await readStandings(database(s, n => {
+    if (n === 4) s.reviews.push({...s.reviews[0],
+      id: '20000000-0000-4000-8000-000000000099',
+      reviewed_at: new Date(s.o.now - 1000).toISOString()});
+    return null;
+  }), s.args);
+  assert.equal(view.snapshot, null);
+  assert.deepEqual(view.read_issues, ['review_changed_during_read']);
+});
+
+
+test('standings retains an old approved batch beyond 100 batches and sees denial beyond 500 reviews', async () => {
+  const s = sample();
+  for (let n=2;n<=105;n++) s.batches.push({...s.batches[0],id:'10000000-0000-4000-8000-'+String(n).padStart(12,'0'),status:'incomplete',generated_at:new Date(s.o.now+n).toISOString()});
+  const retained=await readStandings(database(s),s.args);
+  assert.equal(retained.batch_id,s.o.batch.id);assert.equal(retained.status,'stale');
+  for(let n=2;n<=505;n++) s.reviews.push({...s.reviews[0],id:'20000000-0000-4000-8000-'+String(n).padStart(12,'0')});
+  s.reviews.push(createOfficialReview({...s.o,id:'20000000-0000-4000-8000-000000000999',now:s.o.now+1000,requestActivation:false}));
+  const denied=await readStandings(database(s),s.args);
+  assert.equal(denied.snapshot,null);assert.ok(denied.read_issues.includes('latest_review_denied'));
 });

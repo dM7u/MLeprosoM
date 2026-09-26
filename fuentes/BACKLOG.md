@@ -25,7 +25,7 @@
 
 ## Estado actual
 
-Resumen consolidado al 25/09/2026. Este apartado y la cola inmediata prevalecen
+Resumen consolidado al 26/09/2026. Este apartado y la cola inmediata prevalecen
 sobre las notas de ejecución fechadas, que se conservan como historial.
 
 - Fundación y cadena de partidos operativas: BSD para liga y GOAL para Copa.
@@ -41,9 +41,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   restricciones visibles compatibles. Las definiciones largas de las capturas
   están recortadas: no se certifica equivalencia textual completa del DDL.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 124 pruebas unitarias, lint, typecheck y build aprobados;
+- 130 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
-- Seguimiento cerrado: backlog consolidado y avances anteriores guardados en `1dfe880`.
+- Detalle persistido consolidado en `1018c5b`; paginación revisada y verificada
+  para consolidación local el 26/09/2026.
 
 ### Cola inmediata
 
@@ -60,8 +61,9 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    ampliar carga requiere muestras con fecha real, sin rejuvenecer las históricas.
    Falta certificar DDL/permisos remotos por consulta administrativa (las pruebas
    locales y el acceso Data API no certifican toda la configuración remota).
-2. Antes de automatizar cargas frecuentes, reemplazar los límites de historial
-   de standings y estadísticas por consultas paginadas o transaccionales validadas.
+2. Lectura paginada de historiales implementada y verificada (25/09). Antes de
+   automatizar cargas, evaluar costo de recorrer el historial con volumen real
+   y las garantías de aislamiento necesarias; no hay scheduler habilitado.
 3. XI periodístico: preparar validación y dry-run de evidencia revisada de
    La Capital; resolver política de antigüedad antes de persistencia/UI.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
@@ -1081,3 +1083,30 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Sin nuevas consultas al proveedor ni escrituras remotas en esta consolidación.
 - Pendientes: certificación administrativa remota, historial paginado antes de
   cargas frecuentes y decisión de antigüedad del XI periodístico.
+
+## Historiales paginados — 25/09/2026
+
+- [x] Estadísticas, alineaciones, eventos, lotes y revisiones usan paginación
+  con conteo exacto, UUID ordenado y detección de cambios entre páginas.
+- [x] Conserva reglas de retención/frescura y revalida todo el historial de
+  revisiones del lote elegido. No publica prefijos ante errores.
+- [x] 129 pruebas, lint, typecheck y build aprobados; lecturas remotas de los
+  cuatro servicios aprobadas sin escrituras ni consultas al proveedor.
+- Contrato y límites: src/server/db/HISTORY_READS.md. No requiere migración.
+- El límite del lector de fixtures es independiente y permanece; sus filas
+  mutables requieren otra estrategia si se amplía el ámbito histórico.
+
+## Consolidación de paginación — 26/09/2026
+
+- [x] Revisar diferencias pendientes desde `1018c5b`, contrato y consumidores:
+  conteo exacto, orden UUID de transporte, páginas acotadas y relectura completa
+  de revisiones; sin cambios necesarios en la lógica de producto.
+- [x] Agregar regresión para una revisión retroactiva insertada durante la
+  lectura: rechaza el lote en la comprobación final sin publicar el prefijo.
+- [x] 130 pruebas, lint, typecheck, build y git diff --check aprobados.
+- Consolidación local sin nuevas consultas a proveedores ni operaciones remotas.
+  Las lecturas remotas registradas arriba corresponden al bloque del 25/09.
+- Continúan pendientes certificación administrativa remota y evaluación de
+  costo/aislamiento antes de automatizar cargas. La antigüedad del XI periodístico
+  requiere decisión antes de persistencia/UI. Ratings, promedios y desempates
+  pendientes no se implementaron.

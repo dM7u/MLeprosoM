@@ -34,9 +34,8 @@ TTL obligatorio del consumidor, sin valor predeterminado ni scheduler. La ficha
 usa `statistics-policy.json`: 6 horas como advertencia inicial de antigüedad,
 independiente de fixtures. No promete actualización cada seis horas.
 Empates de timestamp, corrupción, desajuste de identidad o lectura fallida dan
-error/Sin datos. Límite explícito de 100 observaciones por fixture; se solicitan
-101 para detectar exceso y fallar, nunca seleccionar sobre historia truncada.
-Resolver consulta transaccional/paginación antes de ingesta frecuente.
+error/Sin datos. Lectura paginada con conteo exacto y validación de historial inmutable.
+Contrato, límites defensivos y concurrencia en HISTORY_READS.md.
 
 Pruebas:
 
