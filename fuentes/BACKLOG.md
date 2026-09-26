@@ -37,9 +37,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 - Lotes, revisión oficial, activación y lector persistido implementados y probados localmente.
 - Primer lote de liga y revisión oficial guardados y activados provisionalmente
   en Supabase el 24/09/2026. Siete tablas leídas como fresh al verificar.
-- Permisos/RLS y trigger confirmados por resultados administrativos del usuario;
-  restricciones visibles compatibles. Las definiciones largas de las capturas
-  están recortadas: no se certifica equivalencia textual completa del DDL.
+- Catálogos de los cinco historiales contrastados con JSON administrativo completo
+  aportado por el usuario: campos exportados coincidentes con las migraciones,
+  incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
+  en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
 - 130 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
@@ -47,10 +48,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 
 ### Cola inmediata
 
-1. Certificar DDL/permisos remotos por consulta administrativa cuando se disponga
-   de ese acceso. Auditoría de los cinco historiales preparada y probada localmente
-   en `supabase/check-history-access.sql`; exportar JSON completo y contrastar
-   definiciones, no usar capturas recortadas. Ejecución remota pendiente.
+1. Contraste administrativo de los cinco historiales cerrado el 26/09 para los
+   campos exportados por `supabase/check-history-access.sql`. No repetir migraciones.
    Documentación y bloque de detalle consolidados localmente.
    Revisión visual de ficha ampliada completada a 390×844 y 1280×900;
    Eventos: tabla remota disponible, muestra cargada y 22 registros verificados
@@ -61,8 +60,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    Contexto de Newell's en tabla seleccionada y comparativa anual con próximo
    rival implementados. Estadísticas: carga remota y UI verificadas;
    ampliar carga requiere muestras con fecha real, sin rejuvenecer las históricas.
-   Falta certificar DDL/permisos remotos por consulta administrativa (las pruebas
-   locales y el acceso Data API no certifican toda la configuración remota).
+   El contraste de catálogos no certifica toda la configuración del proyecto remoto.
 2. Lectura paginada de historiales implementada y verificada (25/09). Antes de
    automatizar cargas, evaluar costo de recorrer el historial con volumen real
    y las garantías de aislamiento necesarias; no hay scheduler habilitado.
@@ -1127,3 +1125,25 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   completo. No se realizaron consultas ni escrituras remotas en este bloque.
 - Sin cambios de aplicación: las 130 pruebas/typecheck/build del bloque anterior
   permanecen como última verificación del producto; no se repitieron aquí.
+
+## Contraste administrativo de eventos — 26/09/2026
+
+- [x] Revisar JSON completo de incident_observations aportado por el usuario
+  contra la migración: diez columnas, siete constraints validados, dos índices
+  válidos, RLS y privilegios mínimos coincidentes; sin políticas/triggers extra.
+- [x] Recibir y contrastar standings_batches, standings_official_reviews,
+  team_statistics_observations y lineup_observations para cerrar los cinco historiales.
+- Evidencia y alcance registrados en docs/research/EVENTOS_20260925.md. Solo
+  documentación; git diff --check aprobado, sin consultas ni escrituras remotas
+  del agente y sin repetir pruebas de aplicación.
+
+## Cierre de contraste de los cinco historiales — 26/09/2026
+
+- [x] Tres adjuntos contrastados programáticamente con catálogos de migraciones
+  locales; estadísticas y eventos contrastados contra SQL. Sin diferencias
+  funcionales en los campos exportados; nulabilidad verificada explícitamente.
+- [x] Trigger habilitado y función de activación completos coincidentes.
+- [x] Conservar adjuntos y conclusión en docs/research/HISTORY_AUDIT_20260926.md;
+  actualizar estado vigente. git diff --check aprobado.
+- Evidencia suministrada por el usuario, sin consultas/escrituras remotas del
+  agente. Solo documentación: no se repitieron build ni pruebas de aplicación.

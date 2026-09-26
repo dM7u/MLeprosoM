@@ -3,7 +3,10 @@
 Estado vigente: las cinco tablas de historiales están disponibles remotamente
 según las lecturas registradas en `fuentes/BACKLOG.md`. Los apartados inferiores
 conservan el estado histórico de preparación de migraciones; no repetirlas.
-La certificación administrativa completa de DDL/permisos sigue pendiente.
+El 26/09 se contrastaron los cinco JSON administrativos completos aportados por
+el usuario: coinciden los campos exportados con las migraciones. Evidencia y
+límites en `docs/research/HISTORY_AUDIT_20260926.md`; no certifica ACL de funciones,
+otros roles ni toda la configuración de Supabase.
 
 `check-history-access.sql` complementa la consulta anterior de standings:
 produce exactamente cinco filas, incluso si falta una tabla, con evidencia JSON
