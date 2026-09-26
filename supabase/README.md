@@ -1,3 +1,40 @@
+# Auditoría de historiales — 26/09/2026
+
+Estado vigente: las cinco tablas de historiales están disponibles remotamente
+según las lecturas registradas en `fuentes/BACKLOG.md`. Los apartados inferiores
+conservan el estado histórico de preparación de migraciones; no repetirlas.
+La certificación administrativa completa de DDL/permisos sigue pendiente.
+
+`check-history-access.sql` complementa la consulta anterior de standings:
+produce exactamente cinco filas, incluso si falta una tabla, con evidencia JSON
+de columnas/defaults, constraints, índices, políticas, triggers y sus funciones.
+Solo consulta catálogos, sin leer datos deportivos ni modificar la base.
+
+Ejecutar el archivo en SQL Editor del proyecto correcto, o mediante una conexión
+PostgreSQL administrativa local. Exportar el resultado completo como JSON; una
+captura o una celda visualmente recortada no alcanza para contrastar definiciones.
+No compartir credenciales. No se habilitó una conexión administrativa nueva.
+
+`access_ok` debe ser true en las cinco filas: exige tabla ordinaria, RLS y
+privilegios efectivos mínimos para anon/authenticated/service_role. Incluye
+permisos por columna y TRUNCATE/REFERENCES/TRIGGER, además de CRUD; los permisos
+heredados de PUBLIC también cuentan. No certifica otros roles ni es una aprobación
+automática del esquema: comparar todas las definiciones exportadas con las
+migraciones versionadas, comprobar constraints validados, índices válidos,
+políticas y trigger `standings_activation_complete` habilitado con su función.
+Un trigger deshabilitado puede coexistir con `access_ok: true`.
+
+Prueba local reproducible, con PGlite aislado ya instalado:
+
+```powershell
+node tests/database/history-audit.mjs
+```
+
+La prueba ejecuta la auditoría dentro de una transacción read-only y detecta
+permisos de columna/PUBLIC indebidos, RLS deshabilitado, tabla faltante y cambios
+de trigger/políticas. Todas las alteraciones de prueba ocurren en memoria local.
+No equivale a ejecutar ni certificar la auditoría en Supabase remoto.
+
 # Primera migración
 
 `migrations/20260917000100_initial_football.sql` crea cinco tablas vacías.

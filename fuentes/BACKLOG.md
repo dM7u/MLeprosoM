@@ -43,13 +43,15 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 - Operación manual de revisión y política inicial de vigencia implementadas.
 - 130 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
-- Detalle persistido consolidado en `1018c5b`; paginación revisada y verificada
-  para consolidación local el 26/09/2026.
+- Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
 ### Cola inmediata
 
 1. Certificar DDL/permisos remotos por consulta administrativa cuando se disponga
-   de ese acceso. Documentación y bloque de detalle consolidados localmente.
+   de ese acceso. Auditoría de los cinco historiales preparada y probada localmente
+   en `supabase/check-history-access.sql`; exportar JSON completo y contrastar
+   definiciones, no usar capturas recortadas. Ejecución remota pendiente.
+   Documentación y bloque de detalle consolidados localmente.
    Revisión visual de ficha ampliada completada a 390×844 y 1280×900;
    Eventos: tabla remota disponible, muestra cargada y 22 registros verificados
    por HTTP; estadísticas y alineaciones siguen visibles.
@@ -1110,3 +1112,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   costo/aislamiento antes de automatizar cargas. La antigüedad del XI periodístico
   requiere decisión antes de persistencia/UI. Ratings, promedios y desempates
   pendientes no se implementaron.
+
+## Preparación de certificación administrativa — 26/09/2026
+
+- [x] Ampliar evidencia de auditoría a los cinco historiales mediante consulta
+  de catálogos de solo lectura, sin migraciones ni lectura de datos deportivos.
+- [x] Exportar definiciones completas, privilegios efectivos por tabla/columna,
+  RLS, políticas, índices y triggers/funciones; las tablas faltantes permanecen
+  visibles. `access_ok` no certifica equivalencia de DDL ni otros roles.
+- [x] Prueba PostgreSQL local aprobada sobre todas las migraciones: ejecución
+  read-only, permisos indebidos, RLS deshabilitado, tabla faltante y evidencia
+  de trigger deshabilitado/políticas. Lint y git diff --check aprobados.
+- [ ] Ejecutar remotamente con acceso administrativo y contrastar el JSON
+  completo. No se realizaron consultas ni escrituras remotas en este bloque.
+- Sin cambios de aplicación: las 130 pruebas/typecheck/build del bloque anterior
+  permanecen como última verificación del producto; no se repitieron aquí.
