@@ -30,7 +30,7 @@ export function createEditorialRevision({id,previousId=null,action='review',reas
   return {...row,content_hash:hash(row)};
 }
 
-function validateStored(row,{fixture,teamId,now}) {
+export function validateEditorialRevision(row,{fixture,teamId,now}) {
   assertContext(fixture,teamId);
   if(row?.fixture_id!==fixture.id||row?.team_id!==teamId)throw new Error('EDITORIAL_XI_REVISION_MISMATCH');
   // Validate original facts without treating a later kickoff change as corruption.
@@ -42,7 +42,7 @@ function validateStored(row,{fixture,teamId,now}) {
 }
 
 export async function storeEditorialRevision(db,revision,context) {
-  const row=validateStored(revision,context);
+  const row=validateEditorialRevision(revision,context);
   try {
     const replay=async()=>{
       const {data,error}=await db.from('editorial_xi_revisions').select('*').eq('id',row.id).maybeSingle();
@@ -70,7 +70,7 @@ export function editorialXiView(heads,{fixture,teamId,now=Date.now()}) {
   assertContext(fixture,teamId);
   const unavailable=issues=>({status:'unavailable',data:null,issues});
   if(!Array.isArray(heads)||heads.length>100)throw new Error('EDITORIAL_XI_HEADS_UNAVAILABLE');
-  const rows=heads.map(row=>validateStored(row,{fixture,teamId,now}));
+  const rows=heads.map(row=>validateEditorialRevision(row,{fixture,teamId,now}));
   if(new Set(rows.map(row=>row.source_url)).size!==rows.length||new Set(rows.map(row=>row.id)).size!==rows.length)throw new Error('EDITORIAL_XI_AMBIGUOUS_HEADS');
   if(fixture.state!=='scheduled'||!Number.isFinite(time(fixture.kickoff_at))||now>=time(fixture.kickoff_at))return unavailable(['fixture_not_upcoming']);
   const candidates=[],issues=[];

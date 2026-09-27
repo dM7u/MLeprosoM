@@ -312,3 +312,28 @@ dos equipos, una competición y una temporada. Ambas sincronizaciones succeeded.
 Lectura conjunta: 33 partidos (32 BSD + Newell's–Acassuso, Copa Argentina, 0–2).
 Penales siguen null. BSD continúa stale; GOAL actualizado al verificar. La
 activación reemplaza los pendientes de migración/importación de notas previas.
+
+## Importador editorial de XI — 27/09/2026
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/import-editorial-xi.mjs docs/research/la-capital-xi-223728-20260926.json docs/research/editorial-operation-223728-20260927.json --dry-run
+```
+
+El segundo JSON define id (UUID), previousId (null para raíz), action
+(review/retract), reason (null o texto; obligatorio al retractar), reviewedAt
+(con zona explícita) y reviewer. Reintentos conservan ambos archivos y UUID;
+correcciones usan UUID nuevo y previousId de la cabeza actual. No renovar fechas
+para simular frescura. Retractar exige conservar exactamente la evidencia previa.
+
+Solo consulta Supabase; no consulta proveedores. El catálogo persistido puede
+estar antiguo: revisar fixture_observed_at. Dry-run no escribe. Código 0 indica
+validación completa, 2 almacenamiento editorial no disponible (cadena sin
+validar), 1 error sanitizado. published siempre es false, incluso con apply.
+
+Tras habilitar y verificar la migración editorial se puede usar --apply para
+insertar una revisión o reconocer un retry. No se ejecutó apply remotamente
+este bloque. Contrato: src/server/editorial/PERSISTENCE.md.
+
+Ensayo remoto del 27/09: partido 223728 resuelto; fixture observado el 24/09,
+finalizado. unavailable por fixture_not_upcoming, publication_time_unknown y
+editorial_storage_unavailable. Cero escrituras y requests a proveedores.

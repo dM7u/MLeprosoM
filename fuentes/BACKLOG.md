@@ -1261,3 +1261,20 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Sin consultas/proveedores ni escrituras remotas. Migración sin aplicar y sin
   importador/UI. Contrato: src/server/editorial/PERSISTENCE.md. Próximo bloque:
   lookup actual de contexto e importador dry-run, antes de habilitación remota.
+
+## Importador editorial con contexto persistido — 27/09/2026
+
+- [x] CLI de evidencia/operación explícitas, lookup acotado de fixture/equipo,
+  validación previa, dry-run sin inserciones y apply con retry idempotente.
+- [x] Preflight de UUID/cabezas, conflicto de predecesora y retractación fiel;
+  esquema/RPC no disponible bloquea apply y marca dry-run incompleto.
+- [x] 154 pruebas, lint, typecheck, build y prueba PostgreSQL local aprobados.
+- [x] Dry-run remoto de muestra histórica 223728 resuelve identidad real;
+  unavailable por partido finalizado, publicación sin zona y almacenamiento
+  editorial no disponible. Fixture observado 24/09; no se refrescó proveedor.
+- Cero escrituras remotas, sin migración aplicada ni UI. El importador evalúa
+  contexto persistido, no acredita actualidad deportiva ni publica evidencia.
+  Contrato y comando: src/server/editorial/PERSISTENCE.md y scripts/README.md.
+- Próximo: habilitar y verificar persistencia remota; después, presentación
+  con fuente/fecha y política de 48 h. Ratings, promedios y desempates pendientes
+  continúan fuera del bloque.

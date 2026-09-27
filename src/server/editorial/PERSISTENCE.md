@@ -124,7 +124,20 @@ permisos/RLS, identidad, retries/conflictos, sucesoras competidoras, cabezas,
 retractación tras reprogramación, lectura read-only y overflow. Las pruebas
 unitarias cubren TTL, conflicto entre notas, integridad y errores sanitizados.
 
-Próximo bloque: importador controlado con lookup actual de fixture/equipos y
-dry-run, antes de aplicar migración remota. La muestra histórica sirve para
-conservar evidencia, no para poblar el próximo partido. Activación de UI sigue
-pendiente de evidencia actual apta y de la composición con otras fuentes.
+El importador `import-xi.mjs` resuelve fixture/equipos desde la DB bajo el scope
+revisado y falla ante un catálogo parcial o identidad discordante. Conserva
+fechas originales y exige una operación explícita con UUID estable para retries.
+El preflight lee el UUID y las cabezas: detecta correcciones sin predecesora
+actual, conflictos y retractaciones que alteren evidencia. Las restricciones SQL
+siguen arbitrando carreras posteriores al preflight; no es una transacción global.
+
+Dry-run no inserta. Si almacenamiento/RPC no está disponible, informa
+`storage_ready:false`, añade `editorial_storage_unavailable` y el CLI termina
+con código 2: contexto y evidencia pueden validarse, pero no la cadena. Apply
+falla cerrado en ese estado. Readiness no certifica permisos de INSERT.
+La evaluación usa el fixture persistido, cuya fecha se muestra; no refresca el
+proveedor ni acredita actualidad deportiva. Nunca publica ni conecta UI.
+
+Próximo bloque: habilitación y verificación remota de migración/importación.
+La muestra histórica sirve para conservar evidencia, no para poblar el próximo
+partido. UI sigue pendiente de evidencia apta y composición con otras fuentes.
