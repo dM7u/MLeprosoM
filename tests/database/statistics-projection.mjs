@@ -1,3 +1,5 @@
+import {importTeamStatistics} from '../../src/server/db/import-team-statistics.mjs';
+import {previewStatisticsSelection} from '../../src/server/db/statistics-projection.mjs';
 import {PGlite} from '../../.tools/db-validation/node_modules/@electric-sql/pglite/dist/index.js';
 import {readFileSync,readdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
@@ -48,6 +50,10 @@ try{
  await commitStatisticsSelection(client,{...opts,observation:next});await verify();
  const failed=row(6,42,null);await commitStatisticsSelection(client,{...opts,observation:failed});await verify();
  const beforeRetry=await head();
+ const planned=row(7,43,{corner_kicks:2});
+ const preview=await previewStatisticsSelection(client,{...opts,observation:planned});
+ assert.equal(preview.dry_run,true);assert.equal(preview.plan.count,7);
+ assert.deepEqual(await head(),beforeRetry);assert.equal((await all()).length,6);
  assert.equal((await commitStatisticsSelection(client,{...opts,observation:x})).replay,true);assert.deepEqual(await head(),beforeRetry);
  const altered=row(4,10,{corner_kicks:9});await assert.rejects(commitStatisticsSelection(client,{...opts,observation:altered}),/IDEMPOTENCY_CONFLICT/);
  // SQL retry succeeds before stale expected generation; no projection rewrite.
@@ -65,10 +71,24 @@ try{
  let injected=false;const competing=row(8,44,{corner_kicks:3}),target=row(9,45,{corner_kicks:4});
  const racing={...client,async rpc(name,args){if(name==='commit_statistics_projection'&&!injected){injected=true;await commitStatisticsSelection(client,{...opts,observation:competing});}return client.rpc(name,args);}};
  await commitStatisticsSelection(racing,{...opts,observation:target});assert.ok(injected);await verify();
+ // Exercise the production importer's scoped lookup and explicit mode against SQL.
+ const importerClient={...client,from(table){
+  if(table==='team_statistics_observations')return client.from(table);
+  const filters=[];return {select(){return this;},eq(k,v){filters.push([k,v]);return this;},async maybeSingle(){
+   if(table==='teams'){assert.deepEqual(filters,[['provider','bsd'],['external_id','4997']]);return {data:(await query("select id from teams where provider=$1 and external_id=$2",['bsd','4997']))[0]};}
+   assert.equal(table,'fixtures');assert.deepEqual(filters,[['provider','bsd'],['external_id','223728'],['seasons.external_id','test'],['seasons.competitions.external_id','test']]);
+   const data=(await query("select to_jsonb(f) as fixture,s.external_id as season,c.external_id as competition from fixtures f join seasons s on s.id=f.season_id join competitions c on c.id=s.competition_id where f.id=$1",[fixture.id]))[0];
+   return {data:{...data.fixture,seasons:{external_id:data.season,competitions:{external_id:data.competition}}}};
+  }};
+ }};
+ const importOptions={sample:{body:{event_id:223728,stats:{home:{corner_kicks:5}}},fetched_at:time(46)},id:row(10,46,{}).id,scope:{provider:'bsd',externalTeamId:'4997',competitionId:'test',seasonId:'test'},mode:'--dry-run',storage:'projection',now};
+ const importBefore=await head();assert.equal((await importTeamStatistics(importerClient,importOptions)).writes,0);assert.deepEqual(await head(),importBefore);
+ assert.equal((await importTeamStatistics(importerClient,{...importOptions,mode:'--apply'})).writes,1);await verify();
+ assert.equal((await importTeamStatistics(importerClient,{...importOptions,mode:'--apply'})).result.replay,true);
  const good=await head();
  for(const mutate of [e=>e.projection.version=2,e=>e.projection.observation_count=0,e=>e.last=null,e=>e.chosen.payload.home.corner_kicks=-1,e=>e.projection.fixture_id=a.id]){const bad=structuredClone(good);mutate(bad);assert.throws(()=>validateStatisticsProjection(bad,opts));}
  let conflicts=0;const busy={...client,async rpc(name,args){if(name==='commit_statistics_projection'){conflicts++;return {error:{message:'STATS_PROJECTION_CHANGED'}};}return client.rpc(name,args);}};
- await assert.rejects(commitStatisticsSelection(busy,{...opts,observation:row(10,46,{corner_kicks:5})}),/RETRY_EXHAUSTED/);assert.equal(conflicts,3);
+ await assert.rejects(commitStatisticsSelection(busy,{...opts,observation:row(12,47,{corner_kicks:6})}),/RETRY_EXHAUSTED/);assert.equal(conflicts,3);
  // A transport failure must not leak provider/connection diagnostics.
  await assert.rejects(commitStatisticsSelection({from(){throw new Error('private connection detail');}},{...opts,observation:row(10,46,{corner_kicks:5})}),/^Error: STATS_PROJECTION_UNAVAILABLE$/);
  // Empty fixture bootstrap, same-generation root conflict and first INSERT.

@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 175 pruebas unitarias, lint, typecheck y build aprobados;
+- 179 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -75,7 +75,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    por recurso: 150 páginas/56 MB en conjunto; ver HISTORY_VOLUME_20260927.md.
    Contrato atómico definido en src/server/db/HISTORY_PROJECTION.md;
    reductores compartidos y primera proyección/RPC de estadísticas probados localmente.
-   SQL pendiente separado; faltan conexión de escritores, otros recursos y
+   SQL pendiente separado; importador admite opción atómica explícita. Faltan
+   activación de lectura/reconstrucción, otros recursos y
    medición de standings/concurrencia.
    No hay scheduler de sincronización deportiva.
 3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
@@ -1393,3 +1394,16 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   nuevo mecanismo. Pendiente corte de escritores/reconstrucción, pruebas de dos
   conexiones y extensión a alineaciones/eventos antes de habilitar frecuencia.
   Detalle operacional y advertencia de activación: supabase/pending/README.md.
+
+## Importador conectado al modo atómico — 27/09/2026
+
+- [x] Opción CLI explícita --storage=projection; history conserva compatibilidad
+  con la base actual. Flags inválidos/repetidos rechazados antes de I/O sensible.
+- [x] Dry-run calcula candidato/generación sin commit; apply recalcula y usa CAS.
+  Error/RPC ausente no deriva a INSERT directo; reporte identifica storage/writes.
+- [x] Importador real verificado contra PGlite con ACL propuestas: lookup scoped,
+  preview sin cambios, carga y retry sin duplicación. 179 pruebas, lint, typecheck,
+  build y diff aprobados. Sin ejecución remota, migración ni requests deportivos.
+- Pendiente habilitación del lector, reconstrucción operacional y ensayo de dos
+  conexiones. La propuesta SQL continúa fuera de migraciones activas; no aplicar
+  todavía. Alineaciones/eventos mantienen el camino vigente.

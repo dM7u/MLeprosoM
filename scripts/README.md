@@ -337,3 +337,31 @@ este bloque. Contrato: src/server/editorial/PERSISTENCE.md.
 Ensayo remoto del 27/09: partido 223728 resuelto; fixture observado el 24/09,
 finalizado. unavailable por fixture_not_upcoming, publication_time_unknown y
 editorial_storage_unavailable. Cero escrituras y requests a proveedores.
+
+## Importador de estadísticas: modo atómico explícito — 27/09/2026
+
+El cuarto argumento opcional selecciona almacenamiento. Omitirlo equivale a
+`--storage=history`, compatible con la base actual. `--storage=projection`
+requiere las RPC de la propuesta SQL; no hay detección automática ni fallback.
+Flags desconocidos/repetidos se rechazan antes de abrir evidencia/configuración.
+
+Ejemplo de ensayo después de preparar un entorno con la propuesta aplicada:
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/import-team-statistics.mjs docs/research/bsd-team-stats-223728-20260924.json 64a6d4f6-8b4f-40b5-88d4-dc8cde1f1327 --dry-run --storage=projection
+```
+
+La propuesta sigue SIN aplicar en Supabase. Este comando no se ejecutó remotamente.
+En projection, dry-run valida RPC/estado, UUID y contexto, calcula append o replay
+y devuelve plan con generación/count/chosen_id/last_id, sin invocar commit.
+No certifica permiso de escritura ni reserva la generación; apply vuelve a leer
+ y calcular, conservando UUID/fecha. Un UUID ya guardado devuelve replay y aclara
+si la proyección está inicializada; un retry no reconstruye una proyección ausente.
+Falta de RPC, estado inválido o error falla con código sanitizado incluso en retry.
+
+`--apply --storage=projection` usa exclusivamente commit CAS. El reporte incluye
+storage y writes (0/1). Durante corte, revocar INSERT directo garantiza que un
+comando antiguo history no agregue observaciones sin actualizar proyección.
+El lector de UI sigue paginado; selección de lectura y reconstrucción operacional
+quedan pendientes antes de activación. No ejecutar la propuesta solo para ensayar
+este comando: revisar supabase/pending/README.md y completar ensayo multi-conexión.

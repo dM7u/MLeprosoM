@@ -37,9 +37,13 @@ export async function readProjectedStatistics(db,options){
  }catch{return {status:'error',label:'Sin datos',data:null,updatedAt:null,partial:false,lastObservedAt:null,lastObservationStatus:null};}
 }
 
-/** Local opt-in only; existing importers are not connected to this writer yet. */
-async function commitValidatedStatisticsSelection(db,{fixture,observation=null,now=Date.now()}){
+/** Explicit projection mode; dry-run validates the plan without calling commit RPC. */
+async function commitValidatedStatisticsSelection(db,{fixture,observation=null,now=Date.now(),dryRun=false}){
+ if(typeof dryRun!=='boolean')throw new Error('STATS_PROJECTION_INVALID');
  const row=observation===null?null:validateStatisticsObservation(observation,fixture,now);
+ const initial=await db.rpc('read_statistics_projection',{p_fixture_id:fixture.id});
+ if(initial.error)throw new Error('STATS_PROJECTION_UNAVAILABLE');
+ const initialState=validateStatisticsProjection(initial.data,{fixture,now});
  // Preserve UUID retry semantics even if a later generation is now current.
  if(row){
   const response=await db.from('team_statistics_observations').select('*').eq('id',row.id).maybeSingle();
@@ -47,11 +51,11 @@ async function commitValidatedStatisticsSelection(db,{fixture,observation=null,n
   if(response.data){
    const existing=validateStatisticsObservation(response.data,fixture,now);
    if(comparable(existing)!==comparable(row))throw new Error('STATS_IDEMPOTENCY_CONFLICT');
-   return {stored:false,replay:true};
+   return {stored:false,replay:true,...(dryRun?{dry_run:true,generation:initialState.generation,projection_initialized:Boolean(initialState.state)}:{})};
   }
  }
  for(let attempt=0;attempt<3;attempt++){
-  const response=await db.rpc('read_statistics_projection',{p_fixture_id:fixture.id});
+  const response=attempt===0?initial:await db.rpc('read_statistics_projection',{p_fixture_id:fixture.id});
   if(response.error)throw new Error('STATS_PROJECTION_UNAVAILABLE');
   const {generation,state}=validateStatisticsProjection(response.data,{fixture,now});
   let next;
@@ -63,9 +67,10 @@ async function commitValidatedStatisticsSelection(db,{fixture,observation=null,n
    const validated=rows.map(r=>validateStatisticsObservation(r,fixture,now));
    // Another writer may have committed this exact operation since the first check.
    const existing=row&&validated.find(r=>r.id===row.id);
-   if(existing){if(comparable(existing)!==comparable(row))throw new Error('STATS_IDEMPOTENCY_CONFLICT');return {stored:false,replay:true};}
+   if(existing){if(comparable(existing)!==comparable(row))throw new Error('STATS_IDEMPOTENCY_CONFLICT');return {stored:false,replay:true,...(dryRun?{dry_run:true,generation,projection_initialized:Boolean(state)}:{})};}
    next=replayHistorySelection('statistics',row?[...validated,row]:validated);
   }
+  if(dryRun)return {stored:false,replay:false,dry_run:true,generation,projection_initialized:Boolean(state),plan:{version:next.version,count:next.count,chosen_id:next.chosen?.id??null,last_id:next.last?.id??null}};
   const result=await db.rpc('commit_statistics_projection',{p_fixture_id:fixture.id,p_expected_generation:generation,p_observation:row,p_chosen_id:next.chosen?.id??null,p_last_id:next.last?.id??null,p_count:next.count,p_version:next.version});
   if(!result.error){
    if(typeof result.data?.stored!=='boolean'||typeof result.data?.replay!=='boolean'||!counter(result.data.generation))throw new Error('STATS_PROJECTION_UNAVAILABLE');
@@ -81,4 +86,8 @@ async function commitValidatedStatisticsSelection(db,{fixture,observation=null,n
 export async function commitStatisticsSelection(db,options){
  try{return await commitValidatedStatisticsSelection(db,options);}
  catch(error){throw new Error(['STATS_IDEMPOTENCY_CONFLICT','STATS_PROJECTION_RETRY_EXHAUSTED','STATS_PROJECTION_INVALID'].includes(error.message)?error.message:'STATS_PROJECTION_UNAVAILABLE');}
+}
+
+export async function previewStatisticsSelection(db,options){
+ return commitStatisticsSelection(db,{...options,dryRun:true});
 }

@@ -19,9 +19,10 @@ Bootstrap comprueba conteo completo y last real; commits posteriores usan contad
 atómico y last por índice. El backend valida la semántica del reductor: no aceptar
 resultados calculados por usuarios ni afirmar que SQL duplica esa validación.
 
-Estado: prueba local aprobada, SIN aplicar remotamente. Importadores y UI actuales
-continúan usando el camino anterior. Aplicar ahora rompería las importaciones
-antiguas; antes falta conectar escritores, reconstrucción controlada, auditoría
+Estado: prueba local aprobada, SIN aplicar remotamente. El importador admite
+--storage=projection explícito; default y UI conservan el camino anterior. Aplicar
+ahora rompería las importaciones antiguas; falta corte coordinado de escritores,
+activación de lectura, reconstrucción controlada, auditoría
 administrativa y prueba multi-conexión. También revisar disponibilidad del nombre
 mle_statistics_writer y permisos efectivos en el proyecto de destino.
 

@@ -190,3 +190,18 @@ raíz vacía y conflictos serializados. 175 pruebas unitarias: entre ellas 130
 comparaciones de proyección contra replay y fallos de hidratación/transporte.
 Pendiente: integración de importadores, activación del lector, ampliación a otros
 recursos y ensayo de concurrencia real. No aplicar el SQL hasta completar el corte.
+
+## Integración explícita de importador — 27/09/2026
+
+El CLI de estadísticas admite --storage=projection; history sigue siendo default
+para la base vigente. No hay fallback entre escritores. previewStatisticsSelection
+reutiliza validación y planificación, pero nunca invoca commit; devuelve generación
+esperada y selección candidata. Apply recalcula: el preview no reserva ni aprueba
+un estado futuro. La RPC de lectura se exige también antes de aceptar un retry,
+aunque exista la observación histórica. Un retry no inicializa proyección pendiente.
+
+Prueba SQL incorpora lookup acotado del importador real, preview sin mutaciones,
+apply exclusivo mediante RPC y retry; los permisos impiden INSERT directo. Pruebas
+unitarias cubren modo inválido, RPC faltante aun con UUID existente y flags CLI.
+Pendiente activación del lector/reconstrucción operacional y concurrencia real.
+No se activó esta opción remotamente ni se aplicó la propuesta SQL.
