@@ -1,6 +1,7 @@
+import {replayHistorySelection,historySelectionView} from './history-selection.mjs';
 import 'server-only';
 import {readHistory} from './read-history.mjs';
-import {normalizeTeamStatistics, teamStatisticFields} from '../providers/bsd/team-statistics.mjs';
+import {normalizeTeamStatistics} from '../providers/bsd/team-statistics.mjs';
 import {canonicalJson} from '../standings/batch.mjs';
 import {dataState} from '../data-state.mjs';
 
@@ -60,19 +61,8 @@ export function statisticsView(rows, {fixture, ttlMs, now = Date.now()}) {
   validateFixture(fixture);
   dataState({data:null,ttlMs,now});
   if (!Array.isArray(rows)) throw new Error('STATS_HISTORY_LIMIT');
-  const ordered = rows.map(row=>validateObservation(row,fixture,now))
-    .sort((a,b)=>Date.parse(a.observed_at)-Date.parse(b.observed_at));
-  let chosen = null, last = null;
-  for (const row of ordered) {
-    if (last && Date.parse(last.observed_at) === Date.parse(row.observed_at)) throw new Error('STATS_AMBIGUOUS_OBSERVATION');
-    last = row;
-    if (!row.payload || row.status === 'empty') continue;
-    if (!chosen || ['home','away'].every(side=>teamStatisticFields.every(key=>
-      chosen.payload[side][key] === null || row.payload[side][key] !== null))) chosen = row;
-  }
-  const view = dataState({data:chosen?.payload ?? null,fetchedAt:chosen?.observed_at,ttlMs,now,
-    partial:chosen?.status === 'partial',refreshFailed:Boolean(last && (chosen ? chosen !== last : last.status === 'failed'))});
-  return {...view,lastObservedAt:last?.observed_at ?? null,lastObservationStatus:last?.status ?? null};
+  const validated=rows.map(row=>validateObservation(row,fixture,now));
+  return historySelectionView(replayHistorySelection('statistics',validated),{ttlMs,now});
 }
 
 /** Scoped backend read. Count-checked pagination of immutable observations. */

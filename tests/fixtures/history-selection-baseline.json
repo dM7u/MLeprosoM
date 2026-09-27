@@ -1,0 +1,14 @@
+{
+  "statistics": {
+    "cases": 130,
+    "sha256": "55e1a4e0be2006a02b49dceaee6adcc69673adab95aade393177b1786bec72f9"
+  },
+  "lineups": {
+    "cases": 130,
+    "sha256": "864b41a1bb4b0796f55fb66ef45b22a5336a3c236fa5e3c6edc883645662ab18"
+  },
+  "incidents": {
+    "cases": 130,
+    "sha256": "add56003e829c7f76528af61821f2d24d412b06bd232697ef8f5310994ba4be5"
+  }
+}

@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 162 pruebas unitarias, lint, typecheck y build aprobados;
+- 171 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -74,7 +74,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    representativo aislado. Detalles medidos localmente el 27/09 hasta 5000 filas
    por recurso: 150 páginas/56 MB en conjunto; ver HISTORY_VOLUME_20260927.md.
    Contrato atómico definido en src/server/db/HISTORY_PROJECTION.md; pendiente
-   implementación local y medición de standings/concurrencia.
+   reductores compartidos implementados. Pendiente proyección/RPC local y
+   medición de standings/concurrencia.
    No hay scheduler de sincronización deportiva.
 3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
    desde publicación, fuente/fecha visibles y exclusión al iniciar el partido.
@@ -1361,3 +1362,17 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   luego RPC/ACL y pruebas transaccionales antes de activar remotamente.
   Concurrencia real de dos conexiones aún no certificada. Sin scheduler,
   escrituras remotas ni requests a proveedores; ratings siguen fuera de alcance.
+
+## Selección compartida de historiales — 27/09/2026
+
+- [x] Extraer reductor versión 1 usado por estadísticas, alineaciones y eventos;
+  validación de filas anterior al replay conservada, sin modificar paginación.
+- [x] Camino incremental para filas validadas estrictamente nuevas; timestamps
+  iguales/retroactivos y versión desconocida rechazados. Estado sin mutaciones,
+  fechas originales y semántica fresh/stale/partial/empty/error conservadas.
+- [x] 390 resultados completos coinciden con referencia capturada antes del
+  refactor; equivalencia incremental por prefijo, roundtrip JSON y no mutación.
+- [x] 171 pruebas, lint, typecheck y build aprobados; git diff --check aprobado.
+- Sin migraciones, escrituras remotas, proveedor ni cambios UI. No reduce aún
+  requests: próximo bloque es validación de proyección persistida y RPC/CAS local
+  con restricciones/permisos y reconstrucción; después, ensayo multi-conexión.

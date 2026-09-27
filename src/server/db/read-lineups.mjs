@@ -1,3 +1,4 @@
+import {replayHistorySelection,historySelectionView} from './history-selection.mjs';
 import 'server-only';
 import {readHistory} from './read-history.mjs';
 import {validateLineupObservation} from './lineup-observations.mjs';
@@ -10,19 +11,8 @@ export function lineupSnapshotView(rows,{fixture,ttlMs,now=Date.now()}) {
   const observations=rows.map(row=>{
     if(row.fixture_id!==fixture.id||keys.some(k=>row[k]!==fixture[k]))throw new Error('LINEUPS_IDENTITY_MISMATCH');
     return validateLineupObservation(row,{now});
-  }).sort((a,b)=>Date.parse(a.observed_at)-Date.parse(b.observed_at));
-  let chosen=null,last=null;
-  for(const row of observations){
-    if(last&&Date.parse(last.observed_at)===Date.parse(row.observed_at))throw new Error('LINEUPS_AMBIGUOUS_TIME');
-    last=row;
-    if(row.status==='unavailable')continue;
-    // Ignore a provider revision older than the retained one; never merge lineups.
-    if(chosen?.payload.source_updated_at&&(!row.payload.source_updated_at||Date.parse(row.payload.source_updated_at)<Date.parse(chosen.payload.source_updated_at)))continue;
-    if(!chosen||row.status==='complete')chosen=row;
-  }
-  return {...dataState({data:chosen?.payload??null,fetchedAt:chosen?.observed_at,ttlMs,now,
-    partial:chosen?.status==='partial',refreshFailed:Boolean(chosen&&chosen!==last)}),
-    lastObservedAt:last?.observed_at??null,lastObservationStatus:last?.status??null};
+  });
+  return historySelectionView(replayHistorySelection('lineups',observations),{ttlMs,now});
 }
 
 export async function readLineups(db,options) {

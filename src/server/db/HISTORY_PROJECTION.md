@@ -132,3 +132,29 @@ Repetir benchmark con 1/100/1000/5000 filas comparando resultados, bytes y pági
 La meta estructural es una lectura acotada por recurso independiente del tamaño
 del historial; no se fija un SLO de latencia con el benchmark local anterior.
 Nada de este diseño habilita scheduler, cambia cuota ni implementa ratings.
+
+## Reductor compartido implementado — 27/09/2026
+
+history-selection.mjs concentra selección/replay/presentación, versión 1.
+Los tres lectores existentes conservan validación completa de cada fila antes
+ de reducir; recorrido paginado y escrituras no cambian. appendHistorySelection
+acepta únicamente estado/filas previamente validados dentro del backend: no es
+un deserializador seguro ni reemplaza validación de una futura RPC/proyección.
+Rechaza timestamps iguales, retroactivos y versiones desconocidas. Replay ordena
+una copia; append no muta estado ni fila. Conserva chosen, last y count.
+La comparación chosen/last se hace por ID para soportar serialización JSON;
+identidad/contenido del estado sigue requiriendo validación al hidratarlo.
+
+Referencia de compatibilidad: tests/fixtures/history-selection-baseline.json,
+capturada con los lectores anteriores al refactor (commit base 4da3835). Tres
+hashes SHA-256 de 130 resultados completos por recurso, generados por los casos
+ de tests/fixtures/history-selection.mjs: 390 salidas, dos TTL, permutación de
+entrada y combinaciones de cobertura/fallos/revisiones. No regenerar la referencia
+con el nuevo reductor para ocultar diferencias; cambios deliberados de contrato
+requieren revisar salidas y versionar metodología. Además de hashes, los tests
+comparan cada prefijo incremental con replay, ausencia de mutación y roundtrip JSON.
+Pruebas previas mantienen casos explícitos de payload/fechas y errores.
+
+Pendiente: validador de estado persistido, esquema/RPC/CAS, transición de permisos,
+reconstrucción y prueba multi-conexión. No hay mejora de tráfico todavía: los
+lectores actuales siguen leyendo/validando toda la historia.

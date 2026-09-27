@@ -1,3 +1,4 @@
+import {replayHistorySelection,historySelectionView} from './history-selection.mjs';
 import 'server-only';
 import {readHistory} from './read-history.mjs';
 import {normalizeIncidents} from '../providers/bsd/incidents.mjs';
@@ -53,16 +54,8 @@ export function incidentSnapshotView(rows,{fixture,ttlMs,now=Date.now()}) {
   const ordered=rows.map(row=>{
     if(row.fixture_id!==fixture.id||keys.some(k=>row[k]!==fixture[k]))throw new Error('INCIDENTS_IDENTITY_MISMATCH');
     return validateIncidentObservation(row,{now});
-  }).sort((a,b)=>Date.parse(a.observed_at)-Date.parse(b.observed_at));
-  let chosen=null,last=null;
-  for(const row of ordered){
-    if(last&&Date.parse(last.observed_at)===Date.parse(row.observed_at))throw new Error('INCIDENTS_AMBIGUOUS_TIME');
-    last=row;
-    if(row.status==='available'||row.status==='partial')chosen=row;
-  }
-  return {...dataState({data:chosen?.payload??null,fetchedAt:chosen?.observed_at,ttlMs,now,
-    partial:chosen?.status==='partial',refreshFailed:Boolean(last&&(chosen?chosen!==last:last.status==='failed'))}),
-    lastObservedAt:last?.observed_at??null,lastObservationStatus:last?.status??null};
+  });
+  return historySelectionView(replayHistorySelection('incidents',ordered),{ttlMs,now});
 }
 
 export async function readIncidents(db,options) {
