@@ -1,7 +1,8 @@
 # Selección atómica de historiales de detalle
 
-Estado: diseño técnico del 27/09/2026. No hay migración, RPC ni proyección nueva
-implementada. Los lectores paginados siguen siendo el camino operativo.
+Estado 27/09/2026: contrato y primera integración local de estadísticas probados.
+Propuesta SQL en supabase/pending/, sin aplicar; lectores paginados e importadores
+actuales siguen siendo el camino operativo. Ver actualización al pie.
 Alcance: estadísticas, alineaciones y eventos BSD por fixture. Standings,
 revisiones editoriales, actualización de fixtures y polling quedan fuera.
 
@@ -44,8 +45,8 @@ una referencia polimórfica sin integridad. No duplicar el payload en la proyecc
 El esquema físico se prepara en la implementación local, sin tabla genérica
 anticipada ni cambios a los historiales existentes hasta probarlo.
 
-Generación identifica escrituras confirmadas del historial, no reloj, UUID ni
-fecha deportiva. El estado vacío también tiene identidad/generación estable.
+Generación identifica publicaciones confirmadas del estado, no reloj, UUID ni
+fecha deportiva (incluye bootstrap/corrección de proyección; ver implementación). El estado vacío también tiene identidad/generación estable.
 El contador se incrementa una vez por observación nueva, no por reintento.
 Una versión desconocida, proyección incompleta o referencia ausente falla cerrada.
 
@@ -158,3 +159,34 @@ Pruebas previas mantienen casos explícitos de payload/fechas y errores.
 Pendiente: validador de estado persistido, esquema/RPC/CAS, transición de permisos,
 reconstrucción y prueba multi-conexión. No hay mejora de tráfico todavía: los
 lectores actuales siguen leyendo/validando toda la historia.
+
+## Primera integración local: estadísticas — 27/09/2026
+
+Propuesta aislada en supabase/pending/statistics_history_projection.sql, excluida
+ de migraciones activas. Implementación backend en statistics-projection.mjs;
+ningún importador, lector de UI o scheduler la invoca automáticamente.
+
+- read_statistics_projection devuelve proyección/chosen/last en una consulta SQL
+  estable invoker; validateStatisticsProjection valida versión, contadores seguros,
+  referencias, identidad y payload mediante el validador existente. Rechaza datos
+  incompletos y selección incompatible con chosen/last; confía en validación del
+  prefijo completo por el escritor. No acredita integridad de filas no devueltas.
+- commitStatisticsSelection admite observación o null (reconstrucción explícita).
+  Usa append validado o replay completo, hasta tres conflictos de generación.
+  Errores de transporte sanitizados. Comparación de retry normaliza instantes
+  equivalentes con distinto offset sin rejuvenecer observaciones.
+- commit_statistics_projection usa rol dedicado y fila bloqueada. UUID idéntico
+  puede reintentarse tras avance de generación; conflicto no sobrescribe. Conteo,
+  last real y FK se verifican en SQL. Fallo tras INSERT revierte también la fila.
+- Reconstrucción inicial publica generación 1 incluso sin observaciones. Por eso
+  generación cuenta publicaciones del estado (bootstrap/corrección además de INSERT),
+  no equivale a observation_count. Retry/reconstrucción idéntica no la incrementan.
+  Solo versión 1 soportada; una versión desconocida falla, requiere migración futura.
+- Exportación del validador de estadísticas permite reutilizar validación de payload;
+  lectores actuales y resultados históricos conservan su comportamiento.
+
+Prueba SQL aislada aprobada, incluyendo corte de DML directo, privilegios del dueño,
+raíz vacía y conflictos serializados. 175 pruebas unitarias: entre ellas 130
+comparaciones de proyección contra replay y fallos de hidratación/transporte.
+Pendiente: integración de importadores, activación del lector, ampliación a otros
+recursos y ensayo de concurrencia real. No aplicar el SQL hasta completar el corte.

@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 171 pruebas unitarias, lint, typecheck y build aprobados;
+- 175 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -73,8 +73,9 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    Antes de cargas frecuentes, diseñar aislamiento coherente y medir volumen
    representativo aislado. Detalles medidos localmente el 27/09 hasta 5000 filas
    por recurso: 150 páginas/56 MB en conjunto; ver HISTORY_VOLUME_20260927.md.
-   Contrato atómico definido en src/server/db/HISTORY_PROJECTION.md; pendiente
-   reductores compartidos implementados. Pendiente proyección/RPC local y
+   Contrato atómico definido en src/server/db/HISTORY_PROJECTION.md;
+   reductores compartidos y primera proyección/RPC de estadísticas probados localmente.
+   SQL pendiente separado; faltan conexión de escritores, otros recursos y
    medición de standings/concurrencia.
    No hay scheduler de sincronización deportiva.
 3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
@@ -1376,3 +1377,19 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Sin migraciones, escrituras remotas, proveedor ni cambios UI. No reduce aún
   requests: próximo bloque es validación de proyección persistida y RPC/CAS local
   con restricciones/permisos y reconstrucción; después, ensayo multi-conexión.
+
+## Persistencia atómica de estadísticas, solo local — 27/09/2026
+
+- [x] Primera integración vertical: proyección con FK al historial, RPC de lectura
+  de un corte y commit CAS privado. INSERT y selección se confirman/revierten juntos.
+- [x] Rol definer NOLOGIN/NOBYPASSRLS de alcance mínimo; INSERT directo revocado
+  en la propuesta. SQL separado en supabase/pending/, fuera de migraciones activas.
+- [x] Backend valida estado/payload, conserva retries entre generaciones, usa
+  append/replay retroactivo y limita a tres intentos ante conflictos de generación.
+- [x] 175 pruebas, lint, typecheck y build aprobados. PostgreSQL local verifica
+  bootstrap histórico/vacío, equivalencia, retroactivos, rollback, ACL y conflictos
+  serializados con recálculo. No certifica concurrencia multi-conexión.
+- Sin cambios remotos ni proveedores. Importadores/UI actuales NO conectados al
+  nuevo mecanismo. Pendiente corte de escritores/reconstrucción, pruebas de dos
+  conexiones y extensión a alineaciones/eventos antes de habilitar frecuencia.
+  Detalle operacional y advertencia de activación: supabase/pending/README.md.

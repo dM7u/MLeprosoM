@@ -25,7 +25,7 @@ export function createStatisticsObservation({id, fixture, body, observedAt, fail
     observed_at:normalized.fetched_at, status:failed?'failed':normalized.state, payload:failed?null:normalized};
 }
 
-function validateObservation(row, fixture, now) {
+export function validateStatisticsObservation(row, fixture, now) {
   if (!row || row.fixture_id !== fixture.id || bindingKeys.some(k=>row[k] !== fixture[k])) throw new Error('STATS_IDENTITY_MISMATCH');
   const failed = row.status === 'failed';
   const clean = createStatisticsObservation({id:row.id,fixture,observedAt:row.observed_at,failed,now,
@@ -40,7 +40,7 @@ function validateObservation(row, fixture, now) {
 /** Append-only atomic observation; an identical ID is a retry, never an overwrite. */
 export async function storeStatisticsObservation(db, observation, {now = Date.now()} = {}) {
   const fixture = {id:observation?.fixture_id,...Object.fromEntries(bindingKeys.map(k=>[k,observation?.[k]]))};
-  const row = validateObservation(observation, fixture, now);
+  const row = validateStatisticsObservation(observation, fixture, now);
   try {
     const {error} = await db.from('team_statistics_observations').insert(row);
     if (!error) return {id:row.id,stored:true,replay:false};
@@ -61,7 +61,7 @@ export function statisticsView(rows, {fixture, ttlMs, now = Date.now()}) {
   validateFixture(fixture);
   dataState({data:null,ttlMs,now});
   if (!Array.isArray(rows)) throw new Error('STATS_HISTORY_LIMIT');
-  const validated=rows.map(row=>validateObservation(row,fixture,now));
+  const validated=rows.map(row=>validateStatisticsObservation(row,fixture,now));
   return historySelectionView(replayHistorySelection('statistics',validated),{ttlMs,now});
 }
 
