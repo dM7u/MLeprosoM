@@ -50,8 +50,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
 
 0. Chequeo externo Supabase activo en GitHub Actions cada seis horas, secretos
    configurados y primera ejecución manual remota exitosa (36251515374).
-   Confirmar preferencias personales de avisos Actions; primer disparo por
-   horario aún no observado. No realiza sincronizaciones deportivas.
+   Disparos por horario verificados exitosos el 27/09: 36282962719 y 36300400202.
+   Preferencias personales de avisos Actions no verificadas. No sincroniza datos deportivos.
 
 1. Contraste administrativo de los cinco historiales cerrado el 26/09 para los
    campos exportados por `supabase/check-history-access.sql`. No repetir migraciones.
@@ -74,8 +74,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    representativo aislado. No hay scheduler de sincronización deportiva.
 3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
    desde publicación, fuente/fecha visibles y exclusión al iniciar el partido.
-   Muestra histórica validada pero no elegible; falta evidencia actual apta,
-   diseño de revisiones/conflictos y persistencia/lectura antes de UI.
+   Muestra histórica validada pero no elegible; búsqueda acotada del 27/09 sin
+   evidencia actual apta. Contrato de revisiones/conflictos preparado en
+   src/server/editorial/PERSISTENCE.md; próximo bloque: pruebas e implementación
+   local de almacenamiento/selección, antes de activación remota y UI.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
 
 ### Revisión visual de ficha ampliada — 25/09/2026
@@ -1221,3 +1223,17 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Sin migraciones, persistencia, cambios UI ni consultas a proveedores deportivos.
   Contrato en src/server/editorial/REVIEWED_XI.md. Próximo: evidencia actual apta
   y diseño de persistencia/revisiones antes de conectar presentación.
+
+## Seguimiento y contrato editorial — 27/09/2026
+
+- [x] Revisar próximo encuentro en catálogo fechado y buscar evidencia pública
+  de La Capital: no apareció XI apto para Lanús. No implica que no exista.
+- [x] Documentar contrato previo a migración: revisión inmutable, identidad,
+  idempotencia, cabeza/correcciones/retractación atómicas, conflictos sin rescatar
+  una versión sustituida, TTL y prioridad oficial sin confundir fuente periodística.
+- [x] Verificar dos ejecuciones programadas exitosas del job de salud mediante
+  GitHub API de solo lectura; cerrar pendiente de primer disparo por horario.
+- Documentos: docs/research/XI_FOLLOWUP_20260927.md y
+  src/server/editorial/PERSISTENCE.md. Sin implementación de persistencia/UI,
+  sin escrituras remotas ni consultas a proveedores deportivos. git diff --check
+  aprobado; no se repiten pruebas de aplicación por este bloque documental.
