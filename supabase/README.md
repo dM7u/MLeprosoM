@@ -40,6 +40,17 @@ No equivale a ejecutar ni certificar la auditoría en Supabase remoto.
 
 # Primera migración
 
+## XI periodístico — preparado solo localmente, 27/09/2026
+
+`migrations/20260927000100_editorial_xi_revisions.sql` agrega historial privado,
+cadena única de correcciones/retractaciones y RPC de lectura de cabezas en un
+solo SELECT. Probado con `node --conditions=react-server tests/database/editorial-migration.mjs`.
+No aplicado en Supabase remoto; no hay carga ni UI editorial. Contrato y límites
+en `src/server/editorial/PERSISTENCE.md`. No ejecutar como parte de la auditoría
+anterior de cinco historiales: es una migración nueva e independiente.
+
+## Fundación histórica
+
 `migrations/20260917000100_initial_football.sql` crea cinco tablas vacías.
 No importa muestras, no modifica tablas existentes ni aplica datos de investigación.
 RLS habilitado sin políticas públicas; permisos CRUD solo para `service_role`.

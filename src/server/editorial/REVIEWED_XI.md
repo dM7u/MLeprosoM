@@ -1,6 +1,7 @@
 # Evidencia periodística revisada de XI
 
-Validador y CLI de prueba, sin ingesta automática, persistencia ni UI.
+Validador y CLI de prueba, sin ingesta automática ni UI. Persistencia/revisiones
+implementadas y probadas solo localmente; ver PERSISTENCE.md. Este CLI no escribe.
 Fuente inicial seleccionada: La Capital/Ovación. El validador no certifica que
 la transcripción sea fiel: requiere revisión humana/editorial explícita del vínculo
 de partido y de los nombres, sin deducirlos del texto mediante coincidencia difusa.

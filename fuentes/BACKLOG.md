@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 141 pruebas unitarias, lint, typecheck y build aprobados;
+- 148 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -76,8 +76,9 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    desde publicación, fuente/fecha visibles y exclusión al iniciar el partido.
    Muestra histórica validada pero no elegible; búsqueda acotada del 27/09 sin
    evidencia actual apta. Contrato de revisiones/conflictos preparado en
-   src/server/editorial/PERSISTENCE.md; próximo bloque: pruebas e implementación
-   local de almacenamiento/selección, antes de activación remota y UI.
+   src/server/editorial/PERSISTENCE.md; almacenamiento/selección local implementado.
+   Próximo: importador con lookup actual y dry-run antes de aplicar migración
+   remota. Evidencia actual apta y composición de fuentes pendientes antes de UI.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
 
 ### Revisión visual de ficha ampliada — 25/09/2026
@@ -1237,3 +1238,26 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   src/server/editorial/PERSISTENCE.md. Sin implementación de persistencia/UI,
   sin escrituras remotas ni consultas a proveedores deportivos. git diff --check
   aprobado; no se repiten pruebas de aplicación por este bloque documental.
+
+## Almacenamiento editorial local — 27/09/2026
+
+- [x] Migración privada editorial_xi_revisions: versión/hash, FK de contexto,
+  raíz/sucesora únicas, trigger de identidades y cronología, RLS y SELECT/INSERT
+  exclusivos para rol operativo. Historial sin UPDATE/DELETE/TRUNCATE.
+- [x] Creación/validación de revisiones, retries idempotentes y conflicto de UUID;
+  correcciones y retractaciones conservan historia. Retractación posterior a
+  reprogramación preserva exactamente la evidencia anterior y su publicación.
+- [x] RPC privada de cabezas con una sola consulta, incluye retractaciones y
+  conflictos; overflow mayor a 100 claves falla cerrado. Sin paginación truncada.
+- [x] Selección local: TTL 48 h al leer, kickoff/estado actual, parcial sin rescate
+  antiguo, nombres conservados y conflicto entre fuentes sin desempate arbitrario.
+  No hay canal de evidencia oficial ni UI: no se afirma prioridad integrada.
+- [x] 148 pruebas, lint, typecheck y build aprobados. PostgreSQL local prueba
+  permisos, identidad, idempotencia, sucesoras competidoras, retractación,
+  reprogramación, inmutabilidad, RPC read-only y overflow. Auditoría previa de
+  cinco historiales sigue pasando con el conjunto nuevo de migraciones.
+- La competencia de inserciones se probó en PGlite serializado; la unicidad SQL
+  garantiza una sucesora, pero no se hizo ensayo de carga multi-conexión remoto.
+- Sin consultas/proveedores ni escrituras remotas. Migración sin aplicar y sin
+  importador/UI. Contrato: src/server/editorial/PERSISTENCE.md. Próximo bloque:
+  lookup actual de contexto e importador dry-run, antes de habilitación remota.
