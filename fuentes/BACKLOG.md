@@ -71,7 +71,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    Home ya reutiliza lote/revisiones dentro de una petición para anual/torneo,
    sin cache global ni perder revalidación de denegaciones (26/09).
    Antes de cargas frecuentes, diseñar aislamiento coherente y medir volumen
-   representativo aislado. No hay scheduler de sincronización deportiva.
+   representativo aislado. Detalles medidos localmente el 27/09 hasta 5000 filas
+   por recurso: 150 páginas/56 MB en conjunto; ver HISTORY_VOLUME_20260927.md.
+   Pendiente proyección atómica y medición de standings/concurrencia.
+   No hay scheduler de sincronización deportiva.
 3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
    desde publicación, fuente/fecha visibles y exclusión al iniciar el partido.
    Muestra histórica validada pero no elegible; búsqueda acotada del 27/09 sin
@@ -1327,3 +1330,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Sin escrituras remotas ni consultas a proveedores. UI implementada; verificación
   positiva real pendiente de evidencia vigente y contexto actualizado. Canal
   oficial directo aún no implementado; no se afirma verificación oficial.
+
+## Escala local de historiales — 27/09/2026
+
+- [x] Script reproducible en PGlite en memoria, migraciones reales y tres lectores
+  de detalle; 1/100/1000/5000 filas, tres repeticiones y cap servidor 25 adicional.
+- [x] 45 recorridos aprobados: conteo completo, páginas esperadas, retención ante
+  failed/predicted final y fechas originales conservadas. Lint y diff aprobados.
+- Con 5000 filas por recurso: 150 páginas y 56253214 bytes JSON en conjunto;
+  esto no mide latencia de ficha ni Supabase. Datos de prueba solo en memoria.
+- Contrato y decisión: docs/research/HISTORY_VOLUME_20260927.md. Mantener ingesta
+  manual; siguiente diseño debe resolver proyección validada atómica y transición
+  de escritores antes de habilitar frecuencia. No se implementó esa proyección.
+- No hay cambios de aplicación, DB remota ni requests a proveedores. Suite previa
+  159/build/typecheck conservada, sin repetirla por este bloque de medición.
+  Standings y concurrencia multi-conexión siguen pendientes de evaluación propia.

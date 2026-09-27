@@ -48,3 +48,11 @@ y reloj. El contexto pertenece a una invocación de Page, sin cache global ni
 retención entre peticiones. El lector individual sigue disponible y compatible.
 Una revocación posterior a la comprobación final se observa en la siguiente
 petición, como antes; esto no agrega aislamiento transaccional de base de datos.
+
+Volumen local medido el 27/09: tres detalles, 1/100/1000/5000 observaciones,
+45 recorridos en PostgreSQL embebido y lectores reales. Conservación de fechas y
+fallback aprobada; cap 25 detectado como 40 páginas para 1000 filas. Resultado:
+5000 observaciones por cada recurso implican 150 páginas y unos 56 MB JSON en
+conjunto. No equivale a tráfico/latencia Supabase ni ensayo concurrente.
+Método, límites y siguiente diseño: docs/research/HISTORY_VOLUME_20260927.md.
+No cambia el contrato operativo ni habilita sincronización frecuente.

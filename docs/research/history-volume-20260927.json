@@ -1,0 +1,399 @@
+{
+  "recorded_at": "2026-09-27T15:03:53.494Z",
+  "environment": "PGlite in-memory, synthetic clones of saved payload shapes, 3 sequential local runs; no HTTP or network",
+  "node": "v24.21.0",
+  "remote_writes": 0,
+  "provider_requests": 0,
+  "results": [
+    {
+      "table": "team_statistics_observations",
+      "observations": 1,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 892,
+          "elapsed_ms": 3.97
+        },
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 892,
+          "elapsed_ms": 1.27
+        },
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 892,
+          "elapsed_ms": 1.04
+        }
+      ],
+      "median_ms": 1.27
+    },
+    {
+      "table": "team_statistics_observations",
+      "observations": 100,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 88576,
+          "elapsed_ms": 9.14
+        },
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 88576,
+          "elapsed_ms": 7.25
+        },
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 88576,
+          "elapsed_ms": 6.71
+        }
+      ],
+      "median_ms": 7.25
+    },
+    {
+      "table": "team_statistics_observations",
+      "observations": 1000,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 890285,
+          "elapsed_ms": 82.47
+        },
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 890285,
+          "elapsed_ms": 79.87
+        },
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 890285,
+          "elapsed_ms": 74.55
+        }
+      ],
+      "median_ms": 79.87
+    },
+    {
+      "table": "team_statistics_observations",
+      "observations": 1000,
+      "page_cap": 25,
+      "runs": [
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 890315,
+          "elapsed_ms": 136.1
+        },
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 890315,
+          "elapsed_ms": 138.01
+        },
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 890315,
+          "elapsed_ms": 141.95
+        }
+      ],
+      "median_ms": 138.01
+    },
+    {
+      "table": "team_statistics_observations",
+      "observations": 5000,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 4453625,
+          "elapsed_ms": 958.43
+        },
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 4453625,
+          "elapsed_ms": 909.99
+        },
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 4453625,
+          "elapsed_ms": 972.34
+        }
+      ],
+      "median_ms": 958.43
+    },
+    {
+      "table": "lineup_observations",
+      "observations": 1,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 5278,
+          "elapsed_ms": 1.95
+        },
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 5278,
+          "elapsed_ms": 2.81
+        },
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 5278,
+          "elapsed_ms": 1.72
+        }
+      ],
+      "median_ms": 1.95
+    },
+    {
+      "table": "lineup_observations",
+      "observations": 100,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 523009,
+          "elapsed_ms": 34.38
+        },
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 523009,
+          "elapsed_ms": 33.84
+        },
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 523009,
+          "elapsed_ms": 35.56
+        }
+      ],
+      "median_ms": 34.38
+    },
+    {
+      "table": "lineup_observations",
+      "observations": 1000,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 5272218,
+          "elapsed_ms": 354.75
+        },
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 5272218,
+          "elapsed_ms": 342.2
+        },
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 5272218,
+          "elapsed_ms": 338.06
+        }
+      ],
+      "median_ms": 342.2
+    },
+    {
+      "table": "lineup_observations",
+      "observations": 1000,
+      "page_cap": 25,
+      "runs": [
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 5272248,
+          "elapsed_ms": 420.07
+        },
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 5272248,
+          "elapsed_ms": 432.9
+        },
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 5272248,
+          "elapsed_ms": 430.36
+        }
+      ],
+      "median_ms": 430.36
+    },
+    {
+      "table": "lineup_observations",
+      "observations": 5000,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 26379658,
+          "elapsed_ms": 3072.8
+        },
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 26379658,
+          "elapsed_ms": 3012.43
+        },
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 26379658,
+          "elapsed_ms": 2959.77
+        }
+      ],
+      "median_ms": 3012.43
+    },
+    {
+      "table": "incident_observations",
+      "observations": 1,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 5085,
+          "elapsed_ms": 1.95
+        },
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 5085,
+          "elapsed_ms": 2.38
+        },
+        {
+          "pages": 1,
+          "returned": 1,
+          "bytes_json": 5085,
+          "elapsed_ms": 1.25
+        }
+      ],
+      "median_ms": 1.95
+    },
+    {
+      "table": "incident_observations",
+      "observations": 100,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 503782,
+          "elapsed_ms": 35.26
+        },
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 503782,
+          "elapsed_ms": 34.33
+        },
+        {
+          "pages": 1,
+          "returned": 100,
+          "bytes_json": 503782,
+          "elapsed_ms": 35.57
+        }
+      ],
+      "median_ms": 35.26
+    },
+    {
+      "table": "incident_observations",
+      "observations": 1000,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 5080091,
+          "elapsed_ms": 381.56
+        },
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 5080091,
+          "elapsed_ms": 373.78
+        },
+        {
+          "pages": 10,
+          "returned": 1000,
+          "bytes_json": 5080091,
+          "elapsed_ms": 376.56
+        }
+      ],
+      "median_ms": 376.56
+    },
+    {
+      "table": "incident_observations",
+      "observations": 1000,
+      "page_cap": 25,
+      "runs": [
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 5080121,
+          "elapsed_ms": 445.07
+        },
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 5080121,
+          "elapsed_ms": 452.63
+        },
+        {
+          "pages": 40,
+          "returned": 1000,
+          "bytes_json": 5080121,
+          "elapsed_ms": 451.35
+        }
+      ],
+      "median_ms": 451.35
+    },
+    {
+      "table": "incident_observations",
+      "observations": 5000,
+      "page_cap": 100,
+      "runs": [
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 25419931,
+          "elapsed_ms": 3183.01
+        },
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 25419931,
+          "elapsed_ms": 3250.25
+        },
+        {
+          "pages": 50,
+          "returned": 5000,
+          "bytes_json": 25419931,
+          "elapsed_ms": 3632.85
+        }
+      ],
+      "median_ms": 3250.25
+    }
+  ]
+}
