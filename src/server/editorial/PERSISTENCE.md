@@ -3,7 +3,7 @@
 Estado 27/09/2026: migración aplicada por el usuario y catálogo remoto
 contrastado. CLI, primera carga histórica y retry idempotente verificados;
 lector remoto devuelve unavailable sin datos para el partido finalizado.
-UI pendiente. Política de 48 horas aprobada. No se inventó un XI actual.
+Panel Home integrado con bloqueo por contexto desactualizado. Política de 48 horas aprobada. No se inventó un XI actual.
 
 ## Unidad de almacenamiento
 
@@ -112,7 +112,8 @@ atribuciones. Eso compara nombres, no resuelve IDs ni infiere formación.
 
 No existe adaptador de evidencia oficial directa: este servicio devuelve únicamente
 origen periodístico y claims del medio. La prioridad oficial deberá componerse con
-ese futuro canal antes de conectar UI; no se simula con un booleano del consumidor.
+ese futuro canal cuando exista; el panel actual solo identifica versión periodística
+y remite a la ficha ante alineaciones del proveedor. No afirma verificación oficial.
 
 Verificación local:
 
@@ -139,6 +140,24 @@ falla cerrado en ese estado. Readiness no certifica permisos de INSERT.
 La evaluación usa el fixture persistido, cuya fecha se muestra; no refresca el
 proveedor ni acredita actualidad deportiva. Nunca publica ni conecta UI.
 
-Habilitación remota verificada el 27/09; siguiente bloque: presentación.
+Habilitación remota y panel Home implementados el 27/09.
 La muestra histórica sirve para conservar evidencia, no para poblar el próximo
-partido. UI sigue pendiente de evidencia apta y composición con otras fuentes.
+partido. El caso positivo real sigue pendiente de evidencia apta.
+
+## Presentación Home — 27/09/2026
+
+`upcoming-xi.mjs` consume solo DB bajo el scope revisado. Exige catálogo completo
+fresh, fixture futuro notstarted y fetched_at dentro del TTL existente de fixtures.
+Contexto viejo/desconocido/ajeno no dispara lecturas de detalle ni muestra nombres.
+Primero consulta alineaciones BSD: datos incluso parciales o stale remiten a la
+ficha; error bloquea el fallback. No convierte confirmación BSD en oficial.
+Sin alineaciones guardadas, lee cabezas editoriales y aplica las reglas existentes.
+El canal oficial directo sigue sin implementar y no se afirma haberlo consultado.
+
+El cliente recibe solo proyección de nombres/fuentes, nunca revisores ni secretos.
+Muestra fecha/enlace, claim del medio y origen periodístico. Caduca al mínimo de
+kickoff, publicación + 48 h y vencimiento del contexto; timer local y comprobación
+al volver a la pestaña, sin polling remoto. Una reprogramación/retractación nueva
+se descubre al volver a consultar la página; no hay seguimiento en vivo.
+Estados vacíos/error/stale muestran Sin datos; loading usa el estado de Home.
+Caso positivo probado con fixtures sintéticos; pendiente muestra real vigente.

@@ -1,3 +1,5 @@
+import PossibleXi from './possible-xi';
+import {upcomingXiView} from '@/server/editorial/upcoming-xi-view';
 import Link from 'next/link';
 import {fixtureView, type StoredFixture} from '@/server/db/fixture-view';
 import {dashboardStandingsSet, highlightedTeam, type TableView} from '@/server/db/dashboard-standings';
@@ -30,6 +32,7 @@ export default async function Page({searchParams}:{searchParams:Promise<Record<s
   const annual=standings.annual;
   const now=annual.checked_at;
   const {finished,upcoming,unresolved}=dashboardFixtures(snapshot.data,now) as {finished:StoredFixture[];upcoming:StoredFixture[];unresolved:StoredFixture[]};
+  const xi=await upcomingXiView(upcoming[0],snapshot.status==='fresh'&&snapshot.sources.every(source=>source.status==='fresh'));
   const tournaments=[...new Set(annual.selections?.flatMap(s=>s.tournament?[s.tournament]:[])??[])];
   const requested=typeof params.table==='string'?params.table:undefined;
   const selected=requested && [...tournaments,'Anual','Promedios'].includes(requested)?requested:defaultTournament(snapshot.data,tournaments,now);
@@ -43,6 +46,7 @@ export default async function Page({searchParams}:{searchParams:Promise<Record<s
     <main id="contenido"><header className="page-header"><div><p className="eyebrow">NEWELL’S OLD BOYS / EL TABLERO</p><h1>La Lepra, en números.</h1><p className="muted">Para discutir con datos. La pasión ya la tenemos.</p></div><span className="badge">Actualización manual</span></header>
       <section className="hero"><div><p className="eyebrow">PRÓXIMO PARTIDO GUARDADO</p><h2>Otra fecha.<br/>{" "}<span>La misma camiseta.</span></h2><p className="fine">Horarios de Argentina · Sin seguimiento en vivo</p></div><div>{upcoming[0]?<FixtureCard fixture={upcoming[0]}/>:<p className="empty">Sin datos de un próximo partido con fecha futura confirmada.</p>}</div></section>
       <div className={`data-notice ${snapshot.status==='stale'?'warning':''}`} role="status"><strong>Partidos · {snapshot.label}</strong><span>{snapshot.updatedAt?`Consultados: ${fixtureDate(snapshot.updatedAt)}`:'Sin fecha de actualización'}</span>{snapshot.sources.map(s=><span key={s.provider}>{providerLabel(s.provider)}: {s.status==='error'?'No se pudo consultar':s.label}</span>)}{snapshot.status==='error'&&<span>No pudimos leer los partidos.</span>}</div>
+      <PossibleXi view={xi} matchId={upcoming[0]?.id}/>
       {upcoming[0]&&<section className="panel" aria-labelledby="opponent-heading"><p className="eyebrow">PRÓXIMO PARTIDO · TABLA ANUAL DE LIGA</p><h2 id="opponent-heading">Newell’s y el próximo rival</h2>{opponentRows.length&&annual.snapshot?<><div className={`data-notice ${annual.status==='stale'?'warning':''}`}><strong>{annual.label}</strong>{annual.results_as_of&&<span>Resultados observados: {fixtureDate(annual.results_as_of)}</span>}</div><Positions view={{...annual,snapshot:{...annual.snapshot,rows:opponentRows}}}/><p className="table-note">Local primero, visitante después. Posiciones calculadas en la anual, no oficiales; empates y ajustes disciplinarios pendientes. No representa la posición al momento del futuro partido.</p></>:<p className="empty">Sin datos de una tabla anual compatible para ambos equipos.</p>}</section>}
       <div className="matches-grid" id="partidos"><Matches title="Últimos 3 partidos" rows={finished.slice(0,3)}/><Matches title="Próximos 3 partidos" rows={upcoming.slice(0,3)}/></div>
       {selected!=='Promedios'&&<section className="panel" aria-labelledby="context-heading"><p className="eyebrow">{selected}{group?` · Zona ${group}`:' · General'}</p><h2 id="context-heading">Newell’s y su entorno en la tabla</h2><div className={`data-notice ${view.status==='stale'?'warning':''}`}><strong>{view.label}</strong>{view.results_as_of&&<span>Resultados observados: {fixtureDate(view.results_as_of)}</span>}</div>{contextRows.length&&view.snapshot?<Positions view={{...view,snapshot:{...view.snapshot,rows:contextRows}}}/>:<p className="empty">Sin datos de Newell’s en esta selección.</p>}<p className="table-note">Filas contiguas en el orden de la tabla seleccionada. Posiciones calculadas, no oficiales; los empates pendientes no determinan quién está por encima o por debajo. Ajustes disciplinarios sin verificar.</p></section>}

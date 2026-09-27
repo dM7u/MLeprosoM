@@ -62,3 +62,10 @@ Cero requests y escrituras. La muestra real es histórica: once nombres explíci
 afirmación confirmed_by_outlet, autor desconocido y published_at null. Resultado
 esperado: unavailable, fixture_not_upcoming y publication_time_unknown.
 Los casos positivos de tests son sintéticos y solo existen en tests/.
+
+## Estado de presentación — 27/09/2026
+
+Home incorpora Posible XI con reglas de `PERSISTENCE.md`: exige contexto fresco,
+consulta primero alineaciones guardadas y revalida evidencia editorial vigente.
+El caso real actual muestra Sin datos; no hay muestra positiva vigente ni canal
+oficial directo. Los requisitos anteriores de UI pendiente son históricos.

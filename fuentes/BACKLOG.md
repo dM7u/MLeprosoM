@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 154 pruebas unitarias, lint, typecheck y build aprobados;
+- 159 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -79,8 +79,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    src/server/editorial/PERSISTENCE.md; almacenamiento/selección local implementado.
    Importador con lookup DB y dry-run consolidado en 958a827;
    persistencia remota aplicada y catálogo contrastado el 27/09; primera carga
-   histórica y retry sin duplicación verificados. Pendiente: presentación.
-   Evidencia actual apta y composición de fuentes pendientes antes de UI.
+   histórica y retry sin duplicación verificados. Panel Posible XI integrado en Home.
+   Evidencia actual apta pendiente para verificar el caso positivo real.
+   Contexto stale bloquea nombres; alineaciones BSD guardadas remiten a la ficha.
+   No existe aún canal oficial directo ni se afirma verificación oficial.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
 
 ### Revisión visual de ficha ampliada — 25/09/2026
@@ -1310,3 +1312,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   verificación Data API realizadas; git diff --check aprobado.
 - Próximo: presentación con fuente/fecha y vigencia de 48 h; evidencia actual apta
   y composición de fuentes siguen pendientes. No repetir migración ni carga nueva.
+
+## Posible XI en Home — 27/09/2026
+
+- [x] Panel con origen periodístico, fuente/enlace, fecha Argentina y claim del
+  medio. Sin esquema táctico inferido ni etiqueta oficial.
+- [x] Contexto fresh obligatorio, corte por kickoff/TTL, scope revisado y prioridad
+  de alineaciones BSD guardadas mediante acceso a ficha. Error bloquea fallback.
+- [x] Caducidad local mientras la página permanece abierta, sin requests extra.
+  Revisiones/reprogramaciones se revalidan en la siguiente lectura de página.
+- [x] 159 pruebas, lint, typecheck y build aprobados. Navegador local con datos
+  reales: panel Sin datos por contexto desactualizado y enlace a ficha correcto;
+  revisión visual de viewport disponible aprobada. No se cargó evidencia ficticia.
+- Sin escrituras remotas ni consultas a proveedores. UI implementada; verificación
+  positiva real pendiente de evidencia vigente y contexto actualizado. Canal
+  oficial directo aún no implementado; no se afirma verificación oficial.
