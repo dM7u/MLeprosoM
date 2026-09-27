@@ -1,0 +1,31 @@
+import {PGlite} from '../../.tools/db-validation/node_modules/@electric-sql/pglite/dist/index.js';
+import {readFileSync,readdirSync} from 'node:fs';
+import assert from 'node:assert/strict';
+const db=new PGlite();
+const sql=readFileSync('supabase/check-editorial-access.sql','utf8');
+const audit=async()=> (await db.query(sql)).rows[0].evidence;
+try {
+  await db.exec('create role anon; create role authenticated; create role service_role bypassrls;');
+  const missing=await audit();
+  assert.equal(missing.exists,false);
+  assert.equal(missing.access_ok,false);
+  assert.ok(missing.functions.every(f=>!f.exists));
+  for(const name of readdirSync('supabase/migrations').filter(n=>n.endsWith('.sql')).sort())await db.exec(readFileSync('supabase/migrations/'+name,'utf8'));
+  await db.exec('begin read only');
+  const result=await audit();
+  await db.exec('rollback');
+  assert.equal(result.access_ok,true);
+  assert.equal(result.triggers[0].enabled,'O');
+  assert.equal(result.policies.length,0);
+  const rpc=result.functions.find(f=>f.signature.includes('read_editorial'));
+  assert.deepEqual(rpc.execute,{anon:false,authenticated:false,service_role:true});
+  assert.equal(rpc.security_definer,false);
+  assert.equal(rpc.volatility,'s');
+  assert.match(rpc.definition,/limit 101/i);
+  await db.exec('grant execute on function read_editorial_xi_heads(uuid,uuid) to public; alter table editorial_xi_revisions disable trigger editorial_xi_binding; grant update(evidence) on editorial_xi_revisions to anon;');
+  const changed=await audit();
+  assert.equal(changed.access_ok,false);
+  assert.equal(changed.triggers[0].enabled,'D');
+  assert.equal(changed.functions.find(f=>f.signature.includes('read_editorial')).execute.anon,true);
+  console.log('PASS: editorial catalog audit read-only, missing objects, table/column and RPC permissions, disabled trigger');
+}finally{await db.close();}

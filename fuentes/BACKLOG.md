@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 148 pruebas unitarias, lint, typecheck y build aprobados;
+- 154 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -77,8 +77,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    Muestra histórica validada pero no elegible; búsqueda acotada del 27/09 sin
    evidencia actual apta. Contrato de revisiones/conflictos preparado en
    src/server/editorial/PERSISTENCE.md; almacenamiento/selección local implementado.
-   Próximo: importador con lookup actual y dry-run antes de aplicar migración
-   remota. Evidencia actual apta y composición de fuentes pendientes antes de UI.
+   Importador con lookup DB y dry-run consolidado en 958a827. Próximo:
+   aplicar migración remota desde SQL Editor administrativo y verificar catálogo
+   con supabase/check-editorial-access.sql; falta acceso administrativo disponible.
+   Evidencia actual apta y composición de fuentes pendientes antes de UI.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
 
 ### Revisión visual de ficha ampliada — 25/09/2026
@@ -1278,3 +1280,14 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Próximo: habilitar y verificar persistencia remota; después, presentación
   con fuente/fecha y política de 48 h. Ratings, promedios y desempates pendientes
   continúan fuera del bloque.
+
+## Preparación de habilitación editorial — 27/09/2026
+
+- [x] Auditoría SQL de tabla, índices, constraints, RLS, permisos por columna,
+  trigger y ambas funciones editoriales con EXECUTE efectivo y definiciones.
+- [x] Prueba PostgreSQL local: consulta read-only, objetos ausentes, concesiones
+  indebidas a PUBLIC/columna y trigger deshabilitado detectados.
+- [!] Aplicación remota pendiente: solo Data API configurada, sin conexión SQL
+  ni sesión administrativa disponible. Procedimiento concreto en supabase/README.md.
+- Sin escrituras remotas ni carga histórica. La auditoría no afirma que la
+  migración esté aplicada. Estado consolidado actualizado a 154 pruebas.

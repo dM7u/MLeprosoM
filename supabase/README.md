@@ -119,3 +119,23 @@ reintento sin duplicados, diferencias auditadas sin activar y permisos privados.
 No aplica la migración en Supabase ni prueba la Data API remota. No hay un
 puntero mutable de tabla activa: el futuro lector deberá considerar la última
 revisión por lote, incluida una denegación, según el contrato PERSISTENCE.md.
+
+## Habilitación editorial remota — pendiente de acceso administrativo
+
+La configuración local actual solo permite Data API. No hay conexión SQL ni
+sesión de navegador administrativa disponible. En SQL Editor del proyecto:
+
+1. Ejecutar `check-editorial-access.sql` (solo lectura). Si los objetos ya
+   existen, no repetir la migración: revisar primero la evidencia completa.
+2. Si no existen tabla ni funciones, ejecutar
+   `migrations/20260927000100_editorial_xi_revisions.sql` una vez.
+   Es transaccional y crea únicamente objetos editoriales nuevos.
+3. Ejecutar de nuevo `check-editorial-access.sql` y exportar el JSON completo.
+   No contiene filas de aplicación ni secretos. `access_ok` solo certifica
+   privilegios/RLS de tabla; contrastar también funciones, trigger y definiciones.
+4. Tras contraste, ejecutar dry-run y carga histórica controlada con retry,
+   verificar lectura y exclusión de publicación. UI continúa pendiente.
+
+Prueba local: `node tests/database/editorial-audit.mjs`. Verifica lectura dentro
+ de transacción read-only, objetos ausentes, permisos efectivos de columna y RPC,
+ y trigger deshabilitado. No reemplaza la evidencia administrativa remota.

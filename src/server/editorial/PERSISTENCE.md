@@ -2,7 +2,7 @@
 
 Estado 27/09/2026: almacenamiento y selección implementados y probados localmente
 en revisions.mjs y 20260927000100_editorial_xi_revisions.sql. Migración no aplicada
-remotamente, sin CLI de importación ni UI. Parte del validador REVIEWED_XI.md y
+remotamente. CLI con lookup/dry-run implementado; UI pendiente. Parte del validador REVIEWED_XI.md y
 de la política de 48 horas aprobada. No se inventó un XI actual.
 
 ## Unidad de almacenamiento
@@ -75,8 +75,9 @@ Pruebas necesarias: UUID idempotente/conflictivo; FK de partido/equipo; correcci
 y retractación; revisiones simultáneas; cabeza parcial sin rescate de XI antiguo;
 conflicto entre notas; fecha desconocida y límite exacto de 48 h; reprogramación;
 partido iniciado; prioridad oficial sin falsa oficialidad; errores sanitizados;
-lectura sin escrituras ni consulta al periódico. Aplicación remota y UI requieren
-además evidencia real apta, con publicación verificable y contexto actualizado.
+lectura sin escrituras ni consulta al periódico. La carga histórica conserva
+evidencia real sin habilitar publicación. La UI requiere evidencia apta,
+publicación verificable y contexto actualizado.
 
 ## Implementación local y límites
 
