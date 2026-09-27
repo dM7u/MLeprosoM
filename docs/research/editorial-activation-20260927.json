@@ -1,0 +1,15 @@
+{
+  "verified_at": "2026-09-27T10:30:01.320Z",
+  "revision_id": "3afe6a55-2d99-4e2e-b5ae-6193cefb49b4",
+  "heads": 1,
+  "read": {
+    "status": "unavailable",
+    "data": null,
+    "issues": [
+      "fixture_not_upcoming"
+    ]
+  },
+  "initial_insert_writes": 1,
+  "retry_writes": 0,
+  "provider_requests": 0
+}

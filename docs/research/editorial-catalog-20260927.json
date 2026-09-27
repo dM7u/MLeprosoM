@@ -1,0 +1,346 @@
+{
+  "kind": "r",
+  "owner": "postgres",
+  "table": "editorial_xi_revisions",
+  "exists": true,
+  "schema": "public",
+  "columns": [
+    {
+      "name": "id",
+      "type": "uuid",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "contract_version",
+      "type": "integer",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "fixture_id",
+      "type": "uuid",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "team_id",
+      "type": "uuid",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "source_url",
+      "type": "text",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "previous_id",
+      "type": "uuid",
+      "default": null,
+      "not_null": false
+    },
+    {
+      "name": "action",
+      "type": "text",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "reason",
+      "type": "text",
+      "default": null,
+      "not_null": false
+    },
+    {
+      "name": "reviewed_at",
+      "type": "timestamp with time zone",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "reviewer",
+      "type": "text",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "evidence",
+      "type": "jsonb",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "content_hash",
+      "type": "text",
+      "default": null,
+      "not_null": true
+    },
+    {
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "default": "now()",
+      "not_null": true
+    }
+  ],
+  "indexes": [
+    {
+      "valid": true,
+      "definition": "CREATE INDEX editorial_xi_fixture_team_idx ON public.editorial_xi_revisions USING btree (fixture_id, team_id)"
+    },
+    {
+      "valid": true,
+      "definition": "CREATE UNIQUE INDEX editorial_xi_revisions_id_fixture_id_team_id_source_url_key ON public.editorial_xi_revisions USING btree (id, fixture_id, team_id, source_url)"
+    },
+    {
+      "valid": true,
+      "definition": "CREATE UNIQUE INDEX editorial_xi_revisions_pkey ON public.editorial_xi_revisions USING btree (id)"
+    },
+    {
+      "valid": true,
+      "definition": "CREATE UNIQUE INDEX editorial_xi_revisions_previous_id_key ON public.editorial_xi_revisions USING btree (previous_id)"
+    },
+    {
+      "valid": true,
+      "definition": "CREATE UNIQUE INDEX editorial_xi_root_unique ON public.editorial_xi_revisions USING btree (fixture_id, team_id, source_url) WHERE (previous_id IS NULL)"
+    }
+  ],
+  "policies": [],
+  "triggers": [
+    {
+      "name": "editorial_xi_binding",
+      "enabled": "O",
+      "definition": "CREATE TRIGGER editorial_xi_binding BEFORE INSERT ON public.editorial_xi_revisions FOR EACH ROW EXECUTE FUNCTION check_editorial_xi_binding()",
+      "function_definition": "CREATE OR REPLACE FUNCTION public.check_editorial_xi_binding()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog', 'public'\nAS $function$\r\nbegin\r\n  if not exists (\r\n    select 1 from public.fixtures f\r\n    join public.teams h on h.id=f.home_team_id\r\n    join public.teams a on a.id=f.away_team_id\r\n    join public.seasons s on s.id=f.season_id\r\n    join public.competitions c on c.id=s.competition_id\r\n    where f.id=new.fixture_id and new.team_id in (f.home_team_id,f.away_team_id)\r\n      and new.evidence->'binding'->>'provider'=f.provider\r\n      and new.evidence->'binding'->>'fixture_external_id'=f.external_id\r\n      and new.evidence->'binding'->>'competition_external_id'=c.external_id\r\n      and new.evidence->'binding'->>'season_external_id'=s.external_id\r\n      and new.evidence->'binding'->>'home_external_id'=h.external_id\r\n      and new.evidence->'binding'->>'away_external_id'=a.external_id\r\n      and (new.action='retract' or (new.evidence->'binding'->>'kickoff_at')::timestamptz=f.kickoff_at)\r\n      and new.evidence->>'team_external_id'=case when new.team_id=h.id then h.external_id else a.external_id end\r\n  ) then raise exception 'EDITORIAL_XI_BINDING_MISMATCH'; end if;\r\n  if new.previous_id is not null and not exists (\r\n    select 1 from public.editorial_xi_revisions r\r\n    where r.id=new.previous_id and r.reviewed_at<=new.reviewed_at\r\n      and (new.action<>'retract' or r.evidence=new.evidence)\r\n  ) then raise exception 'EDITORIAL_XI_INVALID_PREDECESSOR'; end if;\r\n  return new;\r\nend;\r\n$function$\n"
+    }
+  ],
+  "access_ok": true,
+  "functions": [
+    {
+      "exists": true,
+      "execute": {
+        "anon": false,
+        "service_role": true,
+        "authenticated": false
+      },
+      "signature": "public.check_editorial_xi_binding()",
+      "definition": "CREATE OR REPLACE FUNCTION public.check_editorial_xi_binding()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO 'pg_catalog', 'public'\nAS $function$\r\nbegin\r\n  if not exists (\r\n    select 1 from public.fixtures f\r\n    join public.teams h on h.id=f.home_team_id\r\n    join public.teams a on a.id=f.away_team_id\r\n    join public.seasons s on s.id=f.season_id\r\n    join public.competitions c on c.id=s.competition_id\r\n    where f.id=new.fixture_id and new.team_id in (f.home_team_id,f.away_team_id)\r\n      and new.evidence->'binding'->>'provider'=f.provider\r\n      and new.evidence->'binding'->>'fixture_external_id'=f.external_id\r\n      and new.evidence->'binding'->>'competition_external_id'=c.external_id\r\n      and new.evidence->'binding'->>'season_external_id'=s.external_id\r\n      and new.evidence->'binding'->>'home_external_id'=h.external_id\r\n      and new.evidence->'binding'->>'away_external_id'=a.external_id\r\n      and (new.action='retract' or (new.evidence->'binding'->>'kickoff_at')::timestamptz=f.kickoff_at)\r\n      and new.evidence->>'team_external_id'=case when new.team_id=h.id then h.external_id else a.external_id end\r\n  ) then raise exception 'EDITORIAL_XI_BINDING_MISMATCH'; end if;\r\n  if new.previous_id is not null and not exists (\r\n    select 1 from public.editorial_xi_revisions r\r\n    where r.id=new.previous_id and r.reviewed_at<=new.reviewed_at\r\n      and (new.action<>'retract' or r.evidence=new.evidence)\r\n  ) then raise exception 'EDITORIAL_XI_INVALID_PREDECESSOR'; end if;\r\n  return new;\r\nend;\r\n$function$\n",
+      "volatility": "v",
+      "security_definer": false
+    },
+    {
+      "exists": true,
+      "execute": {
+        "anon": false,
+        "service_role": true,
+        "authenticated": false
+      },
+      "signature": "public.read_editorial_xi_heads(uuid,uuid)",
+      "definition": "CREATE OR REPLACE FUNCTION public.read_editorial_xi_heads(p_fixture_id uuid, p_team_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO 'pg_catalog', 'public'\nAS $function$\r\n  select case when count(*)>100 then null else coalesce(jsonb_agg(to_jsonb(heads) order by heads.source_url),'[]'::jsonb) end\r\n  from (\r\n    select r.* from public.editorial_xi_revisions r\r\n    where r.fixture_id=p_fixture_id and r.team_id=p_team_id\r\n      and not exists (select 1 from public.editorial_xi_revisions child where child.previous_id=r.id)\r\n    limit 101\r\n  ) heads;\r\n$function$\n",
+      "volatility": "s",
+      "security_definer": false
+    }
+  ],
+  "privileges": [
+    {
+      "role": "anon",
+      "allowed": false,
+      "expected": false,
+      "privilege": "DELETE"
+    },
+    {
+      "role": "anon",
+      "allowed": false,
+      "expected": false,
+      "privilege": "INSERT"
+    },
+    {
+      "role": "anon",
+      "allowed": false,
+      "expected": false,
+      "privilege": "REFERENCES"
+    },
+    {
+      "role": "anon",
+      "allowed": false,
+      "expected": false,
+      "privilege": "SELECT"
+    },
+    {
+      "role": "anon",
+      "allowed": false,
+      "expected": false,
+      "privilege": "TRIGGER"
+    },
+    {
+      "role": "anon",
+      "allowed": false,
+      "expected": false,
+      "privilege": "TRUNCATE"
+    },
+    {
+      "role": "anon",
+      "allowed": false,
+      "expected": false,
+      "privilege": "UPDATE"
+    },
+    {
+      "role": "authenticated",
+      "allowed": false,
+      "expected": false,
+      "privilege": "DELETE"
+    },
+    {
+      "role": "authenticated",
+      "allowed": false,
+      "expected": false,
+      "privilege": "INSERT"
+    },
+    {
+      "role": "authenticated",
+      "allowed": false,
+      "expected": false,
+      "privilege": "REFERENCES"
+    },
+    {
+      "role": "authenticated",
+      "allowed": false,
+      "expected": false,
+      "privilege": "SELECT"
+    },
+    {
+      "role": "authenticated",
+      "allowed": false,
+      "expected": false,
+      "privilege": "TRIGGER"
+    },
+    {
+      "role": "authenticated",
+      "allowed": false,
+      "expected": false,
+      "privilege": "TRUNCATE"
+    },
+    {
+      "role": "authenticated",
+      "allowed": false,
+      "expected": false,
+      "privilege": "UPDATE"
+    },
+    {
+      "role": "service_role",
+      "allowed": false,
+      "expected": false,
+      "privilege": "DELETE"
+    },
+    {
+      "role": "service_role",
+      "allowed": true,
+      "expected": true,
+      "privilege": "INSERT"
+    },
+    {
+      "role": "service_role",
+      "allowed": false,
+      "expected": false,
+      "privilege": "REFERENCES"
+    },
+    {
+      "role": "service_role",
+      "allowed": true,
+      "expected": true,
+      "privilege": "SELECT"
+    },
+    {
+      "role": "service_role",
+      "allowed": false,
+      "expected": false,
+      "privilege": "TRIGGER"
+    },
+    {
+      "role": "service_role",
+      "allowed": false,
+      "expected": false,
+      "privilege": "TRUNCATE"
+    },
+    {
+      "role": "service_role",
+      "allowed": false,
+      "expected": false,
+      "privilege": "UPDATE"
+    }
+  ],
+  "constraints": [
+    {
+      "name": "editorial_xi_revisions_action_check",
+      "validated": true,
+      "definition": "CHECK ((action = ANY (ARRAY['review'::text, 'retract'::text])))"
+    },
+    {
+      "name": "editorial_xi_revisions_check",
+      "validated": true,
+      "definition": "CHECK (((previous_id IS NULL) OR (previous_id <> id)))"
+    },
+    {
+      "name": "editorial_xi_revisions_check1",
+      "validated": true,
+      "definition": "CHECK (((action <> 'retract'::text) OR ((previous_id IS NOT NULL) AND (reason IS NOT NULL) AND (btrim(reason) <> ''::text))))"
+    },
+    {
+      "name": "editorial_xi_revisions_check2",
+      "validated": true,
+      "definition": "CHECK ((reviewed_at <= created_at))"
+    },
+    {
+      "name": "editorial_xi_revisions_check3",
+      "validated": true,
+      "definition": "CHECK ((((jsonb_typeof(evidence) = 'object'::text) AND ((evidence -> 'version'::text) = '1'::jsonb) AND (((evidence -> 'source'::text) ->> 'url'::text) = source_url) AND (((evidence -> 'source'::text) ->> 'type'::text) = 'journalistic'::text) AND (((evidence -> 'source'::text) ->> 'outlet'::text) = 'La Capital'::text) AND (jsonb_typeof((evidence -> 'starters'::text)) = 'array'::text) AND (jsonb_array_length((evidence -> 'starters'::text)) <= 11) AND ((((evidence -> 'review'::text) ->> 'reviewed_at'::text))::timestamp with time zone <= reviewed_at) AND (NOT (evidence ? 'assessment'::text)) AND (NOT (evidence ? 'issues'::text))) IS TRUE))"
+    },
+    {
+      "name": "editorial_xi_revisions_content_hash_check",
+      "validated": true,
+      "definition": "CHECK ((content_hash ~ '^[0-9a-f]{64}$'::text))"
+    },
+    {
+      "name": "editorial_xi_revisions_contract_version_check",
+      "validated": true,
+      "definition": "CHECK ((contract_version = 1))"
+    },
+    {
+      "name": "editorial_xi_revisions_fixture_id_fkey",
+      "validated": true,
+      "definition": "FOREIGN KEY (fixture_id) REFERENCES fixtures(id)"
+    },
+    {
+      "name": "editorial_xi_revisions_id_fixture_id_team_id_source_url_key",
+      "validated": true,
+      "definition": "UNIQUE (id, fixture_id, team_id, source_url)"
+    },
+    {
+      "name": "editorial_xi_revisions_pkey",
+      "validated": true,
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "name": "editorial_xi_revisions_previous_id_fixture_id_team_id_sour_fkey",
+      "validated": true,
+      "definition": "FOREIGN KEY (previous_id, fixture_id, team_id, source_url) REFERENCES editorial_xi_revisions(id, fixture_id, team_id, source_url)"
+    },
+    {
+      "name": "editorial_xi_revisions_previous_id_key",
+      "validated": true,
+      "definition": "UNIQUE (previous_id)"
+    },
+    {
+      "name": "editorial_xi_revisions_reviewer_check",
+      "validated": true,
+      "definition": "CHECK ((btrim(reviewer) <> ''::text))"
+    },
+    {
+      "name": "editorial_xi_revisions_team_id_fkey",
+      "validated": true,
+      "definition": "FOREIGN KEY (team_id) REFERENCES teams(id)"
+    }
+  ],
+  "rls_enabled": true
+}

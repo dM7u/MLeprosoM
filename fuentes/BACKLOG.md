@@ -77,9 +77,9 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    Muestra histórica validada pero no elegible; búsqueda acotada del 27/09 sin
    evidencia actual apta. Contrato de revisiones/conflictos preparado en
    src/server/editorial/PERSISTENCE.md; almacenamiento/selección local implementado.
-   Importador con lookup DB y dry-run consolidado en 958a827. Próximo:
-   aplicar migración remota desde SQL Editor administrativo y verificar catálogo
-   con supabase/check-editorial-access.sql; falta acceso administrativo disponible.
+   Importador con lookup DB y dry-run consolidado en 958a827;
+   persistencia remota aplicada y catálogo contrastado el 27/09; primera carga
+   histórica y retry sin duplicación verificados. Pendiente: presentación.
    Evidencia actual apta y composición de fuentes pendientes antes de UI.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
 
@@ -1291,3 +1291,22 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   ni sesión administrativa disponible. Procedimiento concreto en supabase/README.md.
 - Sin escrituras remotas ni carga histórica. La auditoría no afirma que la
   migración esté aplicada. Estado consolidado actualizado a 154 pruebas.
+
+## Activación editorial verificada — 27/09/2026
+
+- [x] Usuario aplicó migración; JSON administrativo contrastado con PostgreSQL
+  local: 13 columnas, 14 constraints, cinco índices, trigger activo, dos funciones,
+  RLS y privilegios mínimos. Evidencia: editorial-catalog-20260927.json en docs/research.
+- Diferencias de entorno consideradas: CRLF/LF en funciones; NOT NULL figura
+  además como constraint en PGlite y se contrastó mediante columnas; Supabase
+  concede EXECUTE de función trigger a service_role (sin acceso anon/authenticated).
+  No se cambiaron permisos remotos. El contraste cubre solo campos exportados.
+- [x] Dry-run storage_ready true; carga histórica insertó una revisión. Retry
+  idéntico devolvió replay true y cero escrituras. RPC retorna una sola cabeza.
+- [x] Lector remoto devuelve unavailable, data null, fixture_not_upcoming.
+  Publicación original sin zona sigue desconocida. Cero requests a proveedores.
+- Reporte: docs/research/editorial-activation-20260927.json. Sin cambios de código
+  de aplicación; no se repiten build/tests unitarios. Comparación de catálogo y
+  verificación Data API realizadas; git diff --check aprobado.
+- Próximo: presentación con fuente/fecha y vigencia de 48 h; evidencia actual apta
+  y composición de fuentes siguen pendientes. No repetir migración ni carga nueva.

@@ -139,3 +139,11 @@ sesión de navegador administrativa disponible. En SQL Editor del proyecto:
 Prueba local: `node tests/database/editorial-audit.mjs`. Verifica lectura dentro
  de transacción read-only, objetos ausentes, permisos efectivos de columna y RPC,
  y trigger deshabilitado. No reemplaza la evidencia administrativa remota.
+
+## Estado editorial vigente — 27/09/2026
+
+Migración aplicada por el usuario, catálogo administrativo contrastado. Primera
+carga histórica y retry idempotente verificados por Data API; una cabeza, lector
+unavailable sin datos por partido finalizado. No repetir migración. Esto reemplaza
+los estados pendientes editoriales anteriores. Evidencia y límites en
+fuentes/BACKLOG.md y docs/research/editorial-activation-20260927.json.

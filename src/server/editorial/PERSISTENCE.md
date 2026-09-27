@@ -1,9 +1,9 @@
 # Diseño de persistencia de XI periodístico
 
-Estado 27/09/2026: almacenamiento y selección implementados y probados localmente
-en revisions.mjs y 20260927000100_editorial_xi_revisions.sql. Migración no aplicada
-remotamente. CLI con lookup/dry-run implementado; UI pendiente. Parte del validador REVIEWED_XI.md y
-de la política de 48 horas aprobada. No se inventó un XI actual.
+Estado 27/09/2026: migración aplicada por el usuario y catálogo remoto
+contrastado. CLI, primera carga histórica y retry idempotente verificados;
+lector remoto devuelve unavailable sin datos para el partido finalizado.
+UI pendiente. Política de 48 horas aprobada. No se inventó un XI actual.
 
 ## Unidad de almacenamiento
 
@@ -139,6 +139,6 @@ falla cerrado en ese estado. Readiness no certifica permisos de INSERT.
 La evaluación usa el fixture persistido, cuya fecha se muestra; no refresca el
 proveedor ni acredita actualidad deportiva. Nunca publica ni conecta UI.
 
-Próximo bloque: habilitación y verificación remota de migración/importación.
+Habilitación remota verificada el 27/09; siguiente bloque: presentación.
 La muestra histórica sirve para conservar evidencia, no para poblar el próximo
 partido. UI sigue pendiente de evidencia apta y composición con otras fuentes.
