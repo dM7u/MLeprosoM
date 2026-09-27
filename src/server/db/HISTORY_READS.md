@@ -56,3 +56,8 @@ fallback aprobada; cap 25 detectado como 40 páginas para 1000 filas. Resultado:
 conjunto. No equivale a tráfico/latencia Supabase ni ensayo concurrente.
 Método, límites y siguiente diseño: docs/research/HISTORY_VOLUME_20260927.md.
 No cambia el contrato operativo ni habilita sincronización frecuente.
+
+Diseño de la siguiente etapa: HISTORY_PROJECTION.md (27/09). Compare-and-swap
+para insertar observación y proyección en una transacción, replay completo ante
+retroactivos, lectura de un corte y transición de permisos/escritores. Todavía
+sin implementación ni migración; este lector paginado sigue operativo.

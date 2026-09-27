@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 159 pruebas unitarias, lint, typecheck y build aprobados;
+- 162 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -73,7 +73,8 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    Antes de cargas frecuentes, diseñar aislamiento coherente y medir volumen
    representativo aislado. Detalles medidos localmente el 27/09 hasta 5000 filas
    por recurso: 150 páginas/56 MB en conjunto; ver HISTORY_VOLUME_20260927.md.
-   Pendiente proyección atómica y medición de standings/concurrencia.
+   Contrato atómico definido en src/server/db/HISTORY_PROJECTION.md; pendiente
+   implementación local y medición de standings/concurrencia.
    No hay scheduler de sincronización deportiva.
 3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
    desde publicación, fuente/fecha visibles y exclusión al iniciar el partido.
@@ -1345,3 +1346,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - No hay cambios de aplicación, DB remota ni requests a proveedores. Suite previa
   159/build/typecheck conservada, sin repetirla por este bloque de medición.
   Standings y concurrencia multi-conexión siguen pendientes de evaluación propia.
+
+## Contrato de selección atómica — 27/09/2026
+
+- [x] Reglas actuales contrastadas por recurso y contrato documentado en
+  src/server/db/HISTORY_PROJECTION.md: generación/CAS, retry, dos caminos
+  (append/replay retroactivo), lectura única, ACL y corte de escritores.
+- [x] Contraejemplo ejecutable: inserción retroactiva vuelve elegible una
+  observación antes descartada; chosen/last solos no permiten reconstruirla.
+  También se cubren append y corrupción antigua sin rescate selectivo.
+- [x] 162 pruebas y lint aprobados. Sin cambios de aplicación ni DB; no se
+  repiten build/typecheck del bloque anterior. git diff --check aprobado.
+- Próximo bloque: implementación local de reductores compartidos/equivalencia,
+  luego RPC/ACL y pruebas transaccionales antes de activar remotamente.
+  Concurrencia real de dos conexiones aún no certificada. Sin scheduler,
+  escrituras remotas ni requests a proveedores; ratings siguen fuera de alcance.
