@@ -25,7 +25,7 @@
 
 ## Estado actual
 
-Resumen consolidado al 26/09/2026. Este apartado y la cola inmediata prevalecen
+Resumen consolidado al 27/09/2026. Este apartado y la cola inmediata prevalecen
 sobre las notas de ejecución fechadas, que se conservan como historial.
 
 - Fundación y cadena de partidos operativas: BSD para liga y GOAL para Copa.
@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 136 pruebas unitarias, lint, typecheck y build aprobados;
+- 141 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -72,8 +72,10 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    sin cache global ni perder revalidación de denegaciones (26/09).
    Antes de cargas frecuentes, diseñar aislamiento coherente y medir volumen
    representativo aislado. No hay scheduler de sincronización deportiva.
-3. XI periodístico: preparar validación y dry-run de evidencia revisada de
-   La Capital; resolver política de antigüedad antes de persistencia/UI.
+3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
+   desde publicación, fuente/fecha visibles y exclusión al iniciar el partido.
+   Muestra histórica validada pero no elegible; falta evidencia actual apta,
+   diseño de revisiones/conflictos y persistencia/lectura antes de UI.
    Automatización de acceso aún no verificada; no bloquea estadísticas.
 
 ### Revisión visual de ficha ampliada — 25/09/2026
@@ -1202,3 +1204,20 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Con la muestra actual, anual+torneo pasa de ocho GET a cuatro. No es una
   garantía de latencia ni habilita ingesta frecuente; el aislamiento entre
   consultas DB sigue siendo el documentado en HISTORY_READS.md.
+
+## Validación de XI periodístico — 27/09/2026
+
+- [x] Validador server-only de transcripciones revisadas con vínculo exacto a
+  partido/equipo/competición/temporada/localía/kickoff, fuente y cronología.
+- [x] Rechazar duplicados; excluir parcial/ambiguo/conflicto y partido iniciado.
+  Conservar nombres sin IDs ni formación inferida; confirmación del medio separada
+  de oficial. Clave de deduplicación preparada, sin almacenamiento aún.
+- [x] Política de 48 horas aprobada por usuario, versionada. Publicación sin
+  zona verificada queda desconocida; ninguna relectura rejuvenece su antigüedad.
+- [x] Relectura de nota histórica de Platense, muestra factual y contexto desde
+  catálogo/mapeo local fechado. Dry-run sin red/escrituras: unavailable por
+  partido finalizado y hora de publicación sin zona verificada.
+- [x] 141 pruebas, lint, typecheck, build y git diff --check aprobados.
+- Sin migraciones, persistencia, cambios UI ni consultas a proveedores deportivos.
+  Contrato en src/server/editorial/REVIEWED_XI.md. Próximo: evidencia actual apta
+  y diseño de persistencia/revisiones antes de conectar presentación.

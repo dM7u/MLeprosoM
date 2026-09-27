@@ -1,5 +1,14 @@
 # La Capital / Ovación como fuente de XI
 
+Actualización 27/09/2026: validador y CLI dry-run implementados, política de 48 h
+desde publicación aprobada por el Product Owner, fuente/fecha obligatorias en la
+futura UI. Contrato: src/server/editorial/REVIEWED_XI.md. Sin persistencia ni UI.
+La nota de Platense se releyó el 26/09 mediante representación web; se conservaron
+solo hechos de alineación y atribución en la muestra JSON, sin copiar el artículo.
+Hora publicada sin zona verificable conservada como texto; no se inventó timestamp.
+La muestra no es apta para un XI actual. Los apartados siguientes son investigación
+histórica; la ficha ya muestra alineaciones confirmadas del proveedor por otra vía.
+
 Relevamiento cerrado el 25/09/2026. Alcance: viabilidad y criterios de
 incorporación; no implementa ingesta, persistencia ni UI. Repositorio limpio al
 comenzar. La ficha actual solo lee fixtures guardados y muestra alineaciones

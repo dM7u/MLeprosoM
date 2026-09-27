@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "binding": {
+    "provider": "bsd",
+    "fixture_external_id": "223728",
+    "competition_external_id": "85",
+    "season_external_id": "1635",
+    "home_external_id": "796",
+    "away_external_id": "4997",
+    "kickoff_at": "2026-09-20T20:00:00+00:00"
+  },
+  "team_external_id": "4997",
+  "source": {
+    "type": "journalistic",
+    "outlet": "La Capital",
+    "url": "https://www.lacapital.com.ar/ovacion/frank-kudelka-tiene-los-once-newells-visitar-platense-n10282101.html",
+    "author": null,
+    "published_text": "20 de septiembre 2026 · 15:48hs",
+    "published_at": null
+  },
+  "observed_at": "2026-09-26T15:33:55.128Z",
+  "review": {
+    "reviewer": "Codex: revisión de representación web y mapeo local fechado",
+    "reviewed_at": "2026-09-26T15:33:55.128Z",
+    "status": "reviewed",
+    "identity_confirmed": true
+  },
+  "claim": "confirmed_by_outlet",
+  "ambiguous": false,
+  "starters": [
+    "Josué Reinatti",
+    "Martín Ortega",
+    "Lautaro Giannetti",
+    "Lucas Carrizo",
+    "Jerónimo Russo",
+    "Rodrigo Herrera",
+    "Luca Regiardo",
+    "Walter Mazzantti",
+    "Facundo Guch",
+    "Santiago Solari",
+    "Matías Cóccaro"
+  ]
+}
