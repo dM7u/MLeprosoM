@@ -221,4 +221,15 @@ no empty inventado. Un bootstrap válido sin observaciones sí es empty. Valor
 inválido falla cerrado. UI no escribe, no reconstruye y no consulta proveedores.
 Activación global para fixtures BSD servidos requiere reconstruir todos, incluso
 vacíos; no existe allowlist por fixture. No se cambió .env.local ni el modo remoto.
-La propuesta sigue pendiente de auditoría administrativa y concurrencia real.
+La propuesta sigue pendiente de auditoría administrativa remota. La concurrencia
+real local se verificó posteriormente como se detalla abajo.
+
+## Concurrencia PostgreSQL verificada — 27/09/2026
+
+PostgreSQL 17.11 portable: dos escritores independientes con bloqueos observados
+mediante pg_blocking_pids. Diez escenarios aprobados, incluidos raíz inexistente,
+CAS, UUID concurrentes, rollback, retry automático del backend, timestamps iguales
+y respuesta descartada seguida de retry tras avance de generación. ACL 76/76.
+Runner aislado y límites en docs/research/STATISTICS_CONCURRENCY_20260927.md.
+Esto cierra el ensayo local pendiente de las notas anteriores; no certifica la
+base remota ni activa la propuesta. Corte, auditoría y reconstrucción siguen pendientes.

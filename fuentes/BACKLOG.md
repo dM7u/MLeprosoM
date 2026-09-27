@@ -1437,3 +1437,20 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   selección histórica ni concurrencia; conserva las verificaciones anteriores.
 - [x] Prueba SQL de integración y auditoría local aprobadas; lint y diff limpios.
   Sin cambios de runtime: no se repiten las 184 pruebas/typecheck/build previos.
+
+## Concurrencia nativa de proyección — 27/09/2026
+
+- [x] PostgreSQL 17.11 portable bajo .tools; cluster propio por ejecución, SCRAM,
+  loopback y cierre al finalizar. Sin instalación global ni configuración privada.
+- [x] Dos escritores reales y tercera conexión observadora: bloqueos comprobados
+  por pg_blocking_pids, invisibilidad antes de commit y equivalencia final.
+- [x] Diez escenarios aprobados: raíz, CAS, idempotencia/conflicto UUID, rollback,
+  error tras INSERT, retry automático, timestamps iguales, respuesta descartada
+  seguida de retry y retroactivos. 76 controles ACL pasan en PostgreSQL nativo.
+- Evidencia: docs/research/STATISTICS_CONCURRENCY_20260927.md. Se cierra el pendiente
+  local multi-conexión; no certifica PostgREST, pooler, red ni catálogo remoto.
+- Próximo: auditoría en destino y corte coordinado de escritores/reconstrucción
+  antes de activar lector. SQL sigue en pending; sin escrituras remotas ni proveedor.
+- [x] Runner final, lint y diff aprobados. Instancias locales detenidas y archivos
+  de contraseña/conexión eliminados. No se repiten build/typecheck/184 pruebas
+  previas: solo se agregan herramientas de prueba y documentación, sin runtime.

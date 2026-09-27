@@ -22,8 +22,8 @@ resultados calculados por usuarios ni afirmar que SQL duplica esa validación.
 Estado: prueba local aprobada, SIN aplicar remotamente. El importador admite
 --storage=projection explícito; default y UI conservan el camino anterior. Aplicar
 ahora rompería las importaciones antiguas; falta corte coordinado de escritores,
-activación remota de lectura/reconstrucción ya implementadas localmente, auditoría
-administrativa y prueba multi-conexión. También revisar disponibilidad del nombre
+activación remota de lectura/reconstrucción ya implementadas localmente y auditoría
+administrativa remota. Prueba multi-conexión local aprobada (ver abajo). Revisar disponibilidad del nombre
 mle_statistics_writer y permisos efectivos en el proyecto de destino.
 
 Reproducir únicamente en base efímera local:
@@ -58,5 +58,32 @@ node tests/database/statistics-projection-acl.mjs
 transacciones revertidas. Esto no reemplaza revisar cuerpos SQL, restricciones,
 políticas RLS, reconstrucción ni concurrencia; tampoco certifica el catálogo
 remoto. Ejecutar la auditoría administrativa en destino tras el futuro corte.
-No se encontró PostgreSQL nativo ni Docker en PATH o instalación PostgreSQL bajo
-Program Files en este equipo; el ensayo real de dos conexiones sigue pendiente.
+La falta inicial de un motor nativo se resolvió con PostgreSQL portable en .tools.
+
+## Concurrencia real local — 27/09/2026
+
+```powershell
+./tests/database/run-statistics-concurrency.ps1
+```
+
+Requiere PowerShell 7, Node y binarios Windows de PostgreSQL. El runner acepta
+`-PgBin` y por defecto usa `.tools/db-validation/pgsql17/pgsql/bin`. Se probó con
+PostgreSQL 17.11 de la [distribución portable EDB](https://www.enterprisedb.com/download-postgresql-binaries)
+y cliente `pg@8.23.0` instalado con `npm install --prefix .tools/db-validation
+--ignore-scripts --no-audit --no-fund pg@8.23.0`; no agrega dependencias a la app.
+
+Cada ejecución crea un cluster nuevo bajo .tools, con contraseña aleatoria SCRAM,
+puerto libre y escucha exclusiva en 127.0.0.1. No lee .env ni acepta URL remota.
+Antes de migrar verifica directorio del servidor y ausencia de tablas públicas.
+Dos conexiones escritoras actúan como service_role; una tercera observa bloqueos
+reales con pg_blocking_pids. El proceso se detiene en finally; contraseña y archivo
+de conexión se eliminan. Cluster/logs locales de prueba quedan ignorados por Git.
+El sandbox de Windows puede requerir autorización para ejecutar initdb/pg_ctl.
+
+Diez escenarios aprobados: raíz inexistente, generación existente, UUID idéntico,
+UUID con contenido conflictivo, rollback que libera al segundo escritor, fallo
+posterior a INSERT, retry automático del backend, fecha igual con UUID diferente,
+retry tras respuesta descartada/desconexión y avance posterior, e inserción
+retroactiva. Se comprueba invisibilidad antes del commit y equivalencia final con
+el lector completo. Los 76 controles ACL también pasan en PostgreSQL nativo.
+Evidencia y límites: `docs/research/STATISTICS_CONCURRENCY_20260927.md`.
