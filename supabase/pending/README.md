@@ -22,7 +22,7 @@ resultados calculados por usuarios ni afirmar que SQL duplica esa validación.
 Estado: prueba local aprobada, SIN aplicar remotamente. El importador admite
 --storage=projection explícito; default y UI conservan el camino anterior. Aplicar
 ahora rompería las importaciones antiguas; falta corte coordinado de escritores,
-activación de lectura, reconstrucción controlada, auditoría
+activación remota de lectura/reconstrucción ya implementadas localmente, auditoría
 administrativa y prueba multi-conexión. También revisar disponibilidad del nombre
 mle_statistics_writer y permisos efectivos en el proyecto de destino.
 

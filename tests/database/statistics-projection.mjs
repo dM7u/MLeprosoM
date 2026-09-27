@@ -1,3 +1,4 @@
+import {rebuildStatisticsProjection} from '../../src/server/db/rebuild-statistics-projection.mjs';
 import {importTeamStatistics} from '../../src/server/db/import-team-statistics.mjs';
 import {previewStatisticsSelection} from '../../src/server/db/statistics-projection.mjs';
 import {PGlite} from '../../.tools/db-validation/node_modules/@electric-sql/pglite/dist/index.js';
@@ -38,7 +39,23 @@ try{
  await assert.rejects(query('update statistics_history_projection set initialized=false'),/permission denied/);
  await assert.rejects(query('delete from team_statistics_observations'),/permission denied/);
  assert.equal((await readProjectedStatistics(client,opts)).status,'error');
- await commitStatisticsSelection(client,opts);await verify();
+ const importerClient={...client,from(table){
+  if(table==='team_statistics_observations')return client.from(table);
+  const filters=[];return {select(){return this;},eq(k,v){filters.push([k,v]);return this;},async maybeSingle(){
+   if(table==='teams'){assert.deepEqual(filters,[['provider','bsd'],['external_id','4997']]);return {data:(await query("select id from teams where provider=$1 and external_id=$2",['bsd','4997']))[0]};}
+   assert.equal(table,'fixtures');assert.deepEqual(filters,[['provider','bsd'],['external_id','223728'],['seasons.external_id','test'],['seasons.competitions.external_id','test']]);
+   const data=(await query("select to_jsonb(f) as fixture,s.external_id as season,c.external_id as competition from fixtures f join seasons s on s.id=f.season_id join competitions c on c.id=s.competition_id where f.id=$1",[fixture.id]))[0];
+   return {data:{...data.fixture,seasons:{external_id:data.season,competitions:{external_id:data.competition}}}};
+  }};
+ }};
+ const rebuildOptions={eventId:223728,scope:{provider:'bsd',externalTeamId:'4997',competitionId:'test',seasonId:'test'},mode:'--dry-run',now};
+ const beforeRebuild=await head();
+ const previewRebuild=await rebuildStatisticsProjection(importerClient,rebuildOptions);
+ assert.equal(previewRebuild.projection_writes,0);assert.equal(previewRebuild.result.plan.count,3);assert.deepEqual(await head(),beforeRebuild);
+ const rebuilt=await rebuildStatisticsProjection(importerClient,{...rebuildOptions,mode:'--apply'});
+ assert.equal(rebuilt.projection_writes,1);assert.equal(rebuilt.observation_writes,0);assert.equal(rebuilt.verification.verified,true);assert.equal((await all()).length,3);await verify();
+ const rebuiltAgain=await rebuildStatisticsProjection(importerClient,{...rebuildOptions,mode:'--apply'});
+ assert.equal(rebuiltAgain.projection_writes,0);assert.equal(rebuiltAgain.verification.verified,true);
  assert.equal((await head()).projection.chosen_id,a.id);
  const initialized=await head();
  assert.equal((await commitStatisticsSelection(client,opts)).replay,true);
@@ -72,15 +89,6 @@ try{
  const racing={...client,async rpc(name,args){if(name==='commit_statistics_projection'&&!injected){injected=true;await commitStatisticsSelection(client,{...opts,observation:competing});}return client.rpc(name,args);}};
  await commitStatisticsSelection(racing,{...opts,observation:target});assert.ok(injected);await verify();
  // Exercise the production importer's scoped lookup and explicit mode against SQL.
- const importerClient={...client,from(table){
-  if(table==='team_statistics_observations')return client.from(table);
-  const filters=[];return {select(){return this;},eq(k,v){filters.push([k,v]);return this;},async maybeSingle(){
-   if(table==='teams'){assert.deepEqual(filters,[['provider','bsd'],['external_id','4997']]);return {data:(await query("select id from teams where provider=$1 and external_id=$2",['bsd','4997']))[0]};}
-   assert.equal(table,'fixtures');assert.deepEqual(filters,[['provider','bsd'],['external_id','223728'],['seasons.external_id','test'],['seasons.competitions.external_id','test']]);
-   const data=(await query("select to_jsonb(f) as fixture,s.external_id as season,c.external_id as competition from fixtures f join seasons s on s.id=f.season_id join competitions c on c.id=s.competition_id where f.id=$1",[fixture.id]))[0];
-   return {data:{...data.fixture,seasons:{external_id:data.season,competitions:{external_id:data.competition}}}};
-  }};
- }};
  const importOptions={sample:{body:{event_id:223728,stats:{home:{corner_kicks:5}}},fetched_at:time(46)},id:row(10,46,{}).id,scope:{provider:'bsd',externalTeamId:'4997',competitionId:'test',seasonId:'test'},mode:'--dry-run',storage:'projection',now};
  const importBefore=await head();assert.equal((await importTeamStatistics(importerClient,importOptions)).writes,0);assert.deepEqual(await head(),importBefore);
  assert.equal((await importTeamStatistics(importerClient,{...importOptions,mode:'--apply'})).writes,1);await verify();

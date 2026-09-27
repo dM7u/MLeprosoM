@@ -365,3 +365,43 @@ comando antiguo history no agregue observaciones sin actualizar proyección.
 El lector de UI sigue paginado; selección de lectura y reconstrucción operacional
 quedan pendientes antes de activación. No ejecutar la propuesta solo para ensayar
 este comando: revisar supabase/pending/README.md y completar ensayo multi-conexión.
+
+## Reconstrucción de estadísticas y elección de lector — 27/09/2026
+
+Comando de un único evento BSD, acotado al equipo/temporada/competición revisados:
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/rebuild-statistics-projection.mjs 223728 --dry-run
+```
+
+Requiere las RPC de la propuesta, que sigue SIN aplicar remotamente. No se ejecutó
+este comando contra Supabase. En un entorno preparado, --apply reconstruye solo
+la proyección: no crea observaciones ni rejuvenece sus fechas. Repetir un resultado
+idéntico no cambia generación. Lookup compartido con importador; no acepta UUID
+arbitrario ni selección suministrada por el operador. Argumentos inválidos fallan
+antes de leer configuración privada.
+
+Tras apply, compara proyección con historial completo y vuelve a leer generación;
+si cambió, repite hasta tres veces. Exige equivalencia de datos, estado y fechas,
+normalizando solamente representación de instantes con distinto offset. No hay
+transacción global durante el contraste; la generación estable depende de que
+todos los escritores usen CAS y no haya intervención administrativa directa.
+
+Salida distingue observation_writes (siempre 0), projection_writes y verification.
+Si el commit ocurrió pero la comprobación posterior falla, se informa por separado
+con código de salida 2; no afirmar rollback ni activar lectura. Fallos previos
+terminan con código 1 sanitizado. Reintentar reconstrucción es seguro; un timeout
+no prueba que el commit haya fallado. Exit 0 de dry-run no reserva la generación
+ni certifica permisos de escritura.
+
+`STATISTICS_READ_MODE` controla solo el lector backend de la ficha. Ausente o
+history conserva lectura paginada. projection hace una RPC y valida su estado;
+RPC ausente, proyección incompleta o valor de configuración inválido da error,
+sin fallback automático. No se consulta proveedor ni se reconstruye durante visitas.
+El importador mantiene su flag de almacenamiento independiente y explícito.
+
+Antes de cambiar a projection, reconstruir/verificar TODOS los fixtures BSD
+servidos, incluidos los vacíos, después del corte de escritores y auditoría ACL.
+No hay selección automática por existencia de tabla ni rollout por fixture.
+Volver a history revierte solo lectura: mantener escritores CAS y permisos cerrados.
+La configuración local privada no fue modificada; historial sigue activo.

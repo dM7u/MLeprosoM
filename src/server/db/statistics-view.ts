@@ -1,6 +1,6 @@
 import 'server-only';
 import {createSupabaseAdminClient} from './supabase';
-import {readStatistics} from './team-statistics.mjs';
+import {readConfiguredStatistics,statisticsReadMode} from './statistics-reader.mjs';
 import type {StoredFixture} from './fixture-view';
 import policy from './statistics-policy.json';
 
@@ -8,6 +8,7 @@ import policy from './statistics-policy.json';
 export async function statisticsViewForMatch(match: StoredFixture) {
   if (match.provider !== 'bsd') return null;
   try {
-    return await readStatistics(createSupabaseAdminClient(),{fixture:match,ttlMs:policy.ttlMs});
+    const mode=statisticsReadMode(process.env.STATISTICS_READ_MODE);
+    return await readConfiguredStatistics(createSupabaseAdminClient(),{fixture:match,ttlMs:policy.ttlMs},mode);
   } catch {return {status:'error',data:null,updatedAt:null,lastObservedAt:null,lastObservationStatus:null};}
 }

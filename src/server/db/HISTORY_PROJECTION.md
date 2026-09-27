@@ -205,3 +205,20 @@ apply exclusivo mediante RPC y retry; los permisos impiden INSERT directo. Prueb
 unitarias cubren modo inválido, RPC faltante aun con UUID existente y flags CLI.
 Pendiente activación del lector/reconstrucción operacional y concurrencia real.
 No se activó esta opción remotamente ni se aplicó la propuesta SQL.
+
+## Reconstrucción y lector configurables — 27/09/2026
+
+rebuild-statistics-projection.mjs comparte lookup acotado con el importador y
+reconstruye un evento explícito; preview sin commit, apply sin insertar historia.
+Verificación post-commit compara replay completo entre dos lecturas de generación
+estable, hasta tres intentos. Resultado separa commit y verificación fallida.
+Un retry idéntico no cambia generación. La comprobación no certifica cambios
+administrativos que rompan el contrato de inmutabilidad/CAS.
+
+statistics-view.ts usa statistics-reader.mjs con STATISTICS_READ_MODE: history
+por defecto; projection explícito, sin fallback. Ausencia de bootstrap es error,
+no empty inventado. Un bootstrap válido sin observaciones sí es empty. Valor
+inválido falla cerrado. UI no escribe, no reconstruye y no consulta proveedores.
+Activación global para fixtures BSD servidos requiere reconstruir todos, incluso
+vacíos; no existe allowlist por fixture. No se cambió .env.local ni el modo remoto.
+La propuesta sigue pendiente de auditoría administrativa y concurrencia real.

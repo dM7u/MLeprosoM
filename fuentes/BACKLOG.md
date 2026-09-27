@@ -42,7 +42,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
   incluidos RLS, privilegios y trigger/función de activación. Alcance y límites
   en `docs/research/HISTORY_AUDIT_20260926.md`.
 - Operación manual de revisión y política inicial de vigencia implementadas.
-- 179 pruebas unitarias, lint, typecheck y build aprobados;
+- 184 pruebas unitarias, lint, typecheck y build aprobados;
   pruebas PostgreSQL locales aprobadas en bloques anteriores.
 - Detalle persistido consolidado en `1018c5b`; paginación consolidada en `25fa200`.
 
@@ -76,7 +76,7 @@ sobre las notas de ejecución fechadas, que se conservan como historial.
    Contrato atómico definido en src/server/db/HISTORY_PROJECTION.md;
    reductores compartidos y primera proyección/RPC de estadísticas probados localmente.
    SQL pendiente separado; importador admite opción atómica explícita. Faltan
-   activación de lectura/reconstrucción, otros recursos y
+   activación remota (lector/reconstrucción ya preparados), otros recursos y
    medición de standings/concurrencia.
    No hay scheduler de sincronización deportiva.
 3. XI periodístico: validador y dry-run implementados. Política aprobada: 48 h
@@ -1407,3 +1407,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Pendiente habilitación del lector, reconstrucción operacional y ensayo de dos
   conexiones. La propuesta SQL continúa fuera de migraciones activas; no aplicar
   todavía. Alineaciones/eventos mantienen el camino vigente.
+
+## Reconstrucción y selección del lector — 27/09/2026
+
+- [x] CLI de reconstrucción por evento con lookup compartido y acotado; dry-run
+  sin cambios y apply sin observaciones nuevas. Repetición idempotente verificada.
+- [x] Contraste de proyección contra replay completo con generación estable;
+  cambios concurrentes provocan hasta tres reintentos. Commit y fallo posterior
+  de verificación se informan por separado, sin afirmar rollback inexistente.
+- [x] Ficha admite STATISTICS_READ_MODE=projection explícito; default history.
+  Errores/configuración inválida no hacen fallback ni reconstruyen en visitas.
+- [x] 184 pruebas y prueba SQL local aprobadas; lint/typecheck/build y diff
+  verificados. Sin cambios en configuración privada, DB remota ni proveedores.
+- Pendiente ensayo PostgreSQL de dos conexiones y auditoría antes de aplicar SQL.
+  Corte debe reconstruir todos los fixtures BSD servidos antes de activar lector.
+  Alineaciones/eventos y medición de standings conservan sus pendientes.
