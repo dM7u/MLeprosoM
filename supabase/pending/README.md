@@ -37,3 +37,26 @@ No abre conexiones remotas ni consume variables privadas. Cubre roles, bootstrap
 replay completo contra lector actual, retroactivos, rollback posterior al INSERT,
 retries tras avance de generación, conflicto/CAS con recálculo y límite de intentos.
 La intercalación se simula serializada; no certifica ejecución en dos conexiones.
+
+## Auditoría de permisos preparada
+
+`audit_statistics_projection_acl.sql` es una consulta administrativa de solo
+lectura. Devuelve `access_ok`, cantidad de comprobaciones y nombres de controles
+fallidos; no expone datos deportivos ni credenciales. Es independiente de la
+aplicación del SQL: esquema/funciones/rol ausentes producen un resultado negativo.
+Revisa permisos efectivos de tabla y columna, RLS, atributos/membresías del rol
+escritor, acceso a otras tablas públicas, CREATE de esquema, propietario del
+definer, search_path y EXECUTE de las dos funciones, incluido PUBLIC.
+
+Verificación local reproducible:
+
+```powershell
+node tests/database/statistics-projection-acl.mjs
+```
+
+76 controles aprobados sobre la propuesta y diez alteraciones detectadas en
+transacciones revertidas. Esto no reemplaza revisar cuerpos SQL, restricciones,
+políticas RLS, reconstrucción ni concurrencia; tampoco certifica el catálogo
+remoto. Ejecutar la auditoría administrativa en destino tras el futuro corte.
+No se encontró PostgreSQL nativo ni Docker en PATH o instalación PostgreSQL bajo
+Program Files en este equipo; el ensayo real de dos conexiones sigue pendiente.

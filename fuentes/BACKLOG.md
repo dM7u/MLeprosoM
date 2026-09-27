@@ -1422,3 +1422,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Pendiente ensayo PostgreSQL de dos conexiones y auditoría antes de aplicar SQL.
   Corte debe reconstruir todos los fixtures BSD servidos antes de activar lector.
   Alineaciones/eventos y medición de standings conservan sus pendientes.
+
+## Auditoría local de ACL de proyección — 27/09/2026
+
+- [x] Consulta administrativa de solo lectura preparada: 76 controles de
+  permisos efectivos de tabla/columna, RLS, rol escritor, membresías, alcance a
+  otras tablas públicas, esquema y funciones. Falla con esquema ausente.
+- [x] Diez alteraciones detectadas y revertidas en PGlite, incluidos permisos
+  por columna, herencia/membresía, EXECUTE público y search_path modificado.
+- Sin cambios de aplicación, configuración privada ni DB remota. SQL sigue en
+  pending y no se habilita el lector. Auditoría remota y ensayo de dos conexiones
+  continúan pendientes; no se encontró PostgreSQL nativo/Docker disponible.
+- Esta auditoría de ACL no certifica cuerpos SQL, políticas, restricciones,
+  selección histórica ni concurrencia; conserva las verificaciones anteriores.
+- [x] Prueba SQL de integración y auditoría local aprobadas; lint y diff limpios.
+  Sin cambios de runtime: no se repiten las 184 pruebas/typecheck/build previos.
