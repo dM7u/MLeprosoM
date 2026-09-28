@@ -40,7 +40,11 @@ checks as (
  select 'writer:attributes',coalesce(not (r.rolcanlogin or r.rolsuper or r.rolbypassrls or r.rolcreatedb or r.rolcreaterole or r.rolreplication or r.rolinherit),false)
  from roles v left join pg_roles r on r.oid=v.oid where v.name='mle_statistics_writer'
  union all
- select 'writer:memberships',r.oid is not null and not exists(select 1 from pg_auth_members m where m.roleid=r.oid or m.member=r.oid)
+ -- PG17 gives a non-superuser creator an ADMIN-only grant from bootstrap admin.
+ -- Permit only the existing history owner, without SET/INHERIT; no delegation.
+ select 'writer:memberships',r.oid is not null and not exists(select 1 from pg_auth_members m where m.member=r.oid or
+  (m.roleid=r.oid and not (m.admin_option and not m.inherit_option and not m.set_option
+   and m.member=(select relowner from pg_class where oid=to_regclass('public.team_statistics_observations')))))
  from roles r where r.name='mle_statistics_writer'
  union all
  select 'writer:schema',coalesce(has_schema_privilege(r.oid,'public','USAGE') and not has_schema_privilege(r.oid,'public','CREATE'),false)

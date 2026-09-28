@@ -1,8 +1,9 @@
 # Propuestas SQL pendientes
 
-Estos archivos NO forman parte del conjunto activo `supabase/migrations/` y NO
-se deben ejecutar mediante el procedimiento habitual de carga del proyecto.
-Son propuestas locales con cambios de permisos que requieren corte coordinado.
+Estos archivos NO forman parte del conjunto activo `supabase/migrations/`.
+Requieren corte coordinado; no incluirlos en una carga automática de migraciones.
+Estado actualizado al 28/09/2026: preflight remoto de estadísticas contrastado;
+su SQL está preparado para el corte manual descrito al final, todavía sin aplicar.
 
 ## Próximo paso remoto: preflight de solo lectura
 
@@ -107,3 +108,35 @@ retry tras respuesta descartada/desconexión y avance posterior, e inserción
 retroactiva. Se comprueba invisibilidad antes del commit y equivalencia final con
 el lector completo. Los 76 controles ACL también pasan en PostgreSQL nativo.
 Evidencia y límites: `docs/research/STATISTICS_CONCURRENCY_20260927.md`.
+
+## Corte manual preparado — 28/09/2026
+
+El preflight recibido del propietario (docs/research/statistics-preflight-20260928.json)
+informa PostgreSQL 17.6, nombres disponibles, RLS habilitado y permisos esperados.
+Columnas, restricciones, índices, políticas y triggers coinciden con el esquema
+local; fixtures conserva la clave compuesta referenciada. Esto reemplaza la espera
+del resultado remoto indicada arriba. No prueba permisos administrativos futuros.
+
+Antes de ejecutar: mantener pausadas las importaciones manuales de estadísticas.
+No hay scheduler deportivo habilitado en el proyecto. El job de salud solo lee.
+
+1. En SQL Editor del mismo proyecto, ejecutar una sola vez el archivo completo
+   `statistics_history_projection.sql`. Crea proyección/RPC y revoca INSERT directo
+   a service_role dentro de una transacción con bloqueo del historial.
+2. Si termina correctamente, ejecutar `audit_statistics_projection_acl.sql` y
+   devolver el resultado completo. Si hay error, devolverlo sin repetir la carga,
+   borrar objetos ni conceder permisos amplios.
+3. Mantener STATISTICS_READ_MODE=history y las importaciones pausadas. Tras revisar
+   la auditoría, Codex verificará Data API y reconstruirá/comparará los fixtures
+   servidos antes de habilitar el lector. Nuevas importaciones usarán exclusivamente
+   `--storage=projection`; comandos antiguos fallarán por permisos sin insertar.
+
+Se corrigió un requisito del cambio de propietario para administradores sin
+superusuario: EXECUTE se restringe antes de transferir la función; membresía
+temporal SET (sin INHERIT) y CREATE de esquema se retiran antes del commit.
+PostgreSQL puede conservar el grant implícito ADMIN-only al creador. La auditoría
+lo acepta solo para el propietario del historial, sin SET ni INHERIT; cualquier
+otra membresía falla. No se otorga capacidad al rol operativo para asumir al escritor.
+Prueba: `node tests/database/statistics-migration-admin.mjs`; repetida además en
+PostgreSQL 17.11 con los diez escenarios concurrentes y auditoría 76/76.
+Requisito de ownership: [ALTER FUNCTION PostgreSQL 17](https://www.postgresql.org/docs/17/sql-alterfunction.html).

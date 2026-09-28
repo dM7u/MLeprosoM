@@ -50,13 +50,14 @@ try {
  const settings=(await query(admin,"select current_setting('data_directory') as dir,current_setting('server_version') as version"))[0];
  assert.equal(realpathSync(settings.dir),realpathSync(config.cluster),'must be runner-owned disposable cluster');
  assert.equal((await query(admin,"select count(*)::integer as n from pg_tables where schemaname='public'"))[0].n,0,'must be empty');
- await admin.query('create role anon; create role authenticated; create role service_role bypassrls;');
+ await admin.query('create role anon; create role authenticated; create role service_role bypassrls; create role migration_admin createrole nosuperuser; grant usage,create on schema public to migration_admin with grant option; set role migration_admin;');
  for(const file of readdirSync('supabase/migrations').filter(f=>f.endsWith('.sql')).sort())await admin.query(readFileSync('supabase/migrations/'+file,'utf8'));
  for(const side of ['home','away'])await query(admin,"insert into teams(id,provider,external_id,name,fetched_at) values($1,'bsd',$2,'Test',$3)",[fixture[side+'_team_id'],fixture[side+'_external_id'],new Date(now)]);
  const competition=(await query(admin,"insert into competitions(provider,external_id,name,fetched_at) values('bsd','test','Test',$1) returning id",[new Date(now)]))[0].id;
  const season=(await query(admin,"insert into seasons(provider,external_id,competition_id,name,fetched_at) values('bsd','test',$1,'Test',$2) returning id",[competition,new Date(now)]))[0].id;
  await query(admin,"insert into fixtures(id,provider,external_id,season_id,home_team_id,away_team_id,source_status,fetched_at) values($1,'bsd',$2,$3,$4,$5,'finished',$6)",[fixture.id,fixture.external_id,season,fixture.home_team_id,fixture.away_team_id,new Date(now)]);
  await admin.query(readFileSync('supabase/pending/statistics_history_projection.sql','utf8'));
+ await admin.query('reset role');
  const audit=(await query(admin,readFileSync('supabase/pending/audit_statistics_projection_acl.sql','utf8')))[0];
  assert.equal(audit.access_ok,true,JSON.stringify(audit));
  const a=await connect(),b=await connect();

@@ -1468,3 +1468,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   acceso administrativo; no se ejecutó migración ni se activó el lector.
 - Lint y diff aprobados; sin cambios de aplicación. Mantener lecturas history
   hasta completar revisión remota, corte y reconstrucción.
+
+## Preflight recibido y corte preparado — 28/09/2026
+
+- [x] Evidencia remota guardada en docs/research/statistics-preflight-20260928.json:
+  PostgreSQL 17.6, nombres libres, permisos/RLS correctos. Comparación automática
+  de columnas, restricciones, índices, políticas/triggers y claves de fixtures.
+- [x] Corregido cambio de propietario de función para creador sin superusuario:
+  restringir EXECUTE antes de transferir, SET temporal sin INHERIT y revocación
+  antes de commit. Auditoría permite solo grant implícito ADMIN-only al propietario
+  del historial, sin SET/INHERIT; otras membresías siguen rechazadas.
+- [x] Pruebas PGlite de administrador/ACL/integración y PostgreSQL 17.11 nativo
+  con administrador limitado, diez escenarios concurrentes y 76 controles aprobados.
+- Pendiente ejecución manual por el propietario del SQL preparado y devolución
+  de auditoría posterior. Sin escritura remota realizada por Codex; mantener
+  importaciones pausadas y lector history hasta auditar y reconstruir.

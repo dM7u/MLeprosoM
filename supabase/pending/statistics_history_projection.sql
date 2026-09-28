@@ -1,4 +1,5 @@
--- LOCAL PROPOSAL ONLY. Requires coordinated writer cutover; not in migrations/.
+-- Manual coordinated cutover after reviewed preflight; not in migrations/.
+-- Keep STATISTICS_READ_MODE=history until post-audit and full reconstruction.
 begin;
 lock table public.team_statistics_observations in access exclusive mode;
 alter table public.team_statistics_observations add constraint statistics_projection_binding unique(fixture_id,id);
@@ -84,10 +85,13 @@ begin
  return jsonb_build_object('stored',p_observation is not null,'replay',false,'generation',head.generation+1);
 end;
 $$;
--- Dedicated NOLOGIN owner, no membership or broad DB privileges granted.
+-- Temporary membership enables ownership transfer for a non-superuser creator.
+-- Remove it before commit. PostgreSQL may retain the creator's ADMIN-only grant.
+revoke all on function public.commit_statistics_projection(uuid,bigint,jsonb,uuid,uuid,bigint,integer) from public,anon,authenticated;
+grant execute on function public.commit_statistics_projection(uuid,bigint,jsonb,uuid,uuid,bigint,integer) to service_role;
+grant mle_statistics_writer to current_user with inherit false, set true;
 grant create on schema public to mle_statistics_writer;
 alter function public.commit_statistics_projection(uuid,bigint,jsonb,uuid,uuid,bigint,integer) owner to mle_statistics_writer;
 revoke create on schema public from mle_statistics_writer;
-revoke all on function public.commit_statistics_projection(uuid,bigint,jsonb,uuid,uuid,bigint,integer) from public,anon,authenticated;
-grant execute on function public.commit_statistics_projection(uuid,bigint,jsonb,uuid,uuid,bigint,integer) to service_role;
+revoke mle_statistics_writer from current_user;
 commit;
