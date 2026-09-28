@@ -244,3 +244,11 @@ Evidencia: docs/research/statistics-activation-20260928.json. Esto reemplaza los
 pendientes de activación de estadísticas de las notas anteriores; los demás
 recursos siguen pendientes. No implica despliegue ni cambio de modo en otros entornos.
 Nuevos fixtures requieren bootstrap explícito; visitas nunca reconstruyen.
+
+## Medición local de la lectura acotada — 28/09/2026
+
+27 pares de lecturas equivalentes en PGlite, hasta 5000 observaciones, incluidos
+empty, failed sin dato útil, fresh y retención stale. Con 5000 filas: 50 consultas
+y ~4,45 MB por historial frente a una RPC y 1,5–2 KB de proyección. Bootstrap
+continúa validando todo el historial; costos separados. No equivale a latencia
+Supabase ni habilita frecuencia. Reporte: docs/research/STATISTICS_PROJECTION_VOLUME_20260928.md.

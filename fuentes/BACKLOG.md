@@ -1503,3 +1503,17 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Sin cambios de runtime: validación remota y smoke HTTP realizadas, diff limpio;
   no se repiten pruebas/build previos. Pendiente medir proyección a escala y
   extender el mecanismo a alineaciones/eventos antes de habilitar frecuencia.
+
+## Escala de proyección estadística — 28/09/2026
+
+- [x] Benchmark local pareado: 0/1/100/1000/5000 observaciones, última útil/fallida,
+  tres repeticiones por escenario. 27 pares con resultado completo idéntico.
+- [x] 5000 filas: historial 50 consultas/~4,45 MB; proyección una RPC/1,5–2 KB.
+  Bootstrap se mide aparte y conserva replay completo. No se promete ahorro
+  para historial de cero/una fila ni latencia/SLO remoto.
+- Evidencia y límites: docs/research/STATISTICS_PROJECTION_VOLUME_20260928.md y
+  statistics-projection-volume-20260928.json. Solo PGlite en memoria, sin red,
+  cambios de runtime, escrituras remotas ni proveedores. No se repiten build ni
+  typecheck por este bloque de medición; benchmark y lint verificados.
+- Próximo bloque: proyección de alineaciones con sus reglas propias, después
+  eventos. Mantener ingesta manual; standings conserva su evaluación separada.
