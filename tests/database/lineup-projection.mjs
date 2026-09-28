@@ -5,6 +5,8 @@ import {fixture,now} from '../fixtures/history-selection.mjs';
 import {createLineupObservation} from '../../src/server/db/lineup-observations.mjs';
 import {lineupSnapshotView} from '../../src/server/db/read-lineups.mjs';
 import {commitLineupSelection,previewLineupSelection,readProjectedLineups} from '../../src/server/db/lineup-projection.mjs';
+import {importLineups} from '../../src/server/db/import-lineups.mjs';
+import {rebuildLineupProjection} from '../../src/server/db/rebuild-lineup-projection.mjs';
 const db=new PGlite();
 const query=async(sql,args=[]) => (await db.query(sql,args)).rows;
 const sample=JSON.parse(readFileSync('docs/research/bsd-lineups-223728-20260925.json','utf8')).body;
@@ -48,7 +50,22 @@ try{
  await assert.rejects(query('insert into lineup_observations(id) values($1)',[fixture.id]),/permission denied/);
  await assert.rejects(query('update lineup_history_projection set initialized=false'),/permission denied/);
  assert.equal((await readProjectedLineups(client,opts)).status,'error');
- await commitLineupSelection(client,opts);await verify();assert.equal((await readProjectedLineups(client,opts)).status,'empty');
+ const operational={...client,from(table){
+  if(table==='lineup_observations')return client.from(table);
+  assert.ok(['teams','fixtures'].includes(table));const filters=[];
+  return {select(){return this;},eq(k,v){filters.push([k,v]);return this;},order(){return this;},limit(n){assert.equal(n,101);return this;},or(filter){assert.equal(filter,`home_team_id.eq.${fixture.away_team_id},away_team_id.eq.${fixture.away_team_id}`);return this;},
+   async maybeSingle(){assert.deepEqual(filters,[['provider','bsd'],['external_id','4997']]);return {data:(await query('select id,name from teams where id=$1',[fixture.away_team_id]))[0]};},
+   async in(k,ids){assert.equal(k,'id');assert.deepEqual(filters,[['provider','bsd']]);assert.equal(ids.length,2);return {data:await query('select id,name,external_id from teams where id=any($1::uuid[])',[ids])};},
+   then(resolve,reject){assert.deepEqual(filters,[['provider','bsd'],['seasons.competitions.external_id','test'],['seasons.external_id','test']]);return query("select to_jsonb(f)||jsonb_build_object('seasons',jsonb_build_object('external_id',s.external_id,'competitions',jsonb_build_object('external_id',c.external_id,'name',c.name))) as row from fixtures f join seasons s on s.id=f.season_id join competitions c on c.id=s.competition_id where f.id=$1",[fixture.id]).then(rows=>({data:rows.map(r=>r.row)})).then(resolve,reject);},
+  };
+ }};
+ const scope={provider:'bsd',externalTeamId:'4997',competitionId:'test',seasonId:'test'};
+ const rebuildArgs={eventId:223728,scope,mode:'--dry-run',now};
+ assert.equal((await rebuildLineupProjection(operational,rebuildArgs)).result.plan.count,0);assert.equal((await head()).projection,null);
+ const rebuilt=await rebuildLineupProjection(operational,{...rebuildArgs,mode:'--apply'});
+ assert.equal(rebuilt.projection_writes,1);assert.equal(rebuilt.verification.verified,true);await verify();
+ assert.equal((await rebuildLineupProjection(operational,{...rebuildArgs,mode:'--apply'})).projection_writes,0);
+ assert.equal((await readProjectedLineups(client,opts)).status,'empty');
  const unavailable=row(1,0,'unavailable');await commitLineupSelection(client,{...opts,observation:unavailable});await verify();assert.equal((await readProjectedLineups(client,opts)).status,'empty');
  const a=row(2,20,'partial'),b=row(3,30,'complete',10),x=row(4,10,'complete',5);
  for(const observation of [a,b]){await commitLineupSelection(client,{...opts,observation});await verify();}
@@ -78,5 +95,9 @@ try{
   await assert.rejects(commitLineupSelection(client,opts),/PROJECTION_UNAVAILABLE/);
  }finally{await db.exec('rollback');}
  assert.deepEqual(await head(),after);await verify();
+ const importArgs={scope,mode:'--dry-run',storage:'projection',id:row(12,42).id,now,sample:{body:{...sample,updated_at:stamp(42)},fetched_at:stamp(42)}};
+ const importBefore=await head();assert.equal((await importLineups(operational,importArgs)).writes,0);assert.deepEqual(await head(),importBefore);
+ assert.equal((await importLineups(operational,{...importArgs,mode:'--apply'})).writes,1);await verify();
+ assert.equal((await importLineups(operational,{...importArgs,mode:'--apply'})).result.replay,true);
  console.log('PASS: lineup empty/unavailable, partial retention, source-date regression/null, retroactive reselection, preview, CAS retry, rollback, idempotence and isolated ACL; serialized PGlite only');
 }finally{await db.close();}

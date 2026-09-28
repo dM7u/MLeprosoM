@@ -1,0 +1,10 @@
+import 'server-only';
+import {resolveLineupFixture} from './lineup-fixture.mjs';
+import {commitLineupSelection,previewLineupSelection,validateLineupProjection} from './lineup-projection.mjs';
+import {lineupSnapshotView} from './read-lineups.mjs';
+import policy from './lineup-policy.json' with {type:'json'};
+import {createHistoryRebuild} from './history-rebuild.mjs';
+const rebuild=createHistoryRebuild({resolveFixture:resolveLineupFixture,commitSelection:commitLineupSelection,previewSelection:previewLineupSelection,validateProjection:validateLineupProjection,fullView:lineupSnapshotView,table:'lineup_observations',readRpc:'read_lineup_projection',policy,errorPrefix:'LINEUPS'});
+export const parseLineupRebuildArgs=rebuild.parseArgs;
+export const verifyLineupProjection=rebuild.verifyProjection;
+export const rebuildLineupProjection=rebuild.rebuildProjection;

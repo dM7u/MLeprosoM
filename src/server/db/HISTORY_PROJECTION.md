@@ -273,3 +273,16 @@ Propuesta SQL propia en supabase/pending/lineup_history_projection.sql, sin apli
 Persistencia/ACL y reglas probadas localmente; faltan integración operacional,
 ensayo de dos conexiones de alineaciones y auditoría remota. No cambia UI ni modo
 de lectura de alineaciones. Estadísticas sigue activada con su configuración actual.
+
+## Operación de alineaciones preparada — 28/09/2026
+
+Importador con --storage=projection explícito y reconstrucción por evento integrados.
+history-rebuild.mjs comparte verificación de generación estable y resultados con
+estadísticas; cada módulo conserva lookup, validador, política y lector completo
+propios. El lookup de alineaciones conserva el límite de su snapshot de equipo y
+rechaza snapshots parciales; no reconstruye fuera de equipo/competición/temporada.
+
+Ficha con LINEUPS_READ_MODE=history por defecto, projection explícito sin fallback.
+El posible XI en Home mantiene su lector anterior; no se afirma que todas las
+lecturas de alineaciones estén migradas. Sin cambio de configuración ni SQL remoto.
+Antes de activar faltan ensayo específico multi-conexión, auditoría y corte.

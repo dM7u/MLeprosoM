@@ -1534,3 +1534,19 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   reconstrucción, luego concurrencia específica/auditoría antes de activar.
 - [x] 187 pruebas, lint, typecheck y build aprobados; diff limpio. SQL local de
   ambos recursos y concurrencia nativa de estadísticas verificados.
+
+## Operación local de proyección de alineaciones — 28/09/2026
+
+- [x] Importador con almacenamiento explícito, preview sin escrituras, CAS en apply
+  y retry sin duplicación. Default history; RPC ausente no hace fallback a INSERT.
+- [x] Reconstrucción por evento con lookup acotado compartido, sin observaciones
+  nuevas; equivalencia bajo generación estable, retry y fallo post-commit separados.
+  Verificador/reconstructor común con estadísticas, API previa conservada.
+- [x] Ficha admite LINEUPS_READ_MODE explícito, default history. Home conserva
+  lector previo; no se cambió .env.local ni se activó el modo remoto.
+- [x] SQL local verifica lookup real, reconstrucción, importación, preview y retry;
+  pruebas unitarias cubren flags, error sin fallback, generaciones y post-commit.
+- Sin consultas deportivas ni cambios remotos. Próximo: concurrencia específica
+  de alineaciones y auditoría antes del corte/reconstrucción en Supabase.
+- [x] 192 pruebas, lint, typecheck y build aprobados; integración SQL de
+  alineaciones y regresión SQL de estadísticas aprobadas; diff limpio.

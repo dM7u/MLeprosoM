@@ -410,3 +410,36 @@ aplicar quedan reemplazadas para este proyecto: NO repetir SQL. Para importar
 estadísticas usar siempre --storage=projection. Todo fixture nuevo necesita
 reconstrucción explícita antes de servirse con ese lector, incluso sin datos.
 Otros entornos mantienen su configuración hasta realizar su propia verificación.
+
+## Alineaciones: importación atómica y reconstrucción local — 28/09/2026
+
+El importador admite un cuarto argumento opcional `--storage=history|projection`.
+Default history conserva el comportamiento vigente. Projection requiere las RPC
+de alineaciones; su ausencia/error no deriva a INSERT directo. Flags inválidos o
+repetidos se rechazan antes de abrir muestras/configuración. Dry-run valida
+identidad y calcula selección/generación; no reserva un estado para el apply.
+
+Después del futuro corte y auditoría, la reconstrucción por evento se ejecutará con:
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/rebuild-lineup-projection.mjs 223728 --dry-run
+node --conditions=react-server --env-file=.env.local scripts/rebuild-lineup-projection.mjs 223728 --apply
+```
+
+Estos comandos no se ejecutaron remotamente: SQL de alineaciones sigue pendiente.
+Apply no inserta observaciones; publica selección mediante CAS y compara con el
+historial completo bajo generación estable. Exit 2 indica verificación posterior
+fallida, aun cuando la proyección se haya confirmado; no implica rollback. Exit 1
+indica fallo previo/no completado. Retry de reconstrucción idéntica no modifica estado.
+
+Importador/reconstructor comparten el lookup existente de equipo, competición y
+temporada, conservando IDs externos de ambos lados. Si el snapshot está incompleto
+o excede el límite de 100 fixtures visibles, fallan cerrados: no reconstruyen un
+evento a partir de un inventario parcial. No consultan proveedores.
+
+La ficha admite LINEUPS_READ_MODE=projection explícito, ausente/history por defecto.
+RPC faltante o bootstrap ausente produce error, sin fallback ni reconstrucción por
+visita. El posible XI de Home mantiene su lectura actual independiente. Antes de
+activar el modo de ficha hay que completar concurrencia específica, auditoría,
+corte de escritores y reconstrucción de todos los fixtures servidos. No cambiar
+.env.local todavía. La propuesta no se aplica como parte de estos comandos.

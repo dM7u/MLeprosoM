@@ -188,3 +188,18 @@ nativo de diez carreras de estadísticas también pasa tras compartir el mecanis
 Pendiente: importador explícito, reconstrucción y selector de lectura, auditoría
 remota y ensayo multi-conexión específico de alineaciones antes del corte.
 UI e importador actuales de alineaciones continúan con el historial paginado.
+
+### Integración operacional preparada localmente
+
+Importador: --storage=projection explícito, default history. Reconstructor:
+scripts/rebuild-lineup-projection.mjs por evento, preview sin escrituras y apply
+sin observaciones nuevas. Comparación del historial bajo generación estable y
+reporte de verificación independiente del commit. Ficha: LINEUPS_READ_MODE,
+default history; no se modificó configuración privada. Home conserva su lector.
+Estas conexiones reemplazan ese pendiente de implementación del párrafo anterior;
+activación, auditoría y concurrencia específica de alineaciones siguen pendientes.
+
+Prueba SQL ahora recorre el lookup y los importadores/reconstructores reales,
+incluidos repetición idempotente, comparación completa y permisos del corte.
+La mecánica de reconstrucción comparte history-rebuild.mjs con estadísticas,
+conservando validadores, tablas y prefijos de error separados por recurso.
