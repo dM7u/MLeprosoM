@@ -233,3 +233,14 @@ y respuesta descartada seguida de retry tras avance de generación. ACL 76/76.
 Runner aislado y límites en docs/research/STATISTICS_CONCURRENCY_20260927.md.
 Esto cierra el ensayo local pendiente de las notas anteriores; no certifica la
 base remota ni activa la propuesta. Corte, auditoría y reconstrucción siguen pendientes.
+
+## Estadísticas activadas localmente sobre Supabase — 28/09/2026
+
+SQL aplicado por el propietario y auditoría administrativa 76/76 informada.
+Reconstrucción remota de 32 fixtures del ámbito revisado, cero observaciones nuevas,
+equivalencia completa y retry idempotente verificados por Data API. Configuración
+local projection activa; 32 lecturas con una RPC cada una, 31 empty/un stale.
+Evidencia: docs/research/statistics-activation-20260928.json. Esto reemplaza los
+pendientes de activación de estadísticas de las notas anteriores; los demás
+recursos siguen pendientes. No implica despliegue ni cambio de modo en otros entornos.
+Nuevos fixtures requieren bootstrap explícito; visitas nunca reconstruyen.

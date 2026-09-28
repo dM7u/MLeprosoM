@@ -404,4 +404,9 @@ Antes de cambiar a projection, reconstruir/verificar TODOS los fixtures BSD
 servidos, incluidos los vacíos, después del corte de escritores y auditoría ACL.
 No hay selección automática por existencia de tabla ni rollout por fixture.
 Volver a history revierte solo lectura: mantener escritores CAS y permisos cerrados.
-La configuración local privada no fue modificada; historial sigue activo.
+Actualización 28/09/2026: SQL aplicado, auditoría 76/76 y reconstrucción 32/32
+verificadas. .env.local usa projection. Las notas anteriores de propuesta sin
+aplicar quedan reemplazadas para este proyecto: NO repetir SQL. Para importar
+estadísticas usar siempre --storage=projection. Todo fixture nuevo necesita
+reconstrucción explícita antes de servirse con ese lector, incluso sin datos.
+Otros entornos mantienen su configuración hasta realizar su propia verificación.

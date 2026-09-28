@@ -2,8 +2,10 @@
 
 Estos archivos NO forman parte del conjunto activo `supabase/migrations/`.
 Requieren corte coordinado; no incluirlos en una carga automática de migraciones.
-Estado actualizado al 28/09/2026: preflight remoto de estadísticas contrastado;
-su SQL está preparado para el corte manual descrito al final, todavía sin aplicar.
+Estado actualizado al 28/09/2026: SQL de estadísticas aplicado por el propietario,
+auditoría 76/76 informada y reconstrucción remota verificada. NO repetir el SQL.
+El archivo permanece aquí como registro del corte manual, fuera de carga automática.
+Los apartados de preparación siguientes describen etapas anteriores; ver activación al final.
 
 ## Próximo paso remoto: preflight de solo lectura
 
@@ -140,3 +142,24 @@ otra membresía falla. No se otorga capacidad al rol operativo para asumir al es
 Prueba: `node tests/database/statistics-migration-admin.mjs`; repetida además en
 PostgreSQL 17.11 con los diez escenarios concurrentes y auditoría 76/76.
 Requisito de ownership: [ALTER FUNCTION PostgreSQL 17](https://www.postgresql.org/docs/17/sql-alterfunction.html).
+
+## Activación verificada — 28/09/2026
+
+El propietario devolvió `true / 76 / []` de la auditoría posterior. Desde Data API
+se verificaron las RPC y se inventariaron los 32 fixtures BSD del ámbito 85/1635,
+equipo 4997. Dry-run: una observación histórica, ninguna escritura. Apply:
+32 proyecciones inicializadas, cero observaciones nuevas, equivalencia 32/32
+contra historial completo; inventario estable. Retry de 223728: cero escrituras,
+misma generación 1. No hubo llamadas a proveedores.
+
+STATISTICS_READ_MODE=projection está activo en .env.local, sin cambiar el default
+de otros entornos ni desplegar. Lectura configurada comprobada para 32 fixtures:
+32 RPC, cero recorridos de historial, 31 empty y un stale. Fichas locales 223728 y
+223606 devuelven HTTP 200 y las secciones esperadas; servidor temporal detenido.
+Evidencia: docs/research/statistics-activation-20260928.json.
+
+Importaciones de estadísticas pueden continuar únicamente con --storage=projection.
+Mantener reconstrucción explícita para fixtures nuevos antes de servirlos con este
+modo: sin proyección inicializada el lector falla cerrado. Alineaciones/eventos
+siguen con lectores completos. Rollback de lectura: history, conservando CAS y
+permisos de escritura; no restaurar INSERT directo ni repetir esta migración.

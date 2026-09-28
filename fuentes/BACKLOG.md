@@ -1483,3 +1483,23 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Pendiente ejecución manual por el propietario del SQL preparado y devolución
   de auditoría posterior. Sin escritura remota realizada por Codex; mantener
   importaciones pausadas y lector history hasta auditar y reconstruir.
+
+## Estadísticas: activación de proyección — 28/09/2026
+
+- [x] Propietario aplicó SQL y devolvió auditoría administrativa true/76/[];
+  RPC verificadas posteriormente mediante Data API. No repetir migración.
+- [x] Inventario estable: 32 fixtures BSD de Newell's en ámbito revisado 85/1635.
+  Dry-run valida una observación histórica; apply inicializa 32 proyecciones sin
+  crear observaciones. Equivalencia completa de cada fixture: 32/32.
+- [x] Retry de 223728 idempotente: cero escrituras y generación 1 conservada.
+- [x] Activado STATISTICS_READ_MODE=projection solo en .env.local. 32 lecturas
+  verificadas: una RPC por fixture, sin historial, 31 empty y un stale. Fichas
+  223728/223606 HTTP 200 con estados correctos; servidor temporal detenido.
+- Evidencia: docs/research/statistics-activation-20260928.json. Cero consultas
+  a proveedores; única escritura remota fueron las 32 proyecciones reconstruidas.
+- Importaciones estadísticas deben usar --storage=projection. Fixtures nuevos
+  necesitan bootstrap explícito antes de servirlos. Otros entornos conservan su
+  configuración; no se desplegó. No se reabre INSERT directo para rollback.
+- Sin cambios de runtime: validación remota y smoke HTTP realizadas, diff limpio;
+  no se repiten pruebas/build previos. Pendiente medir proyección a escala y
+  extender el mecanismo a alineaciones/eventos antes de habilitar frecuencia.
