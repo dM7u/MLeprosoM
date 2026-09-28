@@ -1517,3 +1517,20 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   typecheck por este bloque de medición; benchmark y lint verificados.
 - Próximo bloque: proyección de alineaciones con sus reglas propias, después
   eventos. Mantener ingesta manual; standings conserva su evaluación separada.
+
+## Proyección local de alineaciones — 28/09/2026
+
+- [x] Mecanismo de envelope/RPC/CAS/retry compartido con estadísticas, conservando
+  API y reglas de cada recurso. Identidad local/externa de ambos equipos validada.
+- [x] SQL propio fuera de migraciones activas, rol limitado y corte INSERT
+  preparado solo localmente. Coexistencia de ACL estadísticas/alineaciones probada.
+- [x] 130 resultados de proyección equivalentes al replay; casos partial,
+  unavailable, fuente anterior/ausente y retroactivo que cambia la selección.
+  SQL local cubre bootstrap, rollback, preview, retry y corrupción histórica.
+- [x] Regresión de estadísticas: pruebas SQL y diez escenarios nativos con dos
+  conexiones siguen aprobados después de extraer el mecanismo compartido.
+- Sin cambios remotos, configuración ni proveedores. UI/importador de alineaciones
+  mantienen el camino existente. Próximo: conexión operacional explícita y
+  reconstrucción, luego concurrencia específica/auditoría antes de activar.
+- [x] 187 pruebas, lint, typecheck y build aprobados; diff limpio. SQL local de
+  ambos recursos y concurrencia nativa de estadísticas verificados.

@@ -163,3 +163,28 @@ Mantener reconstrucción explícita para fixtures nuevos antes de servirlos con 
 modo: sin proyección inicializada el lector falla cerrado. Alineaciones/eventos
 siguen con lectores completos. Rollback de lectura: history, conservando CAS y
 permisos de escritura; no restaurar INSERT directo ni repetir esta migración.
+
+## Alineaciones: propuesta exclusivamente local — 28/09/2026
+
+`lineup_history_projection.sql` NO está aplicado ni preparado para corte remoto.
+Agrega proyección y RPC propias, rol mle_lineup_writer y revocación de INSERT
+directo de alineaciones. Conserva las FK del historial con IDs externos de ambos
+equipos; chosen admite complete/partial y nunca unavailable. Reglas de selección
+pertenecen al reductor backend compartido, no se duplican en SQL.
+
+Backend en lineup-projection.mjs reutiliza el mecanismo de validación del envelope,
+lectura única, append/replay, CAS y retry extraído de estadísticas. Valida además
+identidad local/externa de cada lado mediante validateLineupObservation.
+Estadísticas conserva su API y configuración; no se cambia su SQL ya aplicado.
+
+Prueba local: `node --conditions=react-server tests/database/lineup-projection.mjs`.
+Incluye coexistencia y ACL de ambos recursos, administrador no superusuario,
+bootstrap vacío, unavailable sin datos, retención de partial, fechas de fuente
+anteriores/ausentes, retroactivo que cambia chosen, rollback, retry y corrupción
+histórica. Intercalación serializada; no certifica dos conexiones de alineaciones.
+Las pruebas unitarias comparan 130 resultados de proyección/replay. El ensayo
+nativo de diez carreras de estadísticas también pasa tras compartir el mecanismo.
+
+Pendiente: importador explícito, reconstrucción y selector de lectura, auditoría
+remota y ensayo multi-conexión específico de alineaciones antes del corte.
+UI e importador actuales de alineaciones continúan con el historial paginado.

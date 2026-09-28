@@ -252,3 +252,24 @@ empty, failed sin dato útil, fresh y retención stale. Con 5000 filas: 50 consu
 y ~4,45 MB por historial frente a una RPC y 1,5–2 KB de proyección. Bootstrap
 continúa validando todo el historial; costos separados. No equivale a latencia
 Supabase ni habilita frecuencia. Reporte: docs/research/STATISTICS_PROJECTION_VOLUME_20260928.md.
+
+## Alineaciones: integración local — 28/09/2026
+
+history-projection.mjs extrae la mecánica de estadísticas sin cambiar su API:
+validación de envelope, lectura RPC, planificación, CAS y reintentos. Se configura
+solo mediante módulos backend internos, nunca con tablas/RPC recibidas del usuario.
+statistics-projection.mjs y lineup-projection.mjs aportan recurso, nombres fijos y
+validadores propios. La selección sigue en history-selection.mjs.
+
+Alineaciones exige también home_external_id/away_external_id del fixture; no basta
+validar que el payload sea internamente consistente con una observación ajena.
+Unavailable sin selección produce empty, no error; parcial posterior no reemplaza
+selección y una fecha de fuente conocida no puede retroceder ni desaparecer.
+Retroactivos requieren replay de todo el historial. Contrajemplo probado: parcial
+A(t20, fuente20) impide completa B(t30, fuente10); completa X(t10, fuente5) vuelve
+elegible B al impedir que A parcial sustituya X.
+
+Propuesta SQL propia en supabase/pending/lineup_history_projection.sql, sin aplicar.
+Persistencia/ACL y reglas probadas localmente; faltan integración operacional,
+ensayo de dos conexiones de alineaciones y auditoría remota. No cambia UI ni modo
+de lectura de alineaciones. Estadísticas sigue activada con su configuración actual.
