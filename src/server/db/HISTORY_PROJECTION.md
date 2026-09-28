@@ -286,3 +286,9 @@ Ficha con LINEUPS_READ_MODE=history por defecto, projection explícito sin fallb
 El posible XI en Home mantiene su lector anterior; no se afirma que todas las
 lecturas de alineaciones estén migradas. Sin cambio de configuración ni SQL remoto.
 Antes de activar faltan ensayo específico multi-conexión, auditoría y corte.
+
+Actualización 28/09/2026: ensayo específico de alineaciones aprobado en PostgreSQL
+17.11 con bloqueo real entre dos escritores; cuatro carreras de retención además
+de los diez escenarios generales. Estadísticas conserva su regresión. Auditorías
+de ambos recursos pasan localmente. Falta preflight remoto y corte; ver
+docs/research/LINEUP_CONCURRENCY_20260928.md. No se activó el lector de alineaciones.

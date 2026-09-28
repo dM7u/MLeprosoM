@@ -203,3 +203,18 @@ Prueba SQL ahora recorre el lookup y los importadores/reconstructores reales,
 incluidos repetición idempotente, comparación completa y permisos del corte.
 La mecánica de reconstrucción comparte history-rebuild.mjs con estadísticas,
 conservando validadores, tablas y prefijos de error separados por recurso.
+
+### Concurrencia y preflight de alineaciones — 28/09/2026
+
+Ensayo nativo aprobado: diez escenarios comunes y cuatro carreras específicas
+de retención, con bloqueos comprobados y equivalencia contra replay. Auditorías
+de ambos recursos 76/76; diez alteraciones de ACL detectadas en PGlite. El ensayo
+específico de concurrencia ya no está pendiente. Evidencia y límites en
+docs/research/LINEUP_CONCURRENCY_20260928.md.
+
+Próximo paso: ejecutar únicamente `preflight_lineup_projection.sql` en SQL Editor
+del mismo proyecto Supabase y devolver la celda JSON evidence completa. Es de
+solo lectura; incluye restricciones de teams/fixtures además del historial.
+No aplicar todavía `lineup_history_projection.sql` ni activar LINEUPS_READ_MODE.
+Tras contrastar el catálogo se preparará el corte manual y se usará
+`audit_lineup_projection_acl.sql` para la auditoría posterior.

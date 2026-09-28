@@ -1,2 +1,2 @@
 import {runHistoryConcurrency} from './history-concurrency.mjs';
-await runHistoryConcurrency('statistics',process.argv[2]);
+await runHistoryConcurrency('lineups',process.argv[2]);

@@ -1550,3 +1550,18 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
   de alineaciones y auditoría antes del corte/reconstrucción en Supabase.
 - [x] 192 pruebas, lint, typecheck y build aprobados; integración SQL de
   alineaciones y regresión SQL de estadísticas aprobadas; diff limpio.
+
+## Concurrencia y auditoría de alineaciones — 28/09/2026
+
+- [x] PostgreSQL 17.11, dos escritores reales y bloqueo confirmado por tercera
+  conexión. Diez escenarios comunes y cuatro carreras de retención específicas:
+  parcial, fuente anterior/ausente y predicción. Replay completo equivalente.
+- [x] Convivencia con proyección de estadísticas aplicada; administrador limitado
+  y auditorías 76/76 de ambos recursos. Diez carreras de estadísticas conservadas.
+- [x] Preflight/auditoría SQL de solo lectura propios; prueba PGlite de esquema
+  ausente, nombres ocupados y diez alteraciones de privilegios detectadas.
+- Lint y diff aprobados. Sin cambios de runtime, configuración ni Supabase; no
+  se repiten 192 pruebas/typecheck/build previos por este bloque de herramientas.
+- Evidencia: docs/research/LINEUP_CONCURRENCY_20260928.md. Pendiente ejecutar
+  supabase/pending/preflight_lineup_projection.sql en SQL Editor del propietario
+  y contrastar resultado antes del corte. LINEUPS_READ_MODE sigue history.

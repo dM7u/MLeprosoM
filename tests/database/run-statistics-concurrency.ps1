@@ -1,4 +1,4 @@
-param([string]$PgBin = '.tools/db-validation/pgsql17/pgsql/bin')
+param([string]$PgBin = '.tools/db-validation/pgsql17/pgsql/bin', [ValidateSet('statistics','lineups')][string]$Resource = 'statistics')
 $ErrorActionPreference = 'Stop'
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 Set-Location -LiteralPath $repo
@@ -29,7 +29,7 @@ try {
  if (-not $process.WaitForExit(20000)) { throw 'Local pg_ctl timed out' }
  if ($process.ExitCode -ne 0) { throw 'Local PostgreSQL start failed; inspect ignored run logs' }
  $started = $true
- & node --conditions=react-server tests/database/statistics-concurrency.mjs $configPath
+ & node --conditions=react-server "tests/database/$Resource-concurrency.mjs" $configPath
  if ($LASTEXITCODE -ne 0) { throw 'Local concurrency test failed' }
 } finally {
  $stopFailed = $false
