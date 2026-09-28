@@ -1454,3 +1454,17 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - [x] Runner final, lint y diff aprobados. Instancias locales detenidas y archivos
   de contraseña/conexión eliminados. No se repiten build/typecheck/184 pruebas
   previas: solo se agregan herramientas de prueba y documentación, sin runtime.
+
+## Preflight administrativo de estadísticas — 27/09/2026
+
+- [x] Consulta de solo lectura para estado anterior al corte: nombres ocupados,
+  permisos efectivos y definición del historial/relación con fixtures. No lee
+  filas deportivas ni credenciales; no interpreta objetos existentes como permiso
+  para repetir/eliminar la propuesta.
+- [x] Prueba local en transacción read-only: esquema ausente, esquema anterior,
+  permiso por columna, nombre de rol ocupado y propuesta ya aplicada.
+- Pendiente resultado remoto de supabase/pending/preflight_statistics_projection.sql
+  mediante SQL Editor del propietario. La conexión disponible es Data API sin
+  acceso administrativo; no se ejecutó migración ni se activó el lector.
+- Lint y diff aprobados; sin cambios de aplicación. Mantener lecturas history
+  hasta completar revisión remota, corte y reconstrucción.

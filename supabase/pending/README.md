@@ -4,6 +4,26 @@ Estos archivos NO forman parte del conjunto activo `supabase/migrations/` y NO
 se deben ejecutar mediante el procedimiento habitual de carga del proyecto.
 Son propuestas locales con cambios de permisos que requieren corte coordinado.
 
+## Próximo paso remoto: preflight de solo lectura
+
+Ejecutar únicamente `preflight_statistics_projection.sql` en SQL Editor del
+proyecto Supabase y devolver la celda JSON `evidence` completa. No ejecuta DDL ni
+lee filas deportivas: informa versión, nombres ocupados, permisos efectivos,
+columnas, restricciones, índices, políticas y triggers del historial, más las
+restricciones de fixtures. No incluye credenciales.
+
+Se espera `new_names_available=true` e `history.access_ok=true` antes de aplicar
+la propuesta, pero ambos requieren además revisión de las definiciones. Si ya
+existen objetos, no repetir SQL ni eliminar colisiones. `access_ok` describe los
+permisos históricos SELECT/INSERT previos al corte; será false después del cambio
+esperado a SELECT solamente. Para el estado nuevo usar la auditoría posterior.
+
+La conexión disponible en este proyecto es Data API, sin acceso administrativo
+al catálogo. Esta ejecución en SQL Editor requiere al propietario del proyecto;
+no pedir ni compartir contraseñas. No aplicar todavía el SQL de persistencia ni
+cambiar STATISTICS_READ_MODE. Prueba local reproducible, incluida transacción
+read-only: `node tests/database/statistics-preflight.mjs`.
+
 ## statistics_history_projection.sql
 
 Crea proyección por fixture, FK compuestas al historial, lector RPC invoker y
