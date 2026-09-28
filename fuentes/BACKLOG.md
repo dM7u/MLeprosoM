@@ -1565,3 +1565,14 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Evidencia: docs/research/LINEUP_CONCURRENCY_20260928.md. Pendiente ejecutar
   supabase/pending/preflight_lineup_projection.sql en SQL Editor del propietario
   y contrastar resultado antes del corte. LINEUPS_READ_MODE sigue history.
+
+## Preflight remoto de alineaciones contrastado — 28/09/2026
+
+- [x] Evidencia recibida: docs/research/lineup-preflight-20260928.json. PostgreSQL
+  17.6, nombres libres, permisos/RLS esperados, sin políticas/triggers adicionales.
+- [x] Comparación automática de columnas, restricciones, índices, permisos y
+  claves de teams/fixtures contra el esquema local; prueba de auditoría y lint
+  del archivo afectado aprobados. Diff limpio; sin cambios de runtime.
+- Preparado corte manual con importaciones de alineaciones pausadas y auditoría
+  posterior. Pendiente ejecución por el propietario y resultado administrativo.
+  No se aplicó SQL ni se cambió LINEUPS_READ_MODE; estadísticas conserva su estado.

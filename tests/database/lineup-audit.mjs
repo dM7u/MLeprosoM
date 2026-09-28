@@ -11,6 +11,15 @@ try{
  for(const f of readdirSync('supabase/migrations').filter(f=>f.endsWith('.sql')).sort())await db.exec(readFileSync('supabase/migrations/'+f,'utf8'));
  await db.exec(readFileSync('supabase/pending/statistics_history_projection.sql','utf8'));
  const before=(await inspect(preflight)).evidence;
+ const remote=JSON.parse(readFileSync('docs/research/lineup-preflight-20260928.json','utf8'));
+ for(const key of ['exists','kind','owner','rls_enabled','access_ok','columns','privileges','policies','triggers'])assert.deepEqual(before.history[key],remote.history[key],key);
+ // PG18 catalogs NOT NULL separately; PG17 exposes it through column metadata.
+ const constraints=rows=>rows.filter(r=>!r.definition.startsWith('NOT NULL '));
+ assert.deepEqual(constraints(before.history.constraints),remote.history.constraints);
+ for(const key of ['teams_constraints','fixtures_constraints'])assert.deepEqual(constraints(before[key]),remote[key],key);
+ const indexes=rows=>[...rows].sort((a,b)=>a.definition.localeCompare(b.definition));
+ assert.deepEqual(indexes(before.history.indexes),indexes(remote.history.indexes));
+ assert.equal(remote.new_names_available,true);assert.deepEqual(remote.collisions,[]);
  assert.equal(before.new_names_available,true);assert.equal(before.history.access_ok,true);
  assert.ok(before.teams_constraints.some(c=>c.name==='teams_lineup_binding_unique'));
  assert.ok(before.history.columns.some(c=>c.name==='home_external_id'));

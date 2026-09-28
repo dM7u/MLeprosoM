@@ -1,4 +1,4 @@
--- LOCAL ONLY: lineup cutover/importer/rebuild and remote audit are still pending.
+-- Remote preflight reviewed 2026-09-28; execute once during the manual cutover.
 -- Manual coordinated cutover after reviewed preflight; not in migrations/.
 -- Keep LINEUPS_READ_MODE=history until post-audit and full reconstruction.
 begin;

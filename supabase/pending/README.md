@@ -218,3 +218,26 @@ solo lectura; incluye restricciones de teams/fixtures además del historial.
 No aplicar todavía `lineup_history_projection.sql` ni activar LINEUPS_READ_MODE.
 Tras contrastar el catálogo se preparará el corte manual y se usará
 `audit_lineup_projection_acl.sql` para la auditoría posterior.
+
+### Preflight de alineaciones recibido; corte preparado — 28/09/2026
+
+Evidencia en docs/research/lineup-preflight-20260928.json: PostgreSQL 17.6, nombres
+libres y acceso esperado. Comparación automática aprobada contra esquema local:
+columnas, restricciones, índices, políticas/triggers y claves de teams/fixtures.
+Esto reemplaza la espera de preflight de las notas anteriores. SQL aún sin aplicar.
+
+Mantener pausadas las importaciones manuales de alineaciones durante el corte:
+
+1. Ejecutar una vez el archivo completo `lineup_history_projection.sql` en SQL
+   Editor del mismo proyecto. Crea proyección/RPC y revoca INSERT directo de
+   alineaciones a service_role dentro de una transacción con bloqueo del historial.
+2. Si termina correctamente, ejecutar `audit_lineup_projection_acl.sql` y devolver
+   el resultado completo. Si falla, devolver el error sin repetir migración ni
+   conceder permisos adicionales o eliminar objetos.
+3. Mantener LINEUPS_READ_MODE=history y las importaciones pausadas hasta revisar
+   auditoría y RPC. Después Codex hará dry-run/reconstrucción de todos los fixtures
+   servidos y comprobará equivalencia antes de activar la ficha. Home conserva
+   lectura completa independiente. Importaciones futuras usarán --storage=projection.
+
+La configuración local no se modificó. No repetir SQL de estadísticas, ya activo.
+Rollback de lectura conservará el escritor atómico y no reabrirá INSERT directo.
