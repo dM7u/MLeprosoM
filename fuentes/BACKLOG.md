@@ -1576,3 +1576,23 @@ Cambios locales sin commit; promedios, ratings y sanciones fuera de este bloque.
 - Preparado corte manual con importaciones de alineaciones pausadas y auditoría
   posterior. Pendiente ejecución por el propietario y resultado administrativo.
   No se aplicó SQL ni se cambió LINEUPS_READ_MODE; estadísticas conserva su estado.
+
+## Alineaciones: corte remoto y lector local activados — 28/09/2026
+
+- [x] Propietario reportó auditoría posterior al SQL: true, 76 controles, sin fallos.
+  RPC disponibles; inventario estable de 32 fixtures del ámbito BSD revisado.
+- [x] Dry-run sin escrituras; reconstrucción de 32 proyecciones, equivalencia
+  completa con historial y retry idempotente verificados. Una observación existente,
+  cero observaciones nuevas y cero consultas al proveedor deportivo.
+- [x] LINEUPS_READ_MODE=projection en configuración local. Lector de ficha probado
+  en los 32 fixtures: una RPC por lectura, 31 empty y uno stale. HTTP 200 y contenido
+  correcto en ficha con alineación desactualizada y ficha sin datos.
+- Evidencia: docs/research/lineup-activation-20260928.json. Sustituye los pendientes
+  de corte/activación anteriores. Home conserva lector completo; no hubo despliegue
+  ni cambios de configuración de otros entornos. Nuevos fixtures necesitan bootstrap.
+- Importaciones futuras de alineaciones requieren --storage=projection; rollback
+  del lector no reabre INSERT directo. No repetir la migración SQL aplicada.
+- Sin cambios de runtime: no se repiten las 192 pruebas, lint, typecheck y build
+  previos. Verificados dry-run, equivalencia remota, retry, lector y HTTP.
+- Próximo bloque: medir proyección de alineaciones a escala; después eventos.
+  Ingesta sigue manual. Ratings, promedios y desempates pendientes fuera de alcance.

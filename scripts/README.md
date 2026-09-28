@@ -443,3 +443,12 @@ visita. El posible XI de Home mantiene su lectura actual independiente. Antes de
 activar el modo de ficha hay que completar concurrencia específica, auditoría,
 corte de escritores y reconstrucción de todos los fixtures servidos. No cambiar
 .env.local todavía. La propuesta no se aplica como parte de estos comandos.
+
+Actualización 28/09/2026: corte SQL y auditoría completados por el propietario;
+reconstrucción y equivalencia remotas aprobadas para 32 fixtures. LINEUPS_READ_MODE
+es projection en configuración local y la ficha fue comprobada por HTTP. Esto
+reemplaza las indicaciones de espera anteriores; no repetir la migración SQL.
+Importaciones futuras de alineaciones deben indicar --storage=projection. Nuevos
+fixtures requieren bootstrap explícito con rebuild-lineup-projection.mjs antes de
+servirlos por proyección. Home mantiene su lector anterior; no se desplegó a otros
+entornos. Evidencia: docs/research/lineup-activation-20260928.json.

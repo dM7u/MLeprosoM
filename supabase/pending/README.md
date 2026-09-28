@@ -241,3 +241,14 @@ Mantener pausadas las importaciones manuales de alineaciones durante el corte:
 
 La configuración local no se modificó. No repetir SQL de estadísticas, ya activo.
 Rollback de lectura conservará el escritor atómico y no reabrirá INSERT directo.
+
+### Alineaciones aplicadas y reconstruidas — 28/09/2026
+
+El propietario reportó auditoría posterior aprobada: true, 76, sin fallos. Data API
+confirmó RPC disponibles y reconstrucción equivalente de los 32 fixtures revisados;
+retry sin escrituras. Evidencia: docs/research/lineup-activation-20260928.json.
+LINEUPS_READ_MODE=projection activo localmente para ficha; Home conserva historial.
+No hay despliegue a otros entornos. Esta nota sustituye los pendientes anteriores:
+no repetir lineup_history_projection.sql. Futuras importaciones manuales requieren
+--storage=projection y nuevos fixtures necesitan reconstrucción antes de servirlos
+con ese lector. Ninguna observación nueva ni consulta deportiva en este corte.

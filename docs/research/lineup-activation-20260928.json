@@ -1,0 +1,477 @@
+{
+  "recorded_at": "2026-09-28T12:25:04.2884679Z",
+  "administrative_audit": {
+    "failed_checks": [],
+    "source": "user reported SQL Editor result",
+    "checks": 76,
+    "access_ok": true
+  },
+  "scope": {
+    "provider": "bsd",
+    "externalTeamId": "4997",
+    "competitionId": "85",
+    "seasonId": "1635",
+    "evidence": "docs/research/newells-2026-competition-map.json"
+  },
+  "fixture_count": 32,
+  "dry_run_observations": 32.0,
+  "observation_writes": 0,
+  "projection_writes": 32.0,
+  "provider_requests": 0,
+  "inventory_stable": true,
+  "reader": {
+    "checked_at": "2026-09-28T12:24:36.24Z",
+    "mode": "projection",
+    "fixture_count": 32,
+    "projection_rpc_calls": 32,
+    "history_reads": 0,
+    "statuses": {
+      "empty": 31,
+      "stale": 1
+    },
+    "provider_requests": 0
+  },
+  "ui": {
+    "checked_at": "2026-09-28T12:24:44.943Z",
+    "results": [
+      {
+        "event_id": "223728",
+        "http_status": 200,
+        "lineup_status": "stale",
+        "lineup_section_verified": true
+      },
+      {
+        "event_id": "223606",
+        "http_status": 200,
+        "lineup_status": "empty",
+        "lineup_section_verified": true
+      }
+    ]
+  },
+  "retry": {
+    "projection_writes": 0,
+    "verified": true,
+    "observation_writes": 0,
+    "event_id": "223728",
+    "generation": 1,
+    "replay": true
+  },
+  "fixtures": [
+    {
+      "fixture_id": "09f068e5-7948-4246-83f5-ac070d60af94",
+      "event_id": "223606",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "0d5d19ae-9b68-4a52-86f4-2eac1f18563f",
+      "event_id": "223512",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "0f7d06c7-573f-4f93-9521-0907143bd904",
+      "event_id": "223791",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "1690f34c-aeef-4dea-9600-85c9e6430104",
+      "event_id": "223810",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "2078430e-8adf-4f1f-8c87-846ef945ea05",
+      "event_id": "223437",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "294204db-9506-4003-bac5-19ae3a3d1f74",
+      "event_id": "223899",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "2dd83b25-17a9-4f7f-bd89-286549bd7fe4",
+      "event_id": "223564",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "326a7bae-e4f5-4670-99a1-36b449d21013",
+      "event_id": "223525",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "351fd0bc-91ed-4c63-bba7-6f3ce127a21c",
+      "event_id": "223824",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "38911637-6bbd-47ee-a5c1-66c0e2378bc1",
+      "event_id": "223495",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "43f2f1aa-367c-4bbc-9818-0fdd11c31c88",
+      "event_id": "223588",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "4c7c217d-591e-4f74-ba13-d57a4323bcbb",
+      "event_id": "223856",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "4f25315c-9a64-41cf-a8b8-6a1f428afd73",
+      "event_id": "223772",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "5785629e-243e-4811-b33c-4f2433c2cd7d",
+      "event_id": "223574",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "5862b5d0-c7c9-4c75-964a-e8690910141d",
+      "event_id": "223728",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 1,
+        "status": "stale",
+        "updated_at": "2026-09-25T09:25:22.809+02:00",
+        "last_observed_at": "2026-09-25T09:25:22.809+02:00"
+      }
+    },
+    {
+      "fixture_id": "5ab53ebf-66aa-4895-b313-9f5b73dba796",
+      "event_id": "223765",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "6961a43e-f272-4582-a364-6b431958c038",
+      "event_id": "223542",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "706aea52-7974-4525-abec-5fbc61c57913",
+      "event_id": "223454",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "749e2968-d14f-4c1c-b140-f524cb8148bd",
+      "event_id": "223705",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "77cd5a1b-f5c6-4f13-bcdf-e68fc9b0f2eb",
+      "event_id": "223465",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "7aab61e9-e772-4751-a840-1cdbf4293729",
+      "event_id": "223485",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "7bd42115-9c51-4b6a-b629-eb4ee3a95fa2",
+      "event_id": "223750",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "84d63d3a-2463-4fab-b76d-f468dfc2bd85",
+      "event_id": "223858",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "90da3c62-89cf-42a2-9144-c7d35b0f6ca9",
+      "event_id": "223669",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "9327073d-cccb-44c9-84b7-2d906b8cefd5",
+      "event_id": "223835",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "9d956967-06fd-4729-9aec-df85c509bb53",
+      "event_id": "223691",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "bab0e2f7-e8da-428c-be34-dc3176cf1b84",
+      "event_id": "223645",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "ca364ee0-c544-4883-8a04-83c0eec9dfe4",
+      "event_id": "223914",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "ca9208a0-26fb-47f3-a30f-b4302ed5f9b1",
+      "event_id": "223884",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "d56a635e-3331-4f24-9b85-8f8f0ec17097",
+      "event_id": "223710",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "dc28eed6-9bda-41b9-8aaa-21a327982eaa",
+      "event_id": "223619",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    },
+    {
+      "fixture_id": "fa84af1e-e582-44e2-8d4f-a708dd240b87",
+      "event_id": "223636",
+      "projection_writes": 1,
+      "verification": {
+        "verified": true,
+        "generation": 1,
+        "observation_count": 0,
+        "status": "empty",
+        "updated_at": null,
+        "last_observed_at": null
+      }
+    }
+  ]
+}

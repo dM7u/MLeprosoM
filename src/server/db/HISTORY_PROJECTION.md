@@ -292,3 +292,18 @@ Actualización 28/09/2026: ensayo específico de alineaciones aprobado en Postgr
 de los diez escenarios generales. Estadísticas conserva su regresión. Auditorías
 de ambos recursos pasan localmente. Falta preflight remoto y corte; ver
 docs/research/LINEUP_CONCURRENCY_20260928.md. No se activó el lector de alineaciones.
+
+## Alineaciones activadas — 28/09/2026
+
+La auditoría administrativa reportada por el propietario pasó 76/76. Las RPC
+responden y se reconstruyeron 32 proyecciones del ámbito revisado con equivalencia
+completa frente al historial. Una observación existente; ninguna nueva. Retry
+idempotente sin escrituras. Evidencia: docs/research/lineup-activation-20260928.json.
+
+LINEUPS_READ_MODE=projection activo solo en configuración local: ficha usa una RPC
+por lectura (31 empty, uno stale). HTTP comprobado para ambos estados. Home mantiene
+su lector completo. Estas comprobaciones no implican despliegue ni activación en
+otros entornos. Nuevos fixtures requieren bootstrap explícito; visitas no reconstruyen.
+Importaciones posteriores usan --storage=projection incluso si se revierte el modo
+de lectura a history. No repetir SQL ni reabrir INSERT directo. Esta nota reemplaza
+los pendientes de corte/activación anteriores; medición a escala sigue pendiente.
