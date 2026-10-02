@@ -43,7 +43,7 @@ no usar sus pendientes antiguos como cola vigente. Código y evidencia prevalece
   manuales de BSD (32 fixtures) y GOAL API (uno) completados el 01/10; Home
   respondió 200 y mostró ambas fuentes actualizadas. Las tablas aún usan
   resultados observados el 24/09. La Preview se creó con autorización el 02/10;
-  faltan Safari físico y enlace de invitado probado.
+  el PO confirmó el 02/10 que Safari físico y el enlace de invitado funcionan.
 - Corrección del próximo rival (01/10): comparación enlazada a la tabla general
   del torneo clasificado; sin torneo/tabla compatible muestra `Sin datos`. Caso
   de playoffs queda pendiente de identificación explícita, sin fallback anual.
@@ -68,18 +68,18 @@ no usar sus pendientes antiguos como cola vigente. Código y evidencia prevalece
   engine npm a 11–12, como requiere el npm 11 de Vercel. Home, créditos y una
   ficha respondieron por CLI; una sesión ajena llegó al login. El primer intento
   se registró como Production y falló en instalación, sin sitio funcional. El PO
-  confirmó que el enlace compartido abrió en Chrome; Safari físico sigue pendiente.
+  confirmó que el enlace compartido abrió en Chrome y Safari, también como invitado.
 
 ## Cola vigente
 
 | ID | Entregable | Estado / criterio de salida |
 | --- | --- | --- |
 | T01 | Consolidar cambios locales y documentación | Cerrada localmente el 01/10. Diff, evidencia y checks revisados; cambios preservados sin commit ni push. |
-| T06 | Preparar demo web compartible para el sábado 03/10 | Preview protegida READY el 02/10; enlace compartido probado por el PO en Chrome. URL y validación en docs/DEMO_SABADO_20261003.md. Fixtures actualizados el 01/10; tablas observadas el 24/09. Validar Safari físico y completar escudos con procedencia verificada. Antes de T04. |
+| T06 | Preparar demo web compartible para el sábado 03/10 | Cerrada el 02/10: Preview protegida READY; el PO confirmó acceso en Chrome, Safari físico y como invitado. URL y validación en docs/DEMO_SABADO_20261003.md. Fixtures actualizados el 01/10; tablas observadas el 24/09. Los cambios posteriores de T04/T07 requieren nueva Preview. |
 | T02 | Decisión de optimización de standings | Cerrada: el PO aprobó el 02/10 posponer T03 y priorizar panel después de T06. Sin contrato nuevo de lectura ni SQL remoto. Ver decisión T02. |
 | T03 | Implementar standings según T02 | No habilitada. Requiere que el PO priorice optimización y cerrar contrato T02 antes de implementar. Luego pruebas, operación y revisión crítica antes de proponer corte remoto. |
 | T04 | Completar panel con datos disponibles | Cerrada localmente el 02/10: Home muestra once jugadores según titularidades y, a igualdad, última titularidad más reciente; cobertura 11/26. Estadísticas individuales y técnico muestran `Sin datos`; drilldowns requieren fuente persistida. No introducir ratings. |
-| T07 | Rediseño de Home para la demo | Home implementada localmente: cabecera con logo sin recuadro, próximo partido con hora/día locales, último XI guardado en campo con pulsación para rival, estadio/pronóstico/árbitro con estados vacíos, Liga y Copa resumidas. A 430 × 932 requiere desplazamiento corto, sin desborde horizontal. Revisar con PO y validar Safari físico; navegación transversal, Equipo, Vivo y modales quedan después. Escudos FM26 locales: revisar distribución antes de Preview. Ver [T07](../docs/design/T07_HOME_Y_PANEL_TRANSVERSAL_20261002.md). |
+| T07 | Rediseño de Home para la demo | Home ajustada y publicada en Preview protegida el 02/10 por autorización del PO: https://mleprosom-a0zums5bp-d-m7.vercel.app . Build remoto READY; Home verificada por CLI (XI, Kudelka, campo, Acassuso, 32avos, escudo Lanús, noindex). Nombre en una fila, navegación baja, resultado coloreado, camisetas y DT dentro de la cancha, media cancha y arquero en área chica. XI de Lanús corregido al local de BSD 223725 (una copia previa contenía el XI de Estudiantes). Copa con escudos y 32avos oficiales ante Acassuso. Escudos de 30 equipos de Primera y Acassuso vinculados por ID; Estadio/Pronóstico/Árbitro separados, Liga/Copa compactas, pie dM7. Quedan prueba humana de esta nueva URL en Safari y navegación transversal, Equipo, Vivo y modales. Sin commit ni push; el PO los hará. Ver [T07](../docs/design/T07_HOME_Y_PANEL_TRANSVERSAL_20261002.md). |
 | T05 | Verificar caso positivo del XI periodístico | Después de ajustes de diseño. Requiere evidencia vigente y contexto actualizado; no fabricar ni rejuvenecer muestras. |
 
 T02 cerrada; T03 pospuesta porque volumen remoto actual y frecuencia prevista no
@@ -159,7 +159,7 @@ documentación consolidados sin commit/push. Ver Git actual y conservar
 sources/ como read-only. Configuración privada no se imprime. No repetir SQL aplicado
 ni implementar ratings, promedios o desempates pendientes. T06 tiene UI y runbook
 locales listos; fixtures refrescados el 01/10 y tablas aún fechadas el 24/09.
-La Preview protegida está READY; faltan Safari físico y enlace de invitado.
+La Preview protegida está READY; el PO confirmó Safari físico y acceso de invitado.
 No hay despliegue funcional de Production. Para revisar el acceso externo
 recomiendo Astra con esfuerzo medio:
 la app usa clave administrativa solo en servidor y cada visita genera lecturas a

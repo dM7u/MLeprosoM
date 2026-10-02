@@ -16,3 +16,12 @@ referencia; ya no se usan en la interfaz. Sus fichas son
 y [Lanús](https://commons.wikimedia.org/wiki/File:Escudo_de_Lan%C3%BAs_(sin_estrellas).svg).
 
 Los escudos identifican equipos; no expresan afiliación ni respaldo de los clubes.
+
+El PO añadió más PNG de FM26 el 02/10. `src/app/team-crests.json` vincula los
+30 equipos del catálogo revisado de Liga Profesional con sus IDs BSD; también
+vincula los IDs revisados de Newell's y Acassuso en GOAL API. En particular, el archivo de
+Rosario Central provisto por el PO se llama `sinaliento.png` y corresponde al
+ID BSD `792`. Los PNG de otras categorías permanecen disponibles sin asignación
+automática: antes de mostrarlos debe revisarse el ID del proveedor. Las imágenes
+solicitadas por Next.js ahora se generan con resolución suficiente para los
+tamaños de 40–48 px usados en la Home.

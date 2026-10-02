@@ -24,8 +24,8 @@ la fecha y el estado deben verificarse de nuevo antes de compartir el enlace.
 
 La ruta para obtener un enlace es una [Preview de Vercel](https://vercel.com/docs/deployments/environments) del proyecto
 Next.js. Se puede compartir mediante la [función de enlace para invitados](https://vercel.com/docs/deployments/sharing-deployments) si la
-Preview está protegida. Preview creada el 02/10 con autorización del PO; falta
-generar/probar un enlace para invitados y verificar Safari físico.
+Preview está protegida. Preview creada el 02/10 con autorización del PO. El PO
+confirmó acceso en Safari físico y mediante enlace de invitado el 02/10.
 
 ## Configuración de Preview
 
@@ -132,5 +132,14 @@ URL de la Preview: https://mleprosom-phptefakw-d-m7.vercel.app . La Home y una
 ficha de partido respondieron mediante `vercel curl`; comparación del Clausura,
 logo, escudos, créditos y `noindex` presentes. La clave Supabase no apareció en
 el HTML de Home. Una sesión sin autenticación llega al login de Vercel. El PO
-confirmó que el enlace compartido abrió en Chrome. Falta probar Safari físico
-en el iPhone.
+confirmó que el enlace compartido abrió en Chrome, Safari físico y como
+invitado. Los cambios locales posteriores de T04/T07 requieren otra Preview.
+
+El 02/10, tras autorización del PO, se creó una nueva Preview protegida con
+los cambios de T04/T07: https://mleprosom-a0zums5bp-d-m7.vercel.app . Vercel
+informó `READY`, build remoto aprobado y `vercel_authentication` activa. El
+dry run incluyó 193 archivos (4,9 MB) y excluyó `.env.local`, `.tools/`,
+documentación, tests y scripts. `vercel curl` comprobó en Home el último XI,
+Frank Kudelka, el área chica, Acassuso en 32avos, el escudo de Lanús y
+`noindex`. Falta comprobar esta URL nueva en Safari físico como invitado; la
+prueba previa de T06 corresponde al despliegue anterior. No hubo commit ni push.

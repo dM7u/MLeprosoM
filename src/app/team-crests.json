@@ -1,14 +1,224 @@
 {
-  "bsd:4997": {
-    "team": "Newell's Old Boys",
-    "path": "/crests/nob.png",
+  "bsd:787": {
+    "team": "Estudiantes",
+    "path": "/crests/estudianteslp.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:780": {
+    "team": "Boca Jrs.",
+    "path": "/crests/boca.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:2397": {
+    "team": "Vélez",
+    "path": "/crests/velez.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:2391": {
+    "team": "Talleres",
+    "path": "/crests/talleres.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:2390": {
+    "team": "Independiente",
+    "path": "/crests/independiente.png",
     "source": "Aportado por el Product Owner desde archivos de FM26",
     "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
     "reviewed_at": "2026-10-02"
   },
   "bsd:785": {
-    "team": "Club Atlético Lanús",
+    "team": "Lanús",
     "path": "/crests/lanus.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:742": {
+    "team": "San Lorenzo",
+    "path": "/crests/sanlorenzo.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4620": {
+    "team": "Unión",
+    "path": "/crests/union.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4996": {
+    "team": "Instituto",
+    "path": "/crests/instituto.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:3136": {
+    "team": "Defensa",
+    "path": "/crests/defensayjusticia.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:3125": {
+    "team": "Gimnasia Mendoza",
+    "path": "/crests/gimnasiamendoza.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:796": {
+    "team": "Platense",
+    "path": "/crests/platense.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4995": {
+    "team": "Central Córdoba",
+    "path": "/crests/centralcordobase.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4997": {
+    "team": "Newell's",
+    "path": "/crests/nob.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:743": {
+    "team": "Dep. Riestra",
+    "path": "/crests/riestra.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:774": {
+    "team": "Independiente Riv.",
+    "path": "/crests/independienterivadavia.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:755": {
+    "team": "River",
+    "path": "/crests/river.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:806": {
+    "team": "Argentinos Jrs.",
+    "path": "/crests/argentinos.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:792": {
+    "team": "Central",
+    "path": "/crests/sinaliento.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:3299": {
+    "team": "Belgrano",
+    "path": "/crests/belgrano.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4998": {
+    "team": "Gimnasia LP",
+    "path": "/crests/gimnasialp.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:2352": {
+    "team": "Huracán",
+    "path": "/crests/huracan.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:733": {
+    "team": "Racing",
+    "path": "/crests/racing.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:734": {
+    "team": "Barracas",
+    "path": "/crests/barracas.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:739": {
+    "team": "Tigre",
+    "path": "/crests/tiegre.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4999": {
+    "team": "Sarmiento",
+    "path": "/crests/sarmiento.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4994": {
+    "team": "Banfield",
+    "path": "/crests/banfield.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:3132": {
+    "team": "At. Tucumán",
+    "path": "/crests/atu.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:4993": {
+    "team": "Aldosivi",
+    "path": "/crests/aldosivi.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "bsd:5000": {
+    "team": "Estudiantes RC",
+    "path": "/crests/estudiantesriocuarto.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "goal-api:cmr7sjrx97uhirx06ll1213tl": {
+    "team": "Newell's",
+    "path": "/crests/nob.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
+  },
+  "goal-api:cmr7sjx3s7wxprx0606kopdf3": {
+    "team": "Acassuso",
+    "path": "/crests/acasuso.png",
     "source": "Aportado por el Product Owner desde archivos de FM26",
     "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
     "reviewed_at": "2026-10-02"

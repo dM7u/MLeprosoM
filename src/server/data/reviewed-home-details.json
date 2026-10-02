@@ -1,0 +1,22 @@
+{
+  "lineupCoaches": [
+    {
+      "provider": "bsd",
+      "fixture_external_id": "223728",
+      "team_external_id": "4997",
+      "name": "Frank Kudelka",
+      "source": "https://www.newellsoldboys.com.ar/noticias/mantiene-el-invicto-como-local",
+      "reviewed_at": "2026-10-02"
+    }
+  ],
+  "cupRounds": [
+    {
+      "provider": "goal-api",
+      "fixture_external_id": "cmrjgytzvwn3po807ahbz90c8",
+      "stage": "1/32-finals",
+      "label": "32avos",
+      "source": "https://www.copaargentina.org/es/pwa/match/3653_Newell-s-vs-Acassuso.html",
+      "reviewed_at": "2026-10-02"
+    }
+  ]
+}

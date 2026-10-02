@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "version": 1,
+      "provider": "bsd",
+      "team_external_id": "785",
+      "lineup_team_id": "785",
+      "lineup_side": "home",
+      "season_external_id": "1635",
+      "catalog_checked_at": "2026-10-02T17:48:23.040Z",
+      "fixture": {
+        "external_id": "223725",
+        "kickoff_at": "2026-09-22T00:15:00+00:00",
+        "home_score": 2,
+        "away_score": 1,
+        "home_external_id": "785",
+        "away_external_id": "787",
+        "home_team": "CA Lanús",
+        "away_team": "Estudiantes de La Plata"
+      },
+      "observed_at": "2026-10-02T18:33:18.271Z",
+      "source_updated_at": "2026-10-02T04:41:06Z",
+      "formation": "4-2-3-1",
+      "starters": [
+        {
+          "external_id": "22124",
+          "name": "Nahuel Losada",
+          "position": "G",
+          "jersey_number": 26,
+          "captain": false
+        },
+        {
+          "external_id": "22119",
+          "name": "Tomás Guidara",
+          "position": "D",
+          "jersey_number": 33,
+          "captain": false
+        },
+        {
+          "external_id": "22116",
+          "name": "Carlos Izquierdoz",
+          "position": "D",
+          "jersey_number": 24,
+          "captain": true
+        },
+        {
+          "external_id": "22114",
+          "name": "Ronaldo De Jesus",
+          "position": "D",
+          "jersey_number": 35,
+          "captain": false
+        },
+        {
+          "external_id": "22115",
+          "name": "Sasha Marcich",
+          "position": "D",
+          "jersey_number": 6,
+          "captain": false
+        },
+        {
+          "external_id": "22107",
+          "name": "Felipe Peña Biafore",
+          "position": "M",
+          "jersey_number": 5,
+          "captain": false
+        },
+        {
+          "external_id": "22109",
+          "name": "Agustín Cardozo",
+          "position": "M",
+          "jersey_number": 30,
+          "captain": false
+        },
+        {
+          "external_id": "22106",
+          "name": "Lucas Besozzi",
+          "position": "M",
+          "jersey_number": 77,
+          "captain": false
+        },
+        {
+          "external_id": "22104",
+          "name": "Eduardo Salvio",
+          "position": "M",
+          "jersey_number": 11,
+          "captain": false
+        },
+        {
+          "external_id": "206651",
+          "name": "Gonzalo Lobos",
+          "position": "M",
+          "jersey_number": 42,
+          "captain": false
+        },
+        {
+          "external_id": "22970",
+          "name": "Allan Wlk",
+          "position": "F",
+          "jersey_number": 20,
+          "captain": false
+        }
+      ]
+    }
+  ]
+}
