@@ -7,6 +7,6 @@ export async function teamStartsView(fixtures:StoredFixture[],teamExternalId:str
   try {
     return await readTeamStarts(createSupabaseAdminClient(),fixtures,{teamExternalId,now});
   }catch{
-    return {status:'error',finishedCount:fixtures.filter(f=>f.provider==='bsd').length,coveredCount:0,players:[],certain:[],tied:[],places:0,observedAt:null};
+    return {status:'error',finishedCount:fixtures.filter(f=>f.provider==='bsd').length,coveredCount:0,players:[],certain:[],tied:[],places:0,observedAt:null,latestLineup:null};
   }
 }

@@ -26,6 +26,8 @@ test('breaks equal start counts by most recent fixture start',()=>{
   assert.equal(view.tied.length,1);
   assert.equal(view.tied[0].id,String(side.players[10].id));
   assert.equal(view.tied[0].starts,1);
+  assert.equal(view.latestLineup.fixture.id,b.id);
+  assert.equal(view.latestLineup.data.away.starters.length,11);
 });
 
 test('leaves an unresolved boundary tie when the last starts have the same kickoff',()=>{

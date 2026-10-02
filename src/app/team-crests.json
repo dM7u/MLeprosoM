@@ -1,16 +1,16 @@
 {
   "bsd:4997": {
     "team": "Newell's Old Boys",
-    "path": "/crests/bsd-4997.svg",
-    "source": "https://commons.wikimedia.org/wiki/File:CA_Newell%E2%80%99s_Old_Boys.svg",
-    "license_note": "Dominio público por formas y texto simples según la ficha; puede estar protegido como marca.",
-    "reviewed_at": "2026-10-01"
+    "path": "/crests/nob.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
   },
   "bsd:785": {
     "team": "Club Atlético Lanús",
-    "path": "/crests/bsd-785.svg",
-    "source": "https://commons.wikimedia.org/wiki/File:Escudo_de_Lan%C3%BAs_(sin_estrellas).svg",
-    "license_note": "Dominio público según la ficha; fuente original: Copa Argentina.",
-    "reviewed_at": "2026-10-01"
+    "path": "/crests/lanus.png",
+    "source": "Aportado por el Product Owner desde archivos de FM26",
+    "license_note": "Uso de esta imagen para distribución pública pendiente de verificar.",
+    "reviewed_at": "2026-10-02"
   }
 }

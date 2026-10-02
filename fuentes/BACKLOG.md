@@ -54,10 +54,11 @@ no usar sus pendientes antiguos como cola vigente. Código y evidencia prevalece
   habilitada; propuesta, límites y condiciones de reapertura en
   [decisión T02](../docs/research/STANDINGS_DECISION_T02_20261001.md).
 - Logo aportado por el PO (`public/brand/Leproso.png`) integrado sin alterar
-  original; cabecera móvil/escritorio e iconos de navegador. Primeros escudos
-  locales Newell's/Lanús con procedencia en `public/crests/README.md` y créditos
-  visibles en `/creditos`. Faltan escudos del resto de equipos; la UI conserva
-  nombres donde no hay recurso.
+  original; cabecera móvil/escritorio e iconos de navegador. Escudos locales
+  Newell's/Lanús reemplazados por PNG aportados desde FM26 el 02/10; procedencia
+  en `public/crests/README.md` y créditos visibles en `/creditos`. Falta revisar
+  su uso para distribución pública y faltan escudos del resto de equipos; la UI
+  conserva nombres donde no hay recurso.
 - Vercel vinculado por el PO el 02/10 sin despliegue automático. Ocho variables
   Preview confirmadas por `vercel env ls preview` sin leer valores; las dos de
   Supabase figuran como Secret. El PO confirmó Standard Protection. Dry-run
@@ -78,7 +79,7 @@ no usar sus pendientes antiguos como cola vigente. Código y evidencia prevalece
 | T02 | Decisión de optimización de standings | Cerrada: el PO aprobó el 02/10 posponer T03 y priorizar panel después de T06. Sin contrato nuevo de lectura ni SQL remoto. Ver decisión T02. |
 | T03 | Implementar standings según T02 | No habilitada. Requiere que el PO priorice optimización y cerrar contrato T02 antes de implementar. Luego pruebas, operación y revisión crítica antes de proponer corte remoto. |
 | T04 | Completar panel con datos disponibles | Cerrada localmente el 02/10: Home muestra once jugadores según titularidades y, a igualdad, última titularidad más reciente; cobertura 11/26. Estadísticas individuales y técnico muestran `Sin datos`; drilldowns requieren fuente persistida. No introducir ratings. |
-| T07 | Ajustes de diseño para la demo | Siguiente bloque propuesto por el PO; recibir cambios concretos y priorizar los que afectan la demo móvil antes de T05. Sin despliegue automático. |
+| T07 | Rediseño de Home para la demo | Home implementada localmente: cabecera con logo sin recuadro, próximo partido con hora/día locales, último XI guardado en campo con pulsación para rival, estadio/pronóstico/árbitro con estados vacíos, Liga y Copa resumidas. A 430 × 932 requiere desplazamiento corto, sin desborde horizontal. Revisar con PO y validar Safari físico; navegación transversal, Equipo, Vivo y modales quedan después. Escudos FM26 locales: revisar distribución antes de Preview. Ver [T07](../docs/design/T07_HOME_Y_PANEL_TRANSVERSAL_20261002.md). |
 | T05 | Verificar caso positivo del XI periodístico | Después de ajustes de diseño. Requiere evidencia vigente y contexto actualizado; no fabricar ni rejuvenecer muestras. |
 
 T02 cerrada; T03 pospuesta porque volumen remoto actual y frecuencia prevista no

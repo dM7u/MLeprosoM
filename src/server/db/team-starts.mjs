@@ -2,7 +2,7 @@ import 'server-only';
 import {readHistory} from './read-history.mjs';
 import {lineupSnapshotView} from './read-lineups.mjs';
 
-const empty=(status,finishedCount)=>({status,finishedCount,coveredCount:0,players:[],certain:[],tied:[],places:0,observedAt:null});
+const empty=(status,finishedCount)=>({status,finishedCount,coveredCount:0,players:[],certain:[],tied:[],places:0,observedAt:null,latestLineup:null});
 
 /** Counts starts only in stored, confirmed BSD lineups with eleven identified Newell's starters. */
 export function teamStartsView(fixtures,rows,{teamExternalId='',now=Date.now()}={}) {
@@ -14,7 +14,7 @@ export function teamStartsView(fixtures,rows,{teamExternalId='',now=Date.now()}=
     grouped.get(row.fixture_id).push(row);
   }
   const players=new Map();
-  let coveredCount=0,observedAt=null;
+  let coveredCount=0,observedAt=null,latestLineup=null;
   for(const fixture of eligible){
     const history=grouped.get(fixture.id)??[];
     if(!history.length)continue;
@@ -24,6 +24,8 @@ export function teamStartsView(fixtures,rows,{teamExternalId='',now=Date.now()}=
     const starters=view.data[side].starters;
     if(!Array.isArray(starters)||starters.length!==11||new Set(starters.map(p=>p.external_id)).size!==11)continue;
     coveredCount++;
+    if(!latestLineup||Date.parse(fixture.kickoff_at)>Date.parse(latestLineup.fixture.kickoff_at))
+      latestLineup={fixture,data:view.data,observedAt:view.updatedAt};
     if(view.updatedAt&&(!observedAt||Date.parse(view.updatedAt)>Date.parse(observedAt)))observedAt=view.updatedAt;
     const kickoff=Date.parse(fixture.kickoff_at);
     const lastStartAt=Number.isFinite(kickoff)?fixture.kickoff_at:null;
@@ -39,7 +41,7 @@ export function teamStartsView(fixtures,rows,{teamExternalId='',now=Date.now()}=
   const cutoff=sorted[10];
   const certain=!cutoff?sorted:sorted.filter(p=>p.starts>cutoff.starts||p.starts===cutoff.starts&&recent(p)>recent(cutoff));
   const tied=!cutoff?[]:sorted.filter(p=>p.starts===cutoff.starts&&recent(p)===recent(cutoff));
-  return {status:'available',finishedCount:eligible.length,coveredCount,players:sorted,certain,tied,places:cutoff?11-certain.length:0,observedAt};
+  return {status:'available',finishedCount:eligible.length,coveredCount,players:sorted,certain,tied,places:cutoff?11-certain.length:0,observedAt,latestLineup};
 }
 
 export async function readTeamStarts(db,fixtures,{teamExternalId='',now=Date.now()}={}) {
