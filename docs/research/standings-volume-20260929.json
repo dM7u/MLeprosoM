@@ -1,0 +1,489 @@
+{
+  "recorded_at": "2026-09-29T06:44:47.718Z",
+  "environment": "PGlite in memory; three local runs, real readers and SQL, no HTTP",
+  "node": "v24.21.0",
+  "remote_writes": 0,
+  "provider_requests": 0,
+  "results": [
+    {
+      "axis": "batches",
+      "size": 0,
+      "batches": 0,
+      "reviews": 0,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 0,
+          "batch_queries": 0,
+          "metadata_rows": 0,
+          "review_rows": 0,
+          "batch_rows": 0,
+          "bytes_json": 2,
+          "elapsed_ms": 4.29
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 0,
+          "batch_queries": 0,
+          "metadata_rows": 0,
+          "review_rows": 0,
+          "batch_rows": 0,
+          "bytes_json": 2,
+          "elapsed_ms": 1.36
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 0,
+          "batch_queries": 0,
+          "metadata_rows": 0,
+          "review_rows": 0,
+          "batch_rows": 0,
+          "bytes_json": 2,
+          "elapsed_ms": 1.24
+        }
+      ],
+      "probes": {},
+      "last_batch_id": null
+    },
+    {
+      "axis": "batches",
+      "size": 1,
+      "batches": 1,
+      "reviews": 1,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 56.46
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 57.16
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 59.12
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000001"
+    },
+    {
+      "axis": "batches",
+      "size": 100,
+      "batches": 100,
+      "reviews": 1,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 100,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 219913,
+          "elapsed_ms": 51.86
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 100,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 219913,
+          "elapsed_ms": 47.03
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 100,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 219913,
+          "elapsed_ms": 48.33
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000100"
+    },
+    {
+      "axis": "batches",
+      "size": 1000,
+      "batches": 1000,
+      "reviews": 1,
+      "runs": [
+        {
+          "metadata_queries": 10,
+          "review_queries": 11,
+          "batch_queries": 1,
+          "metadata_rows": 1000,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 426040,
+          "elapsed_ms": 106.66
+        },
+        {
+          "metadata_queries": 10,
+          "review_queries": 11,
+          "batch_queries": 1,
+          "metadata_rows": 1000,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 426040,
+          "elapsed_ms": 105.37
+        },
+        {
+          "metadata_queries": 10,
+          "review_queries": 11,
+          "batch_queries": 1,
+          "metadata_rows": 1000,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 426040,
+          "elapsed_ms": 105.65
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000001000"
+    },
+    {
+      "axis": "reviews",
+      "size": 1,
+      "batches": 1,
+      "reviews": 1,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 59.05
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 65.32
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 68.68
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000001"
+    },
+    {
+      "axis": "reviews",
+      "size": 100,
+      "batches": 1,
+      "reviews": 100,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 200,
+          "batch_rows": 1,
+          "bytes_json": 2343736,
+          "elapsed_ms": 205.32
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 200,
+          "batch_rows": 1,
+          "bytes_json": 2343736,
+          "elapsed_ms": 197.39
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 200,
+          "batch_rows": 1,
+          "bytes_json": 2343736,
+          "elapsed_ms": 196.44
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000001"
+    },
+    {
+      "axis": "reviews",
+      "size": 1000,
+      "batches": 1,
+      "reviews": 1000,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 20,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2000,
+          "batch_rows": 1,
+          "bytes_json": 21857138,
+          "elapsed_ms": 1723.45
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 20,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2000,
+          "batch_rows": 1,
+          "bytes_json": 21857138,
+          "elapsed_ms": 1730.38
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 20,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2000,
+          "batch_rows": 1,
+          "bytes_json": 21857138,
+          "elapsed_ms": 1755.03
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000001"
+    },
+    {
+      "axis": "reviews",
+      "size": 5000,
+      "batches": 1,
+      "reviews": 5000,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 100,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 10000,
+          "batch_rows": 1,
+          "bytes_json": 108582858,
+          "elapsed_ms": 8167.71
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 100,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 10000,
+          "batch_rows": 1,
+          "bytes_json": 108582858,
+          "elapsed_ms": 8513.89
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 100,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 10000,
+          "batch_rows": 1,
+          "bytes_json": 108582858,
+          "elapsed_ms": 8098.99
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000001"
+    },
+    {
+      "axis": "denied_batches",
+      "size": 1,
+      "batches": 1,
+      "reviews": 1,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 45.97
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 53.09
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 1,
+          "metadata_rows": 1,
+          "review_rows": 2,
+          "batch_rows": 1,
+          "bytes_json": 197242,
+          "elapsed_ms": 45.8
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000001"
+    },
+    {
+      "axis": "denied_batches",
+      "size": 10,
+      "batches": 10,
+      "reviews": 10,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 10,
+          "metadata_rows": 10,
+          "review_rows": 11,
+          "batch_rows": 10,
+          "bytes_json": 1874841,
+          "elapsed_ms": 421.53
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 10,
+          "metadata_rows": 10,
+          "review_rows": 11,
+          "batch_rows": 10,
+          "bytes_json": 1874841,
+          "elapsed_ms": 418.09
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 10,
+          "metadata_rows": 10,
+          "review_rows": 11,
+          "batch_rows": 10,
+          "bytes_json": 1874841,
+          "elapsed_ms": 420.84
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000010"
+    },
+    {
+      "axis": "denied_batches",
+      "size": 100,
+      "batches": 100,
+      "reviews": 100,
+      "runs": [
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 100,
+          "metadata_rows": 100,
+          "review_rows": 101,
+          "batch_rows": 100,
+          "bytes_json": 18650800,
+          "elapsed_ms": 4278.95
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 100,
+          "metadata_rows": 100,
+          "review_rows": 101,
+          "batch_rows": 100,
+          "bytes_json": 18650800,
+          "elapsed_ms": 4240.6
+        },
+        {
+          "metadata_queries": 1,
+          "review_queries": 2,
+          "batch_queries": 100,
+          "metadata_rows": 100,
+          "review_rows": 101,
+          "batch_rows": 100,
+          "bytes_json": 18650800,
+          "elapsed_ms": 4593.15
+        }
+      ],
+      "probes": {
+        "expiry": true,
+        "revocation_during_recheck": true,
+        "revocation_next_read": true
+      },
+      "last_batch_id": "10000000-0000-4000-8000-000000000100"
+    }
+  ]
+}

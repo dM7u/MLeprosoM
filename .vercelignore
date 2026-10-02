@@ -1,0 +1,13 @@
+# Archivos locales y evidencias que no necesita la web en Vercel.
+.tools/
+.npm-cache/
+sources/
+docs/
+tests/
+scripts/
+supabase/
+fuentes/
+.github/
+AGENTS.md
+.env*
+*.tsbuildinfo

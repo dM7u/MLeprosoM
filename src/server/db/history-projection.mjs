@@ -7,7 +7,7 @@ const comparable=row=>canonicalJson({...row,observed_at:new Date(row.observed_at
 const counter=v=>Number.isSafeInteger(v)&&v>=0;
 
 /** Shared transport/CAS, with resource-specific validation and selection. */
-export function createHistoryProjection({resource,table,readRpc,commitRpc,errorPrefix,validateRow,validateFixture=()=>true}) {
+export function createHistoryProjection({resource,table,readRpc,commitRpc,errorPrefix,validateRow,validateFixture=()=>true,chosenStatuses=['complete','partial']}) {
 const code=suffix=>errorPrefix+'_'+suffix;
 /** Validate private RPC envelope; prior full-history validation is a trusted write invariant. */
 function validateProjection(envelope,{fixture,now=Date.now()}){
@@ -21,7 +21,7 @@ function validateProjection(envelope,{fixture,now=Date.now()}){
  const validate=(raw,id)=>{if(id===null){if(raw!==null)throw new Error(code('PROJECTION_INVALID'));return null;}if(raw?.id!==id)throw new Error(code('PROJECTION_INVALID'));return validateRow(raw,fixture,now);};
  const chosen=validate(envelope.chosen,p.chosen_id),last=validate(envelope.last,p.last_id);
  if((p.observation_count===0)!==(last===null)||(!last&&chosen)|| (last&&p.observation_count<1)||p.generation<1)throw new Error(code('PROJECTION_INVALID'));
- if(chosen&&(Date.parse(chosen.observed_at)>Date.parse(last.observed_at)||!['complete','partial'].includes(chosen.status)))throw new Error(code('PROJECTION_INVALID'));
+ if(chosen&&(Date.parse(chosen.observed_at)>Date.parse(last.observed_at)||!chosenStatuses.includes(chosen.status)))throw new Error(code('PROJECTION_INVALID'));
  if(chosen?.id===last?.id&&chosen&&canonicalJson(chosen)!==canonicalJson(last))throw new Error(code('PROJECTION_INVALID'));
  if(p.observation_count===1&&(chosen&&chosen.id!==last.id))throw new Error(code('PROJECTION_INVALID'));
  const reduced=replayHistorySelection(resource,chosen&&chosen.id!==last?.id?[chosen,last]:last?[last]:[]);

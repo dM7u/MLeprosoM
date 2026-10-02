@@ -1,0 +1,10 @@
+import 'server-only';
+import {resolveIncidentFixture} from './incident-fixture.mjs';
+import {commitIncidentSelection,previewIncidentSelection,validateIncidentProjection} from './incident-projection.mjs';
+import {incidentSnapshotView} from './incident-observations.mjs';
+import policy from './incident-policy.json' with {type:'json'};
+import {createHistoryRebuild} from './history-rebuild.mjs';
+const rebuild=createHistoryRebuild({resolveFixture:resolveIncidentFixture,commitSelection:commitIncidentSelection,previewSelection:previewIncidentSelection,validateProjection:validateIncidentProjection,fullView:incidentSnapshotView,table:'incident_observations',readRpc:'read_incident_projection',policy,errorPrefix:'INCIDENTS'});
+export const parseIncidentRebuildArgs=rebuild.parseArgs;
+export const verifyIncidentProjection=rebuild.verifyProjection;
+export const rebuildIncidentProjection=rebuild.rebuildProjection;

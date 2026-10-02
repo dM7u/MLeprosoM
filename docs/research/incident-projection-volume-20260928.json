@@ -1,0 +1,1437 @@
+{
+  "recorded_at": "2026-09-28T20:06:16.706Z",
+  "environment": "PGlite in-memory, 3 paired local runs per scenario; alternating reader order, no HTTP/network",
+  "node": "v24.21.0",
+  "remote_writes": 0,
+  "provider_requests": 0,
+  "results": [
+    {
+      "observations": 0,
+      "tail": "none",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 0,
+        "bytes_json": 93,
+        "elapsed_ms": 16.72
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 2,
+            "elapsed_ms": 2.01
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 194,
+            "elapsed_ms": 1.46
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 2,
+            "elapsed_ms": 0.93
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 194,
+            "elapsed_ms": 1.28
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 2,
+            "elapsed_ms": 0.8
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 194,
+            "elapsed_ms": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1,
+      "tail": "available",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1,
+        "bytes_json": 5173,
+        "elapsed_ms": 7.73
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 5082,
+            "elapsed_ms": 1.74
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10414,
+            "elapsed_ms": 2.58
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 5082,
+            "elapsed_ms": 1.92
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10414,
+            "elapsed_ms": 2.64
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 5082,
+            "elapsed_ms": 1.67
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10414,
+            "elapsed_ms": 1.72
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1,
+      "tail": "short",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1,
+        "bytes_json": 4956,
+        "elapsed_ms": 7.51
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 4865,
+            "elapsed_ms": 2.51
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9980,
+            "elapsed_ms": 2.48
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 4865,
+            "elapsed_ms": 1.64
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9980,
+            "elapsed_ms": 2.78
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 4865,
+            "elapsed_ms": 1.54
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9980,
+            "elapsed_ms": 2.25
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1,
+      "tail": "partial",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1,
+        "bytes_json": 740,
+        "elapsed_ms": 5.9
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 649,
+            "elapsed_ms": 1.08
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1548,
+            "elapsed_ms": 0.82
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 649,
+            "elapsed_ms": 1.03
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1548,
+            "elapsed_ms": 0.64
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 649,
+            "elapsed_ms": 1.82
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1548,
+            "elapsed_ms": 0.86
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1,
+      "tail": "empty",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1,
+        "bytes_json": 613,
+        "elapsed_ms": 3.71
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 522,
+            "elapsed_ms": 0.83
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 744,
+            "elapsed_ms": 0.57
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 522,
+            "elapsed_ms": 0.81
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 744,
+            "elapsed_ms": 0.5
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 522,
+            "elapsed_ms": 1.1
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 744,
+            "elapsed_ms": 0.79
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1,
+      "tail": "failed",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1,
+        "bytes_json": 454,
+        "elapsed_ms": 5.14
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 363,
+            "elapsed_ms": 0.92
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 585,
+            "elapsed_ms": 0.83
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 363,
+            "elapsed_ms": 1.03
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 585,
+            "elapsed_ms": 0.59
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1,
+            "bytes_json": 363,
+            "elapsed_ms": 0.86
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 585,
+            "elapsed_ms": 0.93
+          }
+        }
+      ]
+    },
+    {
+      "observations": 100,
+      "tail": "available",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 100,
+        "bytes_json": 508192,
+        "elapsed_ms": 46.2
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 508101,
+            "elapsed_ms": 38.19
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10416,
+            "elapsed_ms": 1.95
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 508101,
+            "elapsed_ms": 41.13
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10416,
+            "elapsed_ms": 1.4
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 508101,
+            "elapsed_ms": 38.41
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10416,
+            "elapsed_ms": 1.76
+          }
+        }
+      ]
+    },
+    {
+      "observations": 100,
+      "tail": "short",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 100,
+        "bytes_json": 507975,
+        "elapsed_ms": 48.31
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 507884,
+            "elapsed_ms": 38.16
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9982,
+            "elapsed_ms": 2.1
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 507884,
+            "elapsed_ms": 38.59
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9982,
+            "elapsed_ms": 1.68
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 507884,
+            "elapsed_ms": 42.26
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9982,
+            "elapsed_ms": 1.83
+          }
+        }
+      ]
+    },
+    {
+      "observations": 100,
+      "tail": "partial",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 100,
+        "bytes_json": 503759,
+        "elapsed_ms": 43.21
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503668,
+            "elapsed_ms": 36.92
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1550,
+            "elapsed_ms": 1.43
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503668,
+            "elapsed_ms": 36.86
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1550,
+            "elapsed_ms": 0.81
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503668,
+            "elapsed_ms": 35.35
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1550,
+            "elapsed_ms": 1.06
+          }
+        }
+      ]
+    },
+    {
+      "observations": 100,
+      "tail": "empty",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 100,
+        "bytes_json": 503632,
+        "elapsed_ms": 40.98
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503541,
+            "elapsed_ms": 38.99
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5856,
+            "elapsed_ms": 1.36
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503541,
+            "elapsed_ms": 36.32
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5856,
+            "elapsed_ms": 0.89
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503541,
+            "elapsed_ms": 36.74
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5856,
+            "elapsed_ms": 1.66
+          }
+        }
+      ]
+    },
+    {
+      "observations": 100,
+      "tail": "failed",
+      "bootstrap": {
+        "history_queries": 1,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 100,
+        "bytes_json": 503473,
+        "elapsed_ms": 40.55
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503382,
+            "elapsed_ms": 35.3
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5697,
+            "elapsed_ms": 1.41
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503382,
+            "elapsed_ms": 34.85
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5697,
+            "elapsed_ms": 1.07
+          }
+        },
+        {
+          "history": {
+            "history_queries": 1,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 100,
+            "bytes_json": 503382,
+            "elapsed_ms": 34.85
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5697,
+            "elapsed_ms": 1.62
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1000,
+      "tail": "available",
+      "bootstrap": {
+        "history_queries": 10,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1000,
+        "bytes_json": 5081101,
+        "elapsed_ms": 468.35
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5081010,
+            "elapsed_ms": 493.08
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10417,
+            "elapsed_ms": 1.95
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5081010,
+            "elapsed_ms": 500.81
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10417,
+            "elapsed_ms": 1.81
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5081010,
+            "elapsed_ms": 445.05
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10417,
+            "elapsed_ms": 1.69
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1000,
+      "tail": "short",
+      "bootstrap": {
+        "history_queries": 10,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1000,
+        "bytes_json": 5080884,
+        "elapsed_ms": 418.19
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5080793,
+            "elapsed_ms": 508.79
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9983,
+            "elapsed_ms": 1.68
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5080793,
+            "elapsed_ms": 561.3
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9983,
+            "elapsed_ms": 1.8
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5080793,
+            "elapsed_ms": 436.87
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9983,
+            "elapsed_ms": 1.63
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1000,
+      "tail": "partial",
+      "bootstrap": {
+        "history_queries": 10,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1000,
+        "bytes_json": 5076668,
+        "elapsed_ms": 513.43
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076577,
+            "elapsed_ms": 444.88
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1551,
+            "elapsed_ms": 1.15
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076577,
+            "elapsed_ms": 384.64
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1551,
+            "elapsed_ms": 0.87
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076577,
+            "elapsed_ms": 388.71
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1551,
+            "elapsed_ms": 1.19
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1000,
+      "tail": "empty",
+      "bootstrap": {
+        "history_queries": 10,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1000,
+        "bytes_json": 5076541,
+        "elapsed_ms": 463.68
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076450,
+            "elapsed_ms": 421.6
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5857,
+            "elapsed_ms": 1.22
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076450,
+            "elapsed_ms": 365.16
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5857,
+            "elapsed_ms": 1.14
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076450,
+            "elapsed_ms": 380.96
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5857,
+            "elapsed_ms": 1.32
+          }
+        }
+      ]
+    },
+    {
+      "observations": 1000,
+      "tail": "failed",
+      "bootstrap": {
+        "history_queries": 10,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 1000,
+        "bytes_json": 5076382,
+        "elapsed_ms": 381.94
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076291,
+            "elapsed_ms": 353.9
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5698,
+            "elapsed_ms": 1.24
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076291,
+            "elapsed_ms": 342.85
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5698,
+            "elapsed_ms": 0.99
+          }
+        },
+        {
+          "history": {
+            "history_queries": 10,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 1000,
+            "bytes_json": 5076291,
+            "elapsed_ms": 339.89
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5698,
+            "elapsed_ms": 1.14
+          }
+        }
+      ]
+    },
+    {
+      "observations": 5000,
+      "tail": "available",
+      "bootstrap": {
+        "history_queries": 50,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 5000,
+        "bytes_json": 25405141,
+        "elapsed_ms": 2911.74
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25405050,
+            "elapsed_ms": 2959.47
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10417,
+            "elapsed_ms": 1.56
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25405050,
+            "elapsed_ms": 2775.74
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10417,
+            "elapsed_ms": 1.37
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25405050,
+            "elapsed_ms": 3310.36
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 10417,
+            "elapsed_ms": 2.26
+          }
+        }
+      ]
+    },
+    {
+      "observations": 5000,
+      "tail": "short",
+      "bootstrap": {
+        "history_queries": 50,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 5000,
+        "bytes_json": 25404924,
+        "elapsed_ms": 2950.08
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25404833,
+            "elapsed_ms": 2806.73
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9983,
+            "elapsed_ms": 2.21
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25404833,
+            "elapsed_ms": 2838.47
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9983,
+            "elapsed_ms": 1.22
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25404833,
+            "elapsed_ms": 2827.45
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 9983,
+            "elapsed_ms": 1.58
+          }
+        }
+      ]
+    },
+    {
+      "observations": 5000,
+      "tail": "partial",
+      "bootstrap": {
+        "history_queries": 50,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 5000,
+        "bytes_json": 25400708,
+        "elapsed_ms": 2763.7
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400617,
+            "elapsed_ms": 2669.88
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1551,
+            "elapsed_ms": 0.91
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400617,
+            "elapsed_ms": 2683.63
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1551,
+            "elapsed_ms": 0.48
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400617,
+            "elapsed_ms": 2841.15
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 1551,
+            "elapsed_ms": 1.05
+          }
+        }
+      ]
+    },
+    {
+      "observations": 5000,
+      "tail": "empty",
+      "bootstrap": {
+        "history_queries": 50,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 5000,
+        "bytes_json": 25400581,
+        "elapsed_ms": 3178.97
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400490,
+            "elapsed_ms": 2818.95
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5857,
+            "elapsed_ms": 1.17
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400490,
+            "elapsed_ms": 2939.8
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5857,
+            "elapsed_ms": 0.92
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400490,
+            "elapsed_ms": 2936.91
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5857,
+            "elapsed_ms": 1.21
+          }
+        }
+      ]
+    },
+    {
+      "observations": 5000,
+      "tail": "failed",
+      "bootstrap": {
+        "history_queries": 50,
+        "read_rpc": 1,
+        "commit_rpc": 1,
+        "history_rows": 5000,
+        "bytes_json": 25400422,
+        "elapsed_ms": 2842.78
+      },
+      "runs": [
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400331,
+            "elapsed_ms": 2841.03
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5698,
+            "elapsed_ms": 1.17
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400331,
+            "elapsed_ms": 2784.8
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5698,
+            "elapsed_ms": 0.81
+          }
+        },
+        {
+          "history": {
+            "history_queries": 50,
+            "read_rpc": 0,
+            "commit_rpc": 0,
+            "history_rows": 5000,
+            "bytes_json": 25400331,
+            "elapsed_ms": 2672.53
+          },
+          "projection": {
+            "history_queries": 0,
+            "read_rpc": 1,
+            "commit_rpc": 0,
+            "history_rows": 0,
+            "bytes_json": 5698,
+            "elapsed_ms": 1.17
+          }
+        }
+      ]
+    }
+  ]
+}

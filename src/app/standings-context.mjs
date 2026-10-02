@@ -7,6 +7,15 @@ export function standingsContext(rows, teamId) {
   return rows.slice(Math.max(0,index-1),Math.min(rows.length,index+2));
 }
 
+/** Use the classified fixture's tournament; never substitute the annual table. */
+export function selectMatchupTournament(fixture, selections, select) {
+  const tournament=fixture?.tournament?.name;
+  if(typeof tournament!=='string' || !Array.isArray(selections) ||
+    !selections.some(s=>s.kind==='tournament'&&s.tournament===tournament&&s.group===undefined))
+    return {tournament:null,view:null};
+  return {tournament,view:select({kind:'tournament',tournament})};
+}
+
 /** Both opponents must belong to the reviewed league scope; preserve home/away order. */
 export function matchupStandings(rows, fixture, scope) {
   if (!Array.isArray(rows) || !fixture || fixture.provider!==scope.provider ||

@@ -224,3 +224,26 @@ Guía, formato y semántica de exit codes en `scripts/README.md`.
 Preflight remoto de lectura: ambas tablas y columnas accesibles, cero registros.
 No prueba equivalencia de DDL, RLS ni privilegios: queda auditoría administrativa
 con `supabase/check-standings-access.sql`. Sin escrituras remotas en este bloque.
+
+## Evaluación de escala — 29/09/2026
+
+Ensayo local de readStandingsSet aprobado: 33 lecturas y 30 probes de vigencia y
+revocación controlada. 5000 revisiones de un lote: 102 consultas/~108,6 MB; 100 lotes
+con 99 denegados: 103 consultas/~18,7 MB. 1000 lotes con una revisión: ~426 KB.
+Método/límites: docs/research/STANDINGS_VOLUME_20260929.md. No equivale a latencia
+Supabase ni certifica snapshot global. No cambia reglas, escritor ni lector.
+
+Siguiente bloque técnico posible: definir contrato de lectura coherente por ámbito y selección
+validada afectada por ambos historiales, con denegaciones/retroactivos y fallback
+stale. Evaluar ahorro de evidencias históricas y recálculo de candidatos denegados
+sin ocultar revocaciones ni corrupción relevante. No aplicar proyección de detalle
+a standings automáticamente. SQL/implementación nueva aún pendientes de contrato.
+
+## Prioridad evaluada en T02 — 01/10/2026
+
+La [propuesta T02](../../../docs/research/STANDINGS_DECISION_T02_20261001.md)
+fue aprobada por el PO el 02/10: posponer esa optimización y priorizar panel tras
+la demo. T02 cerrada. El lector compartido actual y la ingesta manual se conservan.
+El benchmark acredita costo de crecimiento, no necesidad actual ni latencia de
+Home. T03 no queda habilitada: requiere prioridad explícita y contrato cerrado.
+No cambian garantías, SQL, permisos ni modos de lectura en este bloque.

@@ -1,5 +1,6 @@
 node_modules/
 .next/
+.vercel/
 out/
 coverage/
 *.tsbuildinfo
@@ -13,3 +14,6 @@ next-env.d.ts
 Thumbs.db
 # Referencias sincronizadas: las copias de trabajo viven en la raíz.
 sources/
+
+.vercel
+.env*

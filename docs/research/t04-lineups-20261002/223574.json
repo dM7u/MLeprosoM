@@ -1,0 +1,350 @@
+{
+  "observation_id": "e4e0d345-9920-4518-981d-8f12d18895a8",
+  "fetched_at": "2026-10-02T09:52:49.049Z",
+  "body": {
+    "event_id": 223574,
+    "lineup_status": "confirmed",
+    "beta": false,
+    "updated_at": "2026-10-02T04:40:53Z",
+    "lineups": {
+      "home": {
+        "team_id": 4997,
+        "formation": "4-2-3-1",
+        "players": [
+          {
+            "id": 90511,
+            "name": "Josué Reinatti",
+            "position": "G",
+            "jersey_number": 30,
+            "captain": false
+          },
+          {
+            "id": 9787,
+            "name": "Franco Escobar",
+            "position": "D",
+            "jersey_number": 24,
+            "captain": false
+          },
+          {
+            "id": 6584,
+            "name": "Lautaro Giannetti",
+            "position": "D",
+            "jersey_number": 17,
+            "captain": false
+          },
+          {
+            "id": 82480,
+            "name": "Lucas Carrizo",
+            "position": "D",
+            "jersey_number": 16,
+            "captain": false
+          },
+          {
+            "id": 90513,
+            "name": "Martín Luciano",
+            "position": "D",
+            "jersey_number": 3,
+            "captain": false
+          },
+          {
+            "id": 90727,
+            "name": "Jerónimo Gómez Mattar",
+            "position": "M",
+            "jersey_number": 19,
+            "captain": false
+          },
+          {
+            "id": 90515,
+            "name": "Luca Regiardo",
+            "position": "M",
+            "jersey_number": 5,
+            "captain": true
+          },
+          {
+            "id": 90516,
+            "name": "Walter Mazzantti",
+            "position": "M",
+            "jersey_number": 7,
+            "captain": false
+          },
+          {
+            "id": 90518,
+            "name": "Facundo Guch",
+            "position": "M",
+            "jersey_number": 20,
+            "captain": false
+          },
+          {
+            "id": 90520,
+            "name": "Lautaro Rios",
+            "position": "M",
+            "jersey_number": 39,
+            "captain": false
+          },
+          {
+            "id": 137,
+            "name": "Juan Ignacio Ramírez",
+            "position": "F",
+            "jersey_number": 99,
+            "captain": false
+          }
+        ],
+        "substitutes": [
+          {
+            "id": 90729,
+            "name": "Martín Ortega",
+            "position": "D",
+            "jersey_number": 6,
+            "captain": false
+          },
+          {
+            "id": 10390,
+            "name": "Mateo García",
+            "position": "F",
+            "jersey_number": 18,
+            "captain": false
+          },
+          {
+            "id": 90522,
+            "name": "Francisco Scarpeccio",
+            "position": "F",
+            "jersey_number": 36,
+            "captain": false
+          },
+          {
+            "id": 90730,
+            "name": "Rodrigo Herrera",
+            "position": "M",
+            "jersey_number": 26,
+            "captain": false
+          },
+          {
+            "id": 90512,
+            "name": "Bruno Cabrera",
+            "position": "D",
+            "jersey_number": 25,
+            "captain": false
+          },
+          {
+            "id": 56501,
+            "name": "Gabriel Arias",
+            "position": "G",
+            "jersey_number": 21,
+            "captain": false
+          },
+          {
+            "id": 9948,
+            "name": "Ian Glavinovich",
+            "position": "D",
+            "jersey_number": 2,
+            "captain": false
+          },
+          {
+            "id": 22138,
+            "name": "Alan Soñora",
+            "position": "M",
+            "jersey_number": 15,
+            "captain": false
+          },
+          {
+            "id": 90514,
+            "name": "David Sotelo",
+            "position": "M",
+            "jersey_number": 8,
+            "captain": false
+          },
+          {
+            "id": 91551,
+            "name": "Valentino Acuña",
+            "position": "M",
+            "jersey_number": 10,
+            "captain": false
+          },
+          {
+            "id": 20163,
+            "name": "Lucas Gómez",
+            "position": "M",
+            "jersey_number": 27,
+            "captain": false
+          },
+          {
+            "id": 90526,
+            "name": "Blas Benedetto",
+            "position": "M",
+            "jersey_number": 35,
+            "captain": false
+          }
+        ]
+      },
+      "away": {
+        "team_id": 743,
+        "formation": "5-4-1",
+        "players": [
+          {
+            "id": 22338,
+            "name": "Ignacio Arce",
+            "position": "G",
+            "jersey_number": 1,
+            "captain": false
+          },
+          {
+            "id": 22333,
+            "name": "Nicolás Sansotre",
+            "position": "D",
+            "jersey_number": 15,
+            "captain": false
+          },
+          {
+            "id": 22332,
+            "name": "Facundo Miño",
+            "position": "D",
+            "jersey_number": 24,
+            "captain": false
+          },
+          {
+            "id": 22335,
+            "name": "Cristian Paz",
+            "position": "D",
+            "jersey_number": 22,
+            "captain": false
+          },
+          {
+            "id": 23762,
+            "name": "Carlos Quintana",
+            "position": "D",
+            "jersey_number": 2,
+            "captain": false
+          },
+          {
+            "id": 22330,
+            "name": "Pedro Ramírez",
+            "position": "D",
+            "jersey_number": 5,
+            "captain": false
+          },
+          {
+            "id": 65072,
+            "name": "Braian Sánchez",
+            "position": "M",
+            "jersey_number": 10,
+            "captain": false
+          },
+          {
+            "id": 18859,
+            "name": "Milton Celiz",
+            "position": "M",
+            "jersey_number": 8,
+            "captain": true
+          },
+          {
+            "id": 22321,
+            "name": "Pablo Monje",
+            "position": "M",
+            "jersey_number": 14,
+            "captain": false
+          },
+          {
+            "id": 22315,
+            "name": "Antony Alonso",
+            "position": "M",
+            "jersey_number": 7,
+            "captain": false
+          },
+          {
+            "id": 22309,
+            "name": "Alexander Díaz",
+            "position": "F",
+            "jersey_number": 11,
+            "captain": false
+          }
+        ],
+        "substitutes": [
+          {
+            "id": 63100,
+            "name": "Tomás Gonzalez",
+            "position": "F",
+            "jersey_number": 21,
+            "captain": false
+          },
+          {
+            "id": 22316,
+            "name": "Nicolas Watson",
+            "position": "M",
+            "jersey_number": 16,
+            "captain": false
+          },
+          {
+            "id": 22308,
+            "name": "Nicolás Benegas",
+            "position": "F",
+            "jersey_number": 9,
+            "captain": false
+          },
+          {
+            "id": 22331,
+            "name": "Mariano Bracamonte",
+            "position": "D",
+            "jersey_number": 36,
+            "captain": false
+          },
+          {
+            "id": 22320,
+            "name": "Yonatan Goitia",
+            "position": "D",
+            "jersey_number": 27,
+            "captain": false
+          },
+          {
+            "id": 20146,
+            "name": "Marino Arzamendia",
+            "position": "G",
+            "jersey_number": 23,
+            "captain": false
+          },
+          {
+            "id": 22334,
+            "name": "Rodrigo Gallo",
+            "position": "D",
+            "jersey_number": 13,
+            "captain": false
+          },
+          {
+            "id": 22054,
+            "name": "Ignacio Gariglio",
+            "position": "D",
+            "jersey_number": 6,
+            "captain": false
+          },
+          {
+            "id": 74151,
+            "name": "Ángel Almada",
+            "position": "M",
+            "jersey_number": 17,
+            "captain": false
+          },
+          {
+            "id": 22318,
+            "name": "Gabriel Obredor",
+            "position": "M",
+            "jersey_number": 40,
+            "captain": false
+          },
+          {
+            "id": 22312,
+            "name": "Ángel Stringa",
+            "position": "F",
+            "jersey_number": 35,
+            "captain": false
+          },
+          {
+            "id": 19804,
+            "name": "Miguel Agustín Graneros",
+            "position": "F",
+            "jersey_number": 29,
+            "captain": false
+          }
+        ]
+      }
+    }
+  }
+}

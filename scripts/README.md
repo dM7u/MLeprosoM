@@ -452,3 +452,53 @@ Importaciones futuras de alineaciones deben indicar --storage=projection. Nuevos
 fixtures requieren bootstrap explícito con rebuild-lineup-projection.mjs antes de
 servirlos por proyección. Home mantiene su lector anterior; no se desplegó a otros
 entornos. Evidencia: docs/research/lineup-activation-20260928.json.
+
+## Eventos: operación de proyección preparada localmente — 28/09/2026
+
+Estado vigente: el corte y la activación local se completaron el 28/09; consultar
+"Eventos activados localmente sobre Supabase" más abajo antes de ejecutar pasos.
+Las instrucciones previas al corte en esta sección quedan como registro histórico.
+
+import-incidents.mjs admite un cuarto argumento opcional --storage=history o
+--storage=projection. Default history conserva la operación vigente. En projection,
+dry-run valida y calcula selección/generación sin escribir; apply recalcula y usa
+CAS. RPC ausente o inválida falla sin volver a INSERT directo. Flags desconocidos
+o repetidos se rechazan antes de leer muestra/configuración.
+
+El reconstructor por evento está preparado para el futuro corte, todavía pendiente:
+
+```powershell
+node --conditions=react-server --env-file=.env.local scripts/rebuild-incident-projection.mjs 223728 --dry-run
+node --conditions=react-server --env-file=.env.local scripts/rebuild-incident-projection.mjs 223728 --apply
+```
+
+No ejecutar en Supabase todavía: falta concurrencia específica, preflight y auditoría
+antes de aplicar la propuesta SQL. Estos comandos no aplican migraciones ni llaman
+al proveedor. Apply no crea observaciones: reconstruye selección y verifica contra
+historial completo bajo generación estable. Exit 2 significa commit realizado con
+verificación posterior fallida; no implica rollback. Retry idéntico no escribe.
+
+Importación y reconstrucción comparten búsqueda por equipo/competición/temporada;
+inventario parcial o superior a 100 fixtures falla cerrado. Eventos y alineaciones
+reutilizan detail-fixture.mjs con códigos de error separados.
+
+La ficha admite INCIDENTS_READ_MODE=projection explícito. Ausente/history conserva
+el historial. Valor inválido, RPC fallida o bootstrap ausente produce error, sin
+fallback ni reconstrucción durante visitas. No se modificó .env.local. Antes de
+activar hay que reconstruir y verificar todos los fixtures BSD servidos, incluso
+vacíos, tras auditoría y corte de escritores. Rollback de lectura no reabrirá
+INSERT directo; importaciones posteriores al corte requerirán --storage=projection.
+
+## Eventos activados localmente sobre Supabase — 28/09/2026
+
+El propietario reportó auditoría posterior true/76/[]. RPC verificadas; inventario
+estable y reconstrucción de 32 proyecciones con equivalencia completa. Una sola
+observación histórica, ninguna nueva; retry sin escrituras. Evidencia:
+docs/research/incident-activation-20260928.json. Sustituye los pendientes de corte
+anteriores: NO repetir incident_history_projection.sql.
+
+INCIDENTS_READ_MODE=projection activo localmente el 28/09; una RPC por fixture, 31 empty y
+uno stale. Fichas HTTP verificadas con 22 eventos y sin datos. Sin despliegue ni
+cambio de otros entornos. Importaciones posteriores requieren --storage=projection;
+nuevos fixtures requieren bootstrap explícito, incluso vacíos. Rollback de lector
+no reabre INSERT directo. Pendiente medición a escala de eventos; ingesta manual.

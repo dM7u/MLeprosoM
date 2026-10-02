@@ -1,5 +1,22 @@
 # AGENTS.md — Movete, Leproso Movete!
 
+## Operación eficiente y avisos de modelo
+
+- Estado/prioridades: `fuentes/BACKLOG.md`. Historial archivado no es la cola vigente.
+- Seguir `fuentes/TRABAJO_Y_MODELOS.md`: recomendar ID de tarea, modelo/esfuerzo y
+  motivo al iniciar; avisar cambios convenientes al aparecer dificultad concreta;
+  cerrar con siguiente tarea/modelo. No afirmar cambios de modelo no realizados.
+- Default recomendado: Sol ligero para ejecución, Astra para arquitectura/seguridad/
+  concurrencia, Luna opcional para ediciones mecánicas. Respetar elección del usuario.
+- Un chat por entregable coherente; incluir tests/documentación. No fragmentar por
+  pasos internos ni crear/enviar chats sin solicitud. Los avisos son dentro del trabajo.
+- En contexto ya leído, consultar solo cambios y secciones necesarias; no releer
+  documentación completa sin motivo. No leer archivo histórico por defecto.
+- Guardar logs extensos sin secretos fuera del contexto; resumir errores/resultados.
+  Repetir verificaciones por cambios/riesgo/fallos, no por rutina documental.
+- Estas reglas precisan cómo cumplir las lecturas y bloques verificables indicados
+  abajo; no eximen controles necesarios, seguridad ni decisiones del Product Owner.
+
 ## Contexto del proyecto
 
 Este directorio es un espejo local del proyecto de ChatGPT **“Movete, Leproso Movete!”**.

@@ -252,3 +252,86 @@ No hay despliegue a otros entornos. Esta nota sustituye los pendientes anteriore
 no repetir lineup_history_projection.sql. Futuras importaciones manuales requieren
 --storage=projection y nuevos fixtures necesitan reconstrucción antes de servirlos
 con ese lector. Ninguna observación nueva ni consulta deportiva en este corte.
+
+## Eventos: propuesta local, sin aplicar — 28/09/2026
+
+Estado vigente: la propuesta se aplicó en el proyecto auditado y el lector se activó
+localmente el 28/09. La sección "Eventos activados localmente sobre Supabase" al
+final reemplaza las instrucciones de corte siguientes. No repetir el SQL.
+
+incident_history_projection.sql implementa persistencia atómica con rol escritor
+propio, RLS/FK, lectura de un corte y commit CAS. Revoca INSERT directo solamente
+en la base de prueba. No ejecutar todavía en Supabase: importador y ficha de
+eventos aún utilizan historial y no se preparó el corte operacional.
+
+Prueba reproducible sin red ni configuración privada:
+
+```powershell
+node --conditions=react-server tests/database/incident-projection.mjs
+```
+
+Incluye administrador no superusuario, auditorías ACL 76/76 de cada uno de los tres
+recursos coexistentes, reemplazo íntegro de listas, retención, reconstrucción,
+preview, conflictos serializados y rollback. No certifica concurrencia real;
+faltan integración operacional, ensayo multi-conexión y preflight remoto revisado.
+No repetir SQL remoto de estadísticas ni alineaciones, ya aplicados.
+
+### Operación de eventos conectada localmente — 28/09/2026
+
+Importador con --storage=projection explícito, reconstrucción por evento y modo
+INCIDENTS_READ_MODE integrados y probados en PGlite. Sustituye el pendiente de
+conexión operacional anterior; default history conserva el estado remoto vigente.
+La prueba SQL recorre búsqueda de fixture real, dry-run, apply, retry, importación
+de failed y verificación completa post-reconstrucción. 202 pruebas unitarias,
+lint, tipos y build aprobados, junto con regresiones SQL de los otros dos recursos.
+
+No aplicar incident_history_projection.sql todavía: quedan concurrencia específica
+multi-conexión, preflight remoto y auditoría/corte coordinado. No se modificaron
+Supabase ni configuración privada. Estadísticas/alineaciones conservan su activación.
+
+### Concurrencia de eventos cerrada; preflight preparado — 28/09/2026
+
+Ensayo PostgreSQL 17.11 aprobado con dos escritores reales, 14 escenarios y
+regresiones de los otros recursos. Tres auditorías 76/76; diez alteraciones ACL
+detectadas localmente. Evidencia: docs/research/INCIDENT_CONCURRENCY_20260928.md.
+
+Siguiente paso: ejecutar solamente preflight_incident_projection.sql en SQL Editor
+del mismo proyecto y devolver la celda JSON evidence completa. Es de solo lectura.
+No aplicar incident_history_projection.sql ni cambiar INCIDENTS_READ_MODE todavía.
+Tras contrastar catálogo se prepara el corte y se usa audit_incident_projection_acl.sql.
+
+### Preflight remoto de eventos contrastado; corte preparado — 28/09/2026
+
+Evidencia recibida en docs/research/incident-preflight-20260928.json: PostgreSQL
+17.6, nombres libres, RLS/permisos esperados. Comparación automática con esquema
+local aprobada para columnas, restricciones, índices, políticas/triggers y claves
+de teams/fixtures. Sustituye la espera de preflight anterior. SQL aún sin aplicar.
+
+Con las importaciones manuales de eventos pausadas:
+
+1. Ejecutar una sola vez el archivo completo incident_history_projection.sql en
+   SQL Editor del mismo proyecto. Crea proyección/RPC y revoca INSERT directo a
+   service_role en una transacción con bloqueo del historial.
+2. Si termina correctamente, ejecutar audit_incident_projection_acl.sql y devolver
+   el resultado completo. Ante error, devolverlo sin repetir migración ni eliminar
+   objetos o conceder permisos adicionales.
+3. Mantener INCIDENTS_READ_MODE ausente/history e importaciones pausadas hasta
+   revisar auditoría y RPC. Después se hará dry-run/reconstrucción de todos los
+   fixtures servidos y contraste de equivalencia antes de activar el lector.
+
+Importaciones posteriores al corte usarán --storage=projection. Rollback de
+lectura no reabre INSERT directo. No repetir SQL de estadísticas/alineaciones.
+
+## Eventos activados localmente sobre Supabase — 28/09/2026
+
+El propietario reportó auditoría posterior true/76/[]. RPC verificadas; inventario
+estable y reconstrucción de 32 proyecciones con equivalencia completa. Una sola
+observación histórica, ninguna nueva; retry sin escrituras. Evidencia:
+docs/research/incident-activation-20260928.json. Sustituye los pendientes de corte
+anteriores: NO repetir incident_history_projection.sql.
+
+INCIDENTS_READ_MODE=projection activo localmente; una RPC por fixture, 31 empty y
+uno stale. Fichas HTTP verificadas con 22 eventos y sin datos. Sin despliegue ni
+cambio de otros entornos. Importaciones posteriores requieren --storage=projection;
+nuevos fixtures requieren bootstrap explícito, incluso vacíos. Rollback de lector
+no reabre INSERT directo. Pendiente medición a escala de eventos; ingesta manual.

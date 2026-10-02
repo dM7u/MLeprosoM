@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {standingsContext,matchupStandings} from '../src/app/standings-context.mjs';
+import {standingsContext,matchupStandings,selectMatchupTournament} from '../src/app/standings-context.mjs';
 
 test('context uses existing order, preserves unresolved ties and does not mutate standings',()=>{
   const rows=['a','b','newells','c','d'].map(team_id=>({team_id,calculated_position:null}));
@@ -29,4 +29,16 @@ test('matchup preserves localia, zero points and unresolved ranks in the same sc
   assert.deepEqual(matchupStandings([...rows,rows[0]],fixture,scope),[]);
   assert.deepEqual(matchupStandings(rows.slice(0,1),fixture,scope),[]);
   assert.deepEqual(matchupStandings(rows,undefined,scope),[]);
+});
+
+test('next opponent uses its verified tournament and never falls back to annual',()=>{
+  const selections=[{kind:'annual'},{kind:'tournament',tournament:'Clausura'},{kind:'tournament',tournament:'Clausura',group:'A'}];
+  const selected=[];
+  const select=selection=>{selected.push(selection);return {snapshot:{rows:[]}};};
+  const fixture={tournament:{name:'Clausura',round:11}};
+  assert.equal(selectMatchupTournament(fixture,selections,select).tournament,'Clausura');
+  assert.deepEqual(selected,[{kind:'tournament',tournament:'Clausura'}]);
+  for(const unclassified of [null,{provider:'goal-api'},{tournament:{name:'Playoffs'}},{tournament:{name:'Apertura'}}])
+    assert.deepEqual(selectMatchupTournament(unclassified,selections,select),{tournament:null,view:null});
+  assert.equal(selected.length,1);
 });

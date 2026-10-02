@@ -1,0 +1,268 @@
+{
+  "observation_id": "d73a400f-a82e-4463-a78b-d59cfe782d7b",
+  "fetched_at": "2026-10-02T12:40:56.974Z",
+  "excluded_bench_sides": [
+    "away"
+  ],
+  "body": {
+    "event_id": 223454,
+    "lineup_status": "confirmed",
+    "beta": false,
+    "updated_at": "2026-10-02T04:40:50Z",
+    "lineups": {
+      "home": {
+        "team_id": 4997,
+        "formation": "4-2-3-1",
+        "players": [
+          {
+            "id": 90511,
+            "name": "Josué Reinatti",
+            "position": "G",
+            "jersey_number": 30,
+            "captain": false
+          },
+          {
+            "id": 90729,
+            "name": "Martín Ortega",
+            "position": "D",
+            "jersey_number": 6,
+            "captain": false
+          },
+          {
+            "id": 90512,
+            "name": "Bruno Cabrera",
+            "position": "D",
+            "jersey_number": 25,
+            "captain": false
+          },
+          {
+            "id": 90523,
+            "name": "Nicolás Goitea",
+            "position": "D",
+            "jersey_number": 23,
+            "captain": false
+          },
+          {
+            "id": 90521,
+            "name": "Jeronimo Russo",
+            "position": "D",
+            "jersey_number": 28,
+            "captain": false
+          },
+          {
+            "id": 90727,
+            "name": "Jerónimo Gómez Mattar",
+            "position": "M",
+            "jersey_number": 19,
+            "captain": false
+          },
+          {
+            "id": 90515,
+            "name": "Luca Regiardo",
+            "position": "M",
+            "jersey_number": 5,
+            "captain": true
+          },
+          {
+            "id": 90516,
+            "name": "Walter Mazzantti",
+            "position": "M",
+            "jersey_number": 7,
+            "captain": false
+          },
+          {
+            "id": 90518,
+            "name": "Facundo Guch",
+            "position": "M",
+            "jersey_number": 20,
+            "captain": false
+          },
+          {
+            "id": 90519,
+            "name": "Walter Nuñez",
+            "position": "M",
+            "jersey_number": 33,
+            "captain": false
+          },
+          {
+            "id": 10316,
+            "name": "Matías Cóccaro",
+            "position": "F",
+            "jersey_number": 9,
+            "captain": false
+          }
+        ],
+        "substitutes": [
+          {
+            "id": 6584,
+            "name": "Lautaro Giannetti",
+            "position": "D",
+            "jersey_number": 17,
+            "captain": false
+          },
+          {
+            "id": 90728,
+            "name": "Marcelo Esponda",
+            "position": "M",
+            "jersey_number": 29,
+            "captain": false
+          },
+          {
+            "id": 137,
+            "name": "Juan Ignacio Ramírez",
+            "position": "F",
+            "jersey_number": 99,
+            "captain": false
+          },
+          {
+            "id": 9787,
+            "name": "Franco Escobar",
+            "position": "D",
+            "jersey_number": 24,
+            "captain": false
+          },
+          {
+            "id": 90520,
+            "name": "Lautaro Rios",
+            "position": "M",
+            "jersey_number": 39,
+            "captain": false
+          },
+          {
+            "id": 56501,
+            "name": "Gabriel Arias",
+            "position": "G",
+            "jersey_number": 21,
+            "captain": false
+          },
+          {
+            "id": 9948,
+            "name": "Ian Glavinovich",
+            "position": "D",
+            "jersey_number": 2,
+            "captain": false
+          },
+          {
+            "id": 90513,
+            "name": "Martín Luciano",
+            "position": "D",
+            "jersey_number": 3,
+            "captain": false
+          },
+          {
+            "id": 90526,
+            "name": "Blas Benedetto",
+            "position": "M",
+            "jersey_number": 35,
+            "captain": false
+          },
+          {
+            "id": 90514,
+            "name": "David Sotelo",
+            "position": "M",
+            "jersey_number": 8,
+            "captain": false
+          },
+          {
+            "id": 22138,
+            "name": "Alan Soñora",
+            "position": "M",
+            "jersey_number": 15,
+            "captain": false
+          },
+          {
+            "id": 90522,
+            "name": "Francisco Scarpeccio",
+            "position": "F",
+            "jersey_number": 36,
+            "captain": false
+          }
+        ]
+      },
+      "away": {
+        "team_id": 2391,
+        "formation": "3-4-2-1",
+        "players": [
+          {
+            "id": 10263,
+            "name": "Ezequiel Unsaín",
+            "position": "G",
+            "jersey_number": 32,
+            "captain": false
+          },
+          {
+            "id": 90557,
+            "name": "Santiago Fernandez",
+            "position": "D",
+            "jersey_number": 44,
+            "captain": false
+          },
+          {
+            "id": 20152,
+            "name": "Román Riquelme",
+            "position": "D",
+            "jersey_number": 6,
+            "captain": false
+          },
+          {
+            "id": 90558,
+            "name": "Valentín Fascendini",
+            "position": "D",
+            "jersey_number": 13,
+            "captain": false
+          },
+          {
+            "id": 90560,
+            "name": "Timoteo Chamorro",
+            "position": "M",
+            "jersey_number": 2,
+            "captain": false
+          },
+          {
+            "id": 20156,
+            "name": "Federico Fattori",
+            "position": "M",
+            "jersey_number": 8,
+            "captain": false
+          },
+          {
+            "id": 90561,
+            "name": "Matias Galarza",
+            "position": "M",
+            "jersey_number": 5,
+            "captain": false
+          },
+          {
+            "id": 90562,
+            "name": "Gabriel Báez",
+            "position": "M",
+            "jersey_number": 23,
+            "captain": false
+          },
+          {
+            "id": 90571,
+            "name": "Giovanni Baroni",
+            "position": "F",
+            "jersey_number": 10,
+            "captain": false
+          },
+          {
+            "id": 618,
+            "name": "Franco Cristaldo",
+            "position": "F",
+            "jersey_number": 19,
+            "captain": true
+          },
+          {
+            "id": 54883,
+            "name": "Ronaldo Martinez",
+            "position": "F",
+            "jersey_number": 77,
+            "captain": false
+          }
+        ],
+        "substitutes": null
+      }
+    }
+  }
+}

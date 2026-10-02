@@ -11,17 +11,20 @@ import {createLineupObservation} from '../../src/server/db/lineup-observations.m
 import {lineupSnapshotView} from '../../src/server/db/read-lineups.mjs';
 import {commitLineupSelection,previewLineupSelection,readProjectedLineups} from '../../src/server/db/lineup-projection.mjs';
 
+import {createIncidentObservation,incidentSnapshotView} from '../../src/server/db/incident-observations.mjs';
+import {commitIncidentSelection,previewIncidentSelection,readProjectedIncidents} from '../../src/server/db/incident-projection.mjs';
+
 export async function runHistoryConcurrency(resource,configPath) {
-assert.ok(['statistics','lineups'].includes(resource));
-const lineups=resource==='lineups';
-const table=lineups?'lineup_observations':'team_statistics_observations';
-const readRpc=lineups?'read_lineup_projection':'read_statistics_projection';
-const commitRpc=lineups?'commit_lineup_projection':'commit_statistics_projection';
-const prefix=lineups?'LINEUPS':'STATS';
-const commitSelection=lineups?commitLineupSelection:commitStatisticsSelection;
-const previewSelection=lineups?previewLineupSelection:previewStatisticsSelection;
-const readProjection=lineups?readProjectedLineups:readProjectedStatistics;
-const fullView=lineups?lineupSnapshotView:statisticsView;
+assert.ok(['statistics','lineups','incidents'].includes(resource));
+const lineups=resource==='lineups',incidents=resource==='incidents';
+const table=incidents?'incident_observations':lineups?'lineup_observations':'team_statistics_observations';
+const readRpc=incidents?'read_incident_projection':lineups?'read_lineup_projection':'read_statistics_projection';
+const commitRpc=incidents?'commit_incident_projection':lineups?'commit_lineup_projection':'commit_statistics_projection';
+const prefix=incidents?'INCIDENTS':lineups?'LINEUPS':'STATS';
+const commitSelection=incidents?commitIncidentSelection:lineups?commitLineupSelection:commitStatisticsSelection;
+const previewSelection=incidents?previewIncidentSelection:lineups?previewLineupSelection:previewStatisticsSelection;
+const readProjection=incidents?readProjectedIncidents:lineups?readProjectedLineups:readProjectedStatistics;
+const fullView=incidents?incidentSnapshotView:lineups?lineupSnapshotView:statisticsView;
 
 // No .env, URL, Supabase or provider access. Runner creates this ignored local file.
 const path=realpathSync(configPath);
@@ -54,7 +57,8 @@ const options={fixture,now,ttlMs:60000};
 const statisticsRow=(n,seconds=n)=>createStatisticsObservation({id:'10000000-0000-4000-8000-'+String(n).padStart(12,'0'),fixture,now,observedAt:new Date(now-60000+seconds*1000).toISOString(),body:{event_id:223728,stats:{home:{corner_kicks:n}}}});
 const sample=lineups?JSON.parse(readFileSync('docs/research/bsd-lineups-223728-20260925.json','utf8')).body:null;
 const stamp=i=>new Date(now-60000+i*1000).toISOString();
-const row=(n,seconds=n,kind='complete',source=seconds)=>lineups?createLineupObservation({id:'10000000-0000-4000-8000-'+String(n).padStart(12,'0'),fixture,now,observedAt:stamp(seconds),body:{...sample,updated_at:source===null?null:stamp(source),...(kind==='partial'?{lineups:{...sample.lineups,home:{...sample.lineups.home,players:sample.lineups.home.players.slice(0,1)}}}:{}),...(kind==='unavailable'?{lineup_status:'predicted'}:{})}}):statisticsRow(n,seconds);
+const incidentSample=incidents?JSON.parse(readFileSync('docs/research/bsd-incidents-223728-20260925.json','utf8')).body:null;
+const row=(n,seconds=n,kind='complete',source=seconds)=>incidents?createIncidentObservation({id:'10000000-0000-4000-8000-'+String(n).padStart(12,'0'),fixture,now,observedAt:stamp(seconds),...(kind==='failed'?{failed:true}:{body:{...incidentSample,incidents:kind==='empty'?[]:kind==='partial'?[{type:'unknown_test',minute:null}]:kind==='short'?incidentSample.incidents.slice(0,1):incidentSample.incidents}})}):lineups?createLineupObservation({id:'10000000-0000-4000-8000-'+String(n).padStart(12,'0'),fixture,now,observedAt:stamp(seconds),body:{...sample,updated_at:source===null?null:stamp(source),...(kind==='partial'?{lineups:{...sample.lineups,home:{...sample.lineups.home,players:sample.lineups.home.players.slice(0,1)}}}:{}),...(kind==='unavailable'?{lineup_status:'predicted'}:{})}}):statisticsRow(n,seconds);
 const head=c=>rpc(c,readRpc,{p_fixture_id:fixture.id});
 const commit=(c,args)=>rpc(c,commitRpc,args);
 const plan=async(c,observation)=>{
@@ -76,15 +80,21 @@ try {
  const season=(await query(admin,"insert into seasons(provider,external_id,competition_id,name,fetched_at) values('bsd','test',$1,'Test',$2) returning id",[competition,new Date(now)]))[0].id;
  await query(admin,"insert into fixtures(id,provider,external_id,season_id,home_team_id,away_team_id,source_status,fetched_at) values($1,'bsd',$2,$3,$4,$5,'finished',$6)",[fixture.id,fixture.external_id,season,fixture.home_team_id,fixture.away_team_id,new Date(now)]);
  await admin.query(readFileSync('supabase/pending/statistics_history_projection.sql','utf8'));
- if(lineups){
+ if(lineups||incidents){
   const preflight=(await query(admin,readFileSync('supabase/pending/preflight_lineup_projection.sql','utf8')))[0].evidence;
   assert.equal(preflight.new_names_available,true);assert.equal(preflight.history.access_ok,true);
   await admin.query(readFileSync('supabase/pending/lineup_history_projection.sql','utf8'));
  }
+ if(incidents){
+  const preflight=(await query(admin,readFileSync('supabase/pending/preflight_incident_projection.sql','utf8')))[0].evidence;
+  assert.equal(preflight.new_names_available,true);assert.equal(preflight.history.access_ok,true);
+  await admin.query(readFileSync('supabase/pending/incident_history_projection.sql','utf8'));
+ }
  await admin.query('reset role');
  const audit=(await query(admin,readFileSync('supabase/pending/audit_statistics_projection_acl.sql','utf8')))[0];
  assert.equal(audit.access_ok,true,JSON.stringify(audit));
- if(lineups){const own=(await query(admin,readFileSync('supabase/pending/audit_lineup_projection_acl.sql','utf8')))[0];assert.equal(own.access_ok,true,JSON.stringify(own));}
+ if(lineups||incidents){const own=(await query(admin,readFileSync('supabase/pending/audit_lineup_projection_acl.sql','utf8')))[0];assert.equal(own.access_ok,true,JSON.stringify(own));}
+ if(incidents){const own=(await query(admin,readFileSync('supabase/pending/audit_incident_projection_acl.sql','utf8')))[0];assert.equal(own.access_ok,true,JSON.stringify(own));}
  const a=await connect(),b=await connect();
  for(const c of [a,b])await c.query('set role service_role');
  const pid=async c=>(await query(c,'select pg_backend_pid() as pid'))[0].pid;
@@ -130,7 +140,7 @@ try {
  assert.equal(duplicate.data?.replay,true);assert.equal((await all()).length,5);await equivalent(b);
  passed.push('concurrent identical UUID produces one observation and replay');
 
- const r6=row(6),different=structuredClone(r6);if(lineups)different.payload.home.starters[0].name='Changed';else different.payload.home.corner_kicks=999;
+ const r6=row(6),different=structuredClone(r6);if(incidents)different.payload.incidents[0].minute=1;else if(lineups)different.payload.home.starters[0].name='Changed';else different.payload.home.corner_kicks=999;
  const conflict=await race(await plan(a,r6),await plan(b,different));
  assert.equal(conflict.error?.message,prefix+'_IDEMPOTENCY_CONFLICT');assert.equal((await all()).length,6);await equivalent(b);
  passed.push('concurrent changed UUID payload is rejected');
@@ -178,6 +188,22 @@ try {
    assert.equal((await readProjection(adapter(b),options)).status,'stale');
   }
   passed.push('concurrent partial, regressed/missing source time and prediction retain chosen and advance last');
+ }
+ if(incidents){
+  for(const [i,kind] of [[20,'short'],[22,'partial'],[24,'empty'],[26,'failed']]){
+   const previous=row(i,i),later=row(i+1,i+1,kind);
+   const collision=await race(await plan(a,previous),await plan(b,later));
+   assert.equal(collision.error?.message,prefix+'_PROJECTION_CHANGED');
+   await commitSelection(adapter(b),{...options,observation:later});await equivalent(b);
+   const current=await head(admin),retained=['empty','failed'].includes(kind);
+   assert.equal(current.projection.chosen_id,retained?previous.id:later.id);
+   assert.equal(current.projection.last_id,later.id);
+   const view=await readProjection(adapter(b),options);
+   assert.equal(view.status,retained?'stale':kind==='partial'?'partial':'fresh');
+   assert.equal(Date.parse(view.updatedAt),Date.parse(retained?previous.observed_at:later.observed_at));
+   assert.deepEqual(view.data.incidents,(retained?previous:later).payload.incidents);
+   passed.push('concurrent '+kind+' preserves whole-list selection, original time and last attempt');
+  }
  }
  await a.end();
  await commitSelection(adapter(b),{...options,observation:row(10)});

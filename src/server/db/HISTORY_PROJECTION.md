@@ -307,3 +307,82 @@ otros entornos. Nuevos fixtures requieren bootstrap explícito; visitas no recon
 Importaciones posteriores usan --storage=projection incluso si se revierte el modo
 de lectura a history. No repetir SQL ni reabrir INSERT directo. Esta nota reemplaza
 los pendientes de corte/activación anteriores; medición a escala sigue pendiente.
+
+## Escala local de alineaciones verificada — 28/09/2026
+
+63 pares de lecturas completos equivalentes, hasta 5000 observaciones, con
+parciales, predicciones y fechas de fuente anteriores/ausentes. 50 páginas/~26,36 MB
+frente a una RPC/6,1–10,8 KB. Bootstrap conserva replay completo y se mide aparte.
+Reporte: docs/research/LINEUP_PROJECTION_VOLUME_20260928.md. No certifica latencia
+remota ni cambia Home, que conserva historial. Próximo recurso: eventos; mantener
+sus reglas de reemplazo de listas y verificar su transición antes de activarlo.
+
+## Eventos: núcleo local — 28/09/2026
+
+Estado vigente: la activación local del 28/09 se registra más abajo. Las notas de
+preparación de este bloque describen el estado anterior al corte y no son pasos
+pendientes de ejecución.
+
+incident-projection.mjs reutiliza createHistoryProjection y el reductor incidents.
+El validador compartido admite chosenStatuses configurado por el módulo backend:
+available/partial para eventos; complete/partial permanece como valor previo para
+estadísticas y alineaciones. No se aceptan parámetros de configuración del cliente.
+Identidad de fixture/proveedor/evento/equipos y payload se revalidan al hidratar.
+
+Lista posterior available/partial sustituye la anterior entera aunque sea más
+corta o menos completa. No fusiona ni recupera eventos retirados. Empty/failed
+conserva última útil con fecha original y stale; failed sin selección produce
+error, empty sin selección produce empty. Cobertura sigue unverified.
+
+SQL aislado en supabase/pending/incident_history_projection.sql; solo aplicado en
+PGlite efímero. 130 comparaciones completas y pruebas de persistencia/rollback,
+CAS/retry, reconstrucción y ACL de tres recursos aprobadas. Regresiones SQL de
+estadísticas/alineaciones y 196 pruebas unitarias pasan, junto con lint/tipos/build.
+No certifica concurrencia multi-conexión de eventos. No aplicar remotamente aún:
+faltan conexión operacional, reconstrucción por ámbito, concurrencia específica
+y preflight/auditoría. UI/importador actuales siguen usando historial.
+
+## Eventos: operación explícita — 28/09/2026
+
+Importador admite storage=projection; history permanece por defecto. Dry-run
+usa preview y apply usa commit con CAS; ausencia de RPC no habilita INSERT directo.
+rebuild-incident-projection.mjs comparte history-rebuild.mjs, usa política de eventos
+y compara replay completo bajo generación estable. Conserva reporte separado de
+commit y verificación posterior. Búsqueda acotada compartida con alineaciones en
+detail-fixture.mjs; inventario parcial, ambiguo o ajeno al ámbito es rechazado.
+
+Ficha conectada mediante incident-reader.mjs: INCIDENTS_READ_MODE explícito,
+history por defecto y error sin fallback en projection. Ninguna visita escribe.
+Sin cambio de configuración ni activación remota. Próximo: concurrencia propia y
+preflight/auditoría antes del corte, reconstrucción completa y activación.
+
+## Concurrencia de eventos verificada — 28/09/2026
+
+PostgreSQL 17.11 con dos conexiones escritoras y bloqueo observado: 14 escenarios,
+incluidas carreras de lista corta/parcial y retención empty/failed. Replay completo
+equivalente. Tres proyecciones coexistentes con ACL 76/76 por recurso; regresiones
+de estadísticas/alineaciones aprobadas. Detalle: docs/research/INCIDENT_CONCURRENCY_20260928.md.
+Pendiente preflight remoto y corte; no se activa eventos ni se aplica SQL remoto.
+
+## Eventos activados localmente sobre Supabase — 28/09/2026
+
+El propietario reportó auditoría posterior true/76/[]. RPC verificadas; inventario
+estable y reconstrucción de 32 proyecciones con equivalencia completa. Una sola
+observación histórica, ninguna nueva; retry sin escrituras. Evidencia:
+docs/research/incident-activation-20260928.json. Sustituye los pendientes de corte
+anteriores: NO repetir incident_history_projection.sql.
+
+INCIDENTS_READ_MODE=projection activo localmente; una RPC por fixture, 31 empty y
+uno stale. Fichas HTTP verificadas con 22 eventos y sin datos. Sin despliegue ni
+cambio de otros entornos. Importaciones posteriores requieren --storage=projection;
+nuevos fixtures requieren bootstrap explícito, incluso vacíos. Rollback de lector
+no reabre INSERT directo. Pendiente medición a escala de eventos; ingesta manual.
+
+## Escala de eventos verificada — 28/09/2026
+
+63 pares de lectura equivalentes hasta 5000 observaciones, incluidas lista corta,
+parcial y retención empty/failed. 50 páginas/~25,4 MB frente a una RPC/1,55–10,42 KB;
+bootstrap sigue validando todo el historial. Reporte y límites:
+docs/research/INCIDENT_PROJECTION_VOLUME_20260928.md. Cierra medición local de los
+tres recursos; no certifica latencia remota ni habilita frecuencia. Standings
+requiere evaluación separada de sus reglas de selección y revisiones.

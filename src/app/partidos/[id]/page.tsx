@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import TeamCrest from '../../team-crest';
 import {notFound} from 'next/navigation';
 import {fixtureView} from '@/server/db/fixture-view';
 import {statisticsViewForMatch} from '@/server/db/statistics-view';
@@ -30,7 +31,7 @@ export default async function MatchPage({params}:{params:Promise<{id:string}>}) 
   ];
   return <main className="match-page">
     <Link className="detail-link" href="/#partidos">← Volver al tablero</Link>
-    <header className="page-header"><div><p className="eyebrow">FICHA DEL PARTIDO</p><h1>{match.home_team ?? 'Equipo sin datos'}<span className="match-versus"> vs. </span>{match.away_team ?? 'Equipo sin datos'}</h1><p className="muted">{match.competition ?? 'Competición sin datos'}{match.tournament?` · ${match.tournament.name} · Fecha ${match.tournament.round}`:''}</p></div></header>
+    <header className="page-header"><div><p className="eyebrow">FICHA DEL PARTIDO</p><h1><TeamCrest provider={match.provider} externalId={match.home_external_id}/>{match.home_team ?? 'Equipo sin datos'}<span className="match-versus"> vs. </span><TeamCrest provider={match.provider} externalId={match.away_external_id}/>{match.away_team ?? 'Equipo sin datos'}</h1><p className="muted">{match.competition ?? 'Competición sin datos'}{match.tournament?` · ${match.tournament.name} · Fecha ${match.tournament.round}`:''}</p></div></header>
     <section className="panel match-summary" aria-label="Resultado guardado"><p className="eyebrow">{fixtureStatus(status)}</p><p className="big-score">{fixtureScore(match.home_score,match.away_score)}</p><p className="muted">{fixtureDate(match.kickoff_at)} · Horario de Argentina</p><p className="fine">Local: {match.home_team ?? 'Sin datos'} · Visitante: {match.away_team ?? 'Sin datos'}</p></section>
     <div className={`data-notice ${source?.status==='stale'?'warning':''}`} role="status"><strong>{providerLabel(match.provider)} · {source?.label ?? 'Sin datos de vigencia'}</strong><span>Consulta del partido: {match.fetched_at?fixtureDate(match.fetched_at):'Sin datos'}</span><span>Datos guardados. Sin seguimiento en vivo.</span></div>
     {match.provider==='goal-api'&&<section className="panel"><h2>Desglose del marcador</h2><dl className="detail-grid"><div><dt>Tiempo reglamentario</dt><dd>{fixtureScore(match.home_fulltime_score,match.away_fulltime_score)}</dd></div><div><dt>Prórroga</dt><dd>{fixtureScore(match.home_extra_score,match.away_extra_score)}</dd></div><div><dt>Penales</dt><dd>{fixtureScore(match.home_penalty_score,match.away_penalty_score)}</dd></div></dl><p className="fine">Cada marcador se muestra por separado, tal como está guardado.</p></section>}
@@ -40,7 +41,7 @@ export default async function MatchPage({params}:{params:Promise<{id:string}>}) 
         <p className="fine">Fuente: BSD · Totales del partido · Datos del proveedor, sin contraste oficial independiente.</p>
         <div className={`data-notice ${statistics.status==='stale'?'warning':''}`} role="status"><strong>{statistics.status==='stale'?'Datos desactualizados':statistics.status==='partial'?'Datos parciales':'Datos actualizados'}</strong><span>Consulta de estadísticas: {fixtureDate(statistics.updatedAt)}</span></div>
         {statistics.lastObservedAt!==statistics.updatedAt&&<p className="fine">Se conservó la última información útil. Último intento: {fixtureDate(statistics.lastObservedAt)}.</p>}
-        <div className="table-scroll" tabIndex={0} aria-label="Estadísticas comparadas"><table className="match-statistics"><thead><tr><th scope="col">Métrica</th><th scope="col">{match.home_team??'Local'}</th><th scope="col">{match.away_team??'Visitante'}</th></tr></thead><tbody>{metrics.map(([key,label,unit])=><tr key={key}><th scope="row">{label}</th>{['home','away'].map(side=><td key={side}>{statistics.data[side][key]===null?'Sin datos':`${statistics.data[side][key]}${unit}`}</td>)}</tr>)}</tbody></table></div>
+        <p className="mobile-scroll-hint">Deslizá la tabla para ver ambas columnas →</p><div className="table-scroll" tabIndex={0} aria-label="Estadísticas comparadas"><table className="match-statistics"><thead><tr><th scope="col">Métrica</th><th scope="col">{match.home_team??'Local'}</th><th scope="col">{match.away_team??'Visitante'}</th></tr></thead><tbody>{metrics.map(([key,label,unit])=><tr key={key}><th scope="row">{label}</th>{['home','away'].map(side=><td key={side}>{statistics.data[side][key]===null?'Sin datos':`${statistics.data[side][key]}${unit}`}</td>)}</tr>)}</tbody></table></div>
       </> : <p className="empty">{statistics?.status==='error'?'Sin datos: no pudimos recuperar las estadísticas.':'Sin datos de estadísticas guardadas para este partido.'}</p>}
     </section>
     <section className="panel match-coverage lineup-panel" id="alineaciones"><h2>Alineaciones</h2>{lineups?.data?<>
@@ -61,6 +62,6 @@ export default async function MatchPage({params}:{params:Promise<{id:string}>}) 
       <ol className="incident-list">{events.data.incidents.map((event:{source_index:number;type:string;source_type:string;minute:number|null;added_time:number|null;side:string|null;partial:boolean})=><li key={event.source_index}><strong>{incidentMinute(event)}</strong><div><p>{incidentLabel(event)}</p>{event.side&&<small>{event.side==='home'?match.home_team:match.away_team}</small>}{event.partial&&<small> · Datos parciales</small>}</div></li>)}</ol>
     </>:<p className="empty">{events?.status==='error'?'Sin datos: no pudimos recuperar los eventos.':'Sin datos de eventos guardados. Esto no indica que el partido no haya tenido incidencias.'}</p>}</section>
     <section className="panel match-coverage"><h2>Información del partido</h2><p className="muted">Esta ficha muestra la cobertura disponible en la app.</p><dl className="detail-grid">{['Estadio','Árbitro','Clima'].map(label=><div key={label}><dt>{label}</dt><dd>Sin datos</dd></div>)}</dl></section>
-    <footer>Movete, Leproso Movete! · La ausencia de información no representa un valor cero.</footer>
+    <footer>Movete, Leproso Movete! · La ausencia de información no representa un valor cero. · <Link href="/creditos">Créditos de escudos</Link></footer>
   </main>;
 }

@@ -91,6 +91,13 @@ el usuario. La consulta de referencias remotas funcionó y no devolvió ramas.
 El primer commit de la fundación es `b62eaea`. La rama `main` está publicada y
 sigue `origin/main` en [dM7u/MLeprosoM](https://github.com/dM7u/MLeprosoM).
 
+## Flujo de trabajo y modelos
+
+El estado vigente está en [BACKLOG.md](BACKLOG.md). La distribución de entregables,
+modelos y avisos está en [TRABAJO_Y_MODELOS.md](TRABAJO_Y_MODELOS.md).
+El [historial hasta el 29/09](../docs/history/BACKLOG_HASTA_20260929.md) se consulta solo
+para rastrear decisiones; sus pendientes fechados no representan el estado actual.
+
 ## Documentación de trabajo
 
 Los documentos de `fuentes/` son las únicas versiones de trabajo; `fuentes/BACKLOG.md`
