@@ -1,8 +1,10 @@
 import SiteHeader from './site-header';
+import LiveHomeRefresh from './live-home-refresh';
 import HomeNextMatch from './home-next-match';
 import HomeLineup, {type LineupMatch} from './home-lineup';
 import TeamCrest from './team-crest';
 import {fixtureView,type StoredFixture} from '@/server/db/fixture-view';
+import {liveHomeView} from '@/server/db/live-home-view';
 import {dashboardStandingsSet,highlightedTeam,type TableView} from '@/server/db/dashboard-standings';
 import {teamStartsView} from '@/server/db/team-starts-view';
 import {opponentLineupForNext} from '@/server/db/opponent-lineup.mjs';
@@ -47,17 +49,37 @@ function CupCard({fixture}:{fixture:StoredFixture|null}) {
 
 export default async function Page() {
   const [fixtures,standings]=await Promise.all([fixtureView(),dashboardStandingsSet()]);
+  const home=await liveHomeView(fixtures.data);
+  if(home.live){
+    const {fixture,payload,observedAt}=home.live;
+    const score=fixtureScore(payload.home_score,payload.away_score);
+    return <div className="home-shell">{process.env.LIVE_HOME_ENABLED==='true'&&<LiveHomeRefresh/>}<a className="skip-link" href="#contenido">Saltar al contenido</a>
+      <SiteHeader section="home" live/>
+      <main id="contenido" className="home-content"><h1 className="sr-only">Partido en vivo de Newell&apos;s Old Boys</h1>
+        <section className="home-card home-live-score" aria-label="Partido en vivo"><p className="home-kicker">Partido en vivo · BSD</p>
+          <div className="home-live-teams"><span><TeamCrest provider="bsd" externalId={fixture.home_external_id}/>{fixture.home_team??'Sin datos'}</span>
+            <strong>{score}</strong><span><TeamCrest provider="bsd" externalId={fixture.away_external_id}/>{fixture.away_team??'Sin datos'}</span></div>
+          <p className="home-card-note">{payload.current_minute==null?'Minuto: Sin datos':`Minuto ${payload.current_minute}`} · Última lectura {new Date(observedAt).toLocaleTimeString('es-AR',{timeZone:'America/Argentina/Buenos_Aires',hour:'2-digit',minute:'2-digit'})} (Argentina)</p>
+        </section>
+        <div className="home-triple"><section className="home-card home-small"><h2>Estadio y clima</h2><p>Sin datos</p></section>
+          <section className="home-card home-small"><h2>Árbitro</h2><p>Sin datos</p></section>
+          <section className="home-card home-small"><h2>Jugadores y puntuaciones</h2><p>Sin datos</p></section></div>
+        <div className="home-pair"><section className="home-card"><h2>Estadísticas del partido</h2><p className="home-empty">Sin datos</p></section>
+          <section className="home-card"><h2>Suplentes</h2><p className="home-empty">Sin datos</p></section></div>
+        <footer className="home-footer">Desarrollado por dM7.</footer>
+      </main></div>;
+  }
   const now=standings.annual.checked_at;
-  const {finished,upcoming}=dashboardFixtures(fixtures.data,now) as {finished:StoredFixture[];upcoming:StoredFixture[]};
+  const {finished,upcoming}=dashboardFixtures(home.fixtures,now) as {finished:StoredFixture[];upcoming:StoredFixture[]};
   const starts=await teamStartsView(finished,primaryScope.externalTeamId,now);
   const latest=starts.latestLineup as LineupMatch|null;
   const coachName=reviewedHome.lineupCoaches.find(row=>row.provider===latest?.fixture.provider&&row.fixture_external_id===latest.fixture.external_id&&row.team_external_id===primaryScope.externalTeamId)?.name??null;
   const next=upcoming[0]??null;
   const rivalId=next?.home_external_id===primaryScope.externalTeamId?next.away_external_id??null:next?.away_external_id===primaryScope.externalTeamId?next.home_external_id??null:null;
   const rival=opponentLineupForNext(next,primaryScope.externalTeamId,{now});
-  const cup=fixtures.data.filter(f=>f.provider==='goal-api').sort((a,b)=>(Date.parse(b.kickoff_at??'')||0)-(Date.parse(a.kickoff_at??'')||0))[0]??null;
-  const league=pickLeagueView(standings,fixtures.data,now);
-  return <div className="home-shell"><a className="skip-link" href="#contenido">Saltar al contenido</a>
+  const cup=home.fixtures.filter(f=>f.provider==='goal-api').sort((a,b)=>(Date.parse(b.kickoff_at??'')||0)-(Date.parse(a.kickoff_at??'')||0))[0]??null;
+  const league=pickLeagueView(standings,home.fixtures,now);
+  return <div className="home-shell">{process.env.LIVE_HOME_ENABLED==='true'&&<LiveHomeRefresh/>}<a className="skip-link" href="#contenido">Saltar al contenido</a>
     <SiteHeader section="home"/>
     <main id="contenido" className="home-content"><h1 className="sr-only">Home de Newell&apos;s Old Boys</h1>
       <HomeNextMatch match={next}/>

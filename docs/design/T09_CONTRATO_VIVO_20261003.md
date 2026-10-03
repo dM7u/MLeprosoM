@@ -216,7 +216,34 @@ Antes de activación deben pasar:
 6. Preflight de entorno y ensayo remoto autorizado. Activación de SQL/secrets/job
    y publicación son pasos posteriores; no afirmar vivo operativo por este diseño.
 
-Este bloque solo verificó código/documentación y una lectura HTTP de cuota/fixture.
-Las pruebas anteriores son criterios pendientes para la implementación, no tests
-ejecutados. Siguiente bloque T09: política y persistencia local con tests de
-concurrencia; Sol ligero implementa el contrato y Astra revisa el corte remoto.
+Estado local 03/10: [SQL propuesto](../../supabase/pending/live_session_control.sql)
+para sesiones, presupuesto, reservas y snapshots. Sin aplicación remota ni
+activación. Pasaron pruebas locales de restricciones/ACL/lease/fence, otra con
+dos conexiones PostgreSQL reales y ocho pruebas de normalización de fixture y
+alineaciones parciales. Los normalizadores están en `src/server/live/` y solo
+promueven a fase activa las combinaciones BSD ya observadas. HT/2H/ET/P aún
+requieren contraste de códigos reales antes de activarse.
+
+Faltan worker Supabase, integración de recursos, política completa de backoff,
+preflight/auditoría remota y UI que lea snapshots. Las pruebas enumeradas arriba
+son criterios del corte completo; este bloque verificó solo control SQL y
+normalización inicial. Siguiente bloque T09: worker/backend y contrato de
+lectura, con Sol ligero; Astra revisa concurrencia/seguridad antes del corte
+remoto.
+
+### Avance local de lectura Home
+
+`LIVE_HOME_ENABLED` permanece en `false` por defecto. Con la bandera activada,
+el servidor consulta solo `live_sessions` y el snapshot persistido de `fixture`
+para fixtures BSD ya presentes en el catálogo. Verifica identidad, fase y edad
+máxima de 360 s antes de reemplazar los paneles de Home; una pestaña visible
+refresca la lectura cada 150 s. Un snapshot final válido se superpone al catálogo
+para que el partido terminado no vuelva a figurar como próximo, aun si el
+intento posterior falla. No consulta BSD desde la visita.
+
+El panel vivo inicial muestra marcador y minuto recibidos; estadio, árbitro,
+XI, estadísticas y suplentes quedan en `Sin datos` hasta conectar snapshots de
+esos recursos. La tabla viva no se activó ni se aplicó SQL remoto, por lo que
+este flujo todavía no puede verse con datos reales. Falta comprobar el flujo
+completo con worker, SQL, pruebas de Safari y cierre FT antes de habilitar la
+bandera o publicar el corte.

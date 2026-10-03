@@ -1,5 +1,17 @@
 # Propuestas SQL pendientes
 
+## T09 — control local de sesiones en vivo (03/10)
+
+`live_session_control.sql` es una propuesta nueva, aún **sin aplicar** en
+Supabase. Crea sesiones deshabilitadas por defecto, presupuesto diario,
+reservas de requests y snapshots con RPC de claim, reserva, commit y cierre.
+Las RPC usan lease/fence para descartar escritores vencidos; las pruebas locales
+`node --conditions=react-server tests/database/live-session-control.mjs` y
+`pwsh -NoProfile -File tests/database/run-statistics-concurrency.ps1 -Resource live`
+pasaron. Antes de cualquier ejecución remota faltan el worker, preflight del
+esquema, auditoría de permisos y revisión del corte T09. No ejecutar todavía,
+ni repetir el SQL de proyecciones históricas ya aplicado.
+
 Estos archivos NO forman parte del conjunto activo `supabase/migrations/`.
 Requieren corte coordinado; no incluirlos en una carga automática de migraciones.
 Estado actualizado al 28/09/2026: SQL de estadísticas aplicado por el propietario,

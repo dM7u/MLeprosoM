@@ -47,11 +47,19 @@ Thomas tiene cinco titularidades en ese puesto y Solari tres; el PO señaló una
 cifra menor para Solari, por lo que ese conteo se limita expresamente a las
 alineaciones guardadas y no se presenta como estadística oficial completa.
 
-## Partido en Vivo
+## Home durante un partido en vivo
 
-- Cuando un partido de Newell's tenga estado activo verificado y fresco, la
-  pantalla en vivo será la entrada predeterminada; la pestaña común mostrará
-  indicador de actividad. Un kickoff pasado no basta para activarla.
+- Home (`/`) es la entrada principal tanto antes como durante el partido. La
+  navegación queda en Home y Equipo; no habrá pestaña ni ruta separada para Vivo.
+  Cuando haya un estado activo verificado y un snapshot persistido reciente,
+  Home reemplazará sus paneles de previa por los paneles del partido y señalará
+  la actividad en Home. Un kickoff pasado no basta para activar el modo vivo.
+- Al confirmarse el final, Home vuelve al contexto del próximo encuentro. El
+  fixture recién finalizado debe dejar de competir como «próximo» aunque el
+  catálogo general todavía no se haya refrescado; integrar primero el resultado
+  terminal persistido con esa lectura. Si los datos vivos vencen o fallan, no
+  anunciar partido activo; conservar el último dato válido con su hora y estado
+  de frescura donde corresponda.
 - Franja superior: estadio/capacidad/clima y árbitro con historial por cada
   equipo, penales a favor/en contra y rojas a favor/en contra. Mostrar muestra,
   ámbito y procedencia cuando esos datos existan.
@@ -62,7 +70,7 @@ alineaciones guardadas y no se presenta como estadística oficial completa.
   campos normalizados y persistidos; distinguir parcial, error y actualización
   antigua. Conservar el último dato válido.
 
-La UI viva y redirección automática siguen bloqueadas por T09: scheduler único,
+La UI viva y el intercambio automático de paneles siguen bloqueados por T09: scheduler único,
 exclusión de duplicados, cuota/cadencia, estados reales, HT→2H y manejo de
 jugadores sin ID en alineaciones BSD. El [contrato T09](T09_CONTRATO_VIVO_20261003.md)
 define el siguiente corte local. La metodología de ratings bloquea únicamente

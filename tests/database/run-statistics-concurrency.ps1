@@ -1,4 +1,4 @@
-param([string]$PgBin = '.tools/db-validation/pgsql17/pgsql/bin', [ValidateSet('statistics','lineups','incidents')][string]$Resource = 'statistics')
+param([string]$PgBin = '.tools/db-validation/pgsql17/pgsql/bin', [ValidateSet('statistics','lineups','incidents','live')][string]$Resource = 'statistics')
 $ErrorActionPreference = 'Stop'
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 Set-Location -LiteralPath $repo

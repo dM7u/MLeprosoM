@@ -81,8 +81,9 @@ no usar sus pendientes antiguos como cola vigente. Código y evidencia prevalece
 | T04 | Completar panel con datos disponibles | Cerrada localmente el 02/10: Home muestra once jugadores según titularidades y, a igualdad, última titularidad más reciente; cobertura 11/26. Estadísticas individuales y técnico muestran `Sin datos`; drilldowns requieren fuente persistida. No introducir ratings. |
 | T07 | Rediseño de Home para la demo | Home ajustada y publicada en Preview protegida el 02/10 por autorización del PO: https://mleprosom-a0zums5bp-d-m7.vercel.app . Build remoto READY; Home verificada por CLI (XI, Kudelka, campo, Acassuso, 32avos, escudo Lanús, noindex). Nombre en una fila, navegación baja, resultado coloreado, camisetas y DT dentro de la cancha, media cancha y arquero en área chica. XI de Lanús corregido al local de BSD 223725 (una copia previa contenía el XI de Estudiantes). Copa con escudos y 32avos oficiales ante Acassuso. Escudos de 30 equipos de Primera y Acassuso vinculados por ID; Estadio/Pronóstico/Árbitro separados, Liga/Copa compactas, pie dM7. El PO hizo commit y push; `main` coincidía con `origin/main` al iniciar T05. El PO confirmó que la Preview funciona en Safari el 03/10. Quedan navegación transversal, Equipo, Vivo y modales por diseñar/validar. Ver [T07](../docs/design/T07_HOME_Y_PANEL_TRANSVERSAL_20261002.md). |
 | T05 | Verificar caso positivo del XI periodístico | Cerrada el 03/10: nota de La Capital/Ovación del 02/10, 12:09 −03:00, con probable XI explícito de Newell's–Lanús. Evidencia local revisada en `docs/research/la-capital-xi-223765-20261002.json`; fuente conserva “Mazzanti” tal como aparece, sin inventar ID. Dry-run local y remoto elegibles. Refresco BSD manual de 32 fixtures (3 GET) y revisión editorial remota `ba1aac7c-1223-4aa1-8ca0-121e988f4154` guardada (1 escritura). Lectura real devolvió `available`, 11 nombres y fuente. El fixture caduca a los 15 minutos sin scheduler: Home vuelve a `Sin datos` hasta otro refresco; el XI deja de ser actual al inicio del partido. No afirmar que sea alineación oficial. |
-| T09 | Definir e implementar el corte de datos en vivo | [Contrato técnico](../docs/design/T09_CONTRATO_VIVO_20261003.md) preparado: Supabase Cron/Edge propuesto, 150 s activos, solo estado en HT, presupuesto 500/sesión, lease/fence y snapshots operativos independientes del catálogo/historial. Una lectura real el 03/10 a las 10:41 UTC confirmó cuota 7.500/día y saldo informado 7.500; fixture 223765 NS, kickoff 20:00 UTC. [Evidencia](../docs/research/T09_BSD_CUOTA_20261003.json). Próximo bloque: implementación local y tests de exclusión, parciales, fases y recuperación; luego preflight/activación autorizada. Pendiente elección del PO: autónomo en Supabase o PC encendida, y contraste de códigos HT/2H/ET/P. No hay scheduler ni Vivo activados. Sol ligero para implementación, Astra para revisión de concurrencia antes del corte remoto. |
-| T10 | Secciones Equipo y Partido en Vivo | Diseño del PO recibido el 03/10; ver [T10](../docs/design/T10_EQUIPO_Y_VIVO_20261003.md). Primera versión local de `/equipo`: cabecera compartida, 3 jugados + 3 próximos con fichas, ventana de tabla y vacíos explícitos para foto/medias/técnico. Tres paneles superiores en una fila. Panel del once con Mejor 11 por defecto, Peor 11 y Más utilizados; los dos primeros muestran «Sin datos» hasta contar con calificaciones propias. Más utilizados dibuja el 4-2-3-1 observado 11/11, titulares por puesto; Thomas Ríos identificado por revisión del PO/plantel y ligado solo en presentación al ID BSD 90520. Cuatro pruebas de conteo previas; typecheck, build y cambio de vista local verificados tras añadir botones. Vivo: diseño documentado, activación dependiente de T09; ratings/ranking permanecen Sin datos sin impedir el resto de la vista. No publicado, sin commit/push. |
+| T09 | Definir e implementar el corte de datos en vivo | [Contrato técnico](../docs/design/T09_CONTRATO_VIVO_20261003.md) preparado. Cuota real de cuenta 7.500/día, saldo informado 7.500 a las 10:41 UTC; fixture 223765 NS y kickoff 20:00 UTC ([evidencia](../docs/research/T09_BSD_CUOTA_20261003.json)). Implementación local parcial: SQL nuevo y **sin aplicar** en `supabase/pending/live_session_control.sql`, con sesiones deshabilitadas, reservas de cuota, lease/fence, snapshots e idempotencia; normalización segura de estado y alineación parcial en `src/server/live/`. Lector Home local con bandera apagada por defecto: snapshot fresco cambia paneles, FT superpone catálogo y reaparece próximo partido; panel inicial de marcador/minuto, demás recursos aún Sin datos. Pruebas locales: 8 de normalización, SQL PGlite y dos conexiones PostgreSQL concurrentes; checks de Home consignados abajo. Próximo bloque: worker Supabase, recursos restantes, backoff, preflight/auditoría y validación UI integrada; después corte remoto. La elección Supabase autónomo sigue como propuesta ante ausencia de respuesta expresa del PO; no hay cron ni Vivo activados. HT/2H/ET/P requieren evidencia de códigos reales. Sol ligero para implementar; Astra para revisar concurrencia antes del corte remoto. |
+| T10 | Equipo y Home durante Partido en Vivo | Diseño del PO recibido el 03/10; ver [T10](../docs/design/T10_EQUIPO_Y_VIVO_20261003.md). Primera versión local de `/equipo`: cabecera compartida, 3 jugados + 3 próximos con fichas, ventana de tabla y vacíos explícitos para foto/medias/técnico. Tres paneles superiores en una fila. Panel del once con Mejor 11 por defecto, Peor 11 y Más utilizados; los dos primeros muestran «Sin datos» hasta contar con calificaciones propias. Más utilizados dibuja el 4-2-3-1 observado 11/11, titulares por puesto; Thomas Ríos identificado por revisión del PO/plantel y ligado solo en presentación al ID BSD 90520. El PO decidió el 03/10 que Vivo reemplaza paneles de Home en `/` mientras haya datos activos verificados y frescos; no habrá tercera pestaña. Navegación ajustada localmente y criterio de activación aislado con pruebas; lector/UI vivos aún dependen de T09. Ratings/ranking permanecen Sin datos sin impedir el resto de la vista. No publicado, sin commit/push. |
+| T11 | App iOS y widgets | Prioridad de producto aclarada por el PO el 03/10: la web/Preview es prototipo y canal de demo; el objetivo es una app móvil instalable con widgets en iPhone. Tras estabilizar T09 y el contrato de lectura, definir un cliente iOS y un primer widget de próximo partido; evaluar Live Activity para marcador durante el encuentro. Reutilizar backend y datos persistidos, sin llevar claves BSD/Supabase administrativas al teléfono. El PO no tiene Mac: evaluar Expo/React Native con `expo-widgets` y compilación iOS remota con EAS; confirmar cuenta Apple Developer y vía de distribución antes de un build físico. No implementado. |
 | T08 | Relevar cobertura de estadio, pronóstico y árbitro para Home | En curso, independiente del diseño de Equipo/Vivo. La muestra BSD 223765 solo guarda fixture/equipos/horario; el esquema `fixtures` no tiene estadio ni árbitro y Home muestra `Sin datos` en las tres tarjetas. LPF identifica el estadio habitual y La Capital menciona sede/árbitro para este partido; falta contraste oficial específico de la designación y contrato de almacenamiento. Open-Meteo depende de coordenadas verificadas; V/E/D requiere historial. Ver [corte T08](../docs/research/T08_CONTEXTO_HOME_20261003.md). |
 
 T02 cerrada; T03 pospuesta porque volumen remoto actual y frecuencia prevista no
@@ -135,6 +136,18 @@ los cambios publicados desde entonces.
 
 ## Pendientes de producto y decisiones conservadas
 
+- Destino móvil: app iOS nativa o híbrida con extensión WidgetKit para widgets
+  reales. La PWA sirve para probar en Safari/Inicio y puede recibir Web Push,
+  pero no sustituye la extensión iOS. Widget de próximo partido primero; para
+  marcador frecuente durante un partido estudiar Live Activity/ActivityKit,
+  porque WidgetKit limita las actualizaciones. El servidor sigue siendo la
+  fuente de datos; definir autenticación y DTO público antes de exponerlo al
+  cliente. T11 queda priorizada tras el corte vivo T09, antes de nuevas métricas.
+  Sin Mac local, Expo documenta `expo-widgets` para widgets/Live Activities y
+  EAS Build/Submit desde Windows; verificar límites concretos con un prototipo
+  antes de elegirlo como stack definitivo. TestFlight/distribución requieren
+  membresía Apple Developer. Fuentes: https://docs.expo.dev/versions/latest/sdk/widgets/ ,
+  https://docs.expo.dev/submit/testflight/ .
 - Vivo: cobertura/cuota vigentes, scheduler y exclusión, polling, HT→2H, ET/P,
   finalización, errores/backoff, cache y estados UI; respetar DATOS_EN_VIVO.md.
 - Panel: XI más utilizado, estadísticas de jugadores, técnico y drilldowns pendientes.
@@ -190,6 +203,25 @@ El PO definió Equipo y Vivo el 03/10. T10 habilita la navegación a Equipo y
 reutiliza los datos persistidos sin inventar ratings. La pantalla en vivo queda
 dependiente de T09; puntuaciones y ranking requieren su metodología. No activar un indicador
 de juego ni entrada predeterminada con un horario o snapshot stale.
+Decisión posterior del PO: los paneles vivos sustituyen los de Home en la misma
+ruta y al finalizar reaparece la previa del próximo partido. El selector local
+`liveHomeMode` exige sesión activa, snapshot del mismo fixture y antigüedad
+máxima; pruebas 2/2, lint afectado y typecheck aprobados. El primer comando de
+prueba falló por `spawn EPERM` del sandbox; pasó sin aislamiento de procesos.
+Ese primer selector no activó Vivo; el avance posterior se detalla abajo.
+
+### Avance T09 local — Home vivo, 03/10
+
+La lectura de snapshots y el reemplazo inicial de paneles ya están implementados
+bajo `LIVE_HOME_ENABLED=false` por defecto. Home consulta sesiones y snapshots
+solo en Supabase; con fase activa y fixture fresco muestra marcador/minuto BSD,
+señal en Home y tarjetas faltantes como `Sin datos`. Una pestaña visible relee
+cada 150 s. FT persistido se superpone al catálogo para mostrar el siguiente
+partido, aun si falla un intento posterior. Cinco pruebas específicas, lint y
+typecheck pasaron; build pasó tras un `spawn EPERM` del sandbox en el primer
+intento. No hay SQL remoto, worker, cron ni datos vivos reales: la bandera sigue
+apagada y la UI nueva no es visible en Preview. Próximo bloque: worker y recursos
+persistidos, pruebas integradas, preflight y revisión de seguridad/concurrencia.
 La corrección del Once más utilizado adopta el XI por puesto en la formación
 4-2-3-1 observada, sin reubicar jugadores. El PO corrigió la identidad y el
 puesto de Thomas Ríos; BSD trae «Lautaro Rios» para el ID 90520/dorsal 39 y
