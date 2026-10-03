@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import SiteHeader from './site-header';
 import HomeNextMatch from './home-next-match';
 import HomeLineup, {type LineupMatch} from './home-lineup';
 import TeamCrest from './team-crest';
@@ -59,7 +58,7 @@ export default async function Page() {
   const cup=fixtures.data.filter(f=>f.provider==='goal-api').sort((a,b)=>(Date.parse(b.kickoff_at??'')||0)-(Date.parse(a.kickoff_at??'')||0))[0]??null;
   const league=pickLeagueView(standings,fixtures.data,now);
   return <div className="home-shell"><a className="skip-link" href="#contenido">Saltar al contenido</a>
-    <header className="home-header"><div className="home-header-inner"><Link className="home-brand-art" href="/" aria-label="Inicio"><Image src="/brand/Leproso.png" alt="" width={1024} height={1536} priority/></Link><div className="home-header-right"><Link className="home-brand-name" href="/">Movete, leproso movete!</Link><nav aria-label="Secciones"><span aria-current="page">Home</span><span aria-disabled="true">Equipo</span><span aria-disabled="true">Partido en Vivo</span></nav></div></div></header>
+    <SiteHeader section="home"/>
     <main id="contenido" className="home-content"><h1 className="sr-only">Home de Newell&apos;s Old Boys</h1>
       <HomeNextMatch match={next}/>
       <HomeLineup match={latest} rival={rival} rivalId={rivalId} coachName={coachName} isLatestFinished={Boolean(latest&&latest.fixture.id===finished[0]?.id)} teamExternalId={primaryScope.externalTeamId}/>

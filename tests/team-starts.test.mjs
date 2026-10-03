@@ -28,6 +28,7 @@ test('breaks equal start counts by most recent fixture start',()=>{
   assert.equal(view.tied[0].starts,1);
   assert.equal(view.latestLineup.fixture.id,b.id);
   assert.equal(view.latestLineup.data.away.starters.length,11);
+  assert.deepEqual(view.formations,[{name:'4-2-3-1',starts:2}]);
 });
 
 test('leaves an unresolved boundary tie when the last starts have the same kickoff',()=>{
@@ -49,6 +50,22 @@ test('uses selected history once per match, excluding unavailable and malformed 
   const view=teamStartsView([a,b],[observation(a,1,first),observation(a,2,prediction),observation(b,3,short)],{teamExternalId:'4997',now});
   assert.equal(view.coveredCount,1);
   assert.equal(view.players.length,11);
+  assert.deepEqual(view.formations,[{name:'4-2-3-1',starts:1}]);
   assert.deepEqual(view.players.map(p=>p.starts),Array(11).fill(1));
   assert.equal(teamStartsView([b],[observation(b,3,short)],{teamExternalId:'4997',now}).status,'empty');
+});
+
+test('uses the most frequent formation and reviewed player name for a lineup slot',()=>{
+  const a=fixture(1),b=fixture(2);
+  const first=structuredClone(sample.body),second=structuredClone(sample.body);
+  const side=second.lineups.away;
+  const replacement=side.substitutes.findIndex(player=>player.id===90520);
+  assert.notEqual(replacement,-1);
+  [side.players[9],side.substitutes[replacement]]=[side.substitutes[replacement],side.players[9]];
+  const view=teamStartsView([a,b],[observation(a,1,first),observation(b,2,second)],{teamExternalId:'4997',now});
+  assert.equal(view.formationLineup.formation,'4-2-3-1');
+  assert.equal(view.formationLineup.starts,2);
+  assert.equal(view.formationLineup.starters[9].id,'90520');
+  assert.equal(view.formationLineup.starters[9].name,'Thomas Ríos');
+  assert.equal(view.players.find(player=>player.id==='90520').name,'Thomas Ríos');
 });

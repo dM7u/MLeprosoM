@@ -79,8 +79,11 @@ no usar sus pendientes antiguos como cola vigente. Código y evidencia prevalece
 | T02 | Decisión de optimización de standings | Cerrada: el PO aprobó el 02/10 posponer T03 y priorizar panel después de T06. Sin contrato nuevo de lectura ni SQL remoto. Ver decisión T02. |
 | T03 | Implementar standings según T02 | No habilitada. Requiere que el PO priorice optimización y cerrar contrato T02 antes de implementar. Luego pruebas, operación y revisión crítica antes de proponer corte remoto. |
 | T04 | Completar panel con datos disponibles | Cerrada localmente el 02/10: Home muestra once jugadores según titularidades y, a igualdad, última titularidad más reciente; cobertura 11/26. Estadísticas individuales y técnico muestran `Sin datos`; drilldowns requieren fuente persistida. No introducir ratings. |
-| T07 | Rediseño de Home para la demo | Home ajustada y publicada en Preview protegida el 02/10 por autorización del PO: https://mleprosom-a0zums5bp-d-m7.vercel.app . Build remoto READY; Home verificada por CLI (XI, Kudelka, campo, Acassuso, 32avos, escudo Lanús, noindex). Nombre en una fila, navegación baja, resultado coloreado, camisetas y DT dentro de la cancha, media cancha y arquero en área chica. XI de Lanús corregido al local de BSD 223725 (una copia previa contenía el XI de Estudiantes). Copa con escudos y 32avos oficiales ante Acassuso. Escudos de 30 equipos de Primera y Acassuso vinculados por ID; Estadio/Pronóstico/Árbitro separados, Liga/Copa compactas, pie dM7. Quedan prueba humana de esta nueva URL en Safari y navegación transversal, Equipo, Vivo y modales. Sin commit ni push; el PO los hará. Ver [T07](../docs/design/T07_HOME_Y_PANEL_TRANSVERSAL_20261002.md). |
-| T05 | Verificar caso positivo del XI periodístico | Después de ajustes de diseño. Requiere evidencia vigente y contexto actualizado; no fabricar ni rejuvenecer muestras. |
+| T07 | Rediseño de Home para la demo | Home ajustada y publicada en Preview protegida el 02/10 por autorización del PO: https://mleprosom-a0zums5bp-d-m7.vercel.app . Build remoto READY; Home verificada por CLI (XI, Kudelka, campo, Acassuso, 32avos, escudo Lanús, noindex). Nombre en una fila, navegación baja, resultado coloreado, camisetas y DT dentro de la cancha, media cancha y arquero en área chica. XI de Lanús corregido al local de BSD 223725 (una copia previa contenía el XI de Estudiantes). Copa con escudos y 32avos oficiales ante Acassuso. Escudos de 30 equipos de Primera y Acassuso vinculados por ID; Estadio/Pronóstico/Árbitro separados, Liga/Copa compactas, pie dM7. El PO hizo commit y push; `main` coincidía con `origin/main` al iniciar T05. El PO confirmó que la Preview funciona en Safari el 03/10. Quedan navegación transversal, Equipo, Vivo y modales por diseñar/validar. Ver [T07](../docs/design/T07_HOME_Y_PANEL_TRANSVERSAL_20261002.md). |
+| T05 | Verificar caso positivo del XI periodístico | Cerrada el 03/10: nota de La Capital/Ovación del 02/10, 12:09 −03:00, con probable XI explícito de Newell's–Lanús. Evidencia local revisada en `docs/research/la-capital-xi-223765-20261002.json`; fuente conserva “Mazzanti” tal como aparece, sin inventar ID. Dry-run local y remoto elegibles. Refresco BSD manual de 32 fixtures (3 GET) y revisión editorial remota `ba1aac7c-1223-4aa1-8ca0-121e988f4154` guardada (1 escritura). Lectura real devolvió `available`, 11 nombres y fuente. El fixture caduca a los 15 minutos sin scheduler: Home vuelve a `Sin datos` hasta otro refresco; el XI deja de ser actual al inicio del partido. No afirmar que sea alineación oficial. |
+| T09 | Definir e implementar el corte de datos en vivo | [Contrato técnico](../docs/design/T09_CONTRATO_VIVO_20261003.md) preparado: Supabase Cron/Edge propuesto, 150 s activos, solo estado en HT, presupuesto 500/sesión, lease/fence y snapshots operativos independientes del catálogo/historial. Una lectura real el 03/10 a las 10:41 UTC confirmó cuota 7.500/día y saldo informado 7.500; fixture 223765 NS, kickoff 20:00 UTC. [Evidencia](../docs/research/T09_BSD_CUOTA_20261003.json). Próximo bloque: implementación local y tests de exclusión, parciales, fases y recuperación; luego preflight/activación autorizada. Pendiente elección del PO: autónomo en Supabase o PC encendida, y contraste de códigos HT/2H/ET/P. No hay scheduler ni Vivo activados. Sol ligero para implementación, Astra para revisión de concurrencia antes del corte remoto. |
+| T10 | Secciones Equipo y Partido en Vivo | Diseño del PO recibido el 03/10; ver [T10](../docs/design/T10_EQUIPO_Y_VIVO_20261003.md). Primera versión local de `/equipo`: cabecera compartida, 3 jugados + 3 próximos con fichas, ventana de tabla y vacíos explícitos para foto/medias/técnico. Tres paneles superiores en una fila. Panel del once con Mejor 11 por defecto, Peor 11 y Más utilizados; los dos primeros muestran «Sin datos» hasta contar con calificaciones propias. Más utilizados dibuja el 4-2-3-1 observado 11/11, titulares por puesto; Thomas Ríos identificado por revisión del PO/plantel y ligado solo en presentación al ID BSD 90520. Cuatro pruebas de conteo previas; typecheck, build y cambio de vista local verificados tras añadir botones. Vivo: diseño documentado, activación dependiente de T09; ratings/ranking permanecen Sin datos sin impedir el resto de la vista. No publicado, sin commit/push. |
+| T08 | Relevar cobertura de estadio, pronóstico y árbitro para Home | En curso, independiente del diseño de Equipo/Vivo. La muestra BSD 223765 solo guarda fixture/equipos/horario; el esquema `fixtures` no tiene estadio ni árbitro y Home muestra `Sin datos` en las tres tarjetas. LPF identifica el estadio habitual y La Capital menciona sede/árbitro para este partido; falta contraste oficial específico de la designación y contrato de almacenamiento. Open-Meteo depende de coordenadas verificadas; V/E/D requiere historial. Ver [corte T08](../docs/research/T08_CONTEXTO_HOME_20261003.md). |
 
 T02 cerrada; T03 pospuesta porque volumen remoto actual y frecuencia prevista no
 justifican nueva infraestructura con la evidencia disponible. T04 fue retomada
@@ -94,8 +97,8 @@ deportivo inventado. Home informa la cobertura y el criterio.
 No hay tablas de jugadores, técnicos ni rendimientos individuales. Ver
 [cobertura T04](../docs/research/T04_COBERTURA_PANEL_20261002.md).
 Checks T04: 12 pruebas pertinentes, typecheck, build y Home local HTTP 200 con
-conteo 11/26 y criterio de desempate visible. La Preview de Vercel aún no
-incluye este cambio.
+conteo 11/26 y criterio de desempate visible. La Preview posterior de T07 incluye
+los cambios publicados desde entonces.
 
 ### Ajustes pedidos para T06 — 01/10
 
@@ -166,9 +169,38 @@ la app usa clave administrativa solo en servidor y cada visita genera lecturas a
 Supabase. T02 cerrada con aprobación del PO el 02/10; T03 pospuesta y no habilitada.
 Para retomarla, leer la decisión T02, PERSISTENCE y el lector: falta elegir
 alternativa y cerrar corte coherente de ambos historiales, validación y operación.
-Siguiente desarrollo: T07, ajustes de diseño para la demo, con Sol ligero una vez
-recibida la lista del PO. T05 puede seguir después; no bloquea los ajustes.
-Si se vuelve a priorizar optimización, reabrir
-el contrato de T02 con Astra medio
-antes de implementar T03 con Sol ligero y revisión crítica Astra. No iniciar
-ninguna de esas implementaciones como continuación automática de este cierre.
+Si se vuelve a priorizar optimización, reabrir el contrato de T02 con Astra
+medio antes de implementar T03 con Sol ligero y revisión crítica Astra.
+
+### Corte 03/10 — después de T05
+
+T07 ya está en `origin/main` y T05 tiene un caso positivo real almacenado. La
+lectura Home devolvió `available` justo después del refresco manual BSD, pero
+su contexto vence en 15 minutos y al comenzar el partido el XI probable deja
+de corresponder. No presentar esa verificación puntual como disponibilidad
+continua de la demo. No se modificó código ni se hizo commit/push en T05.
+
+Safari de la Preview fue confirmado por el PO el 03/10. El ensayo vivo solicitado
+por el PO abrió T09 como prioridad inmediata antes del partido: contrato de
+cuota/concurrencia con Astra medio y ejecución posterior con Sol ligero. T08
+continúa independiente; diseños de Equipo y Partido en Vivo quedan por definir.
+T03 sigue pospuesta.
+
+El PO definió Equipo y Vivo el 03/10. T10 habilita la navegación a Equipo y
+reutiliza los datos persistidos sin inventar ratings. La pantalla en vivo queda
+dependiente de T09; puntuaciones y ranking requieren su metodología. No activar un indicador
+de juego ni entrada predeterminada con un horario o snapshot stale.
+La corrección del Once más utilizado adopta el XI por puesto en la formación
+4-2-3-1 observada, sin reubicar jugadores. El PO corrigió la identidad y el
+puesto de Thomas Ríos; BSD trae «Lautaro Rios» para el ID 90520/dorsal 39 y
+el club tiene fuentes contradictorias. Se conserva el crudo y se aplica el
+nombre revisado solo a la proyección del panel. La cobertura es 11/26, no una
+estadística oficial completa de la temporada.
+
+### Ajuste local de Home — 03/10
+
+El XI del último partido se orienta desde la pantalla con Ortega y Mazzantti a
+la derecha y Solari a la izquierda; las filas de BSD se invierten solo para su
+presentación, sin alterar nombres ni datos guardados. Bordes de tarjetas Home
+en rojo apagado `#704047`. Typecheck y vista local 3101 verificados; cambio aún
+sin publicación, commit ni push. La Preview anterior conserva el diseño previo.

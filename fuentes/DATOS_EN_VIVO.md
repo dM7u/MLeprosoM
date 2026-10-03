@@ -1,5 +1,23 @@
 # Datos en vivo --- Movete, Leproso Movete!
 
+## Corte BSD — 03/10/2026
+
+El [contrato T09](../docs/design/T09_CONTRATO_VIVO_20261003.md) concreta el
+primer corte propuesto para BSD: sesiones con presupuesto, lease y fence,
+refresco activo cada 150 s y TTL operativo 360 s. En HT se pausan los recursos
+deportivos, pero se consulta únicamente el estado cada 150 s para detectar 2H.
+Antes del inicio se hacen verificaciones puntuales, sin polling continuo.
+Las políticas quedan versionadas en la implementación; aún no están activadas.
+
+Una lectura autenticada del 03/10 confirma cabeceras de cuenta BSD con cuota
+7.500/día y saldo informado 7.500. La limitación de 100/día de API-Football que
+figura al final es histórica y no se aplica a BSD. El consumo compartido y 429
+se controlan durante ejecución. Evidencia y criterios de activación en T09.
+
+El contrato distingue respuesta parcial, último dato válido y último completo;
+no fusiona campos de diferentes observaciones para producir una pantalla completa.
+El diseño no habilita un scheduler ni promete cobertura en vivo para un partido.
+
 ## Objetivo
 
 Definir la estrategia de sincronización de datos futbolísticos en tiempo

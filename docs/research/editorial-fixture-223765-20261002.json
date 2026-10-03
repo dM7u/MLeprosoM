@@ -1,0 +1,10 @@
+{
+  "provider": "bsd",
+  "fixture_external_id": "223765",
+  "competition_external_id": "85",
+  "season_external_id": "1635",
+  "home_external_id": "4997",
+  "away_external_id": "785",
+  "kickoff_at": "2026-10-03T20:00:00+00:00",
+  "state": "scheduled"
+}

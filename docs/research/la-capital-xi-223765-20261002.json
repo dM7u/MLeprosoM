@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "binding": {
+    "provider": "bsd",
+    "fixture_external_id": "223765",
+    "competition_external_id": "85",
+    "season_external_id": "1635",
+    "home_external_id": "4997",
+    "away_external_id": "785",
+    "kickoff_at": "2026-10-03T20:00:00+00:00"
+  },
+  "team_external_id": "4997",
+  "source": {
+    "type": "journalistic",
+    "outlet": "La Capital",
+    "url": "https://www.lacapital.com.ar/ovacion/newells-vs-lanus-el-torneo-clausura-hora-canal-y-posibles-formaciones-n10284475.html",
+    "author": null,
+    "published_text": "2 de octubre 2026 · 12:09hs",
+    "published_at": "2026-10-02T12:09:00-03:00"
+  },
+  "observed_at": "2026-10-02T22:47:05.249Z",
+  "review": {
+    "reviewer": "Codex: revisión de nota, metadatos JSON-LD y mapeo BSD fechado",
+    "reviewed_at": "2026-10-02T22:47:05.249Z",
+    "status": "reviewed",
+    "identity_confirmed": true
+  },
+  "claim": "probable",
+  "ambiguous": false,
+  "starters": [
+    "Josué Reinatti",
+    "Martín Ortega",
+    "Lautaro Giannetti",
+    "Lucas Carrizo",
+    "Jerónimo Russo",
+    "Luca Regiardo",
+    "Rodrigo Herrera",
+    "Walter Mazzanti",
+    "Facundo Guch",
+    "Santiago Solari",
+    "Matías Cóccaro"
+  ]
+}

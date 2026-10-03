@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-03T10:41:31.866Z",
+  "event_id": 223765,
+  "requests": 1,
+  "responses": [
+    {
+      "status": 200,
+      "headers": {
+        "ratelimit-policy": "\"football\";q=7500;w=86400",
+        "ratelimit": "\"football\";r=7500;t=47907",
+        "retry-after": null,
+        "date": "Sat, 03 Oct 2026 10:41:32 GMT",
+        "age": null,
+        "x-cache-status": "MISS"
+      }
+    }
+  ],
+  "fixture": {
+    "id": 223765,
+    "league_id": 85,
+    "season_id": 1635,
+    "home_team_id": 4997,
+    "away_team_id": 785,
+    "event_date": "2026-10-03T20:00:00+00:00",
+    "status": "notstarted",
+    "period": "",
+    "home_score": null,
+    "away_score": null
+  },
+  "capture_note": "current_minute está presente pero no se capturó su valor. minute y updated_at no existen en esta respuesta. Solo se guardó una selección de campos; no es el payload completo.",
+  "present_fields": [
+    "attendance",
+    "away_coach_id",
+    "away_score",
+    "away_score_ht",
+    "away_team",
+    "away_team_id",
+    "current_minute",
+    "event_date",
+    "extra_time_score",
+    "group_name",
+    "has_xg",
+    "head_to_head",
+    "highlights",
+    "home_coach_id",
+    "home_score",
+    "home_score_ht",
+    "home_team",
+    "home_team_id",
+    "id",
+    "is_local_derby",
+    "is_neutral_ground",
+    "league_id",
+    "live_websocket",
+    "penalty_shootout",
+    "period",
+    "pitch_condition",
+    "previous_leg_event_id",
+    "referee_id",
+    "replaced_by",
+    "round_label",
+    "round_name",
+    "round_number",
+    "season_id",
+    "stage",
+    "stage_name",
+    "status",
+    "travel_distance_km",
+    "venue_id",
+    "weather",
+    "websocket_plus"
+  ]
+}

@@ -13,7 +13,7 @@ function rows(side:Side) {
   const counts=side.formation?.split('-').map(Number);
   if(!counts?.length||counts.some(n=>!Number.isSafeInteger(n)||n<1)||counts.reduce((a,b)=>a+b,0)!==10)return null;
   let offset=1;
-  const lines=counts.map(count=>{const line=side.starters.slice(offset,offset+count);offset+=count;return line;});
+  const lines=counts.map(count=>{const line=side.starters.slice(offset,offset+count);offset+=count;return line.reverse();});
   return [...lines.reverse(),[side.starters[0]]];
 }
 
